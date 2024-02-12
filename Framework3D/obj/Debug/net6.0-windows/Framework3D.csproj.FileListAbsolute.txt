@@ -1,0 +1,5 @@
+D:\visual stuido\RetroEngine\Framework3D\obj\Debug\net6.0-windows\Framework3D.csproj.AssemblyReference.cache
+D:\visual stuido\RetroEngine\Framework3D\obj\Debug\net6.0-windows\Framework3D.g.cs
+D:\visual stuido\RetroEngine\Framework3D\obj\Debug\net6.0-windows\App.g.cs
+D:\visual stuido\RetroEngine\Framework3D\obj\Debug\net6.0-windows\Framework3D_MarkupCompile.cache
+D:\visual stuido\RetroEngine\Framework3D\obj\Debug\net6.0-windows\Framework3D_MarkupCompile.lref

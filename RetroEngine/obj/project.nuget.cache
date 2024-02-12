@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "pa7M3/TfOv+ur906wxR5lVrFc6GijQdm1MGAXkBypXLBsaEAaadclmQifcy2Jasz8ozHPeGIfcy98EJx0Yfq1g==",
+  "success": true,
+  "projectFilePath": "D:\\visual stuido\\RetroEngine\\RetroEngine\\RetroEngine.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\zcata\\.nuget\\packages\\wpfanimatedgif\\2.0.2\\wpfanimatedgif.2.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}

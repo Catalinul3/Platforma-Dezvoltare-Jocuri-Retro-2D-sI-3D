@@ -1,0 +1,1 @@
+D:\visual stuido\RetroEngine\WpfApp1\obj\Debug\net6.0-windows\3DFramework.csproj.AssemblyReference.cache
