@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\visual stuido\\RetroEngine\\RetroEngine\\RetroEngine.csproj": {}
+    "D:\\GitHub\\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\\RetroEngine\\RetroEngine.csproj": {}
   },
   "projects": {
-    "D:\\visual stuido\\RetroEngine\\RetroEngine\\RetroEngine.csproj": {
+    "D:\\GitHub\\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\\RetroEngine\\RetroEngine.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\visual stuido\\RetroEngine\\RetroEngine\\RetroEngine.csproj",
+        "projectUniqueName": "D:\\GitHub\\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\\RetroEngine\\RetroEngine.csproj",
         "projectName": "RetroEngine",
-        "projectPath": "D:\\visual stuido\\RetroEngine\\RetroEngine\\RetroEngine.csproj",
+        "projectPath": "D:\\GitHub\\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\\RetroEngine\\RetroEngine.csproj",
         "packagesPath": "C:\\Users\\zcata\\.nuget\\packages\\",
-        "outputPath": "D:\\visual stuido\\RetroEngine\\RetroEngine\\obj\\",
+        "outputPath": "D:\\GitHub\\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\\RetroEngine\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\visual stuido\\RetroEngine\\FrameworkFor2D\\FrameworkFor2D.csproj",
+      "projectUniqueName": "D:\\GitHub\\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\\FrameworkFor2D\\FrameworkFor2D.csproj",
       "projectName": "FrameworkFor2D",
-      "projectPath": "D:\\visual stuido\\RetroEngine\\FrameworkFor2D\\FrameworkFor2D.csproj",
+      "projectPath": "D:\\GitHub\\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\\FrameworkFor2D\\FrameworkFor2D.csproj",
       "packagesPath": "C:\\Users\\zcata\\.nuget\\packages\\",
-      "outputPath": "D:\\visual stuido\\RetroEngine\\FrameworkFor2D\\obj\\",
+      "outputPath": "D:\\GitHub\\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\\FrameworkFor2D\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

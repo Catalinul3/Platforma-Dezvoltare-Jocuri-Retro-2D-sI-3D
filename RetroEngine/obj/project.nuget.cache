@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pa7M3/TfOv+ur906wxR5lVrFc6GijQdm1MGAXkBypXLBsaEAaadclmQifcy2Jasz8ozHPeGIfcy98EJx0Yfq1g==",
+  "dgSpecHash": "U4JDuPV/fT4XCv/1Tu/UTJ37691iVWnWcV4NUddkKuY5pI3BKTAka2w6r/x3vBmadMzM9Ieau4Z7YhhhsEhzqg==",
   "success": true,
-  "projectFilePath": "D:\\visual stuido\\RetroEngine\\RetroEngine\\RetroEngine.csproj",
+  "projectFilePath": "D:\\GitHub\\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\\RetroEngine\\RetroEngine.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\zcata\\.nuget\\packages\\wpfanimatedgif\\2.0.2\\wpfanimatedgif.2.0.2.nupkg.sha512"
   ],
