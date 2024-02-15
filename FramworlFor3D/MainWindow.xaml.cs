@@ -24,7 +24,10 @@ namespace FramworlFor3D
         public MainWindow()
         {
             InitializeComponent();
+          
         }
+     
+
         private Point lastPoint;
         private double angleX = 0;
         private double angleY = 0;
@@ -81,19 +84,19 @@ namespace FramworlFor3D
                
                 if (xAxis.X1 > 100 || yAxis.X1 > 100 || zAxis.X1 > 100)
                 {
-                    MessageBox.Show("enough drag to right");
-                    xAxis.X1 = 10;
-                    yAxis.X1 = 10;
-                    zAxis.X1 = 10;
-                    holdMouseL = false;
+                  
+                    xAxis.X1 = 100;
+                    yAxis.X1 = 100;
+                    zAxis.X1 = 100;
+                   
                 }
                 if (xAxis.X1 < -90 || yAxis.X1 < -90 || zAxis.X1 < -90)
                 {
-                    MessageBox.Show("enough drag to left");
-                    xAxis.X1 = 10;
-                    yAxis.X1 = 10;
-                    zAxis.X1 = 10;
-                    holdMouseL = false;
+                   
+                    xAxis.X1 = 100;
+                    yAxis.X1 = 100;
+                    zAxis.X1 = 100;
+                   
                 }
                 else
                 {
@@ -110,6 +113,7 @@ namespace FramworlFor3D
                         AxisAngleRotation3D rotationX = new AxisAngleRotation3D(new Vector3D(0, 1, 0), angleX);
                         RotateTransform3D rotateTransformX = new RotateTransform3D(rotationX);
                         Cub.Transform = rotateTransformX;
+                       
                     }
                     else
                     {
@@ -120,6 +124,7 @@ namespace FramworlFor3D
                         AxisAngleRotation3D rotationX = new AxisAngleRotation3D(new Vector3D(0, 1, 0), angleX);
                         RotateTransform3D rotateTransformX = new RotateTransform3D(rotationX);
                         Cub.Transform = rotateTransformX;
+                       
                     }
                 
                 }
@@ -128,19 +133,19 @@ namespace FramworlFor3D
             {
                 if (xAxis.Y1 > 180 || yAxis.Y1 > 180 || zAxis.Y1 > 180)
                 {
-                    MessageBox.Show("enough drag to right");
-                    xAxis.Y1 = 90;
-                    yAxis.Y1 = 90;
-                    zAxis.Y1 = 90;
-                    holdMouseR = false;
+                   
+                    xAxis.Y1 = 180;
+                    yAxis.Y1 = 180;
+                    zAxis.Y1 = 180;
+                    
                 }
                 if (xAxis.Y1 < -90 || yAxis.Y1 < -90 || zAxis.Y1 < -90)
                 {
-                    MessageBox.Show("enough drag to left");
-                    xAxis.Y1 = 90;
-                    yAxis.Y1 = 90;
-                    zAxis.Y1 = 90;
-                    holdMouseR = false;
+                   
+                    xAxis.Y1 = -90;
+                    yAxis.Y1 = -90;
+                    zAxis.Y1 = -90;
+                   
                 }
               
                 if (isUpOnYaxis(e))
@@ -149,6 +154,7 @@ namespace FramworlFor3D
                     AxisAngleRotation3D rotationy = new AxisAngleRotation3D(new Vector3D(1, 0, 0), angleY);
                     RotateTransform3D rotateTransformy = new RotateTransform3D(rotationy);
                     Cub.Transform = rotateTransformy;
+                  
                     xAxis.Y1 -= 5;
                     yAxis.Y1 -= 5;
                     zAxis.Y1 -= 5;
@@ -159,6 +165,7 @@ namespace FramworlFor3D
                     AxisAngleRotation3D rotationy = new AxisAngleRotation3D(new Vector3D(1, 0, 0), angleY);
                     RotateTransform3D rotateTransformy = new RotateTransform3D(rotationy);
                     Cub.Transform = rotateTransformy;
+                   
                     xAxis.Y1 += 5;
                     yAxis.Y1 += 5;
                     zAxis.Y1 += 5;

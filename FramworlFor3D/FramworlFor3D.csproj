@@ -8,8 +8,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="helpers\grid_lines.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="helpers\grid_lines.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="HelixToolkit" Version="2.24.0" />
     <PackageReference Include="HelixToolkit.Wpf" Version="2.24.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RetroEngine\RetroEngine.csproj" />
   </ItemGroup>
 
 </Project>

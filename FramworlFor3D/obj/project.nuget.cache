@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "e1t/DjiBarlUK1fh5ov1kc02XIluJmjRdRNfxIX2uIJvpsYpKEkHluz9Xlo/3sPQ3qxWkvftYTLPaeZa293oGA==",
+  "dgSpecHash": "m2L6k4af1DNUwDgay15JQGsF9QtS65DKRLxmJ94CfYUlY3WikFAiloe0b8xQKegJvBTtrfGs445wHYRSf3q3Lw==",
   "success": true,
   "projectFilePath": "D:\\GitHub\\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\\FramworlFor3D\\FramworlFor3D.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\zcata\\.nuget\\packages\\helixtoolkit\\2.24.0\\helixtoolkit.2.24.0.nupkg.sha512",
     "C:\\Users\\zcata\\.nuget\\packages\\helixtoolkit.wpf\\2.24.0\\helixtoolkit.wpf.2.24.0.nupkg.sha512",
-    "C:\\Users\\zcata\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512"
+    "C:\\Users\\zcata\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\zcata\\.nuget\\packages\\wpfanimatedgif\\2.0.2\\wpfanimatedgif.2.0.2.nupkg.sha512"
   ],
   "logs": [
     {

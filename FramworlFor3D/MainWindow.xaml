@@ -9,58 +9,59 @@
         mc:Ignorable="d"
         Title="3dFramework" Height="450" Width="800">
     <Grid ShowGridLines="True"   MouseLeftButtonDown="OnMouseLeftButtonDown" MouseRightButtonDown="OnMouseRightButtonDown" MouseRightButtonUp="OnMouseRightButtonUp" MouseLeftButtonUp="OnMouseLeftButtonUp" MouseMove="OnMouseMove">
-        <Canvas x:Name="canvas" Width="100" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 0 20 0">
+        
+            <Canvas x:Name="canvas" Width="100" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 0 20 0">
             <Line X1="10" Y1="90" X2="-80" Y2="102" Stroke="Black" StrokeThickness="2" x:Name="xAxis"/>
             <Line X1="10" Y1="90" X2="102" Y2="102" Stroke="Black" StrokeThickness="2" x:Name="yAxis"/>
             <Line X1="10" Y1="90" X2="10" Y2="14" Stroke="Black" StrokeThickness="2" x:Name="zAxis"/>
         </Canvas>
+       
         <Viewport3D Margin="0 0 0 0">
-            <ModelVisual3D>
-                <ModelVisual3D.Content>
-                    <Model3DGroup>
-                        <AmbientLight Color="Firebrick"/>
-                        <DirectionalLight Color="Firebrick" Direction="1,-2,-3"/>
-                        <DirectionalLight Color="Firebrick" Direction="-1,2,3"/>
-                        <GeometryModel3D x:Name="Cub">
-                            <GeometryModel3D.Geometry>
-                                <MeshGeometry3D Positions=" 
-                                                -1,-1,-1  1,-1,-1, 1,-1,1 -1,-1,1
-                                                -1,-1,1   1,-1,1  1,1,1 -1,1,1
-                                                1,-1,1   1,-1,-1  1,1,-1 1,1,1
-                                                1,1,1   1,1,-1     -1,1,-1   -1,1,1
-                                                -1,-1,1  -1,1,1  -1,1,-1      -1,-1,-1
-                                                -1,-1,-1  -1,1,-1,  1,1,-1   1,-1,-1
+
+                <ModelVisual3D>
+                    <ModelVisual3D.Content>
+                        <Model3DGroup>
+                            <AmbientLight Color="Transparent"/>
+                            <DirectionalLight Color="Transparent" Direction="1,-2,-3"/>
+                            <DirectionalLight Color="Transparent" Direction="-1,2,3"/>
+                            <GeometryModel3D x:Name="Cub">
+                                <GeometryModel3D.Geometry>
+                                    <MeshGeometry3D Positions=" 
+                                                -1,0,1  1,0,1, 1,0,-1 -1,0,-1
                                                 "
+                                                TextureCoordinates="0,0  1,0  1,1  0,1"
                                                 TriangleIndices=" 
                                                 0 1 2  2 3 0
-                                                4 5 6  6 7 4
-                                                8 9 10  10 11 8
-                                                12 13 14 14 15 12
-                                                16 17 18  18 19 16
-                                                20 21 22 22 23 20
+                                         
                                                 "/>
 
 
-                            </GeometryModel3D.Geometry>
-                            <GeometryModel3D.Material>
-                                <DiffuseMaterial Brush="Red"/>
-                            </GeometryModel3D.Material>
-                        </GeometryModel3D>
-                    </Model3DGroup>
-                </ModelVisual3D.Content>
-            </ModelVisual3D>
-            <ModelVisual3D>
-                <ModelVisual3D.Content>
-                    <DirectionalLight Direction="-1,-0,2"/>
-                </ModelVisual3D.Content>
-            </ModelVisual3D>
-            <Viewport3D.Camera>
-                <PerspectiveCamera Position="2,4,6"
-                                   LookDirection="-1,-2,-3"
+                                </GeometryModel3D.Geometry>
+                                <GeometryModel3D.Material>
+                                    <DiffuseMaterial>
+                                        <DiffuseMaterial.Brush>
+                                            <ImageBrush ImageSource="helpers\grid_lines.jpg"/>
+                                        </DiffuseMaterial.Brush>
+                                    </DiffuseMaterial>
+                                </GeometryModel3D.Material>
+                            </GeometryModel3D>
+                        </Model3DGroup>
+                    </ModelVisual3D.Content>
+                </ModelVisual3D>
+                <ModelVisual3D>
+                    <ModelVisual3D.Content>
+                        <DirectionalLight Direction="-1,-0,2"/>
+                    </ModelVisual3D.Content>
+                </ModelVisual3D>
+                <Viewport3D.Camera>
+                    <PerspectiveCamera Position="0,1.74,3.1"
+                                   LookDirection="0,-0.5,-1"
                                    UpDirection="0,1,0"
-                                   FieldOfView="60"></PerspectiveCamera>
-            </Viewport3D.Camera>
-        </Viewport3D>
+                                   FieldOfView="50"></PerspectiveCamera>
+                </Viewport3D.Camera>
+            </Viewport3D>
+       
+
         <!--<h:HelixViewport3D x:Name="environment">
             <h:HelixViewport3D.Background>
                 
