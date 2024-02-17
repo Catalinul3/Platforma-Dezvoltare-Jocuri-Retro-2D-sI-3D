@@ -53,7 +53,7 @@ namespace FramworlFor3D.VIew {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/FramworlFor3D;V1.0.0.0;component/view/test.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/FramworlFor3D;component/view/test.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\VIew\Test.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -29,3 +29,36 @@ D:\visual stuido\RetroEngine\RetroEngine\bin\Debug\net6.0-windows\WpfAnimatedGif
 D:\visual stuido\RetroEngine\RetroEngine\obj\Debug\net6.0-windows\RetroEngine.csproj.CopyComplete
 D:\visual stuido\RetroEngine\RetroEngine\bin\Debug\net6.0-windows\images\load.gif
 D:\visual stuido\RetroEngine\RetroEngine\bin\Debug\net6.0-windows\images\find.png
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\bin\Debug\net6.0-windows\images\find.png
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\bin\Debug\net6.0-windows\images\load.gif
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\bin\Debug\net6.0-windows\images\title.png
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\bin\Debug\net6.0-windows\images\retro.jpg
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\bin\Debug\net6.0-windows\RetroEngine.exe
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\bin\Debug\net6.0-windows\RetroEngine.deps.json
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\bin\Debug\net6.0-windows\RetroEngine.runtimeconfig.json
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\bin\Debug\net6.0-windows\RetroEngine.dll
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\bin\Debug\net6.0-windows\RetroEngine.pdb
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\bin\Debug\net6.0-windows\WpfAnimatedGif.dll
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\RetroEngine.csproj.AssemblyReference.cache
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\View\Game3D.g.cs
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\View\MainWindow.g.cs
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\View\SplatScreen.g.cs
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\App.g.cs
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\RetroEngine_Content.g.cs
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\RetroEngine_MarkupCompile.cache
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\RetroEngine_MarkupCompile.lref
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\View\Game3D.baml
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\View\MainWindow.baml
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\View\SplatScreen.baml
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\RetroEngine.g.resources
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\RetroEngine.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\RetroEngine.AssemblyInfoInputs.cache
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\RetroEngine.AssemblyInfo.cs
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\RetroEngine.csproj.CoreCompileInputs.cache
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\RetroEngine.csproj.CopyComplete
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\RetroEngine.dll
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\refint\RetroEngine.dll
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\RetroEngine.pdb
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\RetroEngine.genruntimeconfig.cache
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\ref\RetroEngine.dll

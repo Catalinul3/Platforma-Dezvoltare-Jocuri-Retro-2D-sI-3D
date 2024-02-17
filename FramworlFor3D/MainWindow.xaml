@@ -3,22 +3,38 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FramworlFor3D"
+        xmlns:local="clr-namespace:FramworlFor3D.ViewModels"
         xmlns:h="http://helix-toolkit.org/wpf"
    
         mc:Ignorable="d"
         Title="3dFramework" Height="450" Width="800">
+    <Window.DataContext>
+        <local:MainVM/>
+    </Window.DataContext>
     <Grid ShowGridLines="True"   MouseLeftButtonDown="OnMouseLeftButtonDown" MouseRightButtonDown="OnMouseRightButtonDown" MouseRightButtonUp="OnMouseRightButtonUp" MouseLeftButtonUp="OnMouseLeftButtonUp" MouseMove="OnMouseMove">
-        
-            <Canvas x:Name="canvas" Width="100" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 0 20 0">
-            <Line X1="10" Y1="90" X2="-80" Y2="102" Stroke="Black" StrokeThickness="2" x:Name="xAxis"/>
-            <Line X1="10" Y1="90" X2="102" Y2="102" Stroke="Black" StrokeThickness="2" x:Name="yAxis"/>
-            <Line X1="10" Y1="90" X2="10" Y2="14" Stroke="Black" StrokeThickness="2" x:Name="zAxis"/>
-        </Canvas>
-       
-        <Viewport3D Margin="0 0 0 0">
+        <StackPanel>
+            <Menu>
+                <MenuItem Header="Add">
+                    <MenuItem Header="Load Resources"
+                              Command="{Binding Path=menuCommand.LoadObjectCommand}"></MenuItem>
+                        <MenuItem Header="Get Resources"></MenuItem>
+                    <MenuItem Header="UnLoad Resources"></MenuItem>
+                </MenuItem>
+            </Menu>
+        </StackPanel>
 
-                <ModelVisual3D>
+        <Canvas x:Name="canvas"  Width="100" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 30 20 0" >
+
+            <Line X1="10" Y1="90" X2="-50" Y2="102" Stroke="Black" StrokeThickness="2" x:Name="xAxis"/>
+            <TextBlock x:Name="xAxisText" Text="X" Canvas.Right="150" Canvas.Top="100" Width="40" Height="20" TextAlignment="Center" FontSize="10" FontWeight="Bold"/>
+            <Line X1="10" Y1="90" X2="70" Y2="102" Stroke="Black" StrokeThickness="2" x:Name="yAxis"/>
+            <TextBlock x:Name="yAxisText" Text="Y" Canvas.Left="60" Canvas.Top="100" Width="40" Height="20" TextAlignment="Center" FontSize="10" FontWeight="Bold"/>
+            <Line X1="10" Y1="90" X2="10" Y2="20" Stroke="Black" StrokeThickness="2" x:Name="zAxis"/>
+            <TextBlock x:Name="zAxisText" Text="Z" Canvas.Left="10"  Canvas.Top="10" Width="40" Height="20" TextAlignment="Center" FontSize="10" FontWeight="Bold"/>
+        </Canvas>
+        <Viewport3D >
+           
+            <ModelVisual3D>
                     <ModelVisual3D.Content>
                         <Model3DGroup>
                             <AmbientLight Color="Transparent"/>
