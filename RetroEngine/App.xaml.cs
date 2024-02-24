@@ -18,7 +18,8 @@ namespace RetroEngine
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
-    { int wait = 0;
+    {
+        double progress = 0;
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -31,9 +32,12 @@ namespace RetroEngine
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += (sender, args) =>
             {
-                if (wait < 5)
+                if (splashScreenVM.Progress < 100)
                 {
-                    wait += 1;
+                    
+                    
+                    progress += 20;
+                    splashScreenVM.SetProgress(progress);
                     
                }
                 else

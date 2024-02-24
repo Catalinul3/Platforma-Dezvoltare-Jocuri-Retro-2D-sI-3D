@@ -33,15 +33,7 @@ namespace RetroEngine.ViewModels
                 NotifyPropertyChanged("Background");
             }
         }
-        public string ImagePath
-        {
-            get { return _imagePath; }
-            set
-            {
-                _imagePath = value;
-                NotifyPropertyChanged("ImagePath");
-            }
-        }
+     
         private string _titlePath;
         public string TitlePath
         {
@@ -59,7 +51,7 @@ namespace RetroEngine.ViewModels
 
             
 
-            _imagePath = "../images/retro.jpg";
+            
             _titlePath = "../images/title.png";
             _background ="../images/load.gif";
         }

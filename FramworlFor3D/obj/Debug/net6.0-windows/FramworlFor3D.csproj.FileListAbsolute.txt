@@ -61,3 +61,5 @@ D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\FramworlFor3D\bin\Debug\net
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\FramworlFor3D\bin\Debug\net6.0-windows\RetroEngine.dll
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\FramworlFor3D\bin\Debug\net6.0-windows\RetroEngine.pdb
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\FramworlFor3D\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\FramworlFor3D\bin\Debug\net6.0-windows\Microsoft.Expression.Interactions.dll
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\FramworlFor3D\bin\Debug\net6.0-windows\System.Windows.Interactivity.dll
