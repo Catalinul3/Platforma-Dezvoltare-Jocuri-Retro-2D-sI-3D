@@ -43,7 +43,8 @@
             <Menu>
                 <MenuItem Header="File">
                     <MenuItem Header="New Scene"
-                              Command="{Binding Path=menuCommand.LoadObjectCommand}"></MenuItem>
+                              Command="{Binding Path=menuCommand.LoadObjectCommand}"
+                              ></MenuItem>
                     <MenuItem Header="Open Scene"></MenuItem>
                     <MenuItem Header="Save Scene"></MenuItem>
                     <MenuItem Header="Save As"></MenuItem>
@@ -54,8 +55,14 @@
                     
                 </MenuItem>
                 <MenuItem Header="Game Object">
-                    <MenuItem Header=" New 3D Object"/>
-                  
+                    <MenuItem Header="Cube"
+                              Command="{Binding Path= gameObjCommands.add3DCube}"
+                              CommandParameter="{Binding ElementName=environment}"/>
+                    <MenuItem Header="Sphere"
+                                Command="{Binding Path= gameObjCommands.add3DSphere}"
+                              CommandParameter="{Binding ElementName=environment}"/>
+                    <MenuItem Header="Other..."/>
+
                 </MenuItem>
             </Menu>
         </DockPanel>
@@ -99,7 +106,7 @@
                 </ModelVisual3D.Transform>
                 <h:GridLinesVisual3D x:Name="floor" Width="150"   Length="130" MinorDistance="1" MajorDistance="5" Thickness="0.03" Fill="#FF888888"></h:GridLinesVisual3D>
             </ModelVisual3D>
-            <h:CubeVisual3D x:Name="Cube" SideLength="3"   Fill="#FF888888" ></h:CubeVisual3D>
+            <!--<h:CubeVisual3D x:Name="Cube" SideLength="3"   Fill="#FF888888" ></h:CubeVisual3D>-->
             
             <h:DefaultLights/>
 

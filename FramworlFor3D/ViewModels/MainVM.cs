@@ -1,4 +1,5 @@
-﻿using FramworkFor3D.helpers;
+﻿using FramworkFor3D.Commands;
+using FramworkFor3D.helpers;
 using FramworkFor3D.ViewModels.TreeViewVM;
 using RetroEngine.ViewModels;
 using System;
@@ -15,11 +16,13 @@ namespace FramworlFor3D.ViewModels
 {
     public class MainVM:BaseVM
     {public MenuCommands menuCommand { get; set; }
+        public GameObjectCommands gameObjCommands { get; set; }
      public ObservableCollection<ComponentsVM> treeViewComponentsVM { get; set; }
         public ObservableCollection<ComponentsVM> components { get; set; }
       public  MainVM()
         {
             menuCommand = new MenuCommands(this);
+            gameObjCommands = new GameObjectCommands(this);
             treeViewComponentsVM = new ObservableCollection<ComponentsVM>();
             components = new ObservableCollection<ComponentsVM>();
             var camera = new ComponentsVM
@@ -37,13 +40,7 @@ namespace FramworlFor3D.ViewModels
             scene.ComponentImage = setImageOfComponents(scene.ComponentType);
            treeViewComponentsVM.Add(camera);
             treeViewComponentsVM.Add(scene);
-            var object3D = new ComponentsVM
-            {
-                ComponentName = "Cube",
-                ComponentType = ComponentsType.OBJECT_3D,
-            };
-            object3D.ComponentImage = setImageOfComponents(object3D.ComponentType);
-            treeViewComponentsVM.Add(object3D);
+          
             //components.Add(camera);
             //components.Add(scene);
             
