@@ -247,9 +247,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\GitHub\\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\\FramworlFor3D\\FramworlFor3D.csproj",
-      "projectName": "FramworlFor3D",
-      "projectPath": "D:\\GitHub\\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\\FramworlFor3D\\FramworlFor3D.csproj",
+      "projectUniqueName": "D:\\GitHub\\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\\FramworlFor3D\\FramworkFor3D.csproj",
+      "projectName": "FramworkFor3D",
+      "projectPath": "D:\\GitHub\\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\\FramworlFor3D\\FramworkFor3D.csproj",
       "packagesPath": "C:\\Users\\zcata\\.nuget\\packages\\",
       "outputPath": "D:\\GitHub\\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\\FramworlFor3D\\obj\\",
       "projectStyle": "PackageReference",

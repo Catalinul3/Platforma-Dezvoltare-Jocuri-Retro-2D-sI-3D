@@ -9,7 +9,7 @@ using System.Windows.Interactivity;
 
 namespace FramworlFor3D.helpers
 {
-    class BindableSelectedTreeViewItem:Behavior<TreeView>
+     public class BindableSelectedTreeViewItem:Behavior<TreeView>
     {
         #region SelectedItem Property
         public object SelectedItem

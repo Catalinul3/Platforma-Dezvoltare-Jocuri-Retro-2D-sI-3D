@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "R7VMsX5R7MExgakErgNKdGpDqIeUrWKbCv8msk7zBuGnl2QaL5ofXJtQsSqL4caG/Ckcsp0filDJzcLYTHVRrQ==",
+  "dgSpecHash": "KvM8PVMR9sxOZQAJ4rJGXXiuAMp2rlsUoegZpHpfpl8NcviPIQ5RPMB90zwDTzk9fU6Tw63XTk9pWNQeIwWEgA==",
   "success": true,
-  "projectFilePath": "D:\\GitHub\\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\\FramworlFor3D\\FramworlFor3D.csproj",
+  "projectFilePath": "D:\\GitHub\\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\\FramworlFor3D\\FramworkFor3D.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\zcata\\.nuget\\packages\\helixtoolkit\\2.24.0\\helixtoolkit.2.24.0.nupkg.sha512",
     "C:\\Users\\zcata\\.nuget\\packages\\helixtoolkit.wpf\\2.24.0\\helixtoolkit.wpf.2.24.0.nupkg.sha512",

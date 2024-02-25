@@ -9,11 +9,23 @@
 
   <ItemGroup>
     <None Remove="helpers\grid_lines.jpg" />
+    <None Remove="Resources\camera.png" />
+    <None Remove="Resources\object.png" />
+    <None Remove="Resources\scene.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="helpers\grid_lines.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\camera.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\object.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\scene.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 

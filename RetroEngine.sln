@@ -5,9 +5,9 @@ VisualStudioVersion = 17.4.33403.182
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RetroEngine", "RetroEngine\RetroEngine.csproj", "{D5872253-5E35-416E-941B-7204EB6DE7E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FramworlFor3D", "FramworlFor3D\FramworlFor3D.csproj", "{A4360AF6-0AD5-462B-A89B-1B26EFA0A871}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FramworkFor3D", "FramworlFor3D\FramworkFor3D.csproj", "{A4360AF6-0AD5-462B-A89B-1B26EFA0A871}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrameworkFor2D", "FrameworkFor2D\FrameworkFor2D.csproj", "{D85A5411-3E61-4B5C-B8A7-320E169B64A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrameworkFor2D", "FrameworkFor2D\FrameworkFor2D.csproj", "{D85A5411-3E61-4B5C-B8A7-320E169B64A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
