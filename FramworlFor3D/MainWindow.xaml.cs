@@ -1,5 +1,8 @@
-﻿using System;
+﻿using FramworkFor3D.Models;
+using FramworlFor3D.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,12 +24,16 @@ namespace FramworlFor3D
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         public MainWindow()
         {
-            InitializeComponent();
             
-        }
+            InitializeComponent();
+        
 
+
+        }
+      
         //private Point lastPoint;
         //private double angleX = 0;
         //private double angleY = 0;

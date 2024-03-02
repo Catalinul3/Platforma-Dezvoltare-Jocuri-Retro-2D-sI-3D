@@ -1,5 +1,6 @@
 ﻿using FramworkFor3D.Commands;
 using FramworkFor3D.helpers;
+using FramworkFor3D.Models;
 using FramworkFor3D.ViewModels.TreeViewVM;
 using RetroEngine.ViewModels;
 using System;
@@ -11,6 +12,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Media3D;
 
 namespace FramworlFor3D.ViewModels
 {
@@ -18,10 +20,20 @@ namespace FramworlFor3D.ViewModels
     {public MenuCommands menuCommand { get; set; }
         public GameObjectCommands gameObjCommands { get; set; }
      public ObservableCollection<ComponentsVM> treeViewComponentsVM { get; set; }
+        public ModelVisual3D grid { get; set; }
         public ObservableCollection<ComponentsVM> components { get; set; }
       public  MainVM()
         {
+            Scenes scenes = new Scenes();
+            grid = new ModelVisual3D();
+            List<ModelVisual3D> root = scenes.createGrid();
+            foreach(var item in root)
+            {
+                grid.Children.Add(item);
+            }
             menuCommand = new MenuCommands(this);
+            
+
             gameObjCommands = new GameObjectCommands(this);
             treeViewComponentsVM = new ObservableCollection<ComponentsVM>();
             components = new ObservableCollection<ComponentsVM>();

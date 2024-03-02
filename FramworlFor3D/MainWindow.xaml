@@ -90,7 +90,12 @@
             </TreeView.ItemTemplate>
          
         </TreeView>
-        <h:HelixViewport3D x:Name="environment" Grid.ColumnSpan="6" Grid.RowSpan="4" Grid.Column="3" Grid.Row="1" >
+        <Viewport3D  x:Name="environment" Grid.ColumnSpan="6" Grid.RowSpan="4" Grid.Column="3" Grid.Row="1"  >
+            <ModelVisual3D Content="{Binding grid.Content, Mode=TwoWay}"></ModelVisual3D>
+           
+        </Viewport3D>
+
+        <!--<h:HelixViewport3D x:Name="environment" Grid.ColumnSpan="6" Grid.RowSpan="4" Grid.Column="3" Grid.Row="1" >
             
                 <h:HelixViewport3D.Background>
 
@@ -106,11 +111,11 @@
                 </ModelVisual3D.Transform>
                 <h:GridLinesVisual3D x:Name="floor" Width="150"   Length="130" MinorDistance="1" MajorDistance="5" Thickness="0.03" Fill="#FF888888"></h:GridLinesVisual3D>
             </ModelVisual3D>
-            <!--<h:CubeVisual3D x:Name="Cube" SideLength="3"   Fill="#FF888888" ></h:CubeVisual3D>-->
+          
             
             <h:DefaultLights/>
 
-        </h:HelixViewport3D>
+        </h:HelixViewport3D>-->
         <DockPanel  Grid.Row="5" Grid.ColumnSpan="8" VerticalAlignment="Top">
             <Menu>
                 <MenuItem Header="Project"></MenuItem>
@@ -151,27 +156,7 @@
             <ListViewItem Content="Inspector for something"/>
             <ListViewItem Content="Inspector for something 2"/>
         </ListView>
-        <!--<Grid ShowGridLines="True"   MouseLeftButtonDown="OnMouseLeftButtonDown" MouseRightButtonDown="OnMouseRightButtonDown" MouseRightButtonUp="OnMouseRightButtonUp" MouseLeftButtonUp="OnMouseLeftButtonUp" MouseMove="OnMouseMove">
-        <StackPanel>
-            <Menu>
-                <MenuItem Header="Add">
-                    <MenuItem Header="Load Resources"
-                              Command="{Binding Path=menuCommand.LoadObjectCommand}"></MenuItem>
-                        <MenuItem Header="Get Resources"></MenuItem>
-                    <MenuItem Header="UnLoad Resources"></MenuItem>
-                </MenuItem>
-            </Menu>
-        </StackPanel>
-
-        <Canvas x:Name="canvas"  Width="100" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 30 20 0" >
-
-            <Line X1="10" Y1="90" X2="-50" Y2="102" Stroke="Black" StrokeThickness="2" x:Name="zAxis"/>
-            <TextBlock x:Name="zAxisText" Text="Z" Canvas.Right="150" Canvas.Top="100" Width="40" Height="20" TextAlignment="Center" FontSize="10" FontWeight="Bold"/>
-            <Line X1="10" Y1="90" X2="70" Y2="102" Stroke="Black" StrokeThickness="2" x:Name="yAxis"/>
-            <TextBlock x:Name="xAxisText" Text="X" Canvas.Left="60" Canvas.Top="100" Width="40" Height="20" TextAlignment="Center" FontSize="10" FontWeight="Bold"/>
-            <Line X1="10" Y1="90" X2="10" Y2="20" Stroke="Black" StrokeThickness="2" x:Name="xAxis"/>
-            <TextBlock x:Name="yAxisText" Text="Y" Canvas.Left="10"  Canvas.Top="10" Width="40" Height="20" TextAlignment="Center" FontSize="10" FontWeight="Bold"/>
-        </Canvas>
+        <!--
         <Viewport3D >
            
             <ModelVisual3D>
