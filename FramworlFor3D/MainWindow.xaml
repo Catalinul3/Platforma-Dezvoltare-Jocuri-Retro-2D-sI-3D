@@ -90,9 +90,17 @@
             </TreeView.ItemTemplate>
          
         </TreeView>
-        <Viewport3D  x:Name="environment" Grid.ColumnSpan="6" Grid.RowSpan="4" Grid.Column="3" Grid.Row="1"  >
-            <ModelVisual3D Content="{Binding grid.Content, Mode=TwoWay}"></ModelVisual3D>
-           
+        <Viewport3D   x:Name="environment" Grid.ColumnSpan="6" Grid.RowSpan="4" Grid.Column="3" Grid.Row="1"  >
+            
+            <ModelVisual3D  x:Name="grid" Content="{Binding grid[0].Content}">
+             
+            </ModelVisual3D>
+            <Viewport3D.Camera>
+                <PerspectiveCamera Position="0,1.74,3.1"
+                                   LookDirection="0,-0.5,-1"
+                                   UpDirection="0,1,0"
+                                   FieldOfView="60"></PerspectiveCamera>
+            </Viewport3D.Camera>
         </Viewport3D>
 
         <!--<h:HelixViewport3D x:Name="environment" Grid.ColumnSpan="6" Grid.RowSpan="4" Grid.Column="3" Grid.Row="1" >

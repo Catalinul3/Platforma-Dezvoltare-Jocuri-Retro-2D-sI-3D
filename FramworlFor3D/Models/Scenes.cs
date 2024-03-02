@@ -13,7 +13,10 @@ namespace FramworkFor3D.Models
         ModelVisual3D sky { get; set; }
         List<ModelVisual3D> grid { get; set; }
         Model3DGroup axis { get; set; }
-
+        public List<ModelVisual3D> getGrid()
+        {
+                       return grid;
+        }
         public Scenes()
         {
             sky = new ModelVisual3D();
@@ -27,7 +30,9 @@ namespace FramworkFor3D.Models
             for (int x = 0; x < 3; x++)
             {
                 for (int y = 0; y < 3; y++)
-                { MeshGeometry3D mesh=new MeshGeometry3D();
+                {
+                    
+                    MeshGeometry3D mesh=new MeshGeometry3D();
                     mesh.Positions.Add(new Point3D(x+1, y+1, 0));
                     mesh.Positions.Add(new Point3D(x-1, y+1, 0));
                     mesh.Positions.Add(new Point3D(x-1, y-1, 0));
@@ -40,7 +45,10 @@ namespace FramworkFor3D.Models
                     mesh.TriangleIndices.Add(2);
                     mesh.TriangleIndices.Add(3);
 
-                    GeometryModel3D cell = new GeometryModel3D(mesh, new DiffuseMaterial(Brushes.Gray));
+                    GeometryModel3D cell = new GeometryModel3D();
+                    cell.Geometry = mesh;
+                    cell.Material = new DiffuseMaterial(Brushes.CadetBlue);
+                    
                     ModelVisual3D cellVisual = new ModelVisual3D();
                     cellVisual.Content = cell;
                     grid.Add(cellVisual);

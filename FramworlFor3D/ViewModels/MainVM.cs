@@ -12,6 +12,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 using System.Windows.Media.Media3D;
 
 namespace FramworlFor3D.ViewModels
@@ -20,16 +21,18 @@ namespace FramworlFor3D.ViewModels
     {public MenuCommands menuCommand { get; set; }
         public GameObjectCommands gameObjCommands { get; set; }
      public ObservableCollection<ComponentsVM> treeViewComponentsVM { get; set; }
-        public ModelVisual3D grid { get; set; }
+        public ObservableCollection<ModelVisual3D> grid { get; set; }
+      public GeometryModel3D geometry3D { get; set; }
         public ObservableCollection<ComponentsVM> components { get; set; }
-      public  MainVM()
+      public MainVM()
         {
             Scenes scenes = new Scenes();
-            grid = new ModelVisual3D();
-            List<ModelVisual3D> root = scenes.createGrid();
-            foreach(var item in root)
+            grid = new ObservableCollection<ModelVisual3D>();
+            List<ModelVisual3D> root = scenes.getGrid();
+          
+            foreach (var item in root)
             {
-                grid.Children.Add(item);
+                grid.Add(item);
             }
             menuCommand = new MenuCommands(this);
             
