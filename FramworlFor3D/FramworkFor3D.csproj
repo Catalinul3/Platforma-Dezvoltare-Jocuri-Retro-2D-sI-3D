@@ -10,6 +10,7 @@
   <ItemGroup>
     <None Remove="helpers\grid_lines.jpg" />
     <None Remove="Resources\camera.png" />
+    <None Remove="Resources\cell.png" />
     <None Remove="Resources\object.png" />
     <None Remove="Resources\scene.png" />
   </ItemGroup>
@@ -20,6 +21,9 @@
     </Content>
     <Content Include="Resources\camera.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\cell.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\object.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

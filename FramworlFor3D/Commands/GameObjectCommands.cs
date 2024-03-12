@@ -1,4 +1,5 @@
-﻿using FramworlFor3D.helpers;
+﻿using FramworkFor3D.Models;
+using FramworlFor3D.helpers;
 using FramworlFor3D.ViewModels;
 using HelixToolkit.Wpf;
 using RetroEngine.ViewModels;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace FramworkFor3D.Commands
@@ -35,15 +37,11 @@ namespace FramworkFor3D.Commands
         }
         private void addCube(object parameter)
         {  
-            if (parameter is HelixViewport3D environment)
-            { 
-                CubeVisual3D cube = new CubeVisual3D
-                {
-                    SideLength = 3,
-                    Fill=Brushes.Gray
+            if (parameter is Viewport3D environment)
+            {
+                Plane plane = new Plane();
 
-                };
-                environment.Children.Add(cube);
+                environment.Children.Add(plane);
                 //MessageBox.Show("Cube " + cube.SideLength);
 
             }

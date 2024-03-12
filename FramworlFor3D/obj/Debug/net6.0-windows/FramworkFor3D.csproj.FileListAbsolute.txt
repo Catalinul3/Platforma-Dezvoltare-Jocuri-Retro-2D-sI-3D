@@ -41,3 +41,4 @@ D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\FramworlFor3D\obj\Debug\net
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\FramworlFor3D\bin\Debug\net6.0-windows\Resources\camera.png
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\FramworlFor3D\bin\Debug\net6.0-windows\Resources\object.png
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\FramworlFor3D\bin\Debug\net6.0-windows\Resources\scene.png
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\FramworlFor3D\bin\Debug\net6.0-windows\Resources\cell.png

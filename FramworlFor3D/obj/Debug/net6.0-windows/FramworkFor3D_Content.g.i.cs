@@ -10,6 +10,7 @@
 
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("helpers/grid_lines.jpg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/camera.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/cell.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/object.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/scene.png")]
 
