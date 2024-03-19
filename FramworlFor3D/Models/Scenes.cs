@@ -40,7 +40,7 @@ namespace FramworkFor3D.Models
             grid.Add(lightVisual);
             for (int x = 0; x < 10; x++)
             {
-                for (int y = 0; y < 3; y++)
+                for (int y = 0; y < 10; y++)
                 {
                     double xPos = x * (cellSize-delim);
                     double yPos = y * (cellSize-delim);

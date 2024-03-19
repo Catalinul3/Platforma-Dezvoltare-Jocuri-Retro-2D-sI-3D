@@ -26,7 +26,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
-            
+
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -51,8 +51,8 @@
                     <MenuItem Header="New Project"></MenuItem>
                     <MenuItem Header="Open Project"></MenuItem>
                     <MenuItem Header="Save Project"></MenuItem>
-                    
-                    
+
+
                 </MenuItem>
                 <MenuItem Header="Game Object">
                     <MenuItem Header="Cube"
@@ -69,7 +69,7 @@
         <StackPanel Orientation="Horizontal" Grid.ColumnSpan="12" Height="20px" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Menu>
                 <MenuItem Header="Build">
-                   
+
                 </MenuItem>
                 <MenuItem Header="Run"></MenuItem>
                 <MenuItem Header="Stop"></MenuItem>
@@ -88,11 +88,27 @@
                     </StackPanel>
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
-         
+
         </TreeView>
-        <Viewport3D   x:Name="environment" Grid.ColumnSpan="6" Grid.RowSpan="4" Grid.Column="3" Grid.Row="1"  >
-            <ModelVisual3D x:Name="grid" Content="{Binding grid[1].Content}"></ModelVisual3D>
-            <Viewport3D.Camera>
+        <Grid Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="6" Grid.RowSpan="4">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0.5 ,0.4" EndPoint="0.5,1" >
+                    <GradientStop Color="#FF7DB6EA" Offset="0"/>
+                    <GradientStop Color="#FFAFAFAF" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+        </Grid>
+        <Viewport3D   x:Name="environment"
+                      Grid.ColumnSpan="6" 
+                      Grid.RowSpan="4"
+                      Grid.Column="3" Grid.Row="1" 
+                      Camera="{Binding Camera}" 
+                      Focusable="True"
+                      Loaded="OnLoaded"
+                     KeyDown="OnKeyDown"
+                       >
+
+            <!--<Viewport3D.Camera>
                 <PerspectiveCamera Position="1,0.5,2"
                                    LookDirection="0,0,-1"
                                    UpDirection="0,1,0"
@@ -100,10 +116,10 @@
                                     >
                     
                 </PerspectiveCamera>
-            </Viewport3D.Camera>
+            </Viewport3D.Camera>-->
         </Viewport3D>
 
-        <!--<h:HelixViewport3D x:Name="environment" Grid.ColumnSpan="6" Grid.RowSpan="4" Grid.Column="3" Grid.Row="1" >
+        <!--<h:HelixViewport3D x:Name="environmnt" Grid.ColumnSpan="6" Grid.RowSpan="4" Grid.Column="3" Grid.Row="1" >
             
                 <h:HelixViewport3D.Background>
 
@@ -118,12 +134,13 @@
                     <TranslateTransform3D OffsetX="2" OffsetY="-1.4" OffsetZ="-1.45"/>
                 </ModelVisual3D.Transform>
                 <h:GridLinesVisual3D x:Name="floor" Width="150"   Length="130" MinorDistance="1" MajorDistance="5" Thickness="0.03" Fill="#FF888888"></h:GridLinesVisual3D>
-            </ModelVisual3D>
-          
-            
-            <h:DefaultLights/>
+            </ModelVisual3D>-->
+
+
+        <!--<h:DefaultLights/>
 
         </h:HelixViewport3D>-->
+
         <DockPanel  Grid.Row="5" Grid.ColumnSpan="8" VerticalAlignment="Top">
             <Menu>
                 <MenuItem Header="Project"></MenuItem>
@@ -149,8 +166,8 @@
         <ListView Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="7" Grid.RowSpan="3" >
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    
-                        <WrapPanel Orientation="Horizontal"></WrapPanel>
+
+                    <WrapPanel Orientation="Horizontal"></WrapPanel>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListViewItem Content="Some Item"></ListViewItem>
@@ -210,8 +227,8 @@
                 </Viewport3D.Camera>
             </Viewport3D>-->
 
-    
-      
+
+
 
     </Grid>
 </Window>
