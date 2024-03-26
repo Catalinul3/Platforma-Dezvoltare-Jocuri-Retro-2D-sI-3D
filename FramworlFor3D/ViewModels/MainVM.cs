@@ -3,6 +3,7 @@ using FramworkFor3D.helpers;
 using FramworkFor3D.Models;
 using FramworkFor3D.ViewModels.TreeViewVM;
 using FramworlFor3D.helpers;
+using MDriven.WPF.Media3D;
 using RetroEngine.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -82,30 +83,13 @@ namespace FramworlFor3D.ViewModels
         }
         public void SetCamera()
         {
-            Camera = new PerspectiveCamera(new Point3D(1, 0.5, 2), new Vector3D(0, 0, -1), new Vector3D(0, 1, 0), 45);
+            Camera = new PerspectiveCamera(new Point3D(1, 0.5, 2), new Vector3D(0, 0, -1), new Vector3D(0, 0.2, 0), 45);
         }
-        private RelayCommand rotateMouseCommand { get; set; }
-        private RelayCommand zoomMouseCommand { get; set; }
-        public RelayCommand RotateCommand
+        public void UpdateCamera(MatrixTransform3D updateConfig)
         {
-            get
-            {
-                if (rotateMouseCommand == null)
-                {
-                    rotateMouseCommand = new RelayCommand(Rotate);
-                }
-                return rotateMouseCommand;
-            }
+            Camera.Transform = updateConfig;
         }
-
-        //metode
-        private void Rotate(object parameter)
-        {
-            if (parameter is Key key)
-            {
-                Camera = ProjectionCameraEX.RotateBy(Camera, key, 0.1);
-            }
-        }
+      
 
     
     #endregion

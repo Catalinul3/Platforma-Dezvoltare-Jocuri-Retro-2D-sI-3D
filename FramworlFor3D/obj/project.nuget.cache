@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "KvM8PVMR9sxOZQAJ4rJGXXiuAMp2rlsUoegZpHpfpl8NcviPIQ5RPMB90zwDTzk9fU6Tw63XTk9pWNQeIwWEgA==",
+  "dgSpecHash": "9lEVa36F2WohyKJaOzc2ZwIwNdX9rgxfFb/W/s9wQuprEQzJIZUKslGpLLMpb7as+TYTWkIefLdikr4dNpe9yw==",
   "success": true,
   "projectFilePath": "D:\\GitHub\\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\\FramworlFor3D\\FramworkFor3D.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\zcata\\.nuget\\packages\\ecocore\\7.0.0.15507\\ecocore.7.0.0.15507.nupkg.sha512",
+    "C:\\Users\\zcata\\.nuget\\packages\\ecowpf\\7.0.0.15507\\ecowpf.7.0.0.15507.nupkg.sha512",
     "C:\\Users\\zcata\\.nuget\\packages\\helixtoolkit\\2.24.0\\helixtoolkit.2.24.0.nupkg.sha512",
     "C:\\Users\\zcata\\.nuget\\packages\\helixtoolkit.wpf\\2.24.0\\helixtoolkit.wpf.2.24.0.nupkg.sha512",
     "C:\\Users\\zcata\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
@@ -11,6 +13,26 @@
     "C:\\Users\\zcata\\.nuget\\packages\\wpfanimatedgif\\2.0.2\\wpfanimatedgif.2.0.2.nupkg.sha512"
   ],
   "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'EcoCore 7.0.0.15507' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "EcoCore",
+      "targetGraphs": [
+        "net6.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'EcoWpf 7.0.0.15507' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "EcoWpf",
+      "targetGraphs": [
+        "net6.0-windows7.0"
+      ]
+    },
     {
       "code": "NU1701",
       "level": "Warning",

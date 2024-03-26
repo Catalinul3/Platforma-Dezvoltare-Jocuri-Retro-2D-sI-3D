@@ -102,17 +102,20 @@
                       Grid.ColumnSpan="6" 
                       Grid.RowSpan="4"
                       Grid.Column="3" Grid.Row="1" 
-                      Camera="{Binding Camera}" 
+                      Camera="{Binding Camera}"
                       Focusable="True"
                       Loaded="OnLoaded"
-                     KeyDown="OnKeyDown"
+                    
+                      MouseLeftButtonDown="MouseDown"
+                      KeyDown="KeyDown"
                        >
+            <ModelVisual3D Content="{Binding grid[1].Content}"> </ModelVisual3D>
 
             <!--<Viewport3D.Camera>
-                <PerspectiveCamera Position="1,0.5,2"
+                <PerspectiveCamera Position="0.7,0.5,2"
                                    LookDirection="0,0,-1"
-                                   UpDirection="0,1,0"
-                                   FieldOfView="45" 
+                                   UpDirection="0,0.2,0"
+                                   FieldOfView="60" 
                                     >
                     
                 </PerspectiveCamera>
