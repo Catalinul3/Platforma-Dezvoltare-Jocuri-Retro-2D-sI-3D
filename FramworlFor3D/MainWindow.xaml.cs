@@ -28,7 +28,8 @@ namespace FramworlFor3D
     public partial class MainWindow : Window
     {
         private TrackBall track;
-        double deltaX= 0.1;
+        double deltaX = .1;
+        double deltaY = .1;
 
         public MainWindow()
         {
@@ -36,14 +37,14 @@ namespace FramworlFor3D
             InitializeComponent();
             CreateGrid();
             track = new TrackBall();
-          
+
 
         }
         private bool isMouseCaptured = false;
         private bool isAPressed = false;
         private bool isKeyPressed = false;
         private Point lastClick;
-        
+
 
         private void MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -56,7 +57,7 @@ namespace FramworlFor3D
                 this.Cursor = Cursors.ScrollAll;
                 lastClick = e.GetPosition((IInputElement)sender);
                 Vector3D sphere = track.ConvertToSphereCoordinates(lastClick, width, height);
-               
+
                 environment.MouseMove += MouseMove;
 
 
@@ -79,7 +80,7 @@ namespace FramworlFor3D
                 double width = environment.RenderSize.Width;
                 double height = environment.RenderSize.Height;
                 Point currentClick = e.GetPosition((IInputElement)sender);
-                Point rotateClick= new Point(width/ 2, height / 2);
+                Point rotateClick = new Point(width / 2, height / 2);
                 Vector3D lastClickSphereCoordinates = track.ConvertToSphereCoordinates(rotateClick, width, height);
                 Vector3D currentClickSphereCoordinates = track.ConvertToSphereCoordinates(currentClick, width, height);
 
@@ -92,23 +93,23 @@ namespace FramworlFor3D
                 Quaternion delta = new Quaternion(axis, -theta);
 
                 //rotatia 
-               
+
                 Matrix3D rotate = new Matrix3D();
                 rotate.Rotate(delta);
 
                 environment.Camera.Transform = new MatrixTransform3D(rotate);
-                
-                
+
+
             }
-           
+
         }
         private void KeyDown(object sender, KeyEventArgs e)
         {
-           switch(e.Key)
+            switch (e.Key)
             {
                 case Key.A:
                     isAPressed = true;
-                    KeyA();break;
+                    KeyA(); break;
                 case Key.D:
                     isKeyPressed = true;
                     KeyD(); break;
@@ -117,36 +118,36 @@ namespace FramworlFor3D
                     KeyW(); break;
                 case Key.S:
                     isKeyPressed = true;
-                    KeyS(); break;                
+                    KeyS(); break;
                 default: break;
             }
-            
+
         }
         private void KeyA()
         {
 
-            if (isAPressed)
-            {
-                Matrix3D translateMatrix =track.MoveCameraOnXaxis(-deltaX);
-                deltaX -= 0.1;
-                environment.Camera.Transform = new MatrixTransform3D(translateMatrix);
-               
-            }
+
+
+            Matrix3D translateMatrix = track.MoveCameraOnXaxis(deltaX);
+            deltaX -= 0.1;
+            environment.Camera.Transform = new MatrixTransform3D(translateMatrix);
+
+
         }
         private void KeyD()
         {
 
-
-            Matrix3D translateMatrix = track.MoveCameraOnXaxis(deltaX);
             deltaX += 0.1;
+            Matrix3D translateMatrix = track.MoveCameraOnXaxis(deltaX);
+
             environment.Camera.Transform = new MatrixTransform3D(translateMatrix);
-            
+
         }
         private void KeyW()
         {
 
-
-            Matrix3D translateMatrix = track.MoveCameraOnYaxis(.1);
+            deltaY+= 0.1;
+            Matrix3D translateMatrix = track.MoveCameraOnYaxis(deltaY);
 
             environment.Camera.Transform = new MatrixTransform3D(translateMatrix);
 
@@ -154,8 +155,9 @@ namespace FramworlFor3D
         private void KeyS()
         {
 
-
-            Matrix3D translateMatrix = track.MoveCameraOnYaxis(-.1);
+            
+            Matrix3D translateMatrix = track.MoveCameraOnYaxis(deltaY);
+            deltaY-= 0.1;
 
             environment.Camera.Transform = new MatrixTransform3D(translateMatrix);
 
@@ -170,7 +172,7 @@ namespace FramworlFor3D
                 environment.Children.Add(item);
             }
         }
-      
+
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             environment.Focus();
