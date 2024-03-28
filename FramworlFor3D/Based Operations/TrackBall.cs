@@ -48,6 +48,12 @@ namespace FramworkFor3D.Based_Operations
             translateMatrix.Translate(translate);
             return translateMatrix;
         }
+        public Matrix3D ZoomCamera(double deltaZoom)
+        {
+            Matrix3D zoom=new Matrix3D();
+            zoom.Translate(new Vector3D(0, 0, deltaZoom));
+            return zoom;
 
+        }
     }
 }

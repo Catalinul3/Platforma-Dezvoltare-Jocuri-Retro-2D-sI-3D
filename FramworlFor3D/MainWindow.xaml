@@ -108,6 +108,7 @@
                     
                       MouseLeftButtonDown="MouseDown"
                       KeyDown="KeyDown"
+                      MouseWheel="MouseWheel"
                        >
            
 

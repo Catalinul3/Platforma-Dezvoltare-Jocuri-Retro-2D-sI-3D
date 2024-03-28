@@ -162,6 +162,29 @@ namespace FramworlFor3D
             environment.Camera.Transform = new MatrixTransform3D(translateMatrix);
 
         }
+        private void MouseWheel(object sender,MouseWheelEventArgs e)
+        {
+            double zoom = 0;
+            if(e.Delta>0)
+            {
+                zoom = 0.1;
+            }
+            else
+            {
+                zoom = -0.1;
+            }
+
+            Zoom(zoom);
+        }
+
+        private void Zoom(double zoom)
+        { Matrix3D zoomTranslate = track.ZoomCamera(zoom);
+            Matrix3D camera = ((MatrixTransform3D)environment.Camera.Transform).Matrix;
+            Matrix3D cameraZoom = Matrix3D.Multiply(camera, zoomTranslate);
+            environment.Camera.Transform = new MatrixTransform3D(cameraZoom);
+
+        }
+
         private void CreateGrid()
         {
             Scenes sc = new Scenes();
