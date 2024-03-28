@@ -19,6 +19,7 @@ namespace FramworkFor3D.Based_Operations
            
         
         }
+        #region RotateCamera
         public Vector3D ConvertToSphereCoordinates(Point click,double width,double height)
         {
             double x= click.X/(width/2);
@@ -32,7 +33,10 @@ namespace FramworkFor3D.Based_Operations
             newPoint.Normalize();
             return newPoint;
         }
-       public Matrix3D MoveCameraOnXaxis(double deltaX)
+        #endregion
+
+        #region MoveCamera
+        public Matrix3D MoveCameraOnXaxis(double deltaX)
         {
             
             Vector3D translate = new Vector3D(deltaX, 0, 0);
@@ -48,6 +52,9 @@ namespace FramworkFor3D.Based_Operations
             translateMatrix.Translate(translate);
             return translateMatrix;
         }
+        #endregion
+
+        #region ZoomCamera
         public Matrix3D ZoomCamera(double deltaZoom)
         {
             Matrix3D zoom=new Matrix3D();
@@ -55,5 +62,6 @@ namespace FramworkFor3D.Based_Operations
             return zoom;
 
         }
+        #endregion
     }
 }

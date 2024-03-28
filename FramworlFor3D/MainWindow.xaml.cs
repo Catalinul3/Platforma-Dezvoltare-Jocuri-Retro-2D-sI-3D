@@ -27,24 +27,23 @@ namespace FramworlFor3D
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region Variables
         private TrackBall track;
         double deltaX = .1;
         double deltaY = .1;
+        private bool isMouseCaptured = false;
+        private bool isKeyPressed = false;
+        private Point lastClick;
+        #endregion
 
         public MainWindow()
         {
-
             InitializeComponent();
             CreateGrid();
             track = new TrackBall();
-
-
         }
-        private bool isMouseCaptured = false;
-        private bool isAPressed = false;
-        private bool isKeyPressed = false;
-        private Point lastClick;
 
+        #region Rotate
 
         private void MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -104,12 +103,15 @@ namespace FramworlFor3D
             }
 
         }
+        #endregion
+
+        #region Move
         private void KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.Key)
             {
                 case Key.A:
-                    isAPressed = true;
+                    isKeyPressed = true;
                     KeyA(); break;
                 case Key.D:
                     isKeyPressed = true;
@@ -169,6 +171,9 @@ namespace FramworlFor3D
             environment.Camera.Transform = new MatrixTransform3D(translateMatrix);
 
         }
+        #endregion
+
+        #region Zoom
         private void MouseWheel(object sender,MouseWheelEventArgs e)
         {
             double zoom = 0;
@@ -191,7 +196,9 @@ namespace FramworlFor3D
             environment.Camera.Transform = new MatrixTransform3D(cameraZoom);
 
         }
+        #endregion
 
+        #region Helpers
         private void CreateGrid()
         {
             Scenes sc = new Scenes();
@@ -207,7 +214,7 @@ namespace FramworlFor3D
         {
             environment.Focus();
         }
-
+        #endregion
 
     }
 }

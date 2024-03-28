@@ -29,8 +29,9 @@ namespace FramworlFor3D.ViewModels
         public ObservableCollection<ModelVisual3D> grid { get; set; }
       public GeometryModel3D geometry3D { get; set; }
         public ObservableCollection<ComponentsVM> components { get; set; }
-     #endregion
+        #endregion
 
+        #region Constructors
         public MainVM()
         {
             Scenes scenes = new Scenes();
@@ -69,8 +70,10 @@ namespace FramworlFor3D.ViewModels
             
             
         }
+        #endregion
+
         #region Camera
-      
+
         private PerspectiveCamera _camera;
         public PerspectiveCamera Camera
         {
@@ -89,12 +92,13 @@ namespace FramworlFor3D.ViewModels
         {
             Camera.Transform = updateConfig;
         }
-      
 
-    
-    #endregion
 
-    private string setImageOfComponents(ComponentsType type)
+
+        #endregion
+
+        #region Helpers
+        private string setImageOfComponents(ComponentsType type)
         {
 
             if (type.Equals(ComponentsType.CAMERA))
@@ -114,5 +118,6 @@ namespace FramworlFor3D.ViewModels
 
         private object selectedItem;
         public object SelectedItem { get => selectedItem; set => SetProperty(ref selectedItem, value); }
+        #endregion
     }
 }

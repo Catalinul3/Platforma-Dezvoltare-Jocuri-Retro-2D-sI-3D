@@ -39,7 +39,7 @@ namespace FramworkFor3D.Commands
         {  
             if (parameter is Viewport3D environment)
             {
-                Plane plane = new Plane();
+                CubeVisual3D plane = new CubeVisual3D();
 
                 environment.Children.Add(plane);
                 //MessageBox.Show("Cube " + cube.SideLength);
@@ -57,7 +57,7 @@ namespace FramworkFor3D.Commands
         }
         private void addSphere(object parameter)
         {
-            if (parameter is HelixViewport3D environment)
+            if (parameter is Viewport3D environment)
             {
                 SphereVisual3D cube = new SphereVisual3D
                 {
