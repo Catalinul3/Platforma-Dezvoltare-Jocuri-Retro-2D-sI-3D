@@ -72,6 +72,7 @@ namespace FramworlFor3D
         {
             ((UIElement)sender).ReleaseMouseCapture();
             isMouseCaptured = false;
+            this.Cursor = Cursors.Arrow;
         }
         private void MouseMove(object sender, MouseEventArgs e)
         {
@@ -130,6 +131,8 @@ namespace FramworlFor3D
 
             Matrix3D translateMatrix = track.MoveCameraOnXaxis(deltaX);
             deltaX -= 0.1;
+            Matrix3D camera = ((MatrixTransform3D)environment.Camera.Transform).Matrix;
+            Matrix3D movingCamera = Matrix3D.Multiply(camera, translateMatrix);
             environment.Camera.Transform = new MatrixTransform3D(translateMatrix);
 
 
@@ -139,7 +142,8 @@ namespace FramworlFor3D
 
             deltaX += 0.1;
             Matrix3D translateMatrix = track.MoveCameraOnXaxis(deltaX);
-
+            Matrix3D camera = ((MatrixTransform3D)environment.Camera.Transform).Matrix;
+            Matrix3D movingCamera = Matrix3D.Multiply(camera, translateMatrix);
             environment.Camera.Transform = new MatrixTransform3D(translateMatrix);
 
         }
@@ -148,7 +152,8 @@ namespace FramworlFor3D
 
             deltaY+= 0.1;
             Matrix3D translateMatrix = track.MoveCameraOnYaxis(deltaY);
-
+            Matrix3D camera = ((MatrixTransform3D)environment.Camera.Transform).Matrix;
+            Matrix3D movingCamera = Matrix3D.Multiply(camera, translateMatrix);
             environment.Camera.Transform = new MatrixTransform3D(translateMatrix);
 
         }
@@ -157,6 +162,8 @@ namespace FramworlFor3D
 
             
             Matrix3D translateMatrix = track.MoveCameraOnYaxis(deltaY);
+            Matrix3D camera = ((MatrixTransform3D)environment.Camera.Transform).Matrix;
+            Matrix3D movingCamera = Matrix3D.Multiply(camera, translateMatrix);
             deltaY-= 0.1;
 
             environment.Camera.Transform = new MatrixTransform3D(translateMatrix);
