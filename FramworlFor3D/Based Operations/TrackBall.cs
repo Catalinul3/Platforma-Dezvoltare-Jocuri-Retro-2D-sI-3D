@@ -21,7 +21,7 @@ namespace FramworkFor3D.Based_Operations
         }
         #region RotateCamera
         public Vector3D ConvertToSphereCoordinates(Point click,double width,double height)
-        {
+        {   //normalizarea coordonatelor click-ului
             double x= click.X/(width/2);
             double y= click.Y/(height/2);
             x = x - 1;
@@ -36,21 +36,21 @@ namespace FramworkFor3D.Based_Operations
         #endregion
 
         #region MoveCamera
-        public Matrix3D MoveCameraOnXaxis(double deltaX)
+        public Matrix3D MoveCameraOnXaxis(double deltaX,Matrix3D camera)
         {
             
             Vector3D translate = new Vector3D(deltaX, 0, 0);
-            Matrix3D translateMatrix = new Matrix3D();
-            translateMatrix.Translate(translate);
-            return translateMatrix;
+            //Matrix3D translateMatrix = new Matrix3D();
+            camera.Translate(translate);
+            return camera;
         }
-        public Matrix3D MoveCameraOnYaxis(double deltaY)
+        public Matrix3D MoveCameraOnYaxis(double deltaY,Matrix3D camera)
         {
 
             Vector3D translate = new Vector3D(0, deltaY, 0);
-            Matrix3D translateMatrix = new Matrix3D();
-            translateMatrix.Translate(translate);
-            return translateMatrix;
+           
+            camera.Translate(translate);
+            return camera;
         }
         #endregion
 

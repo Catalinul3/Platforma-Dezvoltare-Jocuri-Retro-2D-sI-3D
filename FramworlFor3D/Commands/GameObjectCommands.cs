@@ -1,4 +1,5 @@
-﻿using FramworkFor3D.Models;
+﻿using FramworkFor3D._3DObjects;
+using FramworkFor3D.Models;
 using FramworlFor3D.helpers;
 using FramworlFor3D.ViewModels;
 using HelixToolkit.Wpf;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Media3D;
 
 namespace FramworkFor3D.Commands
 {
@@ -39,9 +41,13 @@ namespace FramworkFor3D.Commands
         {  
             if (parameter is Viewport3D environment)
             {
-                CubeVisual3D plane = new CubeVisual3D();
+                Cube3D cube = new Cube3D
+                {color=Brushes.Red,
+                };
 
-                environment.Children.Add(plane);
+                environment.Children.Add(cube);
+                TranslateTransform3D center= new TranslateTransform3D(1, 0.8, 0);
+                cube.Transform= center;
                 //MessageBox.Show("Cube " + cube.SideLength);
 
             }

@@ -40,7 +40,6 @@ D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\bin\Debug\net6.
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\bin\Debug\net6.0-windows\RetroEngine.pdb
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\bin\Debug\net6.0-windows\WpfAnimatedGif.dll
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\RetroEngine.csproj.AssemblyReference.cache
-D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\View\Game3D.g.cs
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\View\MainWindow.g.cs
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\View\SplatScreen.g.cs
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\App.g.cs
@@ -48,7 +47,6 @@ D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\RetroEngine_MarkupCompile.cache
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\RetroEngine_MarkupCompile.lref
-D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\View\Game3D.baml
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\View\MainWindow.baml
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\View\SplatScreen.baml
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\RetroEngine.g.resources

@@ -39,7 +39,7 @@ namespace FramworlFor3D
         public MainWindow()
         {
             InitializeComponent();
-            CreateGrid();
+           CreateGrid();
             track = new TrackBall();
         }
 
@@ -81,14 +81,14 @@ namespace FramworlFor3D
                 double height = environment.RenderSize.Height;
                 Point currentClick = e.GetPosition((IInputElement)sender);
                 Point rotateClick = new Point(width / 2, height / 2);
-                Vector3D lastClickSphereCoordinates = track.ConvertToSphereCoordinates(rotateClick, width, height);
+                Vector3D rotateClickSphereCoordinates = track.ConvertToSphereCoordinates(rotateClick, width, height);
                 Vector3D currentClickSphereCoordinates = track.ConvertToSphereCoordinates(currentClick, width, height);
 
-                //determinarea axei pe care o formeaza cele doua puncte ale mouse-ului unde se va face rotatia camerei
-                Vector3D axis = Vector3D.CrossProduct(lastClickSphereCoordinates, currentClickSphereCoordinates);
+                //determinarea axei pe care o formeaza punctul din mijlocul si punctul curent al mouse-ului
+                Vector3D axis = Vector3D.CrossProduct(rotateClickSphereCoordinates, currentClickSphereCoordinates);
 
-                //determinarea unghiului dintre cele doua puncte ale mouse-ului
-                double theta = Vector3D.AngleBetween(lastClickSphereCoordinates, currentClickSphereCoordinates);
+                //determinarea unghiului dintre cele doua puncte;
+                double theta = Vector3D.AngleBetween(rotateClickSphereCoordinates, currentClickSphereCoordinates);
 
                 Quaternion delta = new Quaternion(axis, -theta);
 
@@ -130,11 +130,11 @@ namespace FramworlFor3D
         {
 
 
-
-            Matrix3D translateMatrix = track.MoveCameraOnXaxis(deltaX);
-            deltaX -= 0.1;
             Matrix3D camera = ((MatrixTransform3D)environment.Camera.Transform).Matrix;
-            Matrix3D movingCamera = Matrix3D.Multiply(camera, translateMatrix);
+            Matrix3D translateMatrix = track.MoveCameraOnXaxis(-deltaX,camera);
+            
+           
+            
             environment.Camera.Transform = new MatrixTransform3D(translateMatrix);
 
 
@@ -142,33 +142,36 @@ namespace FramworlFor3D
         private void KeyD()
         {
 
-            deltaX += 0.1;
-            Matrix3D translateMatrix = track.MoveCameraOnXaxis(deltaX);
             Matrix3D camera = ((MatrixTransform3D)environment.Camera.Transform).Matrix;
-            Matrix3D movingCamera = Matrix3D.Multiply(camera, translateMatrix);
+            Matrix3D translateMatrix = track.MoveCameraOnXaxis(deltaX, camera);
+
+
+
             environment.Camera.Transform = new MatrixTransform3D(translateMatrix);
 
         }
         private void KeyW()
         {
 
-            deltaY+= 0.1;
-            Matrix3D translateMatrix = track.MoveCameraOnYaxis(deltaY);
             Matrix3D camera = ((MatrixTransform3D)environment.Camera.Transform).Matrix;
-            Matrix3D movingCamera = Matrix3D.Multiply(camera, translateMatrix);
+            Matrix3D translateMatrix = track.MoveCameraOnYaxis(deltaY, camera);
+
+
+
             environment.Camera.Transform = new MatrixTransform3D(translateMatrix);
 
         }
         private void KeyS()
         {
 
-            
-            Matrix3D translateMatrix = track.MoveCameraOnYaxis(deltaY);
+
             Matrix3D camera = ((MatrixTransform3D)environment.Camera.Transform).Matrix;
-            Matrix3D movingCamera = Matrix3D.Multiply(camera, translateMatrix);
-            deltaY-= 0.1;
+            Matrix3D translateMatrix = track.MoveCameraOnYaxis(-deltaY, camera);
+
+
 
             environment.Camera.Transform = new MatrixTransform3D(translateMatrix);
+
 
         }
         #endregion
