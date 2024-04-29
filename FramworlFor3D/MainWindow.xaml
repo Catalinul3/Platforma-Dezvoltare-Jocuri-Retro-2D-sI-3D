@@ -61,7 +61,9 @@
                     <MenuItem Header="Sphere"
                                 Command="{Binding Path= gameObjCommands.add3DSphere}"
                               CommandParameter="{Binding ElementName=environment}"/>
-                    <MenuItem Header="Other..."/>
+                    <MenuItem Header="Other..."
+                               Command="{Binding Path= gameObjCommands.add3DOther}"
+                              CommandParameter="{Binding ElementName=environment}"/>/>
 
                 </MenuItem>
             </Menu>

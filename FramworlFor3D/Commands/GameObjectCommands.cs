@@ -70,7 +70,7 @@ namespace FramworkFor3D.Commands
                 TranslateTransform3D center = new TranslateTransform3D(1, 0.8, 0);
                 sphere.Transform = center;
                
-                MessageBox.Show("Sphere ");
+             
 
             }
         }
@@ -79,16 +79,19 @@ namespace FramworkFor3D.Commands
             get
             {
                 if (_add3DOther == null)
-                    _add3DOther = new RelayCommand(addCylinder);
+                    _add3DOther = new RelayCommand(addOther);
                 return _add3DOther;
             }
         }
-        private void addCylinder(object parameter)
+        private void addOther(object parameter)
         {
-            if (parameter is HelixViewport3D environment)
+            if (parameter is Viewport3D environment)
             {
-                
-               
+                Irregular3DObject object3D = new Irregular3DObject();
+                environment.Children.Add(object3D);
+                TranslateTransform3D center = new TranslateTransform3D(1, 0.8, 0);
+                object3D.Transform = center;
+
                 //MessageBox.Show("Cube " + cube.SideLength);
 
             }

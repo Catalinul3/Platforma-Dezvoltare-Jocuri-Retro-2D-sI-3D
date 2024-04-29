@@ -49,11 +49,15 @@ namespace FramworkFor3D._3DObjects
                         float z = float.Parse(parts[3]);
                         Point3D newPoint= new Point3D(x, y, z);
                         vertices.Add(newPoint);
-                        Vector3D normalsPoint = new Vector3D(x, y, z);
-                        normalsPoint.Normalize();
-                        normals.Add(normalsPoint);
                     }
-                 
+                    if (parts[0]=="vn")
+                    {
+                        double x = double.Parse(parts[1]);
+                        double y = double.Parse(parts[2]);
+                        double z = double.Parse(parts[3]);
+                        Vector3D newNormalsVector=new Vector3D(x, y, z);
+                        normals.Add(newNormalsVector);
+                    }
                     if (parts[0]=="f")
                     {
                         string[] index1 = parts[1].Split('/');
@@ -93,7 +97,7 @@ namespace FramworkFor3D._3DObjects
             lightAndGeometry.Children.Add(lightOfSphere.Content);
             lightAndGeometry.Children.Add(model);
             ModelVisual3D sphere=new ModelVisual3D();
-            sphere.Content = model;
+            sphere.Content = lightAndGeometry;
             Content = sphere.Content;
             
         }
