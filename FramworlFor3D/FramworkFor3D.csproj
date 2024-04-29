@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="3D Models\sphere.obj" />
     <None Remove="helpers\grid_lines.jpg" />
     <None Remove="Resources\camera.png" />
     <None Remove="Resources\cell.png" />
@@ -16,6 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="3D Models\sphere.obj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="helpers\grid_lines.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

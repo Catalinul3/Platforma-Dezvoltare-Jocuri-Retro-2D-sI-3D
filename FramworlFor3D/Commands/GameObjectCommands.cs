@@ -65,13 +65,12 @@ namespace FramworkFor3D.Commands
         {
             if (parameter is Viewport3D environment)
             {
-                SphereVisual3D cube = new SphereVisual3D
-                {
-                   Radius=2,
-                   Fill=Brushes.Gray
-                };
-                environment.Children.Add(cube);
-                //MessageBox.Show("Cube " + cube.SideLength);
+                Sphere3D sphere = new Sphere3D();
+                environment.Children.Add(sphere);
+                TranslateTransform3D center = new TranslateTransform3D(1, 0.8, 0);
+                sphere.Transform = center;
+               
+                MessageBox.Show("Sphere ");
 
             }
         }

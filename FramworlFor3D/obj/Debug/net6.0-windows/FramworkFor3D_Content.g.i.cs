@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("3d%20models/sphere.obj")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("helpers/grid_lines.jpg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/camera.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/cell.png")]
