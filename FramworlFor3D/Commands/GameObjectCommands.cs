@@ -89,8 +89,12 @@ namespace FramworkFor3D.Commands
             {
                 Irregular3DObject object3D = new Irregular3DObject();
                 environment.Children.Add(object3D);
+                RotateTransform3D rotate = new RotateTransform3D(new AxisAngleRotation3D(new Vector3D(0, 1, 0), 45));
+                object3D.Transform = rotate;
                 TranslateTransform3D center = new TranslateTransform3D(1, 0.8, 0);
+               
                 object3D.Transform = center;
+               
 
                 //MessageBox.Show("Cube " + cube.SideLength);
 

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Media.Media3D;
 using System.Windows.Media;
 using FramworkFor3D.Based_Operations;
+using System.Windows;
 
 namespace FramworkFor3D._3DObjects
 {
@@ -17,6 +18,7 @@ namespace FramworkFor3D._3DObjects
         private Point3DCollection vertices;
         private Vector3DCollection normals;
         private Int32Collection indices;
+        private PointCollection texture;
 
         #endregion
         public Irregular3DObject()
@@ -37,6 +39,7 @@ namespace FramworkFor3D._3DObjects
             vertices = new Point3DCollection();
             normals = new Vector3DCollection();
             indices = new Int32Collection();
+            texture=new PointCollection();
             using (StreamReader reader = new StreamReader(filePath))
             {
                 string line;
@@ -50,6 +53,14 @@ namespace FramworkFor3D._3DObjects
                         float z = float.Parse(parts[4]);
                         Point3D newPoint = new Point3D(x, y, z);
                         vertices.Add(newPoint);
+                    }
+                    if (parts[0] == "vt")
+                    {
+                        double x = double.Parse(parts[1]);
+                        double y = double.Parse(parts[2]);
+
+                        Point newTextureCoordinates = new Point(x, y);
+                        texture.Add(newTextureCoordinates);
                     }
                     if (parts[0] == "vn")
                     {
@@ -65,14 +76,20 @@ namespace FramworkFor3D._3DObjects
                         string[] index2 = parts[2].Split('/');
                         string[] index3 = parts[3].Split('/');
 
-                        int index1INT = int.Parse(index1[0]);
-                        int index2INT = int.Parse(index2[0]);
-                        int index3INT = int.Parse(index3[0]);
+                        int index1INT = int.Parse(index1[0]) - 1;
+                      
+                        int index2INT = int.Parse(index2[0]) - 1;
+                        
+                        int index3INT = int.Parse(index3[0]) - 1;
+                    
                         indices.Add(index1INT);
+                      
 
                         indices.Add(index2INT);
+                       
 
                         indices.Add(index3INT);
+                       
 
 
 
@@ -82,8 +99,8 @@ namespace FramworkFor3D._3DObjects
             }
             MeshGeometry3D mesh = new MeshGeometry3D();
             mesh.Positions = vertices;
-            mesh.Normals = normals;
-            mesh.TriangleIndices = indices;
+            mesh.TriangleIndices= indices;
+            mesh.TextureCoordinates = texture;
             double scale = 0.03;
             for (int i = 0; i < mesh.Positions.Count; i++)
             {

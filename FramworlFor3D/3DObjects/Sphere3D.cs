@@ -64,9 +64,9 @@ namespace FramworkFor3D._3DObjects
                         string[] index2 = parts[2].Split('/');
                         string[] index3 = parts[3].Split('/');
                     
-                        int index1INT = int.Parse(index1[0]);
-                        int index2INT = int.Parse(index2[0]);
-                        int index3INT = int.Parse(index3[0]);
+                        int index1INT = int.Parse(index1[0])-1;
+                        int index2INT = int.Parse(index2[0])-1;
+                        int index3INT = int.Parse(index3[0])-1;
                         indices.Add(index1INT);
 
                         indices.Add(index2INT);
@@ -83,7 +83,7 @@ namespace FramworkFor3D._3DObjects
             mesh.Positions= vertices;
             mesh.Normals= normals;
             mesh.TriangleIndices= indices;
-            double scale = 0.03;
+            double scale = 0.3;
             for (int i = 0; i < mesh.Positions.Count; i++)
             {
                 Point3D originalPosition = mesh.Positions[i];
