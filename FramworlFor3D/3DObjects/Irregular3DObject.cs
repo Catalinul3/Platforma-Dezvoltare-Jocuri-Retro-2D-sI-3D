@@ -12,21 +12,22 @@ using System.Windows;
 
 namespace FramworkFor3D._3DObjects
 {
-    public class Irregular3DObject: ModelVisual3D, BasedOperation
+    public class Irregular3DObject : ModelVisual3D, BasedOperation
     {
         #region Variables
         private Point3DCollection vertices;
         private Vector3DCollection normals;
         private Int32Collection indices;
         private PointCollection texture;
+        private List<Face> faces;
 
         #endregion
         public Irregular3DObject()
         {
-            read3dObject("D:\\GitHub\\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\\FramworlFor3D\\3D Models\\FinalBaseMesh.obj");
+            read3dObject("D:\\GitHub\\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\\FramworlFor3D\\3D Models\\IRON MAN - Full Figure.obj");
         }
 
-        
+
 
         private void read3dObject(string filePath)
         {
@@ -39,7 +40,8 @@ namespace FramworkFor3D._3DObjects
             vertices = new Point3DCollection();
             normals = new Vector3DCollection();
             indices = new Int32Collection();
-            texture=new PointCollection();
+            texture = new PointCollection();
+            faces= new List<Face>();
             using (StreamReader reader = new StreamReader(filePath))
             {
                 string line;
@@ -53,6 +55,7 @@ namespace FramworkFor3D._3DObjects
                         float z = float.Parse(parts[4]);
                         Point3D newPoint = new Point3D(x, y, z);
                         vertices.Add(newPoint);
+
                     }
                     if (parts[0] == "vt")
                     {
@@ -72,42 +75,45 @@ namespace FramworkFor3D._3DObjects
                     }
                     if (parts[0] == "f")
                     {
-                        string[] index1 = parts[1].Split('/');
-                        string[] index2 = parts[2].Split('/');
-                        string[] index3 = parts[3].Split('/');
+                     
+                            string[] index1 = parts[2].Split('/');
+                            string[] index2 = parts[3].Split('/');
+                            string[] index3 = parts[4].Split('/');
 
-                        int index1INT = int.Parse(index1[0]) - 1;
-                      
-                        int index2INT = int.Parse(index2[0]) - 1;
+                            int index1INT = int.Parse(index1[0]) - 1;
+                            int index2INT = int.Parse(index2[0]) - 1;
+                            int index3INT = int.Parse(index3[0]) - 1;
+                            indices.Add(index1INT);
+
+                            indices.Add(index2INT);
+
+                            indices.Add(index3INT);
+
+
+
+
                         
-                        int index3INT = int.Parse(index3[0]) - 1;
-                    
-                        indices.Add(index1INT);
-                      
-
-                        indices.Add(index2INT);
-                       
-
-                        indices.Add(index3INT);
-                       
-
-
-
-
                     }
+
                 }
+
+                
             }
             MeshGeometry3D mesh = new MeshGeometry3D();
-            mesh.Positions = vertices;
-            mesh.TriangleIndices= indices;
+
+           // mesh.Normals = normals;
+            mesh.TriangleIndices =indices ;
             mesh.TextureCoordinates = texture;
-            double scale = 0.03;
-            for (int i = 0; i < mesh.Positions.Count; i++)
+            double scale = 0.003;
+            for (int i = 0; i < vertices.Count; i++)
             {
-                Point3D originalPosition = mesh.Positions[i];
+                Point3D originalPosition = vertices[i];
                 Point3D scaledPosition = new Point3D(originalPosition.X * scale, originalPosition.Y * scale, originalPosition.Z * scale);
-                mesh.Positions[i] = scaledPosition;
+                vertices[i] = scaledPosition;
             }
+            mesh.Positions = vertices;
+
+
             DiffuseMaterial material = new DiffuseMaterial();
             material.Brush = Brushes.Red;
             GeometryModel3D model = new GeometryModel3D(mesh, material);
@@ -132,6 +138,16 @@ namespace FramworkFor3D._3DObjects
         public void Translate()
         {
             throw new NotImplementedException();
+        }
+    }
+    public class Face
+    {
+        public List<int> vertexIndex;
+        public List<int> textureIndex;
+        public Face()
+        {
+                       vertexIndex = new List<int>();
+            textureIndex = new List<int>();
         }
     }
 }

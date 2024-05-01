@@ -116,7 +116,7 @@ namespace FramworkFor3D._3DObjects
             GeometryModel3D cubeGeometry = new GeometryModel3D();
             cubeGeometry.Geometry = cubeShape;
             DiffuseMaterial material = new DiffuseMaterial();
-            material.Brush = Brushes.Red;
+            material.Brush = Brushes.LightGray;
             cubeGeometry.Material = material;
             Model3DGroup lightAndGeometry= new Model3DGroup();
             lightAndGeometry.Children.Add(lightOfCube.Content);

@@ -83,7 +83,7 @@ namespace FramworkFor3D._3DObjects
             mesh.Positions= vertices;
             mesh.Normals= normals;
             mesh.TriangleIndices= indices;
-            double scale = 0.3;
+            double scale = 0.03;
             for (int i = 0; i < mesh.Positions.Count; i++)
             {
                 Point3D originalPosition = mesh.Positions[i];
@@ -91,7 +91,7 @@ namespace FramworkFor3D._3DObjects
                 mesh.Positions[i] = scaledPosition;
             }
             DiffuseMaterial material= new DiffuseMaterial();
-            material.Brush = Brushes.Red;
+            material.Brush = Brushes.LightGray;
             GeometryModel3D model = new GeometryModel3D(mesh, material);
             Model3DGroup lightAndGeometry = new Model3DGroup();
             lightAndGeometry.Children.Add(lightOfSphere.Content);
