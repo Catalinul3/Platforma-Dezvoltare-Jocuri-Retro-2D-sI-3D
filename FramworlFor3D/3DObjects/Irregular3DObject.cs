@@ -27,7 +27,7 @@ namespace FramworkFor3D._3DObjects
         public Irregular3DObject()
         {
             read3dObject("D:\\GitHub\\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\\" +
-                "FramworlFor3D\\3D Models\\hand.obj");
+                "FramworlFor3D\\3D Models\\Mask.obj");
         }
 
 
@@ -101,29 +101,8 @@ namespace FramworkFor3D._3DObjects
                         Vector3D newNormalsVector = new Vector3D(x, y, z);
                         normals.Add(newNormalsVector);
                     }
-                 
-                    if (parts[0] == "f" && parts[1] != ""&&parts.Length==6)
-                    {                 
-                          string[] index1 = parts[1].Split('/');
-                            string[] index2 = parts[2].Split('/');
-                            string[] index3 = parts[3].Split('/');
-                        string[] index4 = parts[4].Split('/');
 
-                            int index1INT = int.Parse(index1[0]) - 1;
-                            int index2INT = int.Parse(index2[0]) - 1;
-                            int index3INT = int.Parse(index3[0]) - 1;
-                         int index4INT = int.Parse(index4[0]) - 1;
-                            indices.Add(index1INT);
-
-                            indices.Add(index2INT);
-
-                            indices.Add(index3INT);
-                        indices.Add(index1INT);
-                            indices.Add(index3INT);
-                           
-                           indices.Add(index4INT);
-                    }
-                    if (parts[0] == "f" && parts[1] != ""&&parts.Length==5)
+                    if (parts[0] == "f" && parts[1] != "" && parts.Length == 6)
                     {
                         string[] index1 = parts[1].Split('/');
                         string[] index2 = parts[2].Split('/');
@@ -139,32 +118,53 @@ namespace FramworkFor3D._3DObjects
                         indices.Add(index2INT);
 
                         indices.Add(index3INT);
-
                         indices.Add(index1INT);
                         indices.Add(index3INT);
+
                         indices.Add(index4INT);
-                       
                     }
-                    if (parts[0] == "f" && parts[1] == "" && parts.Length == 5)
+                    else
                     {
-                        string[] index1 = parts[2].Split('/');
-                        string[] index2 = parts[3].Split('/');
-                        string[] index3 = parts[4].Split('/');
-                       
+                        if (parts[0] == "f" && parts[1]!="")
+                        {
+                            string[] index1 = parts[1].Split('/');
+                            string[] index2 = parts[2].Split('/');
+                            string[] index3 = parts[3].Split('/');
 
-                        int index1INT = int.Parse(index1[0]) - 1;
-                        int index2INT = int.Parse(index2[0]) - 1;
-                        int index3INT = int.Parse(index3[0]) - 1;
-                        
-                        indices.Add(index1INT);
+                            int index1INT = int.Parse(index1[0]) - 1;
+                            int index2INT = int.Parse(index2[0]) - 1;
+                            int index3INT = int.Parse(index3[0]) - 1;
+                            indices.Add(index1INT);
 
-                        indices.Add(index2INT);
+                            indices.Add(index2INT);
 
-                        indices.Add(index3INT);
+                            indices.Add(index3INT);
 
-                      
 
+
+
+                        }
+                        if (parts[0] == "f" && parts[1]=="")
+                        {
+                            string[] index1 = parts[2].Split('/');
+                            string[] index2 = parts[3].Split('/');
+                            string[] index3 = parts[4].Split('/');
+
+                            int index1INT = int.Parse(index1[0]) - 1;
+                            int index2INT = int.Parse(index2[0]) - 1;
+                            int index3INT = int.Parse(index3[0]) - 1;
+                            indices.Add(index1INT);
+
+                            indices.Add(index2INT);
+
+                            indices.Add(index3INT);
+
+
+
+
+                        }
                     }
+
 
                 }
 
@@ -175,7 +175,7 @@ namespace FramworkFor3D._3DObjects
             mesh.Normals = normals;
             mesh.TriangleIndices =indices ;
             mesh.TextureCoordinates = texture;
-            double scale = 0.3;
+            double scale = 0.003;
             for (int i = 0; i < vertices.Count; i++)
             {
                 Point3D originalPosition = vertices[i];
@@ -189,7 +189,7 @@ namespace FramworkFor3D._3DObjects
             material.Brush = Brushes.LightGray;
             GeometryModel3D model = new GeometryModel3D(mesh, material);
             Model3DGroup lightAndGeometry = new Model3DGroup();
-            //lightAndGeometry.Children.Add(lightOfIrregular.Content);
+            lightAndGeometry.Children.Add(lightOfIrregular.Content);
             lightAndGeometry.Children.Add(model);
             ModelVisual3D irregular = new ModelVisual3D();
             irregular.Content = lightAndGeometry;
