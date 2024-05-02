@@ -51,3 +51,5 @@ D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\FramworlFor3D\bin\Debug\net
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\FramworlFor3D\bin\Debug\net6.0-windows\WPFViewModelExternalControls.dll
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\FramworlFor3D\bin\Debug\net6.0-windows\3D Models\sphere.obj
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\FramworlFor3D\bin\Debug\net6.0-windows\3D Models\FinalBaseMesh.obj
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\FramworlFor3D\bin\Debug\net6.0-windows\SharpDX.dll
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\FramworlFor3D\bin\Debug\net6.0-windows\SharpDX.Direct3D9.dll

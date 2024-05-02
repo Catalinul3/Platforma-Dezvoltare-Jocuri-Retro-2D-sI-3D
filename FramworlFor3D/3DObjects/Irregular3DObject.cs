@@ -9,6 +9,7 @@ using System.Windows.Media.Media3D;
 using System.Windows.Media;
 using FramworkFor3D.Based_Operations;
 using System.Windows;
+using SharpDX.Direct3D9;
 
 namespace FramworkFor3D._3DObjects
 {
@@ -16,15 +17,17 @@ namespace FramworkFor3D._3DObjects
     {
         #region Variables
         private Point3DCollection vertices;
+     
         private Vector3DCollection normals;
         private Int32Collection indices;
         private PointCollection texture;
-        private List<Face> faces;
+
 
         #endregion
         public Irregular3DObject()
         {
-            read3dObject("D:\\GitHub\\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\\FramworlFor3D\\3D Models\\IRON MAN - Full Figure.obj");
+            read3dObject("D:\\GitHub\\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\\" +
+                "FramworlFor3D\\3D Models\\hand.obj");
         }
 
 
@@ -41,14 +44,14 @@ namespace FramworkFor3D._3DObjects
             normals = new Vector3DCollection();
             indices = new Int32Collection();
             texture = new PointCollection();
-            faces= new List<Face>();
+         
             using (StreamReader reader = new StreamReader(filePath))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
                     string[] parts = line.Split(' ');
-                    if (parts[0] == "v")
+                    if (parts[0] == "v" && parts[1]=="")
                     {
                         float x = float.Parse(parts[2]);
                         float y = float.Parse(parts[3]);
@@ -57,7 +60,24 @@ namespace FramworkFor3D._3DObjects
                         vertices.Add(newPoint);
 
                     }
-                    if (parts[0] == "vt")
+                    if (parts[0] == "v" && parts[1]!="")
+                    {
+                        float x = float.Parse(parts[1]);
+                        float y = float.Parse(parts[2]);
+                        float z = float.Parse(parts[3]);
+                        Point3D newPoint = new Point3D(x, y, z);
+                        vertices.Add(newPoint);
+
+                    }
+                    if (parts[0] == "vt" && parts[1] == "")
+                    {
+                        double x = double.Parse(parts[2]);
+                        double y = double.Parse(parts[3]);
+
+                        Point newTextureCoordinates = new Point(x, y);
+                        texture.Add(newTextureCoordinates);
+                    }
+                    if (parts[0] == "vt" && parts[1] != "")
                     {
                         double x = double.Parse(parts[1]);
                         double y = double.Parse(parts[2]);
@@ -65,7 +85,15 @@ namespace FramworkFor3D._3DObjects
                         Point newTextureCoordinates = new Point(x, y);
                         texture.Add(newTextureCoordinates);
                     }
-                    if (parts[0] == "vn")
+                    if (parts[0] == "vn" && parts[1]=="")
+                    {
+                        double x = double.Parse(parts[2]);
+                        double y = double.Parse(parts[3]);
+                        double z = double.Parse(parts[4]);
+                        Vector3D newNormalsVector = new Vector3D(x, y, z);
+                        normals.Add(newNormalsVector);
+                    }
+                    if (parts[0] == "vn" && parts[1] != "")
                     {
                         double x = double.Parse(parts[1]);
                         double y = double.Parse(parts[2]);
@@ -73,26 +101,69 @@ namespace FramworkFor3D._3DObjects
                         Vector3D newNormalsVector = new Vector3D(x, y, z);
                         normals.Add(newNormalsVector);
                     }
-                    if (parts[0] == "f")
-                    {
-                     
-                            string[] index1 = parts[2].Split('/');
-                            string[] index2 = parts[3].Split('/');
-                            string[] index3 = parts[4].Split('/');
+                 
+                    if (parts[0] == "f" && parts[1] != ""&&parts.Length==6)
+                    {                 
+                          string[] index1 = parts[1].Split('/');
+                            string[] index2 = parts[2].Split('/');
+                            string[] index3 = parts[3].Split('/');
+                        string[] index4 = parts[4].Split('/');
 
                             int index1INT = int.Parse(index1[0]) - 1;
                             int index2INT = int.Parse(index2[0]) - 1;
                             int index3INT = int.Parse(index3[0]) - 1;
+                         int index4INT = int.Parse(index4[0]) - 1;
                             indices.Add(index1INT);
 
                             indices.Add(index2INT);
 
                             indices.Add(index3INT);
+                        indices.Add(index1INT);
+                            indices.Add(index3INT);
+                           
+                           indices.Add(index4INT);
+                    }
+                    if (parts[0] == "f" && parts[1] != ""&&parts.Length==5)
+                    {
+                        string[] index1 = parts[1].Split('/');
+                        string[] index2 = parts[2].Split('/');
+                        string[] index3 = parts[3].Split('/');
+                        string[] index4 = parts[4].Split('/');
 
+                        int index1INT = int.Parse(index1[0]) - 1;
+                        int index2INT = int.Parse(index2[0]) - 1;
+                        int index3INT = int.Parse(index3[0]) - 1;
+                        int index4INT = int.Parse(index4[0]) - 1;
+                        indices.Add(index1INT);
 
+                        indices.Add(index2INT);
 
+                        indices.Add(index3INT);
 
+                        indices.Add(index1INT);
+                        indices.Add(index3INT);
+                        indices.Add(index4INT);
+                       
+                    }
+                    if (parts[0] == "f" && parts[1] == "" && parts.Length == 5)
+                    {
+                        string[] index1 = parts[2].Split('/');
+                        string[] index2 = parts[3].Split('/');
+                        string[] index3 = parts[4].Split('/');
+                       
+
+                        int index1INT = int.Parse(index1[0]) - 1;
+                        int index2INT = int.Parse(index2[0]) - 1;
+                        int index3INT = int.Parse(index3[0]) - 1;
                         
+                        indices.Add(index1INT);
+
+                        indices.Add(index2INT);
+
+                        indices.Add(index3INT);
+
+                      
+
                     }
 
                 }
@@ -101,10 +172,10 @@ namespace FramworkFor3D._3DObjects
             }
             MeshGeometry3D mesh = new MeshGeometry3D();
 
-           // mesh.Normals = normals;
+            mesh.Normals = normals;
             mesh.TriangleIndices =indices ;
             mesh.TextureCoordinates = texture;
-            double scale = 0.003;
+            double scale = 0.3;
             for (int i = 0; i < vertices.Count; i++)
             {
                 Point3D originalPosition = vertices[i];
@@ -115,10 +186,10 @@ namespace FramworkFor3D._3DObjects
 
 
             DiffuseMaterial material = new DiffuseMaterial();
-            material.Brush = Brushes.Red;
+            material.Brush = Brushes.LightGray;
             GeometryModel3D model = new GeometryModel3D(mesh, material);
             Model3DGroup lightAndGeometry = new Model3DGroup();
-            lightAndGeometry.Children.Add(lightOfIrregular.Content);
+            //lightAndGeometry.Children.Add(lightOfIrregular.Content);
             lightAndGeometry.Children.Add(model);
             ModelVisual3D irregular = new ModelVisual3D();
             irregular.Content = lightAndGeometry;
@@ -140,14 +211,5 @@ namespace FramworkFor3D._3DObjects
             throw new NotImplementedException();
         }
     }
-    public class Face
-    {
-        public List<int> vertexIndex;
-        public List<int> textureIndex;
-        public Face()
-        {
-                       vertexIndex = new List<int>();
-            textureIndex = new List<int>();
-        }
-    }
+   
 }

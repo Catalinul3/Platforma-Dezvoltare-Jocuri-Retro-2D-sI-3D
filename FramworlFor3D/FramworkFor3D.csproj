@@ -49,6 +49,7 @@
     <PackageReference Include="EcoWpf" Version="7.0.0.15507" />
     <PackageReference Include="HelixToolkit" Version="2.24.0" />
     <PackageReference Include="HelixToolkit.Wpf" Version="2.24.0" />
+    <PackageReference Include="SharpDX.Direct3D9" Version="4.2.0" />
     <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
   </ItemGroup>
 
