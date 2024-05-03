@@ -92,11 +92,19 @@
             </TreeView.ItemTemplate>
 
         </TreeView>
-        <Grid Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="6" Grid.RowSpan="4">
+        <Grid Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="6" Grid.RowSpan="2">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0.5 ,0.4" EndPoint="0.5,1" >
                     <GradientStop Color="#FF7DB6EA" Offset="0"/>
                     <GradientStop Color="#FFAFAFAF" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+        </Grid>
+        <Grid Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="6" Grid.RowSpan="2">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0.5 ,0.4" EndPoint="0.5,1" >
+                    <GradientStop Color="White" Offset="0"/>
+                    <GradientStop Color="Gray" Offset="1"/>
                 </LinearGradientBrush>
             </Grid.Background>
         </Grid>
@@ -124,24 +132,16 @@
                     
                 </PerspectiveCamera>
             </Viewport3D.Camera>-->
-        </Viewport3D>
-
-        <!--<h:HelixViewport3D x:Name="environmnt" Grid.ColumnSpan="6" Grid.RowSpan="4" Grid.Column="3" Grid.Row="1" >
-            
-                <h:HelixViewport3D.Background>
-
-                <LinearGradientBrush StartPoint="0.5 ,0.4" EndPoint="0.5,1" >
-                    <GradientStop Color="#FF7DB6EA" Offset="0"/>
-                    <GradientStop Color="#FFAFAFAF" Offset="1"/>
-                </LinearGradientBrush>
-
-            </h:HelixViewport3D.Background>
-            <ModelVisual3D>
+            <!--<ModelVisual3D>
                 <ModelVisual3D.Transform>
                     <TranslateTransform3D OffsetX="2" OffsetY="-1.4" OffsetZ="-1.45"/>
                 </ModelVisual3D.Transform>
                 <h:GridLinesVisual3D x:Name="floor" Width="150"   Length="130" MinorDistance="1" MajorDistance="5" Thickness="0.03" Fill="#FF888888"></h:GridLinesVisual3D>
             </ModelVisual3D>-->
+        </Viewport3D>
+
+       
+          
 
 
         <!--<h:DefaultLights/>

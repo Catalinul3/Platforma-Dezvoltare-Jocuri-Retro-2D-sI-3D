@@ -31,16 +31,16 @@ namespace FramworkFor3D.Models
         }
         public List<ModelVisual3D> createGrid()
         {
-            DirectionalLight light = new DirectionalLight(Colors.White, new Vector3D(-1, -1, -1));
+           // DirectionalLight light = new DirectionalLight(Colors.White, new Vector3D(-1, -1, -1));
             List<ModelVisual3D> grid = new List<ModelVisual3D>();
             ModelVisual3D lightVisual = new ModelVisual3D();
-            lightVisual.Content = light;
+            //lightVisual.Content = light;
             double cellSize=0.3;
             double delim = 0.09;
             grid.Add(lightVisual);
-            for (int x = 0; x < 10; x++)
+            for (int x = 0; x < 20; x++)
             {
-                for (int y = 0; y < 10; y++)
+                for (int y = 0; y < 20; y++)
                 {
                     double xPos = x * (cellSize-delim);
                     double yPos = y * (cellSize-delim);

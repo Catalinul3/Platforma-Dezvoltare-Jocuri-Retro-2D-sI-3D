@@ -23,7 +23,8 @@ namespace FramworkFor3D._3DObjects
         #endregion
         public Sphere3D()
         {  
-            readSphere("D:/GitHub/Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D/FramworlFor3D/3D Models/sphere.obj");
+            readSphere("D:/GitHub/Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D/" +
+                "FramworlFor3D/3D Models/sphere.obj");
         }
         private void readSphere(string filePath)
         {

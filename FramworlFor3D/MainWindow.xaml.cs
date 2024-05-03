@@ -81,7 +81,7 @@ namespace FramworlFor3D
                 double height = environment.RenderSize.Height;
                 Point currentClick = e.GetPosition((IInputElement)sender);
                 Point rotateClick = new Point(width / 2, height / 2);
-                Vector3D rotateClickSphereCoordinates = track.ConvertToSphereCoordinates(rotateClick, width, height);
+                Vector3D rotateClickSphereCoordinates =  track.ConvertToSphereCoordinates(rotateClick, width, height);
                 Vector3D currentClickSphereCoordinates = track.ConvertToSphereCoordinates(currentClick, width, height);
 
                 //determinarea axei pe care o formeaza punctul din mijlocul si punctul curent al mouse-ului
@@ -95,10 +95,12 @@ namespace FramworlFor3D
                 //rotatia 
 
                 Matrix3D rotate = new Matrix3D();
+
                 rotate.Rotate(delta);
+              
 
                 environment.Camera.Transform = new MatrixTransform3D(rotate);
-
+                
 
             }
 
@@ -180,7 +182,7 @@ namespace FramworlFor3D
         private void MouseWheel(object sender,MouseWheelEventArgs e)
         {
             double zoom = 0;
-            if(e.Delta>0)
+            if(e.Delta<0)
             {
                 zoom = 0.1;
             }

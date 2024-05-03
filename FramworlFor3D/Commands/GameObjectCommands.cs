@@ -28,6 +28,7 @@ namespace FramworkFor3D.Commands
         private RelayCommand _add3DCube;
         private RelayCommand _add3DSphere;
         private RelayCommand _add3DOther;
+        private Irregular3DObject obj;
         public RelayCommand add3DCube
         {
             get
@@ -87,14 +88,23 @@ namespace FramworkFor3D.Commands
         {
             if (parameter is Viewport3D environment)
             {
-                Irregular3DObject object3D = new Irregular3DObject();
-                environment.Children.Add(object3D);
-                RotateTransform3D rotate = new RotateTransform3D(new AxisAngleRotation3D(new Vector3D(0, 1, 0), 45));
-                object3D.Transform = rotate;
-                TranslateTransform3D center = new TranslateTransform3D(1, 0.8, 0);
-               
-                object3D.Transform = center;
-               
+                string fileName = LoadFileDialog("Select a 3d model");
+
+                if (fileName != null)
+                {
+                    obj = new Irregular3DObject(fileName);
+                    MessageBox.Show("succes");
+
+
+                    Transform3DGroup transformGroup = new Transform3DGroup();
+
+                    RotateTransform3D rotate = new RotateTransform3D(new AxisAngleRotation3D(new Vector3D(1, 0, 0), 90));
+                    transformGroup.Children.Add(rotate);
+                    TranslateTransform3D center = new TranslateTransform3D(1, 1, 0);
+                    transformGroup.Children.Add(center);
+                    obj.Transform = transformGroup;
+                    environment.Children.Add(obj);
+                }
 
                 //MessageBox.Show("Cube " + cube.SideLength);
 

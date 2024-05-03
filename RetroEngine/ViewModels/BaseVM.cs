@@ -22,7 +22,7 @@ namespace RetroEngine.ViewModels
             OpenFileDialog fileDialog = new OpenFileDialog
             {
                 Title = title,
-                Filter = "3d files (*.stl)| *stl"
+                Filter = "3d files (*.obj)| *obj"
             };
 
             if (fileDialog.ShowDialog() == false || fileDialog.FileName.CompareTo("") == 0)
