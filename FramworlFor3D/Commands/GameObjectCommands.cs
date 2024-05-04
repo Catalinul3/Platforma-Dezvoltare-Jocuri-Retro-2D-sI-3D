@@ -102,7 +102,10 @@ namespace FramworkFor3D.Commands
                     transformGroup.Children.Add(rotate);
                     TranslateTransform3D center = new TranslateTransform3D(1, 1, 0);
                     transformGroup.Children.Add(center);
-                    obj.Transform = transformGroup;
+                   
+                
+                    transformGroup.Children.Add(obj.Transform);
+                     obj.Transform = transformGroup; 
                     environment.Children.Add(obj);
                 }
 

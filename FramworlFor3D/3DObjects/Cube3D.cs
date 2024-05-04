@@ -131,7 +131,7 @@ namespace FramworkFor3D._3DObjects
 
         }
 
-        public void Rotate(double angle)
+        public void Rotate(double angle,Vector3D axis)
         {
             throw new NotImplementedException();
         }

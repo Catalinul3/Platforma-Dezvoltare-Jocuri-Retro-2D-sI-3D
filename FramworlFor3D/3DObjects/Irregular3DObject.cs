@@ -251,9 +251,11 @@ namespace FramworkFor3D._3DObjects
             Content = irregular.Content;  
 
         }
-        public void Rotate(double angle)
+        public void Rotate(double angle,Vector3D axis)
         {
-            throw new NotImplementedException();
+            AxisAngleRotation3D axisS = new AxisAngleRotation3D(axis, angle);
+            RotateTransform3D rotate = new RotateTransform3D(axisS);
+            this.Transform= rotate;
         }
 
         public void Scale()
