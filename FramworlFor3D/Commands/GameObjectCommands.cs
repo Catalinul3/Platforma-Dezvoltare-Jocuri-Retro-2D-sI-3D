@@ -29,6 +29,7 @@ namespace FramworkFor3D.Commands
         private RelayCommand _add3DSphere;
         private RelayCommand _add3DOther;
         private Irregular3DObject obj;
+
         public RelayCommand add3DCube
         {
             get
@@ -47,7 +48,7 @@ namespace FramworkFor3D.Commands
                 };
 
                 environment.Children.Add(cube);
-                TranslateTransform3D center= new TranslateTransform3D(1, 0.8, 0);
+                TranslateTransform3D center= new TranslateTransform3D(2, 1.5, 0);
                 cube.Transform= center;
                 //MessageBox.Show("Cube " + cube.SideLength);
 
@@ -68,7 +69,7 @@ namespace FramworkFor3D.Commands
             {
                 Sphere3D sphere = new Sphere3D();
                 environment.Children.Add(sphere);
-                TranslateTransform3D center = new TranslateTransform3D(1, 0.8, 0);
+                TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 0);
                 sphere.Transform = center;
                
              
@@ -93,19 +94,24 @@ namespace FramworkFor3D.Commands
                 if (fileName != null)
                 {
                     obj = new Irregular3DObject(fileName);
-                    MessageBox.Show("succes");
+                 
 
 
                     Transform3DGroup transformGroup = new Transform3DGroup();
 
-                    RotateTransform3D rotate = new RotateTransform3D(new AxisAngleRotation3D(new Vector3D(1, 0, 0), 90));
-                    transformGroup.Children.Add(rotate);
-                    TranslateTransform3D center = new TranslateTransform3D(1, 1, 0);
-                    transformGroup.Children.Add(center);
-                   
-                
+                    //RotateTransform3D rotate = new RotateTransform3D(new AxisAngleRotation3D(new Vector3D(1, 0, 0), 90));
+                    //transformGroup.Children.Add(rotate);
+                    obj.Rotate(90, new Vector3D(1, 0, 0));
                     transformGroup.Children.Add(obj.Transform);
-                     obj.Transform = transformGroup; 
+                    TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 0);
+                    transformGroup.Children.Add(center);
+                    //obj.Translate(new Vector3D(0, 0, 1));
+                    //transformGroup.Children.Add(obj.Transform);
+                    obj.Scale(new Vector3D(0, 0, 1), 0.5);
+                    transformGroup.Children.Add(obj.Transform);
+
+
+                    obj.Transform = transformGroup; 
                     environment.Children.Add(obj);
                 }
 

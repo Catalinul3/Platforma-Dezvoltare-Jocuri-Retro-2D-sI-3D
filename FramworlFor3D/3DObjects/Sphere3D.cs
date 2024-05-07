@@ -21,11 +21,13 @@ namespace FramworkFor3D._3DObjects
         private Int32Collection indices;
 
         #endregion
+
         public Sphere3D()
         {  
             readSphere("D:/GitHub/Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D/" +
                 "FramworlFor3D/3D Models/sphere.obj");
         }
+        #region Parse Data
         private void readSphere(string filePath)
         {
             
@@ -99,24 +101,63 @@ namespace FramworkFor3D._3DObjects
             lightAndGeometry.Children.Add(model);
             ModelVisual3D sphere=new ModelVisual3D();
             sphere.Content = lightAndGeometry;
-            Content = sphere.Content;
+            this.Content = sphere.Content;
             
         }
-            public void Rotate(double angle,Vector3D axis)
+        #endregion
+
+        #region Base Transformation
+        public void Rotate(double angle,Vector3D axis)
             {
             AxisAngleRotation3D axisS = new AxisAngleRotation3D(axis,angle);
             RotateTransform3D rotate= new RotateTransform3D(axisS);
-            Transform=rotate;
+            this.Transform=rotate;
             }
 
-            public void Scale()
+            public void Scale(Vector3D axis, double scaleFactor)
             {
-                throw new NotImplementedException();
+            if (axis.X != null)
+            {
+                ScaleTransform3D scale = new ScaleTransform3D(scaleFactor, 1, 1);
+                this.Transform = scale;
             }
-
-            public void Translate()
+            //scalare pe axa y cu factorul scaleFactor
+            if (axis.Y != null)
             {
-                throw new NotImplementedException();
+                ScaleTransform3D scale = new ScaleTransform3D(1, scaleFactor, 1);
+                this.Transform = scale;
+            }
+            //scalare pe axa z cu factorul scaleFactor
+            if (axis.Z != null)
+            {
+                ScaleTransform3D scale = new ScaleTransform3D(1, 1, scaleFactor);
+                this.Transform = scale;
             }
         }
+
+            public void Translate(Vector3D axis)
+            {
+            if (axis.X != null)
+            {
+                Vector3D translate = new Vector3D(0.1, 0, 0);
+                TranslateTransform3D translateTransform = new TranslateTransform3D(translate);
+                this.Transform = translateTransform;
+            }
+            //translatie pe axa y
+            if (axis.Y != null)
+            {
+                Vector3D translate = new Vector3D(0, 0.1, 0);
+                TranslateTransform3D translateTransform = new TranslateTransform3D(translate);
+                this.Transform = translateTransform;
+            }
+            //translatie pe axa z
+            if (axis.Z != null)
+            {
+                Vector3D translate = new Vector3D(0, 0, 0.1);
+                TranslateTransform3D translateTransform = new TranslateTransform3D(translate);
+                this.Transform = translateTransform;
+            }
+        }
+        #endregion
     }
+}

@@ -11,7 +11,7 @@ namespace FramworkFor3D.Based_Operations
     {
         
         void Rotate(double angle, Vector3D AXIS);
-        void Translate();
-        void Scale();
+        void Translate(Vector3D axis);
+        void Scale(Vector3D axis, double scaleFactor);
     }
 }

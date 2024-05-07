@@ -10,6 +10,7 @@ using System.Windows.Media;
 using FramworkFor3D.Based_Operations;
 using System.Windows;
 using SharpDX.Direct3D9;
+using FramworkFor3D._3DPhysics;
 
 namespace FramworkFor3D._3DObjects
 {
@@ -21,6 +22,11 @@ namespace FramworkFor3D._3DObjects
         private Vector3DCollection normals;
         private Int32Collection indices;
         private PointCollection texture;
+        private MaterialGroup materialGroup;
+        private double mass;
+        private double volume;
+        private bool applyRigidBody;
+        private RigidBody body;
 
 
         #endregion
@@ -30,7 +36,7 @@ namespace FramworkFor3D._3DObjects
         }
 
 
-
+        #region Parse Data
         private void read3dObject(string filePath)
         {
 
@@ -43,6 +49,7 @@ namespace FramworkFor3D._3DObjects
             normals = new Vector3DCollection();
             indices = new Int32Collection();
             texture = new PointCollection();
+            RigidBody rigidPhysics= new RigidBody();
 
             using (StreamReader reader = new StreamReader(filePath))
             {
@@ -123,6 +130,8 @@ namespace FramworkFor3D._3DObjects
                             indices.Add(index3INT);
 
                             indices.Add(index4INT);
+
+                            
                         }
                         if (parts[0] == "f" && parts[1] == "")
                         {
@@ -148,9 +157,9 @@ namespace FramworkFor3D._3DObjects
                     }
                     else
                     {
-                        if (parts.Length - 1 == 3)
+                        if (parts.Length == 5)
                         {
-                            if (parts[0] == "f" && parts[1] != "")
+                            if (parts[0] == "f" && parts[1] != "" && (parts[4] == null || parts[4] == " "))
                             {
                                 string[] index1 = parts[1].Split('/');
                                 string[] index2 = parts[2].Split('/');
@@ -164,9 +173,6 @@ namespace FramworkFor3D._3DObjects
                                 indices.Add(index2INT);
 
                                 indices.Add(index3INT);
-
-
-
 
                             }
                             if (parts[0] == "f" && parts[1] == "")
@@ -185,19 +191,19 @@ namespace FramworkFor3D._3DObjects
                                 indices.Add(index3INT);
 
                             }
-                        }
-                        else
-                        {
-                            if (parts[0] == "f" && parts[1] != "")
+
+                            if (parts[0] == "f" && parts[1] != "" && parts[4] != "")
                             {
                                 string[] index1 = parts[1].Split('/');
                                 string[] index2 = parts[2].Split('/');
                                 string[] index3 = parts[3].Split('/');
                                 string[] index4 = parts[4].Split('/');
+
                                 int index1INT = int.Parse(index1[0]) - 1;
                                 int index2INT = int.Parse(index2[0]) - 1;
                                 int index3INT = int.Parse(index3[0]) - 1;
                                 int index4INT = int.Parse(index4[0]) - 1;
+
                                 indices.Add(index1INT);
 
                                 indices.Add(index2INT);
@@ -208,65 +214,145 @@ namespace FramworkFor3D._3DObjects
                                 indices.Add(index4INT);
 
 
-
-
                             }
-                        
+                        }
+                        else
+                        {
+                            if (parts.Length == 4)
+                            {
+                                if (parts[0] == "f" && parts[1] != "")
+                                {
+                                    string[] index1 = parts[1].Split('/');
+                                    string[] index2 = parts[2].Split('/');
+                                    string[] index3 = parts[3].Split('/');
+
+                                    int index1INT = int.Parse(index1[0]) - 1;
+                                    int index2INT = int.Parse(index2[0]) - 1;
+                                    int index3INT = int.Parse(index3[0]) - 1;
+                                    indices.Add(index1INT);
+
+                                    indices.Add(index2INT);
+
+                                    indices.Add(index3INT);
+
+                                }
+                            }
+
 
                         }
                     }
-
                 }
+
+
             }
+
             MeshGeometry3D mesh = new MeshGeometry3D();
 
-            mesh.Normals = normals;
+            //mesh.Normals = normals;
             mesh.TriangleIndices = indices;
             mesh.TextureCoordinates = texture;
-            double scale = 0.03;
+            double scale = 0.05;
             for (int i = 0; i < vertices.Count; i++)
             {
                 Point3D originalPosition = vertices[i];
                 Point3D scaledPosition = new Point3D(originalPosition.X * scale, originalPosition.Y * scale, originalPosition.Z * scale);
-             
+
                 vertices[i] = scaledPosition;
             }
             mesh.Positions = vertices;
+            volume=rigidPhysics.CalculateVolume(vertices, indices);
+            mass = rigidPhysics.CalculateMass(volume);
 
 
             DiffuseMaterial material = new DiffuseMaterial();
-            material.Brush = Brushes.Red;
-          
+            material.Brush = Brushes.LightGray;
+
             GeometryModel3D model = new GeometryModel3D(mesh, material);
             Model3DGroup lightAndGeometry = new Model3DGroup();
             lightAndGeometry.Children.Add(lightOfIrregular.Content);
             lightAndGeometry.Children.Add(model);
             ModelVisual3D irregular = new ModelVisual3D();
-           
-        
 
-        irregular.Content = lightAndGeometry;
-          
-         
-            Content = irregular.Content;  
+
+
+            irregular.Content = lightAndGeometry;
+            
+            //ajustam greutatea obiectului in functie de nr de triunghiuri din care este format
+            if (indices.Count > 0 && indices.Count < 100)
+            {
+                mass = indices.Count / 10f;
+            }
+            if(indices.Count > 100 && indices.Count < 10000)
+            {
+                mass = indices.Count / 100f;
+            }
+            if(indices.Count>10000 && indices.Count <double.MaxValue)
+            {
+                mass = indices.Count / 1000f;
+            }
+
+            Content = irregular.Content;
 
         }
-        public void Rotate(double angle,Vector3D axis)
-        {
+        #endregion
+
+        #region BasicTransformations
+        public void Rotate(double angle, Vector3D axis)
+        {//rotatie indiferent de axa 
             AxisAngleRotation3D axisS = new AxisAngleRotation3D(axis, angle);
             RotateTransform3D rotate = new RotateTransform3D(axisS);
-            this.Transform= rotate;
+            this.Transform = rotate;
         }
 
-        public void Scale()
-        {
-            throw new NotImplementedException();
+        public void Scale(Vector3D axis, double scaleFactor)
+        {//scalare pe axa x cu factorul scaleFactor
+            if (axis.X != null)
+            {
+                ScaleTransform3D scale = new ScaleTransform3D(scaleFactor, 1, 1);
+                this.Transform = scale;
+            }
+            //scalare pe axa y cu factorul scaleFactor
+            if (axis.Y != null)
+            {
+                ScaleTransform3D scale = new ScaleTransform3D(1, scaleFactor, 1);
+                this.Transform = scale;
+            }
+            //scalare pe axa z cu factorul scaleFactor
+            if (axis.Z != null)
+            {
+                ScaleTransform3D scale = new ScaleTransform3D(1, 1, scaleFactor);
+                this.Transform = scale;
+            }
         }
 
-        public void Translate()
-        {
-            throw new NotImplementedException();
+        public void Translate(Vector3D axis)
+        { //translatie pe axa x
+            if (axis.X != null)
+            {
+                Vector3D translate = new Vector3D(0.1, 0, 0);
+                TranslateTransform3D translateTransform = new TranslateTransform3D(translate);
+                this.Transform = translateTransform;
+            }
+            //translatie pe axa y
+            if (axis.Y != null)
+            {
+                Vector3D translate = new Vector3D(0, 0.1, 0);
+                TranslateTransform3D translateTransform = new TranslateTransform3D(translate);
+                this.Transform = translateTransform;
+            }
+            //translatie pe axa z
+            if (axis.Z != null)
+            {
+                Vector3D translate = new Vector3D(0, 0, 0.1);
+                TranslateTransform3D translateTransform = new TranslateTransform3D(translate);
+                this.Transform = translateTransform;
+            }
         }
     }
+    #endregion
+
+    
+
+
 
 }

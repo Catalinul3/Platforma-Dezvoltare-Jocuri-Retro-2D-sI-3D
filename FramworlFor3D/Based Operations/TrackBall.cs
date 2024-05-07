@@ -19,6 +19,7 @@ namespace FramworkFor3D.Based_Operations
            
         
         }
+
         #region RotateCamera
         public Vector3D ConvertToSphereCoordinates(Point click,double width,double height)
         {   //normalizarea coordonatelor click-ului

@@ -12,7 +12,7 @@ namespace FramworkFor3D.Models
     {
         private MeshGeometry3D mesh;
         private GeometryModel3D geometry;
-
+        
         public Plane() {
             CreatePlane();
         }

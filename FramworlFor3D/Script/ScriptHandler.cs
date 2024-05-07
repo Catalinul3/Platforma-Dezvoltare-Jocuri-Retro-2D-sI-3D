@@ -11,6 +11,6 @@ namespace FramworkFor3D.Script
 {
     public class ScriptHandler
     {
-       SyntaxTree c=CSharpSyntaxTree.ParseText(@"")
+      
     }
 }

@@ -86,7 +86,7 @@ namespace FramworlFor3D.ViewModels
         }
         public void SetCamera()
         {
-            Camera = new PerspectiveCamera(new Point3D(1.1, 1, 2), new Vector3D(0, 0, -1), new Vector3D(0, 0.2, 0), 20);
+            Camera = new PerspectiveCamera(new Point3D(2, 1.2, 2), new Vector3D(0, 0, -1), new Vector3D(0, 0.3, 0), 45);
         }
         public void UpdateCamera(MatrixTransform3D updateConfig)
         {

@@ -27,21 +27,22 @@ namespace FramworkFor3D._3DObjects
         }
         public int size { get; set; }
 
-        private List<ModelVisual3D> cube { get; set; }
+      
         #endregion
 
+        #region Create Cube
         public Cube3D()
         { //Adding Light for cube
-            cube = new List<ModelVisual3D>();
+           
             DirectionalLight light = new DirectionalLight(Colors.White, new Vector3D(-1, -1, -1));
             ModelVisual3D lightOfCube = new ModelVisual3D();
             size = 2;
             lightOfCube.Content = light;
-            double newSize = 1 / size;
+            
 
             //Build cube 
 
-            ModelVisual3D cubeConstruction = new ModelVisual3D();
+           
             MeshGeometry3D cubeShape = new MeshGeometry3D();
          
            
@@ -130,20 +131,60 @@ namespace FramworkFor3D._3DObjects
 
 
         }
+        #endregion
 
+        #region Based Transformation
         public void Rotate(double angle,Vector3D axis)
         {
-            throw new NotImplementedException();
+            AxisAngleRotation3D axisS = new AxisAngleRotation3D(axis, angle);
+            RotateTransform3D rotate = new RotateTransform3D(axisS);
+            this.Transform = rotate;
         }
 
-        public void Translate()
+        public void Translate(Vector3D axis)
         {
-            throw new NotImplementedException();
+            if (axis.X != null)
+            {
+                Vector3D translate = new Vector3D(0.1, 0, 0);
+                TranslateTransform3D translateTransform = new TranslateTransform3D(translate);
+                this.Transform = translateTransform;
+            }
+            //translatie pe axa y
+            if (axis.Y != null)
+            {
+                Vector3D translate = new Vector3D(0, 0.1, 0);
+                TranslateTransform3D translateTransform = new TranslateTransform3D(translate);
+                this.Transform = translateTransform;
+            }
+            //translatie pe axa z
+            if (axis.Z != null)
+            {
+                Vector3D translate = new Vector3D(0, 0, 0.1);
+                TranslateTransform3D translateTransform = new TranslateTransform3D(translate);
+                this.Transform = translateTransform;
+            }
         }
 
-        public void Scale()
+        public void Scale(Vector3D axis, double scaleFactor)
         {
-            throw new NotImplementedException();
+            if (axis.X != null)
+            {
+                ScaleTransform3D scale = new ScaleTransform3D(scaleFactor, 1, 1);
+                this.Transform = scale;
+            }
+            //scalare pe axa y cu factorul scaleFactor
+            if (axis.Y != null)
+            {
+                ScaleTransform3D scale = new ScaleTransform3D(1, scaleFactor, 1);
+                this.Transform = scale;
+            }
+            //scalare pe axa z cu factorul scaleFactor
+            if (axis.Z != null)
+            {
+                ScaleTransform3D scale = new ScaleTransform3D(1, 1, scaleFactor);
+                this.Transform = scale;
+            }
         }
     }
+    #endregion
 }
