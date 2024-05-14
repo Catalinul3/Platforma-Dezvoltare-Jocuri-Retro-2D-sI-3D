@@ -49,7 +49,7 @@ namespace FramworkFor3D._3DObjects
             normals = new Vector3DCollection();
             indices = new Int32Collection();
             texture = new PointCollection();
-            RigidBody rigidPhysics= new RigidBody();
+          
 
             using (StreamReader reader = new StreamReader(filePath))
             {
@@ -260,7 +260,9 @@ namespace FramworkFor3D._3DObjects
                 vertices[i] = scaledPosition;
             }
             mesh.Positions = vertices;
-            volume=rigidPhysics.CalculateVolume(vertices, indices);
+            RigidBody rigidPhysics = new RigidBody();
+            //ajustam greutatea in functie de volum, iar volumul il calculam pe baza varfurilor si a indicilor ce formeaza fata
+            volume =rigidPhysics.CalculateVolume(vertices, indices);
             mass = rigidPhysics.CalculateMass(volume);
 
 
@@ -277,19 +279,8 @@ namespace FramworkFor3D._3DObjects
 
             irregular.Content = lightAndGeometry;
             
-            //ajustam greutatea obiectului in functie de nr de triunghiuri din care este format
-            if (indices.Count > 0 && indices.Count < 100)
-            {
-                mass = indices.Count / 10f;
-            }
-            if(indices.Count > 100 && indices.Count < 10000)
-            {
-                mass = indices.Count / 100f;
-            }
-            if(indices.Count>10000 && indices.Count <double.MaxValue)
-            {
-                mass = indices.Count / 1000f;
-            }
+        
+         
 
             Content = irregular.Content;
 

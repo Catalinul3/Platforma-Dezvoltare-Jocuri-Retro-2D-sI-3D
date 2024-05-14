@@ -49,6 +49,10 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "dependencies": {
+            "3DTools": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
             "EcoWpf": {
               "target": "Package",
               "version": "[7.0.0.15507, )"

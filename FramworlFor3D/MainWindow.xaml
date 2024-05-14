@@ -120,25 +120,11 @@
                       KeyDown="KeyDown"
                       MouseWheel="MouseWheel"
                       MouseLeftButtonUp="MouseUp"
-                       >
-           
-
-            <!--<Viewport3D.Camera>
-                <PerspectiveCamera Position="0.7,0.5,2"
-                                   LookDirection="0,0,-1"
-                                   UpDirection="0,0.2,0"
-                                   FieldOfView="60" 
-                                    >
                     
-                </PerspectiveCamera>
-            </Viewport3D.Camera>-->
-            <!--<ModelVisual3D>
-                <ModelVisual3D.Transform>
-                    <TranslateTransform3D OffsetX="2" OffsetY="-1.4" OffsetZ="-1.45"/>
-                </ModelVisual3D.Transform>
-                <h:GridLinesVisual3D x:Name="floor" Width="150"   Length="130" MinorDistance="1" MajorDistance="5" Thickness="0.03" Fill="#FF888888"></h:GridLinesVisual3D>
-            </ModelVisual3D>-->
+                       >
+        
         </Viewport3D>
+        <Rectangle x:Name="margins" Margin="{Binding Margins}" Stroke="Orange" StrokeThickness="1" VerticalAlignment="Top" HorizontalAlignment="Left"/>
 
        
           

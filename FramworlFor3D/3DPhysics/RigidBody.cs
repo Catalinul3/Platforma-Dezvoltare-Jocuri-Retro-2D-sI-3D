@@ -12,8 +12,10 @@ namespace FramworkFor3D._3DPhysics
     {
         private double force;
         private double mass;
-        private const double acceleration=9.18;
+        private const double acceleration=9.8;
         private const double density = 1000.00;
+        private double weight;
+       
 
         public double CalculateMass(double volume)
         {

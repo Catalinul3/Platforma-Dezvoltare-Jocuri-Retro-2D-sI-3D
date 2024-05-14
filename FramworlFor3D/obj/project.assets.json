@@ -2,6 +2,18 @@
   "version": 3,
   "targets": {
     "net6.0-windows7.0": {
+      "3DTools/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0-windows7.0/3DTools.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0-windows7.0/3DTools.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
       "EcoCore/7.0.0.15507": {
         "type": "package",
         "compile": {
@@ -1627,6 +1639,21 @@
     }
   },
   "libraries": {
+    "3DTools/1.0.0": {
+      "sha512": "XzzijLAgIGXRK4q9SD9zyM4HV2Hf/P1xmLEA+40Hh9LhjAZZSUu4rlKPkA+V2OV3P34BvicmUd2W2YdjgpwxBA==",
+      "type": "package",
+      "path": "3dtools/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "3dtools.1.0.0.nupkg.sha512",
+        "3dtools.nuspec",
+        "lib/net35/3DTools.dll",
+        "lib/net48/3DTools.dll",
+        "lib/net5.0-windows7.0/3DTools.dll",
+        "lib/net6.0-windows7.0/3DTools.dll"
+      ]
+    },
     "EcoCore/7.0.0.15507": {
       "sha512": "YJBxOpgNBaNc2yuYzJNw0lXB0UQv/jN3GM5BFLDtS8Doq/IpAk0icQyUYGmvvVOQXxg6NwFUF0Eno4ST5SxXdg==",
       "type": "package",
@@ -5910,6 +5937,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
+      "3DTools >= 1.0.0",
       "EcoWpf >= 7.0.0.15507",
       "HelixToolkit >= 2.24.0",
       "HelixToolkit.Wpf >= 2.24.0",
@@ -5970,6 +5998,10 @@
       "net6.0-windows7.0": {
         "targetAlias": "net6.0-windows",
         "dependencies": {
+          "3DTools": {
+            "target": "Package",
+            "version": "[1.0.0, )"
+          },
           "EcoWpf": {
             "target": "Package",
             "version": "[7.0.0.15507, )"

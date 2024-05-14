@@ -83,3 +83,4 @@ D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\FramworlFor3D\bin\Debug\net
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\FramworlFor3D\bin\Debug\net6.0-windows\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\FramworlFor3D\bin\Debug\net6.0-windows\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\FramworlFor3D\bin\Debug\net6.0-windows\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\FramworlFor3D\bin\Debug\net6.0-windows\3DTools.dll

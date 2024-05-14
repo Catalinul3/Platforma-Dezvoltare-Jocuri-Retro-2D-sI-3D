@@ -14,6 +14,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
@@ -29,6 +30,16 @@ namespace FramworlFor3D.ViewModels
         public ObservableCollection<ModelVisual3D> grid { get; set; }
       public GeometryModel3D geometry3D { get; set; }
         public ObservableCollection<ComponentsVM> components { get; set; }
+        private Thickness margins;
+        public  Thickness Margins
+        {
+            get { return margins; }
+            set
+            {
+                margins = value;
+                NotifyPropertyChanged(nameof(Margins));
+            }
+        }
         #endregion
 
         #region Constructors
@@ -64,7 +75,7 @@ namespace FramworlFor3D.ViewModels
             scene.ComponentImage = setImageOfComponents(scene.ComponentType);
            treeViewComponentsVM.Add(camera);
             treeViewComponentsVM.Add(scene);
-          
+       
             //components.Add(camera);
             //components.Add(scene);
             
@@ -116,6 +127,7 @@ namespace FramworlFor3D.ViewModels
             return "";
         }
 
+      
         private object selectedItem;
         public object SelectedItem { get => selectedItem; set => SetProperty(ref selectedItem, value); }
         #endregion

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "R0AadwSC+fflXbJ9xO3k8odlQTW9M+sXiQ8vCLxTydsEaYK+rC6O6JwjYU63raDHdodsr3+JH9hnTow80WSq2g==",
+  "dgSpecHash": "1T6BalDZe7OSOh5HomBJ9EOzGwNmIWl3ZZViIa7P8qDnpfenVIzV4q6VpPypeBGjvRFTDAb70Wl86zE79OMSIA==",
   "success": true,
   "projectFilePath": "D:\\GitHub\\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\\FramworlFor3D\\FramworkFor3D.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\zcata\\.nuget\\packages\\3dtools\\1.0.0\\3dtools.1.0.0.nupkg.sha512",
     "C:\\Users\\zcata\\.nuget\\packages\\ecocore\\7.0.0.15507\\ecocore.7.0.0.15507.nupkg.sha512",
     "C:\\Users\\zcata\\.nuget\\packages\\ecowpf\\7.0.0.15507\\ecowpf.7.0.0.15507.nupkg.sha512",
     "C:\\Users\\zcata\\.nuget\\packages\\helixtoolkit\\2.24.0\\helixtoolkit.2.24.0.nupkg.sha512",
