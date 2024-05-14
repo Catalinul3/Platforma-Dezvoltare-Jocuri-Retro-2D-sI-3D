@@ -133,8 +133,8 @@ namespace FramworkFor3D.Commands
                     transformGroup.Children.Add(obj.Transform);
                     TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 0);
                     transformGroup.Children.Add(center);
-                    obj.Translate(new Vector3D(0, 0, 1));
-                    transformGroup.Children.Add(obj.Transform);
+                    //obj.Translate(new Vector3D(0, 0, 1));
+                    //transformGroup.Children.Add(obj.Transform);
                     //obj.Scale(new Vector3D(0, 0, 1), 0.5);
                     // transformGroup.Children.Add(obj.Transform);
 
@@ -155,37 +155,41 @@ namespace FramworkFor3D.Commands
         #region Base Events
         private void ObjectPressed(object sender, MouseEventArgs e, Viewport3D environment)
         {
-            if(obj.Content is Model3DGroup model3Dgroup)
-            {
-                foreach(var model in model3Dgroup.Children)
-                {
-                    if(model is GeometryModel3D geometryModel)
-                    {   geometryModel.Material = new DiffuseMaterial(Brushes.SaddleBrown);
+            //if(obj.Content is Model3DGroup model3Dgroup)
+            //{
+            //    foreach(var model in model3Dgroup.Children)
+            //    {
+            //        if(model is GeometryModel3D geometryModel)
+            //        {   geometryModel.Material = new DiffuseMaterial(Brushes.SaddleBrown);
                       
-                    }
-                }
-            }
+            //        }
+            //    }
+            //}
+
+            Viewport3DHelpers viewport= new Viewport3DHelpers();
+            viewport.BuildSkeleton(obj);
         }
 
 
-        // MessageBox.Show("Object pressed");
+      
     
         private void CubePressed(object sender, RoutedEventArgs e, Viewport3D environment)
         {
 
-            if (cube.Content is Model3DGroup model3Dgroup)
-            {
-                foreach (var model in model3Dgroup.Children)
-                {
-                    if (model is GeometryModel3D geometryModel)
-                    {
-                        geometryModel.Material = new DiffuseMaterial(Brushes.Orange);
+            //if (cube.Content is Model3DGroup model3Dgroup)
+            //{
+            //    foreach (var model in model3Dgroup.Children)
+            //    {
+            //        if (model is GeometryModel3D geometryModel)
+            //        {
+            //            geometryModel.Material = new DiffuseMaterial(Brushes.Orange);
 
-                    }
-                }
-            }
+            //        }
+            //    }
+            //}
+            Viewport3DHelpers viewport = new Viewport3DHelpers();
+            viewport.BuildSkeleton(cube);
 
-            // MessageBox.Show("Cube pressed");
 
 
 
@@ -203,9 +207,7 @@ namespace FramworkFor3D.Commands
                     }
                 }
             }
-            // MessageBox.Show("Sphere pressed");
-
-
+            
 
         }
 

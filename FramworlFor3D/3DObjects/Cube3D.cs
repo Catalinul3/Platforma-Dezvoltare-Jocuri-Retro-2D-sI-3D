@@ -1,7 +1,5 @@
 ﻿using FramworkFor3D.Based_Operations;
 using HelixToolkit.Wpf;
-using SharpDX.Direct3D;
-using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
+using System.Windows.Shapes;
 
 namespace FramworkFor3D._3DObjects
 {
@@ -34,7 +33,8 @@ namespace FramworkFor3D._3DObjects
         public int size { get; set; }
         public Point3DCollection vertices { get; set; }
         public Int32Collection indices { get; set; }
-        
+        public List<Line> objSkeleton= new List<Line>();
+
 
         #endregion
 
@@ -46,7 +46,7 @@ namespace FramworkFor3D._3DObjects
             ModelVisual3D lightOfCube = new ModelVisual3D();
             size = 2;
             lightOfCube.Content = light;
-            List<Point> skeleton = new List<Point>();
+            
 
             //Build cube 
 
