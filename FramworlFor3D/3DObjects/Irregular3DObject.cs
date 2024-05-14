@@ -27,6 +27,7 @@ namespace FramworkFor3D._3DObjects
         private double volume;
         private bool applyRigidBody;
         private RigidBody body;
+        
 
 
         #endregion

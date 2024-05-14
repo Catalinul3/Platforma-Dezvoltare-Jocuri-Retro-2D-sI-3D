@@ -24,12 +24,12 @@ using static System.Formats.Asn1.AsnWriter;
 
 namespace FramworkFor3D.Commands
 {
-   public class GameObjectCommands:BaseVM
+    public class GameObjectCommands : BaseVM
     {
-        private readonly  MainVM _mainVM;
+        private readonly MainVM _mainVM;
 
-       
-       public GameObjectCommands(MainVM mainVM)
+
+        public GameObjectCommands(MainVM mainVM)
         {
             _mainVM = mainVM;
         }
@@ -37,10 +37,11 @@ namespace FramworkFor3D.Commands
         private RelayCommand _add3DSphere;
         private RelayCommand _add3DOther;
         private Irregular3DObject obj;
-        public System.Windows.Shapes.Rectangle cube2D;
-        
+
+
         Cube3D cube;
         Sphere3D sphere;
+        System.Windows.Shapes.Rectangle objSkeleton;
 
         #region Create Models 
         public RelayCommand add3DCube
@@ -53,26 +54,25 @@ namespace FramworkFor3D.Commands
             }
         }
         private void addCube(object parameter)
-        { 
+        {
             if (parameter is Viewport3D environment)
             {
                 cube = new Cube3D
-                { color = Brushes.Red,
+                {
+                    color = Brushes.Red,
                 };
-               
-                UIElement3D cubeInteractive= Cube3DInteractive.ConvertToUI(cube);
+                objSkeleton = new System.Windows.Shapes.Rectangle();
+                UIElement3D cubeInteractive = Cube3DInteractive.ConvertToUI(cube);
                 environment.Children.Add(cubeInteractive);
                 TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 0);
-                cubeInteractive.MouseRightButtonDown +=(s,e)=>CubePressed(s,e,environment);
+                cubeInteractive.MouseRightButtonDown += (s, e) => CubePressed(s, e, environment);
                 cubeInteractive.Transform = center;
                 
-                // cube2D.Margin= margins.Margin;
 
-                //MessageBox.Show("Cube " + cube.SideLength);
 
-            } 
+            }
         }
-      
+
 
         public RelayCommand add3DSphere
         {
@@ -87,15 +87,15 @@ namespace FramworkFor3D.Commands
         {
             if (parameter is Viewport3D environment)
             {
-                
+
                 sphere = new Sphere3D();
                 UIElement3D sphereInteractive = Cube3DInteractive.ConvertToUI(sphere);
 
                 environment.Children.Add(sphereInteractive);
                 TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 0);
-               
-               
-              
+
+
+
 
                 sphereInteractive.MouseRightButtonDown += (s, e) => SpherePressed(s, e, environment);
                 sphereInteractive.Transform = center;
@@ -122,7 +122,7 @@ namespace FramworkFor3D.Commands
                 if (fileName != null)
                 {
                     obj = new Irregular3DObject(fileName);
-                   
+
 
 
                     Transform3DGroup transformGroup = new Transform3DGroup();
@@ -135,14 +135,14 @@ namespace FramworkFor3D.Commands
                     transformGroup.Children.Add(center);
                     obj.Translate(new Vector3D(0, 0, 1));
                     transformGroup.Children.Add(obj.Transform);
-                   //obj.Scale(new Vector3D(0, 0, 1), 0.5);
-                   // transformGroup.Children.Add(obj.Transform);
+                    //obj.Scale(new Vector3D(0, 0, 1), 0.5);
+                    // transformGroup.Children.Add(obj.Transform);
 
 
                     objInteractive.Transform = transformGroup;
-                 
+
                     objInteractive.MouseRightButtonDown += (s, e) => ObjectPressed(s, e, environment);
-                  
+
                     environment.Children.Add(objInteractive);
                 }
 
@@ -155,61 +155,64 @@ namespace FramworkFor3D.Commands
         #region Base Events
         private void ObjectPressed(object sender, MouseEventArgs e, Viewport3D environment)
         {
-            MessageBox.Show("Object pressed");
+            if(obj.Content is Model3DGroup model3Dgroup)
+            {
+                foreach(var model in model3Dgroup.Children)
+                {
+                    if(model is GeometryModel3D geometryModel)
+                    {   geometryModel.Material = new DiffuseMaterial(Brushes.SaddleBrown);
+                      
+                    }
+                }
+            }
         }
+
+
+        // MessageBox.Show("Object pressed");
+    
         private void CubePressed(object sender, RoutedEventArgs e, Viewport3D environment)
         {
 
-            MessageBox.Show("Cube pressed");
+            if (cube.Content is Model3DGroup model3Dgroup)
+            {
+                foreach (var model in model3Dgroup.Children)
+                {
+                    if (model is GeometryModel3D geometryModel)
+                    {
+                        geometryModel.Material = new DiffuseMaterial(Brushes.Orange);
+
+                    }
+                }
+            }
+
+            // MessageBox.Show("Cube pressed");
 
 
 
         }
         private void SpherePressed(object sender, RoutedEventArgs e, Viewport3D environment)
         {
-
-            MessageBox.Show("Sphere pressed");
-
-
-
-        }
-        private void Cube3D_MouseLeftDown(object sender, MouseEventArgs e)
-        {
-            ShowLines();
-        }
-
-        public void ShowLines()
-        {   Viewport3D scene= new Viewport3D();
-            GeneralTransform3DTo2D transform = cube.TransformToAncestor(scene);
-            MeshGeometry3D geometry = (MeshGeometry3D)((GeometryModel3D)cube.Content).Geometry;
-            System.Windows.Shapes.Rectangle marg = new System.Windows.Shapes.Rectangle();
-            Rect allMargins = Rect.Empty;
-            if (transform != null)
+            if (sphere.Content is Model3DGroup model3Dgroup)
             {
-                for (int i = 0; i < geometry.TriangleIndices.Count; i++)
+                foreach (var model in model3Dgroup.Children)
                 {
-                    Polygon highlight = new Polygon
+                    if (model is GeometryModel3D geometryModel)
                     {
-                        Stroke = Brushes.Orange,
-                        StrokeThickness = 0.25,
-                    };
-                    var tr = ((GeometryModel3D)cube.Content).Transform;
-                    highlight.Points.Add(transform.Transform(tr.Transform(geometry.Positions[geometry.TriangleIndices[i++]])));
-                    highlight.Points.Add(transform.Transform(tr.Transform(geometry.Positions[geometry.TriangleIndices[i++]])));
-                    highlight.Points.Add(transform.Transform(tr.Transform(geometry.Positions[geometry.TriangleIndices[i++]])));
-                    foreach (System.Windows.Point point in highlight.Points)
-                    {
-                        allMargins.Union(point);
+                        geometryModel.Material = new DiffuseMaterial(Brushes.Orange);
+
                     }
                 }
             }
-         
-            marg.Width = allMargins.Width;
-            marg.Height = allMargins.Height;
-            marg.Margin = new Thickness(allMargins.Left, allMargins.Top, 0, 0);
+            // MessageBox.Show("Sphere pressed");
+
+
 
         }
+
+
+
+
+        #endregion
     }
-    #endregion
 }
 

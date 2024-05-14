@@ -124,7 +124,7 @@
                        >
         
         </Viewport3D>
-        <Rectangle x:Name="margins" Margin="{Binding Margins}" Stroke="Orange" StrokeThickness="1" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Rectangle x:Name="margins" Stroke="Orange" StrokeThickness="1" VerticalAlignment="Top" HorizontalAlignment="Left"/>
 
        
           

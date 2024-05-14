@@ -6,6 +6,14 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
+      "3DTools/1.0.0": {
+        "runtime": {
+          "lib/net6.0-windows7.0/3DTools.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "EcoCore/7.0.0.15507": {
         "runtime": {
           "lib/net40/Eco.Handles.dll": {
@@ -1282,6 +1290,13 @@
     }
   },
   "libraries": {
+    "3DTools/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-XzzijLAgIGXRK4q9SD9zyM4HV2Hf/P1xmLEA+40Hh9LhjAZZSUu4rlKPkA+V2OV3P34BvicmUd2W2YdjgpwxBA==",
+      "path": "3dtools/1.0.0",
+      "hashPath": "3dtools.1.0.0.nupkg.sha512"
+    },
     "EcoCore/7.0.0.15507": {
       "type": "package",
       "serviceable": true,

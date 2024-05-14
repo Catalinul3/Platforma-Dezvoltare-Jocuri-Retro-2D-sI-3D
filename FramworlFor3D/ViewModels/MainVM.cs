@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -30,8 +31,8 @@ namespace FramworlFor3D.ViewModels
         public ObservableCollection<ModelVisual3D> grid { get; set; }
       public GeometryModel3D geometry3D { get; set; }
         public ObservableCollection<ComponentsVM> components { get; set; }
-        private Thickness margins;
-        public  Thickness Margins
+        private Rectangle margins;
+        public  Rectangle Margins
         {
             get { return margins; }
             set
