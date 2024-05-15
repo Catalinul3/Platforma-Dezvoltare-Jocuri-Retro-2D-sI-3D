@@ -53,6 +53,10 @@
               "target": "Package",
               "version": "[1.0.0, )"
             },
+            "BulletSharp": {
+              "target": "Package",
+              "version": "[0.11.1, )"
+            },
             "EcoWpf": {
               "target": "Package",
               "version": "[7.0.0.15507, )"

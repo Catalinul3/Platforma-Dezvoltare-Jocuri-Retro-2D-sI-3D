@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FramworkFor3D._3DPhysics
 {
-    internal class CharacterController
+   public class CharacterController
     {
     }
 }

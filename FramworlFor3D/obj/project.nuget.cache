@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "1T6BalDZe7OSOh5HomBJ9EOzGwNmIWl3ZZViIa7P8qDnpfenVIzV4q6VpPypeBGjvRFTDAb70Wl86zE79OMSIA==",
+  "dgSpecHash": "TF0+HlDZQDPqbepGqJr+OPfbuD7nbX1Zz2Y1vD4fyrNSVHUkz1m/7zJESP7qKfPVnzxHP3Y9ExzOV1veR5Y3fA==",
   "success": true,
   "projectFilePath": "D:\\GitHub\\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\\FramworlFor3D\\FramworkFor3D.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\zcata\\.nuget\\packages\\3dtools\\1.0.0\\3dtools.1.0.0.nupkg.sha512",
+    "C:\\Users\\zcata\\.nuget\\packages\\bulletsharp\\0.11.1\\bulletsharp.0.11.1.nupkg.sha512",
     "C:\\Users\\zcata\\.nuget\\packages\\ecocore\\7.0.0.15507\\ecocore.7.0.0.15507.nupkg.sha512",
     "C:\\Users\\zcata\\.nuget\\packages\\ecowpf\\7.0.0.15507\\ecowpf.7.0.0.15507.nupkg.sha512",
     "C:\\Users\\zcata\\.nuget\\packages\\helixtoolkit\\2.24.0\\helixtoolkit.2.24.0.nupkg.sha512",
@@ -95,6 +96,16 @@
     "C:\\Users\\zcata\\.nuget\\packages\\wpfanimatedgif\\2.0.2\\wpfanimatedgif.2.0.2.nupkg.sha512"
   ],
   "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'BulletSharp 0.11.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "BulletSharp",
+      "targetGraphs": [
+        "net6.0-windows7.0"
+      ]
+    },
     {
       "code": "NU1701",
       "level": "Warning",

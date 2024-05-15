@@ -9,6 +9,7 @@
       "FramworkFor3D/1.0.0": {
         "dependencies": {
           "3DTools": "1.0.0",
+          "BulletSharp": "0.11.1",
           "EcoWpf": "7.0.0.15507",
           "HelixToolkit": "2.24.0",
           "HelixToolkit.Wpf": "2.24.0",
@@ -28,6 +29,14 @@
           "lib/net6.0-windows7.0/3DTools.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "BulletSharp/0.11.1": {
+        "runtime": {
+          "lib/net40-client/BulletSharp.dll": {
+            "assemblyVersion": "0.11.0.0",
+            "fileVersion": "0.11.0.0"
           }
         }
       },
@@ -960,6 +969,13 @@
       "sha512": "sha512-XzzijLAgIGXRK4q9SD9zyM4HV2Hf/P1xmLEA+40Hh9LhjAZZSUu4rlKPkA+V2OV3P34BvicmUd2W2YdjgpwxBA==",
       "path": "3dtools/1.0.0",
       "hashPath": "3dtools.1.0.0.nupkg.sha512"
+    },
+    "BulletSharp/0.11.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-h63YXDBPZV2WZJ5YmP65NTAq0PiNN37lGrX/Ln+Of8ya1kZasIR815dkb/q2xE2HCafIbS9iRf7w7QzLoCTWRw==",
+      "path": "bulletsharp/0.11.1",
+      "hashPath": "bulletsharp.0.11.1.nupkg.sha512"
     },
     "EcoCore/7.0.0.15507": {
       "type": "package",

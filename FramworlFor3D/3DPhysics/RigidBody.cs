@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BulletSharp;
+using BulletSharp.Math;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,15 +10,40 @@ using System.Windows.Media.Media3D;
 
 namespace FramworkFor3D._3DPhysics
 {
-    public class RigidBody
+    public class RigidBodyPhysics
     {
+        private RigidBody body;
         private double force;
-        private double mass;
+        private float mass;
+        private CollisionShape shape;
+        private Vector3D position;
+        private Vector3D velocity;
         private const double acceleration=9.8;
         private const double density = 1000.00;
         private double weight;
-       
+        public RigidBodyPhysics()
+        {
+            shape = new BoxShape(1);
+            mass = 1;
+            position = new Vector3D(0, 0, 0);
+            RigidBodyConstructionInfo bodyInfo = new RigidBodyConstructionInfo(mass, null, shape);
+            body = new RigidBody(bodyInfo);
+        }
+       public RigidBodyPhysics(CollisionShape shape,float mass,Vector3D position)
+        {
+            this.shape = shape;
+            this.mass = mass;
+            this.position= position;
 
+            RigidBodyConstructionInfo bodyInfo = new RigidBodyConstructionInfo(mass, null, shape);
+            body = new RigidBody(bodyInfo);
+            
+        }
+        public void ApplyForce(Vector3D force)
+        { float X=(float)force.X; float Y=(float)force.Y; float Z=(float)force.Z;
+            body.ApplyCentralForce(new Vector3(X,Y,Z));
+        }
+        
         public double CalculateMass(double volume)
         {
             return volume * density;

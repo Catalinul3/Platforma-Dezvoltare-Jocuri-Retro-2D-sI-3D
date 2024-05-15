@@ -1,4 +1,6 @@
-﻿using Eco.UmlRt;
+﻿using BulletSharp.SoftBody;
+using BulletSharp;
+using Eco.UmlRt;
 using FramworkFor3D._3DObjects;
 using FramworkFor3D._3DPhysics;
 using FramworkFor3D.helpers;
@@ -18,6 +20,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
 using static System.Formats.Asn1.AsnWriter;
@@ -61,7 +64,9 @@ namespace FramworkFor3D.Commands
                 {
                     color = Brushes.Red,
                 };
-                objSkeleton = new System.Windows.Shapes.Rectangle();
+               
+          
+             
                 UIElement3D cubeInteractive = Cube3DInteractive.ConvertToUI(cube);
                 environment.Children.Add(cubeInteractive);
                 TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 0);
@@ -73,6 +78,17 @@ namespace FramworkFor3D.Commands
             }
         }
 
+        private void CompositionTarget_Rendering(object? sender, EventArgs e)
+        {
+            Vector3D force = new Vector3D(0.0, 1000000.0, 0.0);
+            cube.ApplyForce(force);
+        }
+
+        private RigidBodyConstructionInfo InitializeRigidBody()
+        {
+            RigidBodyConstructionInfo rigidBody = new RigidBodyConstructionInfo(1, null, new BoxShape(1));
+            return rigidBody;
+        }
 
         public RelayCommand add3DSphere
         {
@@ -155,19 +171,21 @@ namespace FramworkFor3D.Commands
         #region Base Events
         private void ObjectPressed(object sender, MouseEventArgs e, Viewport3D environment)
         {
-            //if(obj.Content is Model3DGroup model3Dgroup)
-            //{
-            //    foreach(var model in model3Dgroup.Children)
-            //    {
-            //        if(model is GeometryModel3D geometryModel)
-            //        {   geometryModel.Material = new DiffuseMaterial(Brushes.SaddleBrown);
-                      
-            //        }
-            //    }
-            //}
+            if (obj.Content is Model3DGroup model3Dgroup)
+            {
+                foreach (var model in model3Dgroup.Children)
+                {
+                    if (model is GeometryModel3D geometryModel)
+                    {
+                        geometryModel.Material = new DiffuseMaterial(Brushes.SaddleBrown);
 
-            Viewport3DHelpers viewport= new Viewport3DHelpers();
-            viewport.BuildSkeleton(obj);
+                    }
+                }
+            }
+         
+
+
+
         }
 
 
@@ -176,19 +194,21 @@ namespace FramworkFor3D.Commands
         private void CubePressed(object sender, RoutedEventArgs e, Viewport3D environment)
         {
 
-            //if (cube.Content is Model3DGroup model3Dgroup)
-            //{
-            //    foreach (var model in model3Dgroup.Children)
-            //    {
-            //        if (model is GeometryModel3D geometryModel)
-            //        {
-            //            geometryModel.Material = new DiffuseMaterial(Brushes.Orange);
+            if (cube.Content is Model3DGroup model3Dgroup)
+            {
+                foreach (var model in model3Dgroup.Children)
+                {
+                    if (model is GeometryModel3D geometryModel)
+                    {
+                        geometryModel.Material = new DiffuseMaterial(Brushes.Orange);
 
-            //        }
-            //    }
-            //}
-            Viewport3DHelpers viewport = new Viewport3DHelpers();
-            viewport.BuildSkeleton(cube);
+                    }
+                }
+            }
+            RigidBodyConstructionInfo bodyInfo = InitializeRigidBody();
+            cube.body = new RigidBody(bodyInfo);
+            CompositionTarget.Rendering += CompositionTarget_Rendering;
+
 
 
 

@@ -1,21 +1,28 @@
-﻿using FramworkFor3D.Based_Operations;
+﻿using BulletSharp;
+using BulletSharp.Math;
+using Eco.Persistence;
+using FramworkFor3D._3DPhysics;
+using FramworkFor3D.Based_Operations;
+using FramworkFor3D.helpers;
 using HelixToolkit.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.Xml;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
 
 namespace FramworkFor3D._3DObjects
 {
-    public class Cube3D : ModelVisual3D, BasedOperation
+    public class Cube3D : ModelVisual3D,IRigidBody, BasedOperation
     {
         #region Cube Morphology
         private Brush _color;
@@ -33,7 +40,7 @@ namespace FramworkFor3D._3DObjects
         public int size { get; set; }
         public Point3DCollection vertices { get; set; }
         public Int32Collection indices { get; set; }
-        public List<Line> objSkeleton= new List<Line>();
+        public RigidBody body;
 
 
         #endregion
@@ -46,6 +53,8 @@ namespace FramworkFor3D._3DObjects
             ModelVisual3D lightOfCube = new ModelVisual3D();
             size = 2;
             lightOfCube.Content = light;
+             
+          
             
 
             //Build cube 
@@ -85,7 +94,7 @@ namespace FramworkFor3D._3DObjects
           
             cubeShape.TriangleIndices.Add(2);
             cubeShape.TriangleIndices.Add(1);
-           
+         
             cubeShape.TriangleIndices.Add(1);
             cubeShape.TriangleIndices.Add(2);
             cubeShape.TriangleIndices.Add(3);
@@ -131,7 +140,7 @@ namespace FramworkFor3D._3DObjects
             cubeShape.TriangleIndices.Add(3);
             cubeShape.TriangleIndices.Add(6);
             cubeShape.TriangleIndices.Add(7);
-            
+        
 
             GeometryModel3D cubeGeometry = new GeometryModel3D();
             cubeGeometry.Geometry = cubeShape;
@@ -146,15 +155,35 @@ namespace FramworkFor3D._3DObjects
 
             ModelVisual3D cubeForm = new ModelVisual3D();
             cubeForm.Content = lightAndGeometry;
-         
 
-        
+          
+
             Content = cubeForm.Content;
+
+
+
+            //Apply physics to cube
           
 
 
+        }
 
+        private void CompositionTarget_Rendering(object? sender, EventArgs e)
+        {
+            UpdatePhysics();
+        }
 
+        private void UpdatePhysics()
+        {
+            Vector3D force = new Vector3D(0.0, 100000.0, 0.0);
+            Vector3 forceB = new Vector3((float)force.X, (float)force.Y, (float)force.Z);
+            body.ApplyCentralForce(forceB);
+        }
+
+        private RigidBodyConstructionInfo InitializeRigidBody()
+        {
+            RigidBodyConstructionInfo rigidBody = new RigidBodyConstructionInfo(1, null, new BoxShape(1));
+            return rigidBody;
 
         }
         #endregion
@@ -212,8 +241,14 @@ namespace FramworkFor3D._3DObjects
             }
         }
 
+        public void ApplyForce(Vector3D force)
+        {   Vector3 forceX=new Vector3((float)force.X,(float)force.Y,(float)force.Z);
+            body.ApplyForce(forceX,new Vector3(0,0,0));
+        }
+       
+
         #endregion
 
-       
+
     }
 }
