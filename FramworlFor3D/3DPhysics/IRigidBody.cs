@@ -9,6 +9,6 @@ namespace FramworkFor3D._3DPhysics
 {
    public interface IRigidBody
     {
-        void ApplyForce(Vector3D force);
+        
     }
 }

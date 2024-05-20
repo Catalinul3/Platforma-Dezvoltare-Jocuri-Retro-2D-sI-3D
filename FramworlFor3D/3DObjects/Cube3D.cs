@@ -11,6 +11,7 @@ using System.Linq;
 using System.Security.Cryptography.Xml;
 using System.Security.Policy;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,6 +20,7 @@ using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace FramworkFor3D._3DObjects
 {
@@ -40,7 +42,20 @@ namespace FramworkFor3D._3DObjects
         public int size { get; set; }
         public Point3DCollection vertices { get; set; }
         public Int32Collection indices { get; set; }
-        public RigidBody body;
+        public RigidBodyPhysics body;
+        private Vector3D _position { get; set; }
+        public Vector3D position
+        {
+            get
+            {
+                return _position;
+            }
+            set
+            {
+                this._position = value;
+            }
+        }
+        DiscreteDynamicsWorld world;
 
 
         #endregion
@@ -83,12 +98,12 @@ namespace FramworkFor3D._3DObjects
 
             double scale = 0.3;
 
-            for (int i = 0; i < cubeShape.Positions.Count; i++)
-            {
-                Point3D originalPosition = cubeShape.Positions[i];
-                Point3D scaledPosition = new Point3D(originalPosition.X * scale, originalPosition.Y * scale, originalPosition.Z * scale);
-                cubeShape.Positions[i] = scaledPosition;
-            }
+            //for (int i = 0; i < cubeShape.Positions.Count; i++)
+            //{
+            //    Point3D originalPosition = cubeShape.Positions[i];
+            //    Point3D scaledPosition = new Point3D(originalPosition.X * scale, originalPosition.Y * scale, originalPosition.Z * scale);
+            //    cubeShape.Positions[i] = scaledPosition;
+            //}
 
             cubeShape.TriangleIndices.Add(0);
           
@@ -155,9 +170,9 @@ namespace FramworkFor3D._3DObjects
 
             ModelVisual3D cubeForm = new ModelVisual3D();
             cubeForm.Content = lightAndGeometry;
-
-          
-
+            position=new Vector3D(cubeForm.Transform.Value.OffsetX, cubeForm.Transform.Value.OffsetY, cubeForm.Transform.Value.OffsetZ);
+            body = new RigidBodyPhysics();
+            
             Content = cubeForm.Content;
 
 
@@ -168,16 +183,30 @@ namespace FramworkFor3D._3DObjects
 
         }
 
+        public void OnInitialisePhysics()
+        {
+            var collision = new DefaultCollisionConfiguration();
+            var dispatcher = new CollisionDispatcher(collision);
+            var broadphase = new DbvtBroadphase();
+            world = new DiscreteDynamicsWorld(dispatcher, broadphase, null, collision);
+            world.Gravity = new BulletSharp.Math.Vector3(0, -10, 0);
+
+            var singleBody = body.Fall(); // Creează un singur corp rigid
+            world.AddRigidBody(singleBody);
+
+        }
+
         private void CompositionTarget_Rendering(object? sender, EventArgs e)
         {
             UpdatePhysics();
         }
-
+        
         private void UpdatePhysics()
         {
             Vector3D force = new Vector3D(0.0, 100000.0, 0.0);
-            Vector3 forceB = new Vector3((float)force.X, (float)force.Y, (float)force.Z);
-            body.ApplyCentralForce(forceB);
+         
+           // body.ApplyForce(force);
+           
         }
 
         private RigidBodyConstructionInfo InitializeRigidBody()
@@ -241,10 +270,7 @@ namespace FramworkFor3D._3DObjects
             }
         }
 
-        public void ApplyForce(Vector3D force)
-        {   Vector3 forceX=new Vector3((float)force.X,(float)force.Y,(float)force.Z);
-            body.ApplyForce(forceX,new Vector3(0,0,0));
-        }
+       
        
 
         #endregion

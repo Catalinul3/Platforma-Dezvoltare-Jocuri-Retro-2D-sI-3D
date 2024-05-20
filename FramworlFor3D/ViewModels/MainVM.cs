@@ -1,4 +1,5 @@
-﻿using FramworkFor3D.Commands;
+﻿using BulletSharp;
+using FramworkFor3D.Commands;
 using FramworkFor3D.helpers;
 using FramworkFor3D.Models;
 using FramworkFor3D.ViewModels.TreeViewVM;
@@ -131,6 +132,14 @@ namespace FramworlFor3D.ViewModels
       
         private object selectedItem;
         public object SelectedItem { get => selectedItem; set => SetProperty(ref selectedItem, value); }
+        #endregion
+
+        #region Physics
+        
+
+       
+
+        
         #endregion
     }
 }

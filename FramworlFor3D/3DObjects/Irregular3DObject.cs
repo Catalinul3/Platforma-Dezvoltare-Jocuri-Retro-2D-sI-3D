@@ -261,10 +261,9 @@ namespace FramworkFor3D._3DObjects
                 vertices[i] = scaledPosition;
             }
             mesh.Positions = vertices;
-           RigidBodyPhysics rigidPhysics = new RigidBodyPhysics();
+          
             //ajustam greutatea in functie de volum, iar volumul il calculam pe baza varfurilor si a indicilor ce formeaza fata
-            volume =rigidPhysics.CalculateVolume(vertices, indices);
-            mass = rigidPhysics.CalculateMass(volume);
+           
 
 
             DiffuseMaterial material = new DiffuseMaterial();

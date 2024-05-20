@@ -24,6 +24,7 @@ using System.Windows.Media.Effects;
 using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
 using static System.Formats.Asn1.AsnWriter;
+using System.Windows.Threading;
 
 namespace FramworkFor3D.Commands
 {
@@ -31,11 +32,14 @@ namespace FramworkFor3D.Commands
     {
         private readonly MainVM _mainVM;
 
-
+        private DiscreteDynamicsWorld _world;
+        private DispatcherTimer _renderTimer;
         public GameObjectCommands(MainVM mainVM)
         {
             _mainVM = mainVM;
-        }
+          
+            
+    }
         private RelayCommand _add3DCube;
         private RelayCommand _add3DSphere;
         private RelayCommand _add3DOther;
@@ -44,7 +48,7 @@ namespace FramworkFor3D.Commands
 
         Cube3D cube;
         Sphere3D sphere;
-        System.Windows.Shapes.Rectangle objSkeleton;
+        UIElement3D cubeInteractive;
 
         #region Create Models 
         public RelayCommand add3DCube
@@ -64,12 +68,17 @@ namespace FramworkFor3D.Commands
                 {
                     color = Brushes.Red,
                 };
-               
-          
-             
-                UIElement3D cubeInteractive = Cube3DInteractive.ConvertToUI(cube);
+
+                
+
+                cubeInteractive = Cube3DInteractive.ConvertToUI(cube);
                 environment.Children.Add(cubeInteractive);
-                TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 0);
+
+                TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 1);
+                var initialPosition = new BulletSharp.Math.Vector3((float)center.OffsetX, (float)center.OffsetY, (float)center.OffsetZ);
+                var boxShape = new BoxShape(1);
+             
+                cube.position = new Vector3D(center.OffsetX, center.OffsetY, center.OffsetZ);
                 cubeInteractive.MouseRightButtonDown += (s, e) => CubePressed(s, e, environment);
                 cubeInteractive.Transform = center;
                 
@@ -78,10 +87,11 @@ namespace FramworkFor3D.Commands
             }
         }
 
-        private void CompositionTarget_Rendering(object? sender, EventArgs e)
+        private void ApplyPhysics()
         {
-            Vector3D force = new Vector3D(0.0, 1000000.0, 0.0);
-            cube.ApplyForce(force);
+            var info = InitializeRigidBody()
+                 ;
+            cube.body = new RigidBodyPhysics(info);
         }
 
         private RigidBodyConstructionInfo InitializeRigidBody()
@@ -148,6 +158,7 @@ namespace FramworkFor3D.Commands
                     obj.Rotate(90, new Vector3D(1, 0, 0));
                     transformGroup.Children.Add(obj.Transform);
                     TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 0);
+                    
                     transformGroup.Children.Add(center);
                     //obj.Translate(new Vector3D(0, 0, 1));
                     //transformGroup.Children.Add(obj.Transform);
@@ -205,9 +216,10 @@ namespace FramworkFor3D.Commands
                     }
                 }
             }
-            RigidBodyConstructionInfo bodyInfo = InitializeRigidBody();
-            cube.body = new RigidBody(bodyInfo);
-            CompositionTarget.Rendering += CompositionTarget_Rendering;
+            MessageBox.Show("cube position X = " + cube.position.X + " y = " + cube.position.Y + " Z = " + cube.position.Z);
+            cube.OnInitialisePhysics();
+            cubeInteractive.Transform = cube.Transform;
+            MessageBox.Show("cube position X = " + cube.position.X+" y = " + cube.position.Y+ " Z = " + cube.position.Z );
 
 
 
