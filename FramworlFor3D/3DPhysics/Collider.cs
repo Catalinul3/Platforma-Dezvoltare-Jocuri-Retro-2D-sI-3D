@@ -13,10 +13,16 @@ using System.Windows.Shapes;
 
 namespace FramworkFor3D._3DPhysics
 {
-    public class Collider
+    public static class Collider
     {
-   
-      
+       public static bool IsColliding(ModelVisual3D obj1,ModelVisual3D obj2)
+        {  Rect3D primaryBounds= obj1.Content.Bounds;
+       
+           Rect3D objectInCollision= obj2.Content.Bounds;
+         return primaryBounds.IntersectsWith(objectInCollision);
+     
+            
+        }
 
     }
 }

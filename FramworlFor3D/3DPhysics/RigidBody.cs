@@ -44,8 +44,9 @@ namespace FramworkFor3D._3DPhysics
         public void Fall(object sender,EventArgs e, UIElement3D obj)
         {
           
-            float fallingDirection =(float) obj.Transform.Value.OffsetZ;
-           
+         
+             float fallingDirection =(float) obj.Transform.Value.OffsetZ;
+            
             TranslateTransform3D falling = new TranslateTransform3D();
 
             falling.OffsetZ = fallingDirection - 0.1;

@@ -38,9 +38,9 @@ namespace FramworkFor3D.Commands
         public GameObjectCommands(MainVM mainVM)
         {
             _mainVM = mainVM;
-          
-            
-    }
+
+
+        }
         private RelayCommand _add3DCube;
         private RelayCommand _add3DSphere;
         private RelayCommand _add3DOther;
@@ -49,8 +49,9 @@ namespace FramworkFor3D.Commands
 
         Cube3D cube;
         Sphere3D sphere;
-        UIElement3D cubeInteractive,sphereInteractive,objInteractive;
+        UIElement3D cubeInteractive, sphereInteractive, objInteractive;
         DispatcherTimer timer;
+        Rect3D cubeBounds,sphereBounds, objBounds;
 
         #region Create Models 
         public RelayCommand add3DCube
@@ -70,28 +71,27 @@ namespace FramworkFor3D.Commands
                 {
                     color = Brushes.Red,
                 };
-
                 
 
                 cubeInteractive = Cube3DInteractive.ConvertToUI(cube);
                 environment.Children.Add(cubeInteractive);
 
                 TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 1);
-                var initialPosition = new BulletSharp.Math.Vector3((float)center.OffsetX, (float)center.OffsetY, (float)center.OffsetZ);
-                var boxShape = new BoxShape(1);
-             
+                cube.Transform= center;
+                MessageBox.Show("X = " + cube.Transform.Value.OffsetX + " y = " + cube.Transform.Value.OffsetY + " Z = " + cube.Transform.Value.OffsetZ);
+
                 cube.position = new Vector3D(center.OffsetX, center.OffsetY, center.OffsetZ);
                 cubeInteractive.MouseRightButtonDown += (s, e) => CubePressed(s, e, environment);
                 cubeInteractive.Transform = center;
-                
+
 
 
             }
         }
 
-       
 
-    
+
+
 
         public RelayCommand add3DSphere
         {
@@ -111,9 +111,10 @@ namespace FramworkFor3D.Commands
                 sphereInteractive = Cube3DInteractive.ConvertToUI(sphere);
 
                 environment.Children.Add(sphereInteractive);
-                TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 1);
+                TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 3);
 
 
+                MessageBox.Show("X = " + sphere.Transform.Value.OffsetX + " y = " + sphere.Transform.Value.OffsetY + " Z = " + sphere.Transform.Value.OffsetZ);
 
 
                 sphereInteractive.MouseRightButtonDown += (s, e) => SpherePressed(s, e, environment);
@@ -151,7 +152,7 @@ namespace FramworkFor3D.Commands
                     obj.Rotate(90, new Vector3D(1, 0, 0));
                     transformGroup.Children.Add(obj.Transform);
                     TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 2);
-                    
+
                     transformGroup.Children.Add(center);
                     //obj.Translate(new Vector3D(0, 0, 1));
                     //transformGroup.Children.Add(obj.Transform);
@@ -199,8 +200,8 @@ namespace FramworkFor3D.Commands
         }
 
 
-      
-    
+
+
         private void CubePressed(object sender, RoutedEventArgs e, Viewport3D environment)
         {
 
@@ -215,17 +216,28 @@ namespace FramworkFor3D.Commands
                     }
                 }
             }
-            
-            
-        
-           
+
+
+
+
             if (cubeInteractive.Transform.Value.OffsetZ > 0)
             {
                 _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(1);
                 rigid.Start(cubeInteractive);
-                
+                ModelVisual3D cubeModel = Cube3DInteractive.ConvertToModel(cubeInteractive);
+                ModelVisual3D sphereModel = Cube3DInteractive.ConvertToModel(sphereInteractive);
+                bool isCollidingWithSphere = Collider.IsColliding(cubeModel, sphereModel);
+                if(isCollidingWithSphere==true)
+                {
+                    MessageBox.Show("Cube and sphere are colliding");
+                }
+                else
+                {
+                    MessageBox.Show("Aren't colliding");
+                }
+
             }
-        
+
 
 
 

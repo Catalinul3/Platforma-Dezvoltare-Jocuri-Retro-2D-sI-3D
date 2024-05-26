@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Eco.Subscription;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,11 +17,13 @@ namespace FramworkFor3D._3DObjects
             modelUIElement.Model = model.Content;
             return modelUIElement;
         }
-        public static ModelVisual3D ConvertToModel(ModelUIElement3D uIElement3D)
-        {
+        public static ModelVisual3D ConvertToModel(UIElement3D uIElement3D)
+        { ModelUIElement3D modelUi = new ModelUIElement3D();
+            modelUi = (ModelUIElement3D)uIElement3D;
             ModelVisual3D modelVisual3DmodelUIElement = new ModelVisual3D();
-            modelVisual3DmodelUIElement.Content = uIElement3D.Model;
+            modelVisual3DmodelUIElement.Content = modelUi.Model ;
             return modelVisual3DmodelUIElement;
         }
+       
     }
 }
