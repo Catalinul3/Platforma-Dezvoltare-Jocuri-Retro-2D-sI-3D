@@ -26,7 +26,7 @@ namespace FramworkFor3D._3DObjects
         private double mass;
         private double volume;
         private bool applyRigidBody;
-        private RigidBodyPhysics body;
+        
         
 
 

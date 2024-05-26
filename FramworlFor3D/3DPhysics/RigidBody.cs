@@ -2,11 +2,13 @@
 using BulletSharp.Math;
 using BulletSharp.SoftBody;
 using FramworkFor3D._3DObjects;
+using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
 using System.Windows.Threading;
@@ -15,47 +17,48 @@ using Matrix = BulletSharp.Math.Matrix;
 
 namespace FramworkFor3D._3DPhysics
 {
-    public class RigidBodyPhysics
+    public class RigidBody
     {
+        float mass;
+        const float gravity_acceleration = 9.81f;
+        DispatcherTimer timer;
+        UIElement3D obj;
 
-
-        private float mass;
-        private RigidBody rigidBody;
-        private BoxShape colShape;
-        private Vector3 inertia;
-        private RigidBodyConstructionInfo info;
-
-
-        public RigidBodyPhysics()
+        public RigidBody(float mass)
         {
-            mass = 1.0f;
-            colShape = new BoxShape(1);
-            inertia = colShape.CalculateLocalInertia(mass);
-            info = new RigidBodyConstructionInfo(mass, null, colShape, inertia);
+            this.mass = mass;
 
 
-
-        }
-       public Matrix GetTransform()
-        {
-            return rigidBody.WorldTransform;
-        }
-        public RigidBody Fall()
-        {
            
-
-            var startPos = new Vector3(0, 20, 0);
-            var position = startPos + new Vector3(0, 0, 10);
-            info.MotionState = new DefaultMotionState(BulletSharp.Math.Matrix.Translation(position));
-            var body = new RigidBody(info);
-            return body;
-
-            
         }
-        public RigidBodyPhysics(RigidBodyConstructionInfo info)
+        public void Start(UIElement3D obj)
         {
-            rigidBody = new RigidBody(info);
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(10);
+            timer.Tick += (s, e) => Fall(s, e, obj);
+            timer.Start();
         }
+
+        
+
+        public void Fall(object sender,EventArgs e, UIElement3D obj)
+        {
+          
+            float fallingDirection =(float) obj.Transform.Value.OffsetZ;
+           
+            TranslateTransform3D falling = new TranslateTransform3D();
+
+            falling.OffsetZ = fallingDirection - 0.1;
+            falling.OffsetX = obj.Transform.Value.OffsetX;
+            falling.OffsetY = obj.Transform.Value.OffsetY;
+            obj.Transform = falling;
+            if(fallingDirection<=0.1)
+            {
+                timer.Stop();
+            }
+        }
+       
+
 
 
 

@@ -26,6 +26,7 @@ using System.Windows.Shapes;
 using static System.Formats.Asn1.AsnWriter;
 using System.Windows.Threading;
 
+
 namespace FramworkFor3D.Commands
 {
     public class GameObjectCommands : BaseVM
@@ -48,7 +49,8 @@ namespace FramworkFor3D.Commands
 
         Cube3D cube;
         Sphere3D sphere;
-        UIElement3D cubeInteractive;
+        UIElement3D cubeInteractive,sphereInteractive,objInteractive;
+        DispatcherTimer timer;
 
         #region Create Models 
         public RelayCommand add3DCube
@@ -87,18 +89,9 @@ namespace FramworkFor3D.Commands
             }
         }
 
-        private void ApplyPhysics()
-        {
-            var info = InitializeRigidBody()
-                 ;
-            cube.body = new RigidBodyPhysics(info);
-        }
+       
 
-        private RigidBodyConstructionInfo InitializeRigidBody()
-        {
-            RigidBodyConstructionInfo rigidBody = new RigidBodyConstructionInfo(1, null, new BoxShape(1));
-            return rigidBody;
-        }
+    
 
         public RelayCommand add3DSphere
         {
@@ -115,10 +108,10 @@ namespace FramworkFor3D.Commands
             {
 
                 sphere = new Sphere3D();
-                UIElement3D sphereInteractive = Cube3DInteractive.ConvertToUI(sphere);
+                sphereInteractive = Cube3DInteractive.ConvertToUI(sphere);
 
                 environment.Children.Add(sphereInteractive);
-                TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 0);
+                TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 1);
 
 
 
@@ -152,12 +145,12 @@ namespace FramworkFor3D.Commands
 
 
                     Transform3DGroup transformGroup = new Transform3DGroup();
-                    UIElement3D objInteractive = Cube3DInteractive.ConvertToUI(obj);
+                    objInteractive = Cube3DInteractive.ConvertToUI(obj);
                     //RotateTransform3D rotate = new RotateTransform3D(new AxisAngleRotation3D(new Vector3D(1, 0, 0), 90));
                     //transformGroup.Children.Add(rotate);
                     obj.Rotate(90, new Vector3D(1, 0, 0));
                     transformGroup.Children.Add(obj.Transform);
-                    TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 0);
+                    TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 2);
                     
                     transformGroup.Children.Add(center);
                     //obj.Translate(new Vector3D(0, 0, 1));
@@ -193,7 +186,13 @@ namespace FramworkFor3D.Commands
                     }
                 }
             }
-         
+            if (objInteractive.Transform.Value.OffsetZ > 0)
+            {
+                _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(1);
+                rigid.Start(objInteractive);
+
+            }
+
 
 
 
@@ -216,16 +215,26 @@ namespace FramworkFor3D.Commands
                     }
                 }
             }
-            MessageBox.Show("cube position X = " + cube.position.X + " y = " + cube.position.Y + " Z = " + cube.position.Z);
-            cube.OnInitialisePhysics();
-            cubeInteractive.Transform = cube.Transform;
-            MessageBox.Show("cube position X = " + cube.position.X+" y = " + cube.position.Y+ " Z = " + cube.position.Z );
+            
+            
+        
+           
+            if (cubeInteractive.Transform.Value.OffsetZ > 0)
+            {
+                _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(1);
+                rigid.Start(cubeInteractive);
+                
+            }
+        
 
 
 
 
 
         }
+
+
+
         private void SpherePressed(object sender, RoutedEventArgs e, Viewport3D environment)
         {
             if (sphere.Content is Model3DGroup model3Dgroup)
@@ -239,7 +248,13 @@ namespace FramworkFor3D.Commands
                     }
                 }
             }
-            
+            if (sphereInteractive.Transform.Value.OffsetZ > 0)
+            {
+                _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(1);
+                rigid.Start(sphereInteractive);
+
+            }
+
 
         }
 

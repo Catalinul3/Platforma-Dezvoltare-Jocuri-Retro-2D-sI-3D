@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "TF0+HlDZQDPqbepGqJr+OPfbuD7nbX1Zz2Y1vD4fyrNSVHUkz1m/7zJESP7qKfPVnzxHP3Y9ExzOV1veR5Y3fA==",
+  "dgSpecHash": "vPR2wa4g8LACrwdJfxDAEvq+gUChx/Q/hD+rlPSLehtuQjl69YvueFG2EYYkVJdvLXyXqX2kPnrNAaKOSgzcBg==",
   "success": true,
   "projectFilePath": "D:\\GitHub\\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\\FramworlFor3D\\FramworkFor3D.csproj",
   "expectedPackageFiles": [
@@ -18,6 +18,7 @@
     "C:\\Users\\zcata\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\zcata\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\zcata\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
+    "C:\\Users\\zcata\\.nuget\\packages\\ode.net.double\\0.1.3\\ode.net.double.0.1.3.nupkg.sha512",
     "C:\\Users\\zcata\\.nuget\\packages\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\zcata\\.nuget\\packages\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\zcata\\.nuget\\packages\\runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
@@ -132,6 +133,16 @@
       "warningLevel": 1,
       "message": "Package 'HelixToolkit.Wpf 2.24.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
       "libraryId": "HelixToolkit.Wpf",
+      "targetGraphs": [
+        "net6.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Ode.Net.Double 0.1.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Ode.Net.Double",
       "targetGraphs": [
         "net6.0-windows7.0"
       ]

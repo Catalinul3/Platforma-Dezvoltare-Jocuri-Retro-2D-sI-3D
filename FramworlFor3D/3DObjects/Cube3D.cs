@@ -24,7 +24,7 @@ using System.Windows.Threading;
 
 namespace FramworkFor3D._3DObjects
 {
-    public class Cube3D : ModelVisual3D,IRigidBody, BasedOperation
+    public class Cube3D : ModelVisual3D, BasedOperation
     {
         #region Cube Morphology
         private Brush _color;
@@ -42,8 +42,21 @@ namespace FramworkFor3D._3DObjects
         public int size { get; set; }
         public Point3DCollection vertices { get; set; }
         public Int32Collection indices { get; set; }
-        public RigidBodyPhysics body;
+        
         private Vector3D _position { get; set; }
+
+        private float velocity { get; set; }
+        public float Velocity
+        {
+            get
+            {
+                return velocity;
+            }
+            set
+            {
+                this.velocity = value;
+            }
+        }
         public Vector3D position
         {
             get
@@ -55,7 +68,7 @@ namespace FramworkFor3D._3DObjects
                 this._position = value;
             }
         }
-        DiscreteDynamicsWorld world;
+ 
 
 
         #endregion
@@ -68,7 +81,7 @@ namespace FramworkFor3D._3DObjects
             ModelVisual3D lightOfCube = new ModelVisual3D();
             size = 2;
             lightOfCube.Content = light;
-             
+            velocity = 0f;
           
             
 
@@ -126,7 +139,7 @@ namespace FramworkFor3D._3DObjects
             cubeShape.TriangleIndices.Add(0);
             cubeShape.TriangleIndices.Add(1);
             cubeShape.TriangleIndices.Add(4);
-           
+            
 
             cubeShape.TriangleIndices.Add(1);
             cubeShape.TriangleIndices.Add(5);
@@ -159,7 +172,7 @@ namespace FramworkFor3D._3DObjects
 
             GeometryModel3D cubeGeometry = new GeometryModel3D();
             cubeGeometry.Geometry = cubeShape;
-            
+           
             DiffuseMaterial material = new DiffuseMaterial();
             material.Brush = Brushes.LightGray;
             cubeGeometry.Material = material;
@@ -171,50 +184,23 @@ namespace FramworkFor3D._3DObjects
             ModelVisual3D cubeForm = new ModelVisual3D();
             cubeForm.Content = lightAndGeometry;
             position=new Vector3D(cubeForm.Transform.Value.OffsetX, cubeForm.Transform.Value.OffsetY, cubeForm.Transform.Value.OffsetZ);
-            body = new RigidBodyPhysics();
+          
             
             Content = cubeForm.Content;
 
 
 
             //Apply physics to cube
-          
+            
 
 
         }
 
-        public void OnInitialisePhysics()
-        {
-            var collision = new DefaultCollisionConfiguration();
-            var dispatcher = new CollisionDispatcher(collision);
-            var broadphase = new DbvtBroadphase();
-            world = new DiscreteDynamicsWorld(dispatcher, broadphase, null, collision);
-            world.Gravity = new BulletSharp.Math.Vector3(0, -10, 0);
+       
 
-            var singleBody = body.Fall(); // Creează un singur corp rigid
-            world.AddRigidBody(singleBody);
-
-        }
-
-        private void CompositionTarget_Rendering(object? sender, EventArgs e)
-        {
-            UpdatePhysics();
-        }
+      
         
-        private void UpdatePhysics()
-        {
-            Vector3D force = new Vector3D(0.0, 100000.0, 0.0);
-         
-           // body.ApplyForce(force);
-           
-        }
-
-        private RigidBodyConstructionInfo InitializeRigidBody()
-        {
-            RigidBodyConstructionInfo rigidBody = new RigidBodyConstructionInfo(1, null, new BoxShape(1));
-            return rigidBody;
-
-        }
+     
         #endregion
 
         #region Based Transformation
@@ -270,7 +256,12 @@ namespace FramworkFor3D._3DObjects
             }
         }
 
-       
+       public void Fall(double velocity)
+        {
+            Vector3D translate = new Vector3D(0, 0, velocity);
+            TranslateTransform3D translateTransform = new TranslateTransform3D(translate);
+            this.Transform = translateTransform;
+        }
        
 
         #endregion

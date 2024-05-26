@@ -2,6 +2,22 @@
   "version": 3,
   "targets": {
     "net6.0-windows7.0": {
+      "Ode.Net.Double/0.1.3": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Ode.Net.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net45/Ode.Net.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "build/net45/Ode.Net.Double.targets": {}
+        }
+      },
       "System.Windows.Interactivity.WPF/2.0.20525": {
         "type": "package",
         "compile": {
@@ -24,6 +40,26 @@
     }
   },
   "libraries": {
+    "Ode.Net.Double/0.1.3": {
+      "sha512": "lhQzzIF97qUJZRjqUGwwjlYAIjI2w+uagHsjBX3fr+cgRhGMwYwGRTOwGgHYysyJso9QJgexOsDqHejFj7L+mg==",
+      "type": "package",
+      "path": "ode.net.double/0.1.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "GIMPACT-LICENSE-BSD.TXT",
+        "ODE-LICENSE-BSD.TXT",
+        "build/native/bin/Win32/v110/ode_double.dll",
+        "build/native/bin/x64/v110/ode_double.dll",
+        "build/net45/Ode.Net.Double.targets",
+        "content/NuGet/GIMPACT-LICENSE-BSD.TXT",
+        "content/NuGet/ODE-LICENSE-BSD.TXT",
+        "lib/net45/Ode.Net.dll",
+        "lib/net45/Ode.Net.xml",
+        "ode.net.double.0.1.3.nupkg.sha512",
+        "ode.net.double.nuspec"
+      ]
+    },
     "System.Windows.Interactivity.WPF/2.0.20525": {
       "sha512": "0r+Le4E7hCm4zToUvBzjSUyTcuU3rFeoPa7JyTdWIzR/F7wH6+O/pWkjHIG40hIA0z1wvRdZayvoizA4wcK1dg==",
       "type": "package",
@@ -42,6 +78,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
+      "Ode.Net.Double >= 0.1.3",
       "System.Windows.Interactivity.WPF >= 2.0.20525"
     ]
   },
@@ -90,6 +127,10 @@
       "net6.0-windows7.0": {
         "targetAlias": "net6.0-windows",
         "dependencies": {
+          "Ode.Net.Double": {
+            "target": "Package",
+            "version": "[0.1.3, )"
+          },
           "System.Windows.Interactivity.WPF": {
             "target": "Package",
             "version": "[2.0.20525, )"
@@ -119,6 +160,16 @@
     }
   },
   "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Ode.Net.Double 0.1.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Ode.Net.Double",
+      "targetGraphs": [
+        "net6.0-windows7.0"
+      ]
+    },
     {
       "code": "NU1701",
       "level": "Warning",
