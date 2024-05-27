@@ -76,9 +76,11 @@ namespace FramworkFor3D.Commands
                 cubeInteractive = Cube3DInteractive.ConvertToUI(cube);
                 environment.Children.Add(cubeInteractive);
 
-                TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 1);
-                cube.Transform= center;
-                MessageBox.Show("X = " + cube.Transform.Value.OffsetX + " y = " + cube.Transform.Value.OffsetY + " Z = " + cube.Transform.Value.OffsetZ);
+                TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 3);
+                cube.Transform = center;
+                cubeBounds = Collider.UpdateBounds(cube, center);
+                
+                  MessageBox.Show("X = " + cube.Content.Bounds.SizeX + " y = " + cube.Content.Bounds.Y + " Z = " + cube.Content.Bounds.Z);
 
                 cube.position = new Vector3D(center.OffsetX, center.OffsetY, center.OffsetZ);
                 cubeInteractive.MouseRightButtonDown += (s, e) => CubePressed(s, e, environment);
@@ -111,10 +113,11 @@ namespace FramworkFor3D.Commands
                 sphereInteractive = Cube3DInteractive.ConvertToUI(sphere);
 
                 environment.Children.Add(sphereInteractive);
-                TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 3);
-
-
-                MessageBox.Show("X = " + sphere.Transform.Value.OffsetX + " y = " + sphere.Transform.Value.OffsetY + " Z = " + sphere.Transform.Value.OffsetZ);
+                TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 0);
+                sphereBounds = Collider.UpdateBounds(sphere, center);
+                sphere.Transform = center;
+                //MessageBox.Show("X = " + sphere.Content.Bounds.X + " y = " + sphere.Content.Bounds.Y + " Z = " + sphere.Content.Bounds.Z);
+               // MessageBox.Show("X = " + sphere.Transform.Value.OffsetX + " y = " + sphere.Transform.Value.OffsetY + " Z = " + sphere.Transform.Value.OffsetZ);
 
 
                 sphereInteractive.MouseRightButtonDown += (s, e) => SpherePressed(s, e, environment);
@@ -143,7 +146,7 @@ namespace FramworkFor3D.Commands
                 {
                     obj = new Irregular3DObject(fileName);
 
-
+                   // MessageBox.Show("X = " + obj.Content.Bounds.X + " y = " + obj.Content.Bounds.Y + " Z = " + obj.Content.Bounds.Z);
 
                     Transform3DGroup transformGroup = new Transform3DGroup();
                     objInteractive = Cube3DInteractive.ConvertToUI(obj);
@@ -161,6 +164,7 @@ namespace FramworkFor3D.Commands
 
 
                     objInteractive.Transform = transformGroup;
+                    objBounds = Collider.UpdateBounds(obj, center);
 
                     objInteractive.MouseRightButtonDown += (s, e) => ObjectPressed(s, e, environment);
 
@@ -224,12 +228,16 @@ namespace FramworkFor3D.Commands
             {
                 _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(1);
                 rigid.Start(cubeInteractive);
-                ModelVisual3D cubeModel=Cube3DInteractive.ConvertToModel(cubeInteractive);
-                ModelVisual3D sphereModel=Cube3DInteractive.ConvertToModel(sphereInteractive);
-                bool collision=Collider.IsColliding(cubeModel, sphereModel);
+  
+               //test
+                bool collision = Collider.IsColliding(cubeBounds, sphereBounds);
                 if (collision)
                 {
-                    MessageBox.Show("Collision");
+                    MessageBox.Show("Collsion detected");
+                }
+                else
+                {
+                    MessageBox.Show("No collision detected");
                 }
 
 
@@ -261,7 +269,20 @@ namespace FramworkFor3D.Commands
             {
                 _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(1);
                 rigid.Start(sphereInteractive);
+                
+                //ModelVisual3D sphereModel = Cube3DInteractive.ConvertToModel(sphereInteractive);
+                //ModelVisual3D objModel = Cube3DInteractive.ConvertToModel(objInteractive);
+                //bool collision = Collider.IsColliding(sphereModel, objModel);
 
+            }
+            bool collision = Collider.IsColliding(cubeBounds, sphereBounds);
+            if (collision)
+            {
+                MessageBox.Show("Collsion detected");
+            }
+            else
+            {
+                MessageBox.Show("No collision detected");
             }
 
 
