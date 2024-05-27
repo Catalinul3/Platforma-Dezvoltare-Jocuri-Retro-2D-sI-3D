@@ -224,17 +224,14 @@ namespace FramworkFor3D.Commands
             {
                 _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(1);
                 rigid.Start(cubeInteractive);
-                ModelVisual3D cubeModel = Cube3DInteractive.ConvertToModel(cubeInteractive);
-                ModelVisual3D sphereModel = Cube3DInteractive.ConvertToModel(sphereInteractive);
-                bool isCollidingWithSphere = Collider.IsColliding(cubeModel, sphereModel);
-                if(isCollidingWithSphere==true)
+                ModelVisual3D cubeModel=Cube3DInteractive.ConvertToModel(cubeInteractive);
+                ModelVisual3D sphereModel=Cube3DInteractive.ConvertToModel(sphereInteractive);
+                bool collision=Collider.IsColliding(cubeModel, sphereModel);
+                if (collision)
                 {
-                    MessageBox.Show("Cube and sphere are colliding");
+                    MessageBox.Show("Collision");
                 }
-                else
-                {
-                    MessageBox.Show("Aren't colliding");
-                }
+
 
             }
 

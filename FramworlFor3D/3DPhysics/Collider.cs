@@ -19,8 +19,17 @@ namespace FramworkFor3D._3DPhysics
         {  Rect3D primaryBounds= obj1.Content.Bounds;
        
            Rect3D objectInCollision= obj2.Content.Bounds;
-         return primaryBounds.IntersectsWith(objectInCollision);
-     
+
+         Rect3D intersectionRectangle=Rect3D.Intersect(primaryBounds, objectInCollision);
+            if (intersectionRectangle.IsEmpty)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+         
             
         }
 

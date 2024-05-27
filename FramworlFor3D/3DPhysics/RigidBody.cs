@@ -23,6 +23,7 @@ namespace FramworkFor3D._3DPhysics
         const float gravity_acceleration = 9.81f;
         DispatcherTimer timer;
         UIElement3D obj;
+        float time_elapsed = 0;
 
         public RigidBody(float mass)
         {
@@ -47,16 +48,20 @@ namespace FramworkFor3D._3DPhysics
          
              float fallingDirection =(float) obj.Transform.Value.OffsetZ;
             
+           
+            time_elapsed+=(float)timer.Interval.TotalSeconds;
+           
+            fallingDirection -=(float)0.5*gravity_acceleration*time_elapsed*time_elapsed;
             TranslateTransform3D falling = new TranslateTransform3D();
-
-            falling.OffsetZ = fallingDirection - 0.1;
+            falling.OffsetZ= fallingDirection; 
             falling.OffsetX = obj.Transform.Value.OffsetX;
             falling.OffsetY = obj.Transform.Value.OffsetY;
             obj.Transform = falling;
-            if(fallingDirection<=0.1)
+            if(fallingDirection < 0.1f)
             {
                 timer.Stop();
             }
+          
         }
        
 
