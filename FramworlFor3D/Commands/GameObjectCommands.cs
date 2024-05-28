@@ -75,7 +75,7 @@ namespace FramworkFor3D.Commands
 
                 cubeInteractive = InteractiveHelper.ConvertToUI(cube);
                 environment.Children.Add(cubeInteractive);
-
+                
                 TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 2);
                 cube.Transform = center;
                 cubeBounds = Collider.UpdateBounds(cube, center);
@@ -85,16 +85,8 @@ namespace FramworkFor3D.Commands
                 cube.position = new Vector3D(center.OffsetX, center.OffsetY, center.OffsetZ);
                 cubeInteractive.MouseRightButtonDown += (s, e) => CubePressed(s, e, environment);
                 cubeInteractive.Transform = center;
-
-
-
             }
         }
-
-
-
-
-
         public RelayCommand add3DSphere
         {
             get
@@ -118,13 +110,8 @@ namespace FramworkFor3D.Commands
                 sphere.Transform = center;
                 //MessageBox.Show("X = " + sphere.Content.Bounds.X + " y = " + sphere.Content.Bounds.Y + " Z = " + sphere.Content.Bounds.Z);
                // MessageBox.Show("X = " + sphere.Transform.Value.OffsetX + " y = " + sphere.Transform.Value.OffsetY + " Z = " + sphere.Transform.Value.OffsetZ);
-
-
                 sphereInteractive.MouseRightButtonDown += (s, e) => SpherePressed(s, e, environment);
                 sphereInteractive.Transform = center;
-
-
-
             }
         }
         public RelayCommand add3DOther
@@ -195,20 +182,11 @@ namespace FramworkFor3D.Commands
             {
                 _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(1);
                 rigid.Start(objInteractive,objBounds);
-
             }
-
-
-
-
         }
-
-
-
 
         private void CubePressed(object sender, RoutedEventArgs e, Viewport3D environment)
         {
-
             if (cube.Content is Model3DGroup model3Dgroup)
             {
                 foreach (var model in model3Dgroup.Children)
@@ -216,33 +194,46 @@ namespace FramworkFor3D.Commands
                     if (model is GeometryModel3D geometryModel)
                     {
                         geometryModel.Material = new DiffuseMaterial(Brushes.Orange);
-
                     }
                 }
+               
             }
+            #region Context Menu
+            ContextMenu context = new ContextMenu();
+            MenuItem delete = new MenuItem();
+            delete.Header = "Delete";
+            MenuItem addMaterial = new MenuItem();
+            addMaterial.Header = "Add Material";
+            MenuItem applyPhisycs = new MenuItem();
+            applyPhisycs.Header = "Apply Physics";
+            MenuItem rigidBody= new MenuItem();
+            rigidBody.Header = "Rigid Body";
+            applyPhisycs.Items.Add(rigidBody);
 
+            
+            delete.Click += (s, ev) => DeleteCube(s, ev, environment);
+            rigidBody.Click += (s, ev) => Rigid(s, ev, environment);
+            context.Items.Add(delete);
+            context.Items.Add(addMaterial);
+            context.Items.Add(applyPhisycs);
+            context.IsOpen = true;
+          
+            #endregion
 
-
-
+        }
+        private void Rigid(object s,RoutedEventArgs ev,Viewport3D environment)
+        {
             if (cubeInteractive.Transform.Value.OffsetZ > 0)
             {
                 _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(1);
-                rigid.Start(cubeInteractive,sphereBounds);
-
-                
-              
-
-
+                rigid.Start(cubeInteractive, sphereBounds);
             }
-
-
-
-
-
-
         }
 
-
+        private void DeleteCube(object s, RoutedEventArgs ev, Viewport3D environment)
+        {
+            environment.Children.Remove(cubeInteractive);
+        }
 
         private void SpherePressed(object sender, RoutedEventArgs e, Viewport3D environment)
         {
@@ -276,14 +267,7 @@ namespace FramworkFor3D.Commands
             {
                 MessageBox.Show("No collision detected");
             }
-
-
         }
-
-
-
-
         #endregion
     }
 }
-
