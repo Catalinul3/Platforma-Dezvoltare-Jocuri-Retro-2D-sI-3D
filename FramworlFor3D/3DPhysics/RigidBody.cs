@@ -2,13 +2,16 @@
 using BulletSharp.Math;
 using BulletSharp.SoftBody;
 using FramworkFor3D._3DObjects;
+using HelixToolkit.Wpf;
 using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
 using System.Windows.Threading;
@@ -25,6 +28,15 @@ namespace FramworkFor3D._3DPhysics
         UIElement3D obj;
         Rect3D bound;
         float time_elapsed = 0;
+        bool colliding = false;
+        public Rect3D Bound
+        {
+            get { return bound; }
+            set
+            {
+                this.bound= value;
+            }
+        }
 
         public RigidBody(float mass)
         {
@@ -33,40 +45,63 @@ namespace FramworkFor3D._3DPhysics
 
            
         }
-        public void Start(UIElement3D obj)
+        public void Start(UIElement3D obj,Rect3D bound)
         {
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(10);
-            timer.Tick += (s, e) => Fall(s, e, obj);
+
+
+
+            timer = new DispatcherTimer(DispatcherPriority.Normal);
+            timer.Interval = TimeSpan.FromMilliseconds(8.33);
+            timer.Tick += (s, e) => Fall(s, e, obj, bound);
             timer.Start();
+           
+            
+           
         }
 
         
 
-        public void Fall(object sender,EventArgs e, UIElement3D obj)
+        public void Fall(object sender,EventArgs e,UIElement3D obj,Rect3D bound)
         {
           
          
              float fallingDirection =(float) obj.Transform.Value.OffsetZ;
-            
-           
-            time_elapsed+=(float)timer.Interval.TotalSeconds;
-           //formula pentru cadere libera a lui Newton dar fara viteza intiala si altitudine initiala obiectului
-            fallingDirection -=(float)0.5*gravity_acceleration*time_elapsed*time_elapsed;
+
+
+            time_elapsed += (float)timer.Interval.TotalSeconds;
+
+            //formula pentru cadere libera a lui Newton dar fara viteza intiala si altitudine initiala obiectului
+            fallingDirection -= (float)0.5*gravity_acceleration*time_elapsed*time_elapsed;
+            //Transform3DGroup transformationGroup = new Transform3DGroup();
             TranslateTransform3D falling = new TranslateTransform3D();
             falling.OffsetZ= fallingDirection; 
+           
             falling.OffsetX = obj.Transform.Value.OffsetX;
             falling.OffsetY = obj.Transform.Value.OffsetY;
-           
+            //transformationGroup.Children.Add(falling);
             obj.Transform = falling;
-            if(fallingDirection < 0.1f)
+
+            ModelVisual3D objectModel = InteractiveHelper.ConvertToModel(obj);
+            Bound = Collider.UpdateBounds(objectModel, falling);
+            bool collision = Collider.IsColliding(Bound, bound);
+            if (collision)
             {
-                timer.Stop();
+                Stop();
+                MessageBox.Show("Collsion detected");
             }
-          
+
+
+
         }
        
+        public void Stop()
+        {
+            timer.Stop();
+        }
+        public void ApplyForce(Vector3D forceAxis,float force)
+        {
 
+        }
 
 
 

@@ -253,13 +253,13 @@ namespace FramworkFor3D._3DObjects
             mesh.TriangleIndices = indices;
             mesh.TextureCoordinates = texture;
             double scale = 0.05;
-            for (int i = 0; i < vertices.Count; i++)
-            {
-                Point3D originalPosition = vertices[i];
-                Point3D scaledPosition = new Point3D(originalPosition.X * scale, originalPosition.Y * scale, originalPosition.Z * scale);
+            //for (int i = 0; i < vertices.Count; i++)
+            //{
+            //    Point3D originalPosition = vertices[i];
+            //    Point3D scaledPosition = new Point3D(originalPosition.X * scale, originalPosition.Y * scale, originalPosition.Z * scale);
 
-                vertices[i] = scaledPosition;
-            }
+            //    vertices[i] = scaledPosition;
+            //}
             mesh.Positions = vertices;
           
             //ajustam greutatea in functie de volum, iar volumul il calculam pe baza varfurilor si a indicilor ce formeaza fata
@@ -278,9 +278,9 @@ namespace FramworkFor3D._3DObjects
 
 
             irregular.Content = lightAndGeometry;
+
             
-        
-         
+           
 
             Content = irregular.Content;
 

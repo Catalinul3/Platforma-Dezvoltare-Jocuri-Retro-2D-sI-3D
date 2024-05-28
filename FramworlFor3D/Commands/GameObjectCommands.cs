@@ -73,10 +73,10 @@ namespace FramworkFor3D.Commands
                 };
                 
 
-                cubeInteractive = Cube3DInteractive.ConvertToUI(cube);
+                cubeInteractive = InteractiveHelper.ConvertToUI(cube);
                 environment.Children.Add(cubeInteractive);
 
-                TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 3);
+                TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 2);
                 cube.Transform = center;
                 cubeBounds = Collider.UpdateBounds(cube, center);
                 
@@ -110,7 +110,7 @@ namespace FramworkFor3D.Commands
             {
 
                 sphere = new Sphere3D();
-                sphereInteractive = Cube3DInteractive.ConvertToUI(sphere);
+                sphereInteractive = InteractiveHelper.ConvertToUI(sphere);
 
                 environment.Children.Add(sphereInteractive);
                 TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 0);
@@ -149,7 +149,7 @@ namespace FramworkFor3D.Commands
                    // MessageBox.Show("X = " + obj.Content.Bounds.X + " y = " + obj.Content.Bounds.Y + " Z = " + obj.Content.Bounds.Z);
 
                     Transform3DGroup transformGroup = new Transform3DGroup();
-                    objInteractive = Cube3DInteractive.ConvertToUI(obj);
+                    objInteractive = InteractiveHelper.ConvertToUI(obj);
                     //RotateTransform3D rotate = new RotateTransform3D(new AxisAngleRotation3D(new Vector3D(1, 0, 0), 90));
                     //transformGroup.Children.Add(rotate);
                     obj.Rotate(90, new Vector3D(1, 0, 0));
@@ -194,7 +194,7 @@ namespace FramworkFor3D.Commands
             if (objInteractive.Transform.Value.OffsetZ > 0)
             {
                 _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(1);
-                rigid.Start(objInteractive);
+                rigid.Start(objInteractive,objBounds);
 
             }
 
@@ -227,18 +227,10 @@ namespace FramworkFor3D.Commands
             if (cubeInteractive.Transform.Value.OffsetZ > 0)
             {
                 _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(1);
-                rigid.Start(cubeInteractive);
-  
-               //test
-                bool collision = Collider.IsColliding(cubeBounds, sphereBounds);
-                if (collision)
-                {
-                    MessageBox.Show("Collsion detected");
-                }
-                else
-                {
-                    MessageBox.Show("No collision detected");
-                }
+                rigid.Start(cubeInteractive,sphereBounds);
+
+                
+              
 
 
             }
@@ -268,7 +260,7 @@ namespace FramworkFor3D.Commands
             if (sphereInteractive.Transform.Value.OffsetZ > 0)
             {
                 _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(1);
-                rigid.Start(sphereInteractive);
+                rigid.Start(sphereInteractive,sphereBounds);
                 
                 //ModelVisual3D sphereModel = Cube3DInteractive.ConvertToModel(sphereInteractive);
                 //ModelVisual3D objModel = Cube3DInteractive.ConvertToModel(objInteractive);

@@ -35,6 +35,7 @@ namespace FramworkFor3D._3DPhysics
                 SizeZ = obj.Content.Bounds.SizeZ,
             };
         }
+        
 
     }
 }

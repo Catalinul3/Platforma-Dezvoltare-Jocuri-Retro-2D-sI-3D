@@ -39,7 +39,7 @@ namespace FramworlFor3D
         public MainWindow()
         {
             InitializeComponent();
-           CreateGrid();
+           //CreateGrid();
             track = new TrackBall();
         }
 

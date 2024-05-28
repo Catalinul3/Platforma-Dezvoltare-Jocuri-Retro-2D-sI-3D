@@ -38,9 +38,9 @@ namespace FramworkFor3D.Models
             double cellSize=0.3;
             double delim = 0.09;
             grid.Add(lightVisual);
-            for (int x = 0; x < 20; x++)
+            for (int x = 0; x < 10; x++)
             {
-                for (int y = 0; y < 20; y++)
+                for (int y = 0; y < 10; y++)
                 {
                     double xPos = x * (cellSize-delim);
                     double yPos = y * (cellSize-delim);
