@@ -178,11 +178,27 @@ namespace FramworkFor3D.Commands
                     }
                 }
             }
-            if (objInteractive.Transform.Value.OffsetZ > 0)
-            {
-                _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(1);
-                rigid.Start(objInteractive,objBounds);
-            }
+            #region Context Menu
+            ContextMenu context = new ContextMenu();
+            MenuItem delete = new MenuItem();
+            delete.Header = "Delete";
+            MenuItem addMaterial = new MenuItem();
+            addMaterial.Header = "Add Material";
+            MenuItem applyPhisycs = new MenuItem();
+            applyPhisycs.Header = "Apply Physics";
+            MenuItem rigidBody = new MenuItem();
+            rigidBody.Header = "Rigid Body";
+            applyPhisycs.Items.Add(rigidBody);
+
+
+            delete.Click += (s, ev) => Delete(s, ev, environment, sphereInteractive);
+            rigidBody.Click += (s, ev) => Rigid(s, ev, environment, sphereInteractive);
+            addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment, sphereInteractive);
+            context.Items.Add(delete);
+            context.Items.Add(addMaterial);
+            context.Items.Add(applyPhisycs);
+            context.IsOpen = true;
+            #endregion
         }
 
         private void CubePressed(object sender, RoutedEventArgs e, Viewport3D environment)
@@ -199,6 +215,7 @@ namespace FramworkFor3D.Commands
                
             }
             #region Context Menu
+            
             ContextMenu context = new ContextMenu();
             MenuItem delete = new MenuItem();
             delete.Header = "Delete";
@@ -211,8 +228,9 @@ namespace FramworkFor3D.Commands
             applyPhisycs.Items.Add(rigidBody);
 
             
-            delete.Click += (s, ev) => DeleteCube(s, ev, environment);
-            rigidBody.Click += (s, ev) => Rigid(s, ev, environment);
+            delete.Click += (s, ev) => Delete(s, ev, environment, cubeInteractive);
+            rigidBody.Click += (s, ev) => Rigid(s, ev, environment,cubeInteractive);
+            addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment,cubeInteractive);
             context.Items.Add(delete);
             context.Items.Add(addMaterial);
             context.Items.Add(applyPhisycs);
@@ -221,18 +239,25 @@ namespace FramworkFor3D.Commands
             #endregion
 
         }
-        private void Rigid(object s,RoutedEventArgs ev,Viewport3D environment)
+
+        private void SetMaterial(object s, RoutedEventArgs ev, Viewport3D environment,UIElement3D obj)
         {
-            if (cubeInteractive.Transform.Value.OffsetZ > 0)
-            {
-                _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(1);
-                rigid.Start(cubeInteractive, sphereBounds);
-            }
+            MessageBox.Show("Under development");
         }
 
-        private void DeleteCube(object s, RoutedEventArgs ev, Viewport3D environment)
+        private void Rigid(object s,RoutedEventArgs ev,Viewport3D environment,UIElement3D obj)
         {
-            environment.Children.Remove(cubeInteractive);
+            if (obj.Transform.Value.OffsetZ > 0&&sphereBounds!=null)
+            {
+                _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(1);
+                rigid.Start(obj, sphereBounds);
+            }
+         
+        }
+
+        private void Delete(object s, RoutedEventArgs ev, Viewport3D environment,UIElement3D obj)
+        {
+            environment.Children.Remove(obj);
         }
 
         private void SpherePressed(object sender, RoutedEventArgs e, Viewport3D environment)
@@ -248,26 +273,34 @@ namespace FramworkFor3D.Commands
                     }
                 }
             }
-            if (sphereInteractive.Transform.Value.OffsetZ > 0)
-            {
-                _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(1);
-                rigid.Start(sphereInteractive,sphereBounds);
-                
-                //ModelVisual3D sphereModel = Cube3DInteractive.ConvertToModel(sphereInteractive);
-                //ModelVisual3D objModel = Cube3DInteractive.ConvertToModel(objInteractive);
-                //bool collision = Collider.IsColliding(sphereModel, objModel);
+            #region Context Menu
 
-            }
-            bool collision = Collider.IsColliding(cubeBounds, sphereBounds);
-            if (collision)
-            {
-                MessageBox.Show("Collsion detected");
-            }
-            else
-            {
-                MessageBox.Show("No collision detected");
-            }
+            ContextMenu context = new ContextMenu();
+            MenuItem delete = new MenuItem();
+            delete.Header = "Delete";
+            MenuItem addMaterial = new MenuItem();
+            addMaterial.Header = "Add Material";
+            MenuItem applyPhisycs = new MenuItem();
+            applyPhisycs.Header = "Apply Physics";
+            MenuItem rigidBody = new MenuItem();
+            rigidBody.Header = "Rigid Body";
+            applyPhisycs.Items.Add(rigidBody);
+
+
+            delete.Click += (s, ev) => Delete(s, ev, environment,sphereInteractive);
+            rigidBody.Click += (s, ev) => Rigid(s, ev, environment,sphereInteractive);
+            addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment, sphereInteractive);
+            context.Items.Add(delete);
+            context.Items.Add(addMaterial);
+            context.Items.Add(applyPhisycs);
+            context.IsOpen = true;
+
+            #endregion
+
+        
         }
+
+   
         #endregion
     }
 }

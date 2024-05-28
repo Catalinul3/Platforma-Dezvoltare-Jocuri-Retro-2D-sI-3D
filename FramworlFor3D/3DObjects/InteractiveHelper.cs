@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Media3D;
 
@@ -25,5 +26,7 @@ namespace FramworkFor3D._3DObjects
             return modelVisual3DmodelUIElement;
         }
        
+
+     
     }
 }
