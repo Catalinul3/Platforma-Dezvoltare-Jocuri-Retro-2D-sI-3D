@@ -33,13 +33,14 @@ namespace FramworlFor3D
         double deltaY = .1;
         private bool isMouseCaptured = false;
         private bool isKeyPressed = false;
-        private Point lastClick;
+        Point lastClick;
+        ModelVisual3D centerOfGrid;
         #endregion
 
         public MainWindow()
         {
             InitializeComponent();
-           //CreateGrid();
+            CreateGrid();
             track = new TrackBall();
         }
 
@@ -79,9 +80,10 @@ namespace FramworlFor3D
             { //convertirea punctelor 2D la spațiul de coordonate sferic 3D 
                 double width = environment.RenderSize.Width;
                 double height = environment.RenderSize.Height;
-                Point currentClick = e.GetPosition((IInputElement)sender);
-                Point rotateClick = new Point(width / 2, height / 2);
-                Vector3D rotateClickSphereCoordinates =  track.ConvertToSphereCoordinates(rotateClick, width, height);
+                Point currentClick = e.GetPosition(this);
+                
+                Point rotateClick =new Point(width/2,height/2);
+                Vector3D rotateClickSphereCoordinates = track.ConvertToSphereCoordinates(rotateClick, width, height);
                 Vector3D currentClickSphereCoordinates = track.ConvertToSphereCoordinates(currentClick, width, height);
 
                 //determinarea axei pe care o formeaza punctul din mijlocul si punctul curent al mouse-ului
@@ -93,18 +95,20 @@ namespace FramworlFor3D
                 Quaternion delta = new Quaternion(axis, -theta);
 
                 //rotatia 
-
-                Matrix3D rotate = new Matrix3D();
-
-                rotate.Rotate(delta);
               
+               Matrix3D matrix=new Matrix3D();
+                matrix.Rotate(delta);
+              
+                environment.Camera.Transform = new MatrixTransform3D(matrix);
+                lastClick = currentClick;
+          
 
-                environment.Camera.Transform = new MatrixTransform3D(rotate);
-                
+
 
             }
 
         }
+       
         #endregion
 
         #region Move
@@ -207,12 +211,16 @@ namespace FramworlFor3D
         private void CreateGrid()
         {
             Scenes sc = new Scenes();
-            List<ModelVisual3D> root = sc.getGrid();
+            List < ModelVisual3D> root = sc.getGrid();
             ObservableCollection<ModelVisual3D> grid = new ObservableCollection<ModelVisual3D>(root);
             foreach (var item in grid)
             {
+
                 environment.Children.Add(item);
             }
+
+            // centerOfGrid = sc.getCenterOfGrid(root);
+
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)

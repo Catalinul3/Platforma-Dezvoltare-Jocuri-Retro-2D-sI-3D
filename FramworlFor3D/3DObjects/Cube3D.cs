@@ -109,14 +109,14 @@ namespace FramworkFor3D._3DObjects
             cubeShape.Positions.Add(new Point3D(1, 1, 1));
             
 
-            double scale = 0.3;
+            double scale = 0.4;
 
-            //for (int i = 0; i < cubeShape.Positions.Count; i++)
-            //{
-            //    Point3D originalPosition = cubeShape.Positions[i];
-            //    Point3D scaledPosition = new Point3D(originalPosition.X * scale, originalPosition.Y * scale, originalPosition.Z * scale);
-            //    cubeShape.Positions[i] = scaledPosition;
-            //}
+            for (int i = 0; i < cubeShape.Positions.Count; i++)
+            {
+                Point3D originalposition = cubeShape.Positions[i];
+                Point3D scaledposition = new Point3D(originalposition.X * scale, originalposition.Y * scale, originalposition.Z * scale);
+                cubeShape.Positions[i] = scaledposition;
+            }
 
             cubeShape.TriangleIndices.Add(0);
           

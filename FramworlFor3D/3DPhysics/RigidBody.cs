@@ -51,7 +51,7 @@ namespace FramworkFor3D._3DPhysics
 
 
             timer = new DispatcherTimer(DispatcherPriority.Normal);
-            timer.Interval = TimeSpan.FromMilliseconds(8.33);
+            timer.Interval = TimeSpan.FromMilliseconds(1);
             timer.Tick += (s, e) => Fall(s, e, obj, bound);
             timer.Start();
            
@@ -71,7 +71,7 @@ namespace FramworkFor3D._3DPhysics
             time_elapsed += (float)timer.Interval.TotalSeconds;
 
             //formula pentru cadere libera a lui Newton dar fara viteza intiala si altitudine initiala obiectului
-            fallingDirection -= (float)0.5*gravity_acceleration*time_elapsed*time_elapsed;
+            fallingDirection -= (float)mass*0.5f*gravity_acceleration*time_elapsed*time_elapsed;
             //Transform3DGroup transformationGroup = new Transform3DGroup();
             TranslateTransform3D falling = new TranslateTransform3D();
             falling.OffsetZ= fallingDirection; 
@@ -87,7 +87,7 @@ namespace FramworkFor3D._3DPhysics
             if (collision)
             {
                 Stop();
-                MessageBox.Show("Collsion detected");
+               
             }
 
 

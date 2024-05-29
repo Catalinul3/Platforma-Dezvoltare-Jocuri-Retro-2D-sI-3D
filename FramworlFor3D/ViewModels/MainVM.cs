@@ -48,14 +48,11 @@ namespace FramworlFor3D.ViewModels
         public MainVM()
         {
             Scenes scenes = new Scenes();
-            grid = new ObservableCollection<ModelVisual3D>();
+           
             List<ModelVisual3D> root = scenes.getGrid();
             SetCamera();
           
-            foreach (var item in root)
-            {
-                grid.Add(item);
-            }
+          
             menuCommand = new MenuCommands(this);
             
 
@@ -99,7 +96,7 @@ namespace FramworlFor3D.ViewModels
         }
         public void SetCamera()
         {
-            Camera = new PerspectiveCamera(new Point3D(2, 1.2, 2), new Vector3D(0, 0, -1), new Vector3D(0, 0.3, 0), 45);
+            Camera = new PerspectiveCamera(new Point3D(2, 0, 1), new Vector3D(0, 1.3, -0.3), new Vector3D(0, 2, 0), 90);
         }
         public void UpdateCamera(MatrixTransform3D updateConfig)
         {

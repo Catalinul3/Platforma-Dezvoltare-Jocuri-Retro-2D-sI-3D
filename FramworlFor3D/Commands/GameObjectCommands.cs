@@ -75,12 +75,12 @@ namespace FramworkFor3D.Commands
 
                 cubeInteractive = InteractiveHelper.ConvertToUI(cube);
                 environment.Children.Add(cubeInteractive);
-                
-                TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 2);
+
+                TranslateTransform3D center = new TranslateTransform3D(2, 2.4, 1.2);
                 cube.Transform = center;
                 cubeBounds = Collider.UpdateBounds(cube, center);
                 
-                  MessageBox.Show("X = " + cube.Content.Bounds.SizeX + " y = " + cube.Content.Bounds.Y + " Z = " + cube.Content.Bounds.Z);
+               // MessageBox.Show("X = " + cube.Content.Bounds.SizeX + " y = " + cube.Content.Bounds.Y + " Z = " + cube.Content.Bounds.Z);
 
                 cube.position = new Vector3D(center.OffsetX, center.OffsetY, center.OffsetZ);
                 cubeInteractive.MouseRightButtonDown += (s, e) => CubePressed(s, e, environment);
@@ -105,7 +105,7 @@ namespace FramworkFor3D.Commands
                 sphereInteractive = InteractiveHelper.ConvertToUI(sphere);
 
                 environment.Children.Add(sphereInteractive);
-                TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 0);
+                TranslateTransform3D center = new TranslateTransform3D(2, 2.4, 0);
                 sphereBounds = Collider.UpdateBounds(sphere, center);
                 sphere.Transform = center;
                 //MessageBox.Show("X = " + sphere.Content.Bounds.X + " y = " + sphere.Content.Bounds.Y + " Z = " + sphere.Content.Bounds.Z);
@@ -141,7 +141,7 @@ namespace FramworkFor3D.Commands
                     //transformGroup.Children.Add(rotate);
                     obj.Rotate(90, new Vector3D(1, 0, 0));
                     transformGroup.Children.Add(obj.Transform);
-                    TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 2);
+                    TranslateTransform3D center = new TranslateTransform3D(2, 2.4, 1.2);
 
                     transformGroup.Children.Add(center);
                     //obj.Translate(new Vector3D(0, 0, 1));
@@ -191,9 +191,9 @@ namespace FramworkFor3D.Commands
             applyPhisycs.Items.Add(rigidBody);
 
 
-            delete.Click += (s, ev) => Delete(s, ev, environment, sphereInteractive);
-            rigidBody.Click += (s, ev) => Rigid(s, ev, environment, sphereInteractive);
-            addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment, sphereInteractive);
+            delete.Click += (s, ev) => Delete(s, ev, environment, objInteractive);
+            rigidBody.Click += (s, ev) => Rigid(s, ev, environment, objInteractive);
+            addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment, objInteractive);
             context.Items.Add(delete);
             context.Items.Add(addMaterial);
             context.Items.Add(applyPhisycs);
@@ -249,7 +249,7 @@ namespace FramworkFor3D.Commands
         {
             if (obj.Transform.Value.OffsetZ > 0&&sphereBounds!=null)
             {
-                _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(1);
+                _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(10);
                 rigid.Start(obj, sphereBounds);
             }
          
