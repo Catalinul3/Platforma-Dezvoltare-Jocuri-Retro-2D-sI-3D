@@ -31,7 +31,7 @@ namespace FramworkFor3D.Based_Operations
             double zSquare=1-Math.Pow(x,2)-Math.Pow(y,2);
             double z=zSquare >0 ? Math.Sqrt(zSquare) : 0;
             Vector3D newPoint=new Vector3D(x,y,z);
-           // newPoint.Normalize();
+           newPoint.Normalize();
             return newPoint;
         }
         #endregion

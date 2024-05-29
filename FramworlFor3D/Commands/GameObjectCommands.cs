@@ -105,7 +105,7 @@ namespace FramworkFor3D.Commands
                 sphereInteractive = InteractiveHelper.ConvertToUI(sphere);
 
                 environment.Children.Add(sphereInteractive);
-                TranslateTransform3D center = new TranslateTransform3D(2, 2.4, 0);
+                TranslateTransform3D center = new TranslateTransform3D(2, 2.4, 2);
                 sphereBounds = Collider.UpdateBounds(sphere, center);
                 sphere.Transform = center;
                 //MessageBox.Show("X = " + sphere.Content.Bounds.X + " y = " + sphere.Content.Bounds.Y + " Z = " + sphere.Content.Bounds.Z);
@@ -141,7 +141,7 @@ namespace FramworkFor3D.Commands
                     //transformGroup.Children.Add(rotate);
                     obj.Rotate(90, new Vector3D(1, 0, 0));
                     transformGroup.Children.Add(obj.Transform);
-                    TranslateTransform3D center = new TranslateTransform3D(2, 2.4, 1.2);
+                    TranslateTransform3D center = new TranslateTransform3D(2, 2.4, 0);
 
                     transformGroup.Children.Add(center);
                     //obj.Translate(new Vector3D(0, 0, 1));
@@ -188,11 +188,17 @@ namespace FramworkFor3D.Commands
             applyPhisycs.Header = "Apply Physics";
             MenuItem rigidBody = new MenuItem();
             rigidBody.Header = "Rigid Body";
+            MenuItem solidBody = new MenuItem();
+            solidBody.Header = "Solid Body";
+            MenuItem elasticBody = new MenuItem();
+            elasticBody.Header = "Elastic Body";
+            rigidBody.Items.Add(solidBody);
+            rigidBody.Items.Add(elasticBody);
             applyPhisycs.Items.Add(rigidBody);
 
 
             delete.Click += (s, ev) => Delete(s, ev, environment, objInteractive);
-            rigidBody.Click += (s, ev) => Rigid(s, ev, environment, objInteractive);
+            rigidBody.Click += (s, ev) => Solid(s, ev, environment, objInteractive);
             addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment, objInteractive);
             context.Items.Add(delete);
             context.Items.Add(addMaterial);
@@ -225,12 +231,19 @@ namespace FramworkFor3D.Commands
             applyPhisycs.Header = "Apply Physics";
             MenuItem rigidBody= new MenuItem();
             rigidBody.Header = "Rigid Body";
+            MenuItem solidBody = new MenuItem();
+            solidBody.Header = "Solid Body";
+            MenuItem elasticBody= new MenuItem();
+            elasticBody.Header = "Elastic Body";
+            rigidBody.Items.Add(solidBody);
+            rigidBody.Items.Add(elasticBody);
             applyPhisycs.Items.Add(rigidBody);
 
             
             delete.Click += (s, ev) => Delete(s, ev, environment, cubeInteractive);
-            rigidBody.Click += (s, ev) => Rigid(s, ev, environment,cubeInteractive);
+           solidBody.Click += (s, ev) => Solid(s, ev, environment,cubeInteractive);
             addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment,cubeInteractive);
+            elasticBody.Click += (s, ev) => Elastic(s, ev, environment,cubeInteractive);
             context.Items.Add(delete);
             context.Items.Add(addMaterial);
             context.Items.Add(applyPhisycs);
@@ -240,12 +253,21 @@ namespace FramworkFor3D.Commands
 
         }
 
+        private void Elastic(object s, RoutedEventArgs ev, Viewport3D environment, UIElement3D cubeInteractive)
+        {
+            
+            
+                _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(10);
+                rigid.StartBouncing(cubeInteractive);
+            
+        }
+
         private void SetMaterial(object s, RoutedEventArgs ev, Viewport3D environment,UIElement3D obj)
         {
             MessageBox.Show("Under development");
         }
 
-        private void Rigid(object s,RoutedEventArgs ev,Viewport3D environment,UIElement3D obj)
+        private void Solid(object s,RoutedEventArgs ev,Viewport3D environment,UIElement3D obj)
         {
             if (obj.Transform.Value.OffsetZ > 0&&sphereBounds!=null)
             {
@@ -284,12 +306,19 @@ namespace FramworkFor3D.Commands
             applyPhisycs.Header = "Apply Physics";
             MenuItem rigidBody = new MenuItem();
             rigidBody.Header = "Rigid Body";
+            MenuItem solidBody = new MenuItem();
+            solidBody.Header = "Solid Body";
+            MenuItem elasticBody = new MenuItem();
+            elasticBody.Header = "Elastic Body";
+            rigidBody.Items.Add(solidBody);
+            rigidBody.Items.Add(elasticBody);
             applyPhisycs.Items.Add(rigidBody);
 
 
             delete.Click += (s, ev) => Delete(s, ev, environment,sphereInteractive);
-            rigidBody.Click += (s, ev) => Rigid(s, ev, environment,sphereInteractive);
+            rigidBody.Click += (s, ev) => Solid(s, ev, environment,sphereInteractive);
             addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment, sphereInteractive);
+            elasticBody.Click += (s, ev) => Elastic(s, ev, environment, sphereInteractive);
             context.Items.Add(delete);
             context.Items.Add(addMaterial);
             context.Items.Add(applyPhisycs);
