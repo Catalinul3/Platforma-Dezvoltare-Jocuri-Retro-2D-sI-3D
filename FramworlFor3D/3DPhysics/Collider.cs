@@ -17,8 +17,7 @@ namespace FramworkFor3D._3DPhysics
     {
        public static bool IsColliding(Rect3D bound1,Rect3D bound2)
         { 
-         // MessageBox.Show("Location object 1 = "+bound1.Location.ToString() +"\n Location object 2 = "+bound2.Location.ToString()
-              //+"\n Size object 1 = "+bound1.Size.ToString()+"\n Size object 2 = "+bound2.Size.ToString());
+
           return bound1.IntersectsWith(bound2);
          
             

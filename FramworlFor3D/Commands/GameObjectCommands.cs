@@ -76,7 +76,7 @@ namespace FramworkFor3D.Commands
                 cubeInteractive = InteractiveHelper.ConvertToUI(cube);
                 environment.Children.Add(cubeInteractive);
 
-                TranslateTransform3D center = new TranslateTransform3D(2, 2.4, 1.2);
+                TranslateTransform3D center = new TranslateTransform3D(1, 2.4, 0);
                 cube.Transform = center;
                 cubeBounds = Collider.UpdateBounds(cube, center);
                 
@@ -105,7 +105,7 @@ namespace FramworkFor3D.Commands
                 sphereInteractive = InteractiveHelper.ConvertToUI(sphere);
 
                 environment.Children.Add(sphereInteractive);
-                TranslateTransform3D center = new TranslateTransform3D(2, 2.4, 2);
+                TranslateTransform3D center = new TranslateTransform3D(3, 2.4, 0.3);
                 sphereBounds = Collider.UpdateBounds(sphere, center);
                 sphere.Transform = center;
                 //MessageBox.Show("X = " + sphere.Content.Bounds.X + " y = " + sphere.Content.Bounds.Y + " Z = " + sphere.Content.Bounds.Z);
@@ -235,8 +235,11 @@ namespace FramworkFor3D.Commands
             solidBody.Header = "Solid Body";
             MenuItem elasticBody= new MenuItem();
             elasticBody.Header = "Elastic Body";
+            MenuItem addForce = new MenuItem();
+            addForce.Header = "Add Force";
             rigidBody.Items.Add(solidBody);
             rigidBody.Items.Add(elasticBody);
+            applyPhisycs.Items.Add(addForce);
             applyPhisycs.Items.Add(rigidBody);
 
             
@@ -244,6 +247,7 @@ namespace FramworkFor3D.Commands
            solidBody.Click += (s, ev) => Solid(s, ev, environment,cubeInteractive);
             addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment,cubeInteractive);
             elasticBody.Click += (s, ev) => Elastic(s, ev, environment,cubeInteractive);
+            addForce.Click +=(s,ev)=> Force(s,ev,environment,cubeInteractive,sphereInteractive);
             context.Items.Add(delete);
             context.Items.Add(addMaterial);
             context.Items.Add(applyPhisycs);
@@ -253,12 +257,27 @@ namespace FramworkFor3D.Commands
 
         }
 
-        private void Elastic(object s, RoutedEventArgs ev, Viewport3D environment, UIElement3D cubeInteractive)
+        private void Force(object s, RoutedEventArgs ev, Viewport3D environment, UIElement3D cubeInteractive,UIElement3D objElement)
+        {
+            _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(1);
+            //trebuie sa ecsiste doua corpuri pentru a aplica forta ( cubul va avea fi cel care se va ciocni <deci va produce o forta>
+            //, iar sfera va fi afectata de ciocnire<va fi aplicata o forta>)
+            if(!cubeBounds.IsEmpty&&!sphereBounds.IsEmpty)
+            {
+               
+                rigid.StartForce(cubeBounds, sphereBounds,cubeInteractive,objElement);
+            }
+        }
+
+      
+
+        private void Elastic(object s, RoutedEventArgs ev, Viewport3D environment, UIElement3D obj)
         {
             
             
                 _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(10);
-                rigid.StartBouncing(cubeInteractive);
+                  
+                rigid.StartBouncing(obj,rigid.Mass);
             
         }
 

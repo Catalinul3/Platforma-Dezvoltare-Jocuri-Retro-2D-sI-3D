@@ -68,8 +68,19 @@ namespace FramworkFor3D._3DObjects
                 this._position = value;
             }
         }
- 
 
+        private _3DPhysics.RigidBody body;
+        public _3DPhysics.RigidBody Body
+        {
+            get
+            {
+                return body;
+            }
+            set
+            {
+                this.body = value;
+            }
+        }
 
         #endregion
 
@@ -187,6 +198,7 @@ namespace FramworkFor3D._3DObjects
           
             
             Content = cubeForm.Content;
+           Body = new _3DPhysics.RigidBody(1);
 
 
 
