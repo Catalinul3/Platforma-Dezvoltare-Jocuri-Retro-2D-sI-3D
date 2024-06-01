@@ -140,17 +140,24 @@ namespace FramworkFor3D._3DPhysics
             time_elapsed +=(float)timer.Interval.TotalSeconds;
 
             jumpingDirection += (float)jumpVelocity * 0.5f * gravity_acceleration * time_elapsed * time_elapsed;
-            //Transform3DGroup transformationGroup = new Transform3DGroup();
+            Transform3DGroup transformationGroup = new Transform3DGroup();
+            ModelVisual3D objectModel = InteractiveHelper.ConvertToModel(obj);
+            Irregular3DObject irregular = new Irregular3DObject(objectModel);
+            if (irregular != null)
+            {
+                irregular.Rotate(90, new Vector3D(1, 0, 0));
+                transformationGroup.Children.Add(irregular.Transform);
+            }
             TranslateTransform3D jump = new TranslateTransform3D();
             jump.OffsetZ = jumpingDirection;
           
             jump.OffsetX = obj.Transform.Value.OffsetX;
             jump.OffsetY = obj.Transform.Value.OffsetY;
-            //transformationGroup.Children.Add(falling);
-            obj.Transform = jump;
+            transformationGroup.Children.Add(jump);
+            obj.Transform = transformationGroup;
 
             
-            ModelVisual3D objectModel = InteractiveHelper.ConvertToModel(obj);
+           
             Bound = Collider.UpdateBounds(objectModel, jump);
             
             if (jumpVelocity<=0.0f)
@@ -180,20 +187,27 @@ namespace FramworkFor3D._3DPhysics
             //formula pentru cadere libera a lui Newton dar fara viteza intiala si altitudine initiala obiectului
             float jump = 0;
             fallingDirection -= (float)(mass * 0.5f * gravity_acceleration * time_elapsed * time_elapsed);
-            //Transform3DGroup transformationGroup = new Transform3DGroup();
+            Transform3DGroup transformationGroup = new Transform3DGroup();
 
             //transformationGroup.Children.Add(falling);
-
+            ModelVisual3D objectModel = InteractiveHelper.ConvertToModel(obj);
+            Irregular3DObject irregular = new Irregular3DObject(objectModel);
+            if (irregular != null)
+            {
+                irregular.Rotate(90, new Vector3D(1, 0, 0));
+                transformationGroup.Children.Add(irregular.Transform);
+            }
             TranslateTransform3D falling = new TranslateTransform3D();
             falling.OffsetZ = fallingDirection;
 
             falling.OffsetX = obj.Transform.Value.OffsetX;
             falling.OffsetY = obj.Transform.Value.OffsetY;
-            //transformationGroup.Children.Add(falling);
-            obj.Transform = falling;
-            ModelVisual3D objectModel = InteractiveHelper.ConvertToModel(obj);
+            transformationGroup.Children.Add(falling);
+            obj.Transform = transformationGroup;
+       
             Bound = Collider.UpdateBounds(objectModel, falling);
-
+       
+         
             if (obj.Transform.Value.OffsetZ <= 0.3f)
             {
               jumpVelocity*=restitution;
