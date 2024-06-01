@@ -55,24 +55,15 @@ namespace FramworkFor3D._3DPhysics
         {
             this.mass = mass;
 
-
-
         }
         public void Start(UIElement3D obj)
         {
-
-
-
             timer = new DispatcherTimer(DispatcherPriority.Normal);
             timer.Interval = TimeSpan.FromMilliseconds(1);
             timer.Tick += (s, e) => Fall(s, e, obj);
             timer.Start();
 
-
-
         }
-
-
 
         public void Fall(object sender, EventArgs e, UIElement3D obj)
         {
@@ -165,16 +156,13 @@ namespace FramworkFor3D._3DPhysics
                 Stop();
                 time_elapsed = 0;
                 StartBouncing(obj,mass);
-                
-               
+                              
             }
             else
             {
                 jumpVelocityCopied -= 1;
             }
           
-         
-
         }
 
         private void Bounce(object s, EventArgs e, UIElement3D obj,float mass)
@@ -251,6 +239,9 @@ namespace FramworkFor3D._3DPhysics
              obj.Transform=move;
             ModelVisual3D objectModel = InteractiveHelper.ConvertToModel(obj);
             Bound = Collider.UpdateBounds(objectModel, move);
+            objWithForce= Collider.UpdateColliderObject(objWithForce, move);
+            Bound = objWithForce;
+            
              if(Collider.IsColliding(Bound,objApplyForce))
             {
                 float forcePower = (float)obj2.Transform.Value.OffsetX;
@@ -299,9 +290,6 @@ namespace FramworkFor3D._3DPhysics
             //MessageBox.Show("Distance: " + distance);
             return distance;
         }
-
-
-
 
     }
 }

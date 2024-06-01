@@ -75,7 +75,7 @@ namespace FramworkFor3D.Commands
                 cubeInteractive = InteractiveHelper.ConvertToUI(cube);
                 environment.Children.Add(cubeInteractive);
 
-                TranslateTransform3D center = new TranslateTransform3D(1, 2.4, 1.3);
+                TranslateTransform3D center = new TranslateTransform3D(1, 2.4, 0.1);
                 cube.Transform = center;
                 cubeBounds = Collider.UpdateBounds(cube, center);
                 
@@ -104,7 +104,7 @@ namespace FramworkFor3D.Commands
                 sphereInteractive = InteractiveHelper.ConvertToUI(sphere);
 
                 environment.Children.Add(sphereInteractive);
-                TranslateTransform3D center = new TranslateTransform3D(3, 2.4, 1.3);
+                TranslateTransform3D center = new TranslateTransform3D(3, 2.4, 0.3);
                 sphereBounds = Collider.UpdateBounds(sphere, center);
                 sphere.Transform = center;
                 //MessageBox.Show("X = " + sphere.Content.Bounds.X + " y = " + sphere.Content.Bounds.Y + " Z = " + sphere.Content.Bounds.Z);
@@ -140,7 +140,7 @@ namespace FramworkFor3D.Commands
                     //transformGroup.Children.Add(rotate);
                     obj.Rotate(90, new Vector3D(1, 0, 0));
                     transformGroup.Children.Add(obj.Transform);
-                    TranslateTransform3D center = new TranslateTransform3D(2, 2.4, 1.3);
+                    TranslateTransform3D center = new TranslateTransform3D(1, 2.4, 1.3);
 
                     transformGroup.Children.Add(center);
                     //obj.Translate(new Vector3D(0, 0, 1));
@@ -237,6 +237,12 @@ namespace FramworkFor3D.Commands
             elasticBody.Header = "Elastic Body";
             MenuItem addForce = new MenuItem();
             addForce.Header = "Add Force";
+            MenuItem collider = new MenuItem();
+            collider.Header = "Collider";
+            MenuItem colliderModify = new MenuItem();
+            colliderModify.Header = "Modify Collider";
+            collider.Items.Add(colliderModify);
+
             rigidBody.Items.Add(solidBody);
             rigidBody.Items.Add(elasticBody);
             applyPhisycs.Items.Add(addForce);
@@ -248,12 +254,26 @@ namespace FramworkFor3D.Commands
             addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment,cubeInteractive);
             elasticBody.Click += (s, ev) => Elastic(s, ev, environment,cubeInteractive);
             addForce.Click +=(s,ev)=> Force(s,ev,environment,cubeInteractive,sphereInteractive);
+            colliderModify.Click += (s, ev) => ModifyCollider(s, ev, environment, cubeInteractive);
             context.Items.Add(delete);
             context.Items.Add(addMaterial);
             context.Items.Add(applyPhisycs);
+            context.Items.Add(collider);
             context.IsOpen = true;
           
             #endregion
+            
+        }
+
+        private void ModifyCollider(object s, RoutedEventArgs ev, Viewport3D environment, UIElement3D obj)
+        {
+            ModelVisual3D objectModel = InteractiveHelper.ConvertToModel(obj);
+            cubeBounds = ObjectCollider.getCurrentObjectCollider(objectModel);
+            MessageBox.Show("X = " + cubeBounds.SizeX + " y = " + cubeBounds.Y + " Z = " + cubeBounds.Z);
+            cubeBounds =ObjectCollider.modifyObjectBounds(objectModel, 1);
+            MessageBox.Show("X = " + cubeBounds.SizeX + " y = " + cubeBounds.Y + " Z = " + cubeBounds.Z);
+
+
 
         }
 
@@ -262,6 +282,7 @@ namespace FramworkFor3D.Commands
             _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(1);
             //trebuie sa ecsiste doua corpuri pentru a aplica forta ( cubul va avea fi cel care se va ciocni <deci va produce o forta>
             //, iar sfera va fi afectata de ciocnire<va fi aplicata o forta>)
+            
             if(!cubeBounds.IsEmpty&&!sphereBounds.IsEmpty)
             {
                

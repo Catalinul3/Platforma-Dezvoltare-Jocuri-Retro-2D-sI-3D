@@ -34,6 +34,18 @@ namespace FramworkFor3D._3DPhysics
                 SizeZ = obj.Content.Bounds.SizeZ,
             };
         }
+        public static Rect3D UpdateColliderObject(Rect3D objectBound,TranslateTransform3D translate)
+        {
+            return new Rect3D
+            {
+                X = objectBound.X + translate.OffsetX,
+                Y = objectBound.Y + translate.OffsetY,
+                Z = objectBound.Z + translate.OffsetZ,
+                SizeX = objectBound.SizeX,
+                SizeY = objectBound.SizeY,
+                SizeZ = objectBound.SizeZ,
+            };
+        }
         
 
     }
