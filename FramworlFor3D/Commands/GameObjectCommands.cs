@@ -7,7 +7,6 @@ using FramworkFor3D.helpers;
 using FramworkFor3D.Models;
 using FramworlFor3D.helpers;
 using FramworlFor3D.ViewModels;
-
 using RetroEngine.ViewModels;
 using SharpDX.Direct3D9;
 using System;
@@ -76,7 +75,7 @@ namespace FramworkFor3D.Commands
                 cubeInteractive = InteractiveHelper.ConvertToUI(cube);
                 environment.Children.Add(cubeInteractive);
 
-                TranslateTransform3D center = new TranslateTransform3D(1, 2.4, 0);
+                TranslateTransform3D center = new TranslateTransform3D(1, 2.4, 1.3);
                 cube.Transform = center;
                 cubeBounds = Collider.UpdateBounds(cube, center);
                 
@@ -105,7 +104,7 @@ namespace FramworkFor3D.Commands
                 sphereInteractive = InteractiveHelper.ConvertToUI(sphere);
 
                 environment.Children.Add(sphereInteractive);
-                TranslateTransform3D center = new TranslateTransform3D(3, 2.4, 0.3);
+                TranslateTransform3D center = new TranslateTransform3D(3, 2.4, 1.3);
                 sphereBounds = Collider.UpdateBounds(sphere, center);
                 sphere.Transform = center;
                 //MessageBox.Show("X = " + sphere.Content.Bounds.X + " y = " + sphere.Content.Bounds.Y + " Z = " + sphere.Content.Bounds.Z);
@@ -141,7 +140,7 @@ namespace FramworkFor3D.Commands
                     //transformGroup.Children.Add(rotate);
                     obj.Rotate(90, new Vector3D(1, 0, 0));
                     transformGroup.Children.Add(obj.Transform);
-                    TranslateTransform3D center = new TranslateTransform3D(2, 2.4, 0);
+                    TranslateTransform3D center = new TranslateTransform3D(2, 2.4, 1.3);
 
                     transformGroup.Children.Add(center);
                     //obj.Translate(new Vector3D(0, 0, 1));
@@ -199,7 +198,8 @@ namespace FramworkFor3D.Commands
 
             delete.Click += (s, ev) => Delete(s, ev, environment, objInteractive);
             rigidBody.Click += (s, ev) => Solid(s, ev, environment, objInteractive);
-            addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment, objInteractive);
+            elasticBody.Click += (s, ev) => Elastic(s, ev, environment, objInteractive);
+                addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment, objInteractive);
             context.Items.Add(delete);
             context.Items.Add(addMaterial);
             context.Items.Add(applyPhisycs);
@@ -288,10 +288,10 @@ namespace FramworkFor3D.Commands
 
         private void Solid(object s,RoutedEventArgs ev,Viewport3D environment,UIElement3D obj)
         {
-            if (obj.Transform.Value.OffsetZ > 0&&sphereBounds!=null)
+            if (obj.Transform.Value.OffsetZ > 0)
             {
                 _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(10);
-                rigid.Start(obj, sphereBounds);
+                rigid.Start(obj);
             }
          
         }
@@ -332,8 +332,6 @@ namespace FramworkFor3D.Commands
             rigidBody.Items.Add(solidBody);
             rigidBody.Items.Add(elasticBody);
             applyPhisycs.Items.Add(rigidBody);
-
-
             delete.Click += (s, ev) => Delete(s, ev, environment,sphereInteractive);
             rigidBody.Click += (s, ev) => Solid(s, ev, environment,sphereInteractive);
             addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment, sphereInteractive);
@@ -342,13 +340,9 @@ namespace FramworkFor3D.Commands
             context.Items.Add(addMaterial);
             context.Items.Add(applyPhisycs);
             context.IsOpen = true;
-
             #endregion
-
         
         }
-
-   
         #endregion
     }
 }

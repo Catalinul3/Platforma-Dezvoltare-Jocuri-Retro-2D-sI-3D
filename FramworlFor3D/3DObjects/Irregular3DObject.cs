@@ -35,7 +35,10 @@ namespace FramworkFor3D._3DObjects
         {
             read3dObject(fileName);
         }
-
+        public Irregular3DObject(ModelVisual3D obj)
+        {
+            this.Content= obj.Content;
+        }
 
         #region Parse Data
         private void read3dObject(string filePath)
