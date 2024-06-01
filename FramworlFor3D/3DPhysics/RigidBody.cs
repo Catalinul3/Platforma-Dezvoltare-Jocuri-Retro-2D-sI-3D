@@ -240,13 +240,22 @@ namespace FramworkFor3D._3DPhysics
             time_elapsed += (float)timer.Interval.TotalSeconds;
 
             forceOrientation += (float)(mass * time_elapsed * time_elapsed);
+            Transform3DGroup transformationGroup = new Transform3DGroup();
             TranslateTransform3D move = new TranslateTransform3D();
+            ModelVisual3D objectModel = InteractiveHelper.ConvertToModel(obj);
+            Irregular3DObject irregular = new Irregular3DObject(objectModel);
+            if (irregular != null)
+            {
+                irregular.Rotate(90, new Vector3D(1, 0, 0));
+                transformationGroup.Children.Add(irregular.Transform);
+            }
             move.OffsetX = forceOrientation;
             move.OffsetY = obj.Transform.Value.OffsetY;
             move.OffsetZ = obj.Transform.Value.OffsetZ;
-            obj.Transform = move;
-            ModelVisual3D objectModel = InteractiveHelper.ConvertToModel(obj);
-            Bound=Collider.UpdateBounds(objectModel,move);
+            transformationGroup.Children.Add(move);
+            obj.Transform = transformationGroup;
+        
+            Bound =Collider.UpdateBounds(objectModel,move);
             objWithForce = Collider.UpdateColliderObject(objWithForce, move);
             Bound = objWithForce;
             if (Collider.IsColliding(Bound, objApplyForce))
@@ -271,11 +280,22 @@ namespace FramworkFor3D._3DPhysics
         
             forceOrientation += (float)(mass * time_elapsed * time_elapsed);
             TranslateTransform3D move= new TranslateTransform3D();
-              move.OffsetX= forceOrientation;
-                move.OffsetY=obj.Transform.Value.OffsetY;
-            move.OffsetZ=obj.Transform.Value.OffsetZ;
-             obj.Transform=move;
+            Transform3DGroup transformationGroup = new Transform3DGroup();
+         
             ModelVisual3D objectModel = InteractiveHelper.ConvertToModel(obj);
+            Irregular3DObject irregular = new Irregular3DObject(objectModel);
+            if (irregular != null)
+            {
+                irregular.Rotate(90, new Vector3D(1, 0, 0));
+                transformationGroup.Children.Add(irregular.Transform);
+            }
+            move.OffsetX = forceOrientation;
+            move.OffsetY = obj.Transform.Value.OffsetY;
+            move.OffsetZ = obj.Transform.Value.OffsetZ;
+            transformationGroup.Children.Add(move);
+            obj.Transform = transformationGroup;
+           
+     
             
             Bound = Collider.UpdateBounds(objectModel, move);
           

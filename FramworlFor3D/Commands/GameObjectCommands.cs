@@ -202,17 +202,21 @@ namespace FramworkFor3D.Commands
             rigidBody.Items.Add(solidBody);
             rigidBody.Items.Add(elasticBody);
             applyPhisycs.Items.Add(rigidBody);
+            applyPhisycs.Items.Add(addForce);
+            applyPhisycs.Items.Add(collider);
 
 
             delete.Click += (s, ev) => Delete(s, ev, environment, objInteractive);
             rigidBody.Click += (s, ev) => Solid(s, ev, environment, objInteractive);
             elasticBody.Click += (s, ev) => Elastic(s, ev, environment, objInteractive);
-                addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment, objInteractive);
+            addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment, objInteractive);
+            addForce.Click += (s, ev) => Force(s, ev, environment, objInteractive, sphereInteractive);
+            colliderModify.Click += (s, ev) => ModifyCollider(s, ev, environment, objInteractive);
             context.Items.Add(delete);
             context.Items.Add(addMaterial);
             context.Items.Add(applyPhisycs);
-            context.Items.Add(addForce);
-            context.Items.Add(collider);
+
+
             context.IsOpen = true;
             #endregion
         }
@@ -255,6 +259,8 @@ namespace FramworkFor3D.Commands
             rigidBody.Items.Add(solidBody);
             rigidBody.Items.Add(elasticBody);
             applyPhisycs.Items.Add(rigidBody);
+            applyPhisycs.Items.Add(addForce);
+            applyPhisycs.Items.Add(collider);
 
 
             delete.Click += (s, ev) => Delete(s, ev, environment, cubeInteractive);
@@ -266,12 +272,9 @@ namespace FramworkFor3D.Commands
             context.Items.Add(delete);
             context.Items.Add(addMaterial);
             context.Items.Add(applyPhisycs);
-            context.Items.Add(addForce);
-            context.Items.Add(collider);
-            context.IsOpen = true;
-
-
-       
+          
+           
+            context.IsOpen = true;    
           
             #endregion
             
@@ -353,7 +356,6 @@ namespace FramworkFor3D.Commands
                 }
             }
             #region Context Menu
-
             ContextMenu context = new ContextMenu();
             MenuItem delete = new MenuItem();
             delete.Header = "Delete";
@@ -367,19 +369,34 @@ namespace FramworkFor3D.Commands
             solidBody.Header = "Solid Body";
             MenuItem elasticBody = new MenuItem();
             elasticBody.Header = "Elastic Body";
+            MenuItem addForce = new MenuItem();
+            addForce.Header = "Add Force";
+            MenuItem collider = new MenuItem();
+            collider.Header = "Collider";
+            MenuItem colliderModify = new MenuItem();
+            colliderModify.Header = "Modify Collider";
+            collider.Items.Add(colliderModify);
             rigidBody.Items.Add(solidBody);
             rigidBody.Items.Add(elasticBody);
             applyPhisycs.Items.Add(rigidBody);
-            delete.Click += (s, ev) => Delete(s, ev, environment,sphereInteractive);
-            rigidBody.Click += (s, ev) => Solid(s, ev, environment,sphereInteractive);
-            addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment, sphereInteractive);
+            applyPhisycs.Items.Add(addForce);
+            applyPhisycs.Items.Add(collider);
+
+
+            delete.Click += (s, ev) => Delete(s, ev, environment, sphereInteractive);
+            rigidBody.Click += (s, ev) => Solid(s, ev, environment, sphereInteractive);
             elasticBody.Click += (s, ev) => Elastic(s, ev, environment, sphereInteractive);
+            addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment, sphereInteractive);
+            addForce.Click += (s, ev) => Force(s, ev, environment, sphereInteractive, sphereInteractive);
+            colliderModify.Click += (s, ev) => ModifyCollider(s, ev, environment, sphereInteractive);
             context.Items.Add(delete);
             context.Items.Add(addMaterial);
             context.Items.Add(applyPhisycs);
+
+
             context.IsOpen = true;
             #endregion
-        
+
         }
         #endregion
     }
