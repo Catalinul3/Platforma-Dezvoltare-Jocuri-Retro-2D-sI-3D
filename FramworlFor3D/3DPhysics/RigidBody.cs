@@ -226,6 +226,44 @@ namespace FramworkFor3D._3DPhysics
             timer.Tick += (s, e) => AddForce( s, e,objWithForce,objApplyForce,obj,obj2);
             timer.Start();
         }
+        public void StartForceWithUserCollider(Rect3D objWithForce, Rect3D objApplyForce, UIElement3D obj, UIElement3D obj2)
+        {
+            timer = new DispatcherTimer(DispatcherPriority.Normal);
+            timer.Interval = TimeSpan.FromMilliseconds(1);
+            timer.Tick += (s, e) => AddForceUser(s, e, objWithForce, objApplyForce, obj, obj2);
+            timer.Start();
+        }
+        public void AddForceUser(object s, EventArgs e, Rect3D objWithForce, Rect3D objApplyForce, UIElement3D obj, UIElement3D obj2)
+        {
+            float forceOrientation = (float)obj.Transform.Value.OffsetX;
+            float distance = getDistance(Bound, objApplyForce);
+            time_elapsed += (float)timer.Interval.TotalSeconds;
+
+            forceOrientation += (float)(mass * time_elapsed * time_elapsed);
+            TranslateTransform3D move = new TranslateTransform3D();
+            move.OffsetX = forceOrientation;
+            move.OffsetY = obj.Transform.Value.OffsetY;
+            move.OffsetZ = obj.Transform.Value.OffsetZ;
+            obj.Transform = move;
+            ModelVisual3D objectModel = InteractiveHelper.ConvertToModel(obj);
+            Bound=Collider.UpdateBounds(objectModel,move);
+            objWithForce = Collider.UpdateColliderObject(objWithForce, move);
+            Bound = objWithForce;
+            if (Collider.IsColliding(Bound, objApplyForce))
+            {
+                float forcePower = (float)obj2.Transform.Value.OffsetX;
+                float velocity = (float)(distance / time_elapsed);
+                float acceleration = (float)(velocity / time_elapsed);
+                float force = (float)(mass * acceleration);
+                forcePower += force / 100;
+                Stop();
+                StartFriction(obj2, forcePower, velocity);
+
+
+            }
+
+
+        }
         public void AddForce(object s, EventArgs e, Rect3D objWithForce, Rect3D objApplyForce,UIElement3D obj,UIElement3D obj2)
         {   float forceOrientation=(float)obj.Transform.Value.OffsetX;
             float distance = getDistance(Bound, objApplyForce);
@@ -238,10 +276,9 @@ namespace FramworkFor3D._3DPhysics
             move.OffsetZ=obj.Transform.Value.OffsetZ;
              obj.Transform=move;
             ModelVisual3D objectModel = InteractiveHelper.ConvertToModel(obj);
-            Bound = Collider.UpdateBounds(objectModel, move);
-            objWithForce= Collider.UpdateColliderObject(objWithForce, move);
-            Bound = objWithForce;
             
+            Bound = Collider.UpdateBounds(objectModel, move);
+          
              if(Collider.IsColliding(Bound,objApplyForce))
             {
                 float forcePower = (float)obj2.Transform.Value.OffsetX;

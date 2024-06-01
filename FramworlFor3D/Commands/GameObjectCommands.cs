@@ -51,6 +51,7 @@ namespace FramworkFor3D.Commands
         UIElement3D cubeInteractive, sphereInteractive, objInteractive;
         DispatcherTimer timer;
         Rect3D cubeBounds,sphereBounds, objBounds;
+        bool collider = false;
 
         #region Create Models 
         public RelayCommand add3DCube
@@ -75,7 +76,7 @@ namespace FramworkFor3D.Commands
                 cubeInteractive = InteractiveHelper.ConvertToUI(cube);
                 environment.Children.Add(cubeInteractive);
 
-                TranslateTransform3D center = new TranslateTransform3D(1, 2.4, 0.1);
+                TranslateTransform3D center = new TranslateTransform3D(1, 2.3, 0.1);
                 cube.Transform = center;
                 cubeBounds = Collider.UpdateBounds(cube, center);
                 
@@ -191,6 +192,13 @@ namespace FramworkFor3D.Commands
             solidBody.Header = "Solid Body";
             MenuItem elasticBody = new MenuItem();
             elasticBody.Header = "Elastic Body";
+            MenuItem addForce = new MenuItem();
+            addForce.Header = "Add Force";
+            MenuItem collider = new MenuItem();
+            collider.Header = "Collider";
+            MenuItem colliderModify = new MenuItem();
+            colliderModify.Header = "Modify Collider";
+            collider.Items.Add(colliderModify);
             rigidBody.Items.Add(solidBody);
             rigidBody.Items.Add(elasticBody);
             applyPhisycs.Items.Add(rigidBody);
@@ -203,6 +211,8 @@ namespace FramworkFor3D.Commands
             context.Items.Add(delete);
             context.Items.Add(addMaterial);
             context.Items.Add(applyPhisycs);
+            context.Items.Add(addForce);
+            context.Items.Add(collider);
             context.IsOpen = true;
             #endregion
         }
@@ -221,7 +231,7 @@ namespace FramworkFor3D.Commands
                
             }
             #region Context Menu
-            
+
             ContextMenu context = new ContextMenu();
             MenuItem delete = new MenuItem();
             delete.Header = "Delete";
@@ -229,11 +239,11 @@ namespace FramworkFor3D.Commands
             addMaterial.Header = "Add Material";
             MenuItem applyPhisycs = new MenuItem();
             applyPhisycs.Header = "Apply Physics";
-            MenuItem rigidBody= new MenuItem();
+            MenuItem rigidBody = new MenuItem();
             rigidBody.Header = "Rigid Body";
             MenuItem solidBody = new MenuItem();
             solidBody.Header = "Solid Body";
-            MenuItem elasticBody= new MenuItem();
+            MenuItem elasticBody = new MenuItem();
             elasticBody.Header = "Elastic Body";
             MenuItem addForce = new MenuItem();
             addForce.Header = "Add Force";
@@ -242,24 +252,26 @@ namespace FramworkFor3D.Commands
             MenuItem colliderModify = new MenuItem();
             colliderModify.Header = "Modify Collider";
             collider.Items.Add(colliderModify);
-
             rigidBody.Items.Add(solidBody);
             rigidBody.Items.Add(elasticBody);
-            applyPhisycs.Items.Add(addForce);
             applyPhisycs.Items.Add(rigidBody);
 
-            
+
             delete.Click += (s, ev) => Delete(s, ev, environment, cubeInteractive);
-           solidBody.Click += (s, ev) => Solid(s, ev, environment,cubeInteractive);
+            rigidBody.Click += (s, ev) => Solid(s, ev, environment, cubeInteractive);
+            elasticBody.Click += (s, ev) => Elastic(s, ev, environment, cubeInteractive);
             addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment,cubeInteractive);
-            elasticBody.Click += (s, ev) => Elastic(s, ev, environment,cubeInteractive);
-            addForce.Click +=(s,ev)=> Force(s,ev,environment,cubeInteractive,sphereInteractive);
+            addForce.Click += (s, ev) => Force(s, ev, environment, cubeInteractive,sphereInteractive);
             colliderModify.Click += (s, ev) => ModifyCollider(s, ev, environment, cubeInteractive);
             context.Items.Add(delete);
             context.Items.Add(addMaterial);
             context.Items.Add(applyPhisycs);
+            context.Items.Add(addForce);
             context.Items.Add(collider);
             context.IsOpen = true;
+
+
+       
           
             #endregion
             
@@ -273,7 +285,7 @@ namespace FramworkFor3D.Commands
             cubeBounds =ObjectCollider.modifyObjectBounds(objectModel, 1);
             MessageBox.Show("X = " + cubeBounds.SizeX + " y = " + cubeBounds.Y + " Z = " + cubeBounds.Z);
 
-
+            collider = true;
 
         }
 
@@ -283,11 +295,16 @@ namespace FramworkFor3D.Commands
             //trebuie sa ecsiste doua corpuri pentru a aplica forta ( cubul va avea fi cel care se va ciocni <deci va produce o forta>
             //, iar sfera va fi afectata de ciocnire<va fi aplicata o forta>)
             
-            if(!cubeBounds.IsEmpty&&!sphereBounds.IsEmpty)
+            if(!cubeBounds.IsEmpty&&!sphereBounds.IsEmpty&&!collider)
             {
                
                 rigid.StartForce(cubeBounds, sphereBounds,cubeInteractive,objElement);
             }
+            if(collider)
+            {
+                rigid.StartForceWithUserCollider(cubeBounds, sphereBounds, cubeInteractive, objElement);
+            }
+
         }
 
       
