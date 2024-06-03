@@ -173,15 +173,23 @@ namespace FramworkFor3D.Commands
         #region Base Events
         private void ObjectPressed(object sender, MouseEventArgs e, Viewport3D environment)
         {
-            if (obj.Content is Model3DGroup model3Dgroup)
-            {
-                foreach (var model in model3Dgroup.Children)
-                {
-                    if (model is GeometryModel3D geometryModel)
-                    {
-                        geometryModel.Material = new DiffuseMaterial(Brushes.SaddleBrown);
+            Point mouse = e.GetPosition(environment);
+            var hitTestResult = VisualTreeHelper.HitTest(environment, mouse);
+            var clickedObject = hitTestResult.VisualHit as UIElement3D;
 
+            if (hitTestResult != null && hitTestResult.VisualHit is UIElement3D hit)
+            {
+                var hitModel = InteractiveHelper.ConvertToModel(hit);
+                if (hitModel.Content is Model3DGroup model3Dgroup)
+                {
+                    foreach (var model in model3Dgroup.Children)
+                    {
+                        if (model is GeometryModel3D geometryModel)
+                        {
+                            geometryModel.Material = new DiffuseMaterial(Brushes.Orange);
+                        }
                     }
+
                 }
             }
             #region Context Menu
@@ -212,12 +220,12 @@ namespace FramworkFor3D.Commands
             applyPhisycs.Items.Add(collider);
 
 
-            delete.Click += (s, ev) => Delete(s, ev, environment, objInteractive);
-            rigidBody.Click += (s, ev) => Solid(s, ev, environment, objInteractive,ObjectType.IRREGULAR);
-            elasticBody.Click += (s, ev) => Elastic(s, ev, environment, objInteractive,ObjectType.IRREGULAR);
-            addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment, objInteractive,ObjectType.IRREGULAR);
-            addForce.Click += (s, ev) => Force(s, ev, environment, objInteractive, sphereInteractive);
-            colliderModify.Click += (s, ev) => ModifyCollider(s, ev, environment, objInteractive);
+            delete.Click += (s, ev) => Delete(s, ev, environment, clickedObject);
+            rigidBody.Click += (s, ev) => Solid(s, ev, environment, clickedObject, ObjectType.IRREGULAR);
+            elasticBody.Click += (s, ev) => Elastic(s, ev, environment, clickedObject, ObjectType.IRREGULAR);
+            addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment, clickedObject, ObjectType.IRREGULAR);
+            addForce.Click += (s, ev) => Force(s, ev, environment, clickedObject, sphereInteractive);
+            colliderModify.Click += (s, ev) => ModifyCollider(s, ev, environment, clickedObject);
             context.Items.Add(delete);
             context.Items.Add(addMaterial);
             context.Items.Add(applyPhisycs);
@@ -354,8 +362,6 @@ namespace FramworkFor3D.Commands
 
         }
 
-      
-
         private void Elastic(object s, RoutedEventArgs ev, Viewport3D environment, UIElement3D obj,ObjectType type)
         {
 
@@ -420,17 +426,25 @@ namespace FramworkFor3D.Commands
             MessageBox.Show("Object deleted ");
         }
 
-        private void SpherePressed(object sender, RoutedEventArgs e, Viewport3D environment)
+        private void SpherePressed(object sender, MouseEventArgs e, Viewport3D environment)
         {
-            if (sphere.Content is Model3DGroup model3Dgroup)
-            {
-                foreach (var model in model3Dgroup.Children)
-                {
-                    if (model is GeometryModel3D geometryModel)
-                    {
-                        geometryModel.Material = new DiffuseMaterial(Brushes.Orange);
+            Point mouse = e.GetPosition(environment);
+            var hitTestResult = VisualTreeHelper.HitTest(environment, mouse);
+            var clickedSphere = hitTestResult.VisualHit as UIElement3D;
 
+            if (hitTestResult != null && hitTestResult.VisualHit is UIElement3D hit)
+            {
+                var hitModel = InteractiveHelper.ConvertToModel(hit);
+                if (hitModel.Content is Model3DGroup model3Dgroup)
+                {
+                    foreach (var model in model3Dgroup.Children)
+                    {
+                        if (model is GeometryModel3D geometryModel)
+                        {
+                            geometryModel.Material = new DiffuseMaterial(Brushes.Orange);
+                        }
                     }
+
                 }
             }
             #region Context Menu
@@ -461,12 +475,12 @@ namespace FramworkFor3D.Commands
             applyPhisycs.Items.Add(collider);
 
 
-            delete.Click += (s, ev) => Delete(s, ev, environment, sphereInteractive);
-            rigidBody.Click += (s, ev) => Solid(s, ev, environment, sphereInteractive,ObjectType.SPHERE);
-            elasticBody.Click += (s, ev) => Elastic(s, ev, environment, sphereInteractive, ObjectType.SPHERE);
-            addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment, sphereInteractive,ObjectType.SPHERE);
-            addForce.Click += (s, ev) => Force(s, ev, environment, sphereInteractive, sphereInteractive);
-            colliderModify.Click += (s, ev) => ModifyCollider(s, ev, environment, sphereInteractive);
+            delete.Click += (s, ev) => Delete(s, ev, environment, clickedSphere);
+            rigidBody.Click += (s, ev) => Solid(s, ev, environment, clickedSphere, ObjectType.SPHERE);
+            elasticBody.Click += (s, ev) => Elastic(s, ev, environment, clickedSphere, ObjectType.SPHERE);
+            addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment, clickedSphere, ObjectType.SPHERE);
+            addForce.Click += (s, ev) => Force(s, ev, environment, clickedSphere, sphereInteractive);
+            colliderModify.Click += (s, ev) => ModifyCollider(s, ev, environment, clickedSphere);
             context.Items.Add(delete);
             context.Items.Add(addMaterial);
             context.Items.Add(applyPhisycs);
