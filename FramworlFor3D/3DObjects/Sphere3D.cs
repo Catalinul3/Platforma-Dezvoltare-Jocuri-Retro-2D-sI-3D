@@ -1,5 +1,6 @@
 ﻿using Eco.ModelValidation;
 using FramworkFor3D.Based_Operations;
+using FramworkFor3D.helpers;
 using SVGImage.SVG.Shapes;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace FramworkFor3D._3DObjects
         private Point3DCollection vertices;
         private Vector3DCollection normals;
         private Int32Collection indices;
-
+        public const ObjectType type = ObjectType.SPHERE;
         #endregion
 
         public Sphere3D()
@@ -75,10 +76,6 @@ namespace FramworkFor3D._3DObjects
                         indices.Add(index2INT);
 
                         indices.Add(index3INT);
-
-
-
-
                     }
                 }
             }

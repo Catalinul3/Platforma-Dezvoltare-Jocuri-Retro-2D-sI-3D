@@ -28,6 +28,7 @@ namespace FramworkFor3D._3DObjects
     {
         #region Cube Morphology
         private Brush _color;
+
         public Brush color
         {
             get
@@ -41,22 +42,8 @@ namespace FramworkFor3D._3DObjects
         }
         public int size { get; set; }
         public Point3DCollection vertices { get; set; }
-        public Int32Collection indices { get; set; }
-        
+        public Int32Collection indices { get; set; }      
         private Vector3D _position { get; set; }
-
-        private float velocity { get; set; }
-        public float Velocity
-        {
-            get
-            {
-                return velocity;
-            }
-            set
-            {
-                this.velocity = value;
-            }
-        }
         public Vector3D position
         {
             get
@@ -69,18 +56,7 @@ namespace FramworkFor3D._3DObjects
             }
         }
 
-        private _3DPhysics.RigidBody body;
-        public _3DPhysics.RigidBody Body
-        {
-            get
-            {
-                return body;
-            }
-            set
-            {
-                this.body = value;
-            }
-        }
+      public const ObjectType type=ObjectType.CUBE;
 
         #endregion
 
@@ -92,7 +68,7 @@ namespace FramworkFor3D._3DObjects
             ModelVisual3D lightOfCube = new ModelVisual3D();
             size = 2;
             lightOfCube.Content = light;
-            velocity = 0f;
+           
           
             
 
@@ -194,25 +170,9 @@ namespace FramworkFor3D._3DObjects
 
             ModelVisual3D cubeForm = new ModelVisual3D();
             cubeForm.Content = lightAndGeometry;
-            position=new Vector3D(cubeForm.Transform.Value.OffsetX, cubeForm.Transform.Value.OffsetY, cubeForm.Transform.Value.OffsetZ);
-          
-            
+            position=new Vector3D(cubeForm.Transform.Value.OffsetX, cubeForm.Transform.Value.OffsetY, cubeForm.Transform.Value.OffsetZ);          
             Content = cubeForm.Content;
-           Body = new _3DPhysics.RigidBody(1);
-
-
-
-            //Apply physics to cube
-            
-
-
-        }
-
-       
-
-      
-        
-     
+        }   
         #endregion
 
         #region Based Transformation
@@ -246,7 +206,6 @@ namespace FramworkFor3D._3DObjects
                 this.Transform = translateTransform;
             }
         }
-
         public void Scale(Vector3D axis, double scaleFactor)
         {
             if (axis.X != null)
@@ -267,14 +226,6 @@ namespace FramworkFor3D._3DObjects
                 this.Transform = scale;
             }
         }
-
-       public void Fall(double velocity)
-        {
-            Vector3D translate = new Vector3D(0, 0, velocity);
-            TranslateTransform3D translateTransform = new TranslateTransform3D(translate);
-            this.Transform = translateTransform;
-        }
-       
 
         #endregion
 

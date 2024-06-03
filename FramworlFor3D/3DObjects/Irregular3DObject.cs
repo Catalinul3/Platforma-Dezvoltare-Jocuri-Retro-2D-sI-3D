@@ -1,16 +1,10 @@
-﻿using Eco.Report;
-using System;
-using System.Collections.Generic;
+﻿
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media.Media3D;
 using System.Windows.Media;
 using FramworkFor3D.Based_Operations;
 using System.Windows;
-using SharpDX.Direct3D9;
-using FramworkFor3D._3DPhysics;
+using FramworkFor3D.helpers;
 
 namespace FramworkFor3D._3DObjects
 {
@@ -22,13 +16,7 @@ namespace FramworkFor3D._3DObjects
         private Vector3DCollection normals;
         private Int32Collection indices;
         private PointCollection texture;
-        private MaterialGroup materialGroup;
-        private double mass;
-        private double volume;
-        private bool applyRigidBody;
-        
-        
-
+        private const ObjectType type = ObjectType.IRREGULAR;
 
         #endregion
         public Irregular3DObject(string fileName)
@@ -39,6 +27,7 @@ namespace FramworkFor3D._3DObjects
         {
             this.Content= obj.Content;
         }
+      
 
         #region Parse Data
         private void read3dObject(string filePath)
@@ -241,12 +230,9 @@ namespace FramworkFor3D._3DObjects
 
                                 }
                             }
-
-
                         }
                     }
                 }
-
 
             }
 
@@ -264,11 +250,7 @@ namespace FramworkFor3D._3DObjects
             //    vertices[i] = scaledPosition;
             //}
             mesh.Positions = vertices;
-          
-            //ajustam greutatea in functie de volum, iar volumul il calculam pe baza varfurilor si a indicilor ce formeaza fata
-           
-
-
+         
             DiffuseMaterial material = new DiffuseMaterial();
             material.Brush = Brushes.LightGray;
 
@@ -277,15 +259,8 @@ namespace FramworkFor3D._3DObjects
             lightAndGeometry.Children.Add(lightOfIrregular.Content);
             lightAndGeometry.Children.Add(model);
             ModelVisual3D irregular = new ModelVisual3D();
-
-
-
             irregular.Content = lightAndGeometry;
-
-            
-           
-
-            Content = irregular.Content;
+           Content = irregular.Content;
 
         }
         #endregion
@@ -344,9 +319,5 @@ namespace FramworkFor3D._3DObjects
         }
     }
     #endregion
-
-    
-
-
 
 }

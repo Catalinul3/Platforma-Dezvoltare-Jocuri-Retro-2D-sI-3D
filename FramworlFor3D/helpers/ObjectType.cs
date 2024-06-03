@@ -8,8 +8,7 @@ namespace FramworkFor3D.helpers
 {
     public enum ObjectType
     {CUBE,
-     PLANE,
      SPHERE,
-     OTHER
+     IRREGULAR
     }
 }

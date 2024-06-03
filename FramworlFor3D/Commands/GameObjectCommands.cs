@@ -1,28 +1,19 @@
-﻿using BulletSharp.SoftBody;
+﻿
 using BulletSharp;
-using Eco.UmlRt;
 using FramworkFor3D._3DObjects;
 using FramworkFor3D._3DPhysics;
 using FramworkFor3D.helpers;
-using FramworkFor3D.Models;
 using FramworlFor3D.helpers;
 using FramworlFor3D.ViewModels;
 using RetroEngine.ViewModels;
-using SharpDX.Direct3D9;
-using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Media.Media3D;
-using System.Windows.Shapes;
-using static System.Formats.Asn1.AsnWriter;
+
 using System.Windows.Threading;
 
 
@@ -31,12 +22,26 @@ namespace FramworkFor3D.Commands
     public class GameObjectCommands : BaseVM
     {
         private readonly MainVM _mainVM;
+        private List<UIElement3D> _objects;
+        public List<UIElement3D> objects
+        {
+            get
+            {
+                return _objects;
+            }
+            set
+            {
+                _objects = value;
 
-        private DiscreteDynamicsWorld _world;
-        private DispatcherTimer _renderTimer;
+            }
+        }
+
+
+
         public GameObjectCommands(MainVM mainVM)
         {
             _mainVM = mainVM;
+            _objects = new List<UIElement3D>();
 
 
         }
@@ -45,13 +50,16 @@ namespace FramworkFor3D.Commands
         private RelayCommand _add3DOther;
         private Irregular3DObject obj;
 
-
+   
+      
         Cube3D cube;
         Sphere3D sphere;
         UIElement3D cubeInteractive, sphereInteractive, objInteractive;
         DispatcherTimer timer;
         Rect3D cubeBounds,sphereBounds, objBounds;
         bool collider = false;
+        bool isPressed = false;
+         DiffuseMaterial defaultMaterial = new DiffuseMaterial(Brushes.Gray);
 
         #region Create Models 
         public RelayCommand add3DCube
@@ -74,18 +82,20 @@ namespace FramworkFor3D.Commands
                 
 
                 cubeInteractive = InteractiveHelper.ConvertToUI(cube);
-                environment.Children.Add(cubeInteractive);
+                UIElement3D newCubeInteractive = cubeInteractive; 
+                environment.Children.Add(newCubeInteractive);
 
-                TranslateTransform3D center = new TranslateTransform3D(1, 2.3, 0.1);
+                TranslateTransform3D center = new TranslateTransform3D(3, 2.3, 1.1);
                 cube.Transform = center;
                 cubeBounds = Collider.UpdateBounds(cube, center);
                 
-               // MessageBox.Show("X = " + cube.Content.Bounds.SizeX + " y = " + cube.Content.Bounds.Y + " Z = " + cube.Content.Bounds.Z);
-
+               
                 cube.position = new Vector3D(center.OffsetX, center.OffsetY, center.OffsetZ);
-                cubeInteractive.MouseRightButtonDown += (s, e) => CubePressed(s, e, environment);
-                cubeInteractive.Transform = center;
+                newCubeInteractive.MouseRightButtonDown += (s, e) => CubePressed(s, e, environment);
+                newCubeInteractive.Transform = center;
+                objects.Add(newCubeInteractive);
             }
+            MessageBox.Show("Scene has " + objects.Count + " objects");
         }
         public RelayCommand add3DSphere
         {
@@ -105,14 +115,14 @@ namespace FramworkFor3D.Commands
                 sphereInteractive = InteractiveHelper.ConvertToUI(sphere);
 
                 environment.Children.Add(sphereInteractive);
-                TranslateTransform3D center = new TranslateTransform3D(3, 2.4, 0.3);
+                TranslateTransform3D center = new TranslateTransform3D(1, 2.4, 1.3);
                 sphereBounds = Collider.UpdateBounds(sphere, center);
                 sphere.Transform = center;
-                //MessageBox.Show("X = " + sphere.Content.Bounds.X + " y = " + sphere.Content.Bounds.Y + " Z = " + sphere.Content.Bounds.Z);
-               // MessageBox.Show("X = " + sphere.Transform.Value.OffsetX + " y = " + sphere.Transform.Value.OffsetY + " Z = " + sphere.Transform.Value.OffsetZ);
-                sphereInteractive.MouseRightButtonDown += (s, e) => SpherePressed(s, e, environment);
+               sphereInteractive.MouseRightButtonDown += (s, e) => SpherePressed(s, e, environment);
                 sphereInteractive.Transform = center;
+                objects.Add(sphereInteractive);
             }
+            MessageBox.Show("Scene has " + objects.Count + " objects");
         }
         public RelayCommand add3DOther
         {
@@ -133,21 +143,16 @@ namespace FramworkFor3D.Commands
                 {
                     obj = new Irregular3DObject(fileName);
 
-                   // MessageBox.Show("X = " + obj.Content.Bounds.X + " y = " + obj.Content.Bounds.Y + " Z = " + obj.Content.Bounds.Z);
-
+                   
                     Transform3DGroup transformGroup = new Transform3DGroup();
                     objInteractive = InteractiveHelper.ConvertToUI(obj);
-                    //RotateTransform3D rotate = new RotateTransform3D(new AxisAngleRotation3D(new Vector3D(1, 0, 0), 90));
-                    //transformGroup.Children.Add(rotate);
+                    
                     obj.Rotate(90, new Vector3D(1, 0, 0));
                     transformGroup.Children.Add(obj.Transform);
                     TranslateTransform3D center = new TranslateTransform3D(1, 2.4, 1.3);
 
                     transformGroup.Children.Add(center);
-                    //obj.Translate(new Vector3D(0, 0, 1));
-                    //transformGroup.Children.Add(obj.Transform);
-                    //obj.Scale(new Vector3D(0, 0, 1), 0.5);
-                    // transformGroup.Children.Add(obj.Transform);
+                 
 
 
                     objInteractive.Transform = transformGroup;
@@ -156,9 +161,10 @@ namespace FramworkFor3D.Commands
                     objInteractive.MouseRightButtonDown += (s, e) => ObjectPressed(s, e, environment);
 
                     environment.Children.Add(objInteractive);
+                    objects.Add(objInteractive);
                 }
 
-                //MessageBox.Show("Cube " + cube.SideLength);
+                MessageBox.Show("Scene has " + objects.Count + " objects");
 
             }
         }
@@ -207,9 +213,9 @@ namespace FramworkFor3D.Commands
 
 
             delete.Click += (s, ev) => Delete(s, ev, environment, objInteractive);
-            rigidBody.Click += (s, ev) => Solid(s, ev, environment, objInteractive);
-            elasticBody.Click += (s, ev) => Elastic(s, ev, environment, objInteractive);
-            addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment, objInteractive);
+            rigidBody.Click += (s, ev) => Solid(s, ev, environment, objInteractive,ObjectType.IRREGULAR);
+            elasticBody.Click += (s, ev) => Elastic(s, ev, environment, objInteractive,ObjectType.IRREGULAR);
+            addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment, objInteractive,ObjectType.IRREGULAR);
             addForce.Click += (s, ev) => Force(s, ev, environment, objInteractive, sphereInteractive);
             colliderModify.Click += (s, ev) => ModifyCollider(s, ev, environment, objInteractive);
             context.Items.Add(delete);
@@ -221,18 +227,27 @@ namespace FramworkFor3D.Commands
             #endregion
         }
 
-        private void CubePressed(object sender, RoutedEventArgs e, Viewport3D environment)
+        private void CubePressed(object sender, MouseEventArgs e, Viewport3D environment)
         {
-            if (cube.Content is Model3DGroup model3Dgroup)
+            isPressed = true;
+            Point mouse = e.GetPosition(environment);
+            var hitTestResult = VisualTreeHelper.HitTest(environment, mouse);
+            var clickedCube = hitTestResult.VisualHit as UIElement3D;
+           
+            if (hitTestResult!=null&&hitTestResult.VisualHit is UIElement3D hit)
             {
-                foreach (var model in model3Dgroup.Children)
+                var hitModel = InteractiveHelper.ConvertToModel(hit);
+                if (hitModel.Content is Model3DGroup model3Dgroup)
                 {
-                    if (model is GeometryModel3D geometryModel)
+                    foreach (var model in model3Dgroup.Children)
                     {
-                        geometryModel.Material = new DiffuseMaterial(Brushes.Orange);
+                        if (model is GeometryModel3D geometryModel)
+                        {
+                            geometryModel.Material = new DiffuseMaterial(Brushes.Orange);
+                        }
                     }
+
                 }
-               
             }
             #region Context Menu
 
@@ -263,12 +278,12 @@ namespace FramworkFor3D.Commands
             applyPhisycs.Items.Add(collider);
 
 
-            delete.Click += (s, ev) => Delete(s, ev, environment, cubeInteractive);
-            rigidBody.Click += (s, ev) => Solid(s, ev, environment, cubeInteractive);
-            elasticBody.Click += (s, ev) => Elastic(s, ev, environment, cubeInteractive);
-            addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment,cubeInteractive);
-            addForce.Click += (s, ev) => Force(s, ev, environment, cubeInteractive,sphereInteractive);
-            colliderModify.Click += (s, ev) => ModifyCollider(s, ev, environment, cubeInteractive);
+            delete.Click += (s, ev) => Delete(s, ev, environment, clickedCube);
+            rigidBody.Click += (s, ev) => Solid(s, ev, environment, clickedCube, ObjectType.CUBE);
+            elasticBody.Click += (s, ev) => Elastic(s, ev, environment, clickedCube,ObjectType.CUBE);
+            addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment,clickedCube,ObjectType.CUBE);
+            addForce.Click += (s, ev) => Force(s, ev, environment, clickedCube,sphereInteractive);
+            colliderModify.Click += (s, ev) => ModifyCollider(s, ev, environment, clickedCube);
             context.Items.Add(delete);
             context.Items.Add(addMaterial);
             context.Items.Add(applyPhisycs);
@@ -287,18 +302,47 @@ namespace FramworkFor3D.Commands
             MessageBox.Show("X = " + cubeBounds.SizeX + " y = " + cubeBounds.Y + " Z = " + cubeBounds.Z);
             cubeBounds =ObjectCollider.modifyObjectBounds(objectModel, 1);
             MessageBox.Show("X = " + cubeBounds.SizeX + " y = " + cubeBounds.Y + " Z = " + cubeBounds.Z);
-
+            isPressed = false;
             collider = true;
+            if (!isPressed)
+            {
+                if (objectModel.Content is Model3DGroup model3Dgroup)
+                {
+                    foreach (var model in model3Dgroup.Children)
+                    {
+                        if (model is GeometryModel3D geometryModel)
+                        {
+                            geometryModel.Material = defaultMaterial;
+                        }
+                    }
+
+                }
+            }
 
         }
 
         private void Force(object s, RoutedEventArgs ev, Viewport3D environment, UIElement3D cubeInteractive,UIElement3D objElement)
         {
-            _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(1);
+            _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(10);
+            ModelVisual3D objectModel = InteractiveHelper.ConvertToModel(cubeInteractive);
             //trebuie sa ecsiste doua corpuri pentru a aplica forta ( cubul va avea fi cel care se va ciocni <deci va produce o forta>
             //, iar sfera va fi afectata de ciocnire<va fi aplicata o forta>)
-            
-            if(!cubeBounds.IsEmpty&&!sphereBounds.IsEmpty&&!collider)
+            isPressed = false;
+            if (!isPressed)
+            {
+                if (objectModel.Content is Model3DGroup model3Dgroup)
+                {
+                    foreach (var model in model3Dgroup.Children)
+                    {
+                        if (model is GeometryModel3D geometryModel)
+                        {
+                            geometryModel.Material = defaultMaterial;
+                        }
+                    }
+
+                }
+            }
+            if (!cubeBounds.IsEmpty&&!sphereBounds.IsEmpty&&!collider)
             {
                
                 rigid.StartForce(cubeBounds, sphereBounds,cubeInteractive,objElement);
@@ -312,34 +356,68 @@ namespace FramworkFor3D.Commands
 
       
 
-        private void Elastic(object s, RoutedEventArgs ev, Viewport3D environment, UIElement3D obj)
+        private void Elastic(object s, RoutedEventArgs ev, Viewport3D environment, UIElement3D obj,ObjectType type)
         {
-            
-            
-                _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(10);
+
+            isPressed = false;
+            ModelVisual3D objectModel = InteractiveHelper.ConvertToModel(obj);
+            if (!isPressed)
+            {
+                if (objectModel.Content is Model3DGroup model3Dgroup)
+                {
+                    foreach (var model in model3Dgroup.Children)
+                    {
+                        if (model is GeometryModel3D geometryModel)
+                        {
+                            geometryModel.Material = defaultMaterial;
+                        }
+                    }
+
+                }
+            }
+            _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(10);
                   
-                rigid.StartBouncing(obj,rigid.Mass);
+                rigid.StartBouncing(obj,rigid.Mass,type);
             
         }
 
-        private void SetMaterial(object s, RoutedEventArgs ev, Viewport3D environment,UIElement3D obj)
+        private void SetMaterial(object s, RoutedEventArgs ev, Viewport3D environment,UIElement3D obj,ObjectType type)
         {
             MessageBox.Show("Under development");
         }
 
-        private void Solid(object s,RoutedEventArgs ev,Viewport3D environment,UIElement3D obj)
+        private void Solid(object s,RoutedEventArgs ev,Viewport3D environment,UIElement3D obj,ObjectType type)
         {
+            isPressed = false;
+            ModelVisual3D objectModel = InteractiveHelper.ConvertToModel(obj);
+            if (!isPressed)
+            {
+                if (objectModel.Content is Model3DGroup model3Dgroup)
+                {
+                    foreach (var model in model3Dgroup.Children)
+                    {
+                        if (model is GeometryModel3D geometryModel)
+                        {
+                            geometryModel.Material = defaultMaterial;
+                        }
+                    }
+
+                }
+            }
             if (obj.Transform.Value.OffsetZ > 0)
             {
                 _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(10);
-                rigid.Start(obj);
+                rigid.Start(obj,type);
             }
          
         }
 
         private void Delete(object s, RoutedEventArgs ev, Viewport3D environment,UIElement3D obj)
         {
+            isPressed = false;
             environment.Children.Remove(obj);
+            objects.Remove(obj);
+            MessageBox.Show("Object deleted ");
         }
 
         private void SpherePressed(object sender, RoutedEventArgs e, Viewport3D environment)
@@ -384,9 +462,9 @@ namespace FramworkFor3D.Commands
 
 
             delete.Click += (s, ev) => Delete(s, ev, environment, sphereInteractive);
-            rigidBody.Click += (s, ev) => Solid(s, ev, environment, sphereInteractive);
-            elasticBody.Click += (s, ev) => Elastic(s, ev, environment, sphereInteractive);
-            addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment, sphereInteractive);
+            rigidBody.Click += (s, ev) => Solid(s, ev, environment, sphereInteractive,ObjectType.SPHERE);
+            elasticBody.Click += (s, ev) => Elastic(s, ev, environment, sphereInteractive, ObjectType.SPHERE);
+            addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment, sphereInteractive,ObjectType.SPHERE);
             addForce.Click += (s, ev) => Force(s, ev, environment, sphereInteractive, sphereInteractive);
             colliderModify.Click += (s, ev) => ModifyCollider(s, ev, environment, sphereInteractive);
             context.Items.Add(delete);
