@@ -435,7 +435,18 @@ namespace FramworkFor3D._3DPhysics
                 float velocity = (float)(distance / time_elapsed);
                 float acceleration = (float)(velocity / time_elapsed);
                 force = (float)((mass * acceleration)/200);
-              
+                if (typeObjectForce == ObjectType.IRREGULAR)
+                {
+                    gameObj.ObjBounds = Bound;
+                }
+                if (typeObjectForce == ObjectType.SPHERE)
+                {
+                    gameObj.SphereBounds = Bound;
+                }
+                if (typeObjectForce == ObjectType.CUBE)
+                {
+                    gameObj.CubeBounds = Bound;
+                }
                 Stop();
 
                 StartFriction(obj2, velocity, typeObjectAffected);
