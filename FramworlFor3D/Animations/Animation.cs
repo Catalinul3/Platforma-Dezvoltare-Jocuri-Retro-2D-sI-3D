@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FramworkFor3D.Animations
 {
-    public class AnimationClip
+    public class Animation
     {
     }
 }

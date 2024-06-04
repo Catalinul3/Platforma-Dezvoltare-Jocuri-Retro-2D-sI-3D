@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FramworkFor3D.Animations
 {
-    internal class AnimatorController
+    public class AnimatorController
     {
     }
 }
