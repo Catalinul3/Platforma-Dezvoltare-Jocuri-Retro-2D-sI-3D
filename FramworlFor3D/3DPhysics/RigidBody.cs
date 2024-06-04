@@ -32,6 +32,7 @@ namespace FramworkFor3D._3DPhysics
         Rect3D bound;
         float time_elapsed = 0;
         bool colliding = false;
+       float force = 0.0f;
         double jumpVelocity = 10.0f;
         double restitution = 1f;
         double jumpVelocityCopied = 10.0f;
@@ -52,6 +53,8 @@ namespace FramworkFor3D._3DPhysics
                 this.bound = value;
             }
         }
+
+        bool fromLeft = false;
         #endregion
 
         #region Constructor
@@ -63,16 +66,16 @@ namespace FramworkFor3D._3DPhysics
         #endregion
 
         #region Fall Physics
-        public void Start(UIElement3D obj,ObjectType type)
+        public void Start(UIElement3D obj, ObjectType type)
         {
             timer = new DispatcherTimer(DispatcherPriority.Normal);
             timer.Interval = TimeSpan.FromMilliseconds(1);
-            timer.Tick += (s, e) => Fall(s, e, obj,type);
+            timer.Tick += (s, e) => Fall(s, e, obj, type);
             timer.Start();
 
         }
 
-        public void Fall(object sender, EventArgs e, UIElement3D obj,ObjectType type)
+        public void Fall(object sender, EventArgs e, UIElement3D obj, ObjectType type)
         {
 
 
@@ -87,7 +90,8 @@ namespace FramworkFor3D._3DPhysics
             TranslateTransform3D falling = new TranslateTransform3D();
             ModelVisual3D objectModel = InteractiveHelper.ConvertToModel(obj);
             if (type == ObjectType.IRREGULAR)
-            {Irregular3DObject irregular = new Irregular3DObject(objectModel);
+            {
+                Irregular3DObject irregular = new Irregular3DObject(objectModel);
 
                 if (irregular != null)
                 {
@@ -109,46 +113,46 @@ namespace FramworkFor3D._3DPhysics
                 falling.OffsetZ = fallingDirection;
                 falling.OffsetX = obj.Transform.Value.OffsetX;
                 falling.OffsetY = obj.Transform.Value.OffsetY;
-              
+
                 obj.Transform = falling;
             }
 
 
 
-          
-            Bound = Collider.UpdateBounds(objectModel, falling);
-            
-            bool collision = Collider.IsColliding(Bound, bound);
-          
-                if (fallingDirection <=0.1f)
-                {
-                    Stop();
 
-                }
-            
+            Bound = Collider.UpdateBounds(objectModel, falling);
+
+            bool collision = Collider.IsColliding(Bound, bound);
+
+            if (fallingDirection <= 0.1f)
+            {
+                Stop();
+
+            }
+
 
         }
         #endregion
 
         #region Bounce Physics
-        public void StartBouncing(UIElement3D obj, float mass,ObjectType type)
+        public void StartBouncing(UIElement3D obj, float mass, ObjectType type)
         {
             timer = new DispatcherTimer(DispatcherPriority.Normal);
             timer.Interval = TimeSpan.FromMilliseconds(1);
-            timer.Tick += (s, e) => Bounce(s, e, obj, mass,type);
+            timer.Tick += (s, e) => Bounce(s, e, obj, mass, type);
             timer.Start();
         }
-        public void StartJump(UIElement3D obj,ObjectType type)
+        public void StartJump(UIElement3D obj, ObjectType type)
         {
             double jump = jumpVelocity;
             timer = new DispatcherTimer(DispatcherPriority.Normal);
             timer.Interval = TimeSpan.FromMilliseconds(1);
-            timer.Tick += (s, e) => Jump(s, e, obj, jumpVelocityCopied,type);
+            timer.Tick += (s, e) => Jump(s, e, obj, jumpVelocityCopied, type);
             timer.Start();
 
         }
 
-        private void Jump(object s, EventArgs e, UIElement3D obj, double jumpVelocity,ObjectType type)
+        private void Jump(object s, EventArgs e, UIElement3D obj, double jumpVelocity, ObjectType type)
         {
             float jumpingDirection = (float)obj.Transform.Value.OffsetZ;
             time_elapsed += (float)timer.Interval.TotalSeconds;
@@ -156,7 +160,7 @@ namespace FramworkFor3D._3DPhysics
             jumpingDirection += (float)jumpVelocity * 0.5f * gravity_acceleration * time_elapsed * time_elapsed;
             Transform3DGroup transformationGroup = new Transform3DGroup();
             ModelVisual3D objectModel = InteractiveHelper.ConvertToModel(obj);
-          
+
             TranslateTransform3D jump = new TranslateTransform3D();
             if (type == ObjectType.IRREGULAR)
             {
@@ -192,7 +196,7 @@ namespace FramworkFor3D._3DPhysics
             {
                 Stop();
                 time_elapsed = 0;
-                StartBouncing(obj, mass,type);
+                StartBouncing(obj, mass, type);
 
             }
             else
@@ -201,7 +205,7 @@ namespace FramworkFor3D._3DPhysics
             }
 
         }
-        private void Bounce(object s, EventArgs e, UIElement3D obj, float mass,ObjectType type)
+        private void Bounce(object s, EventArgs e, UIElement3D obj, float mass, ObjectType type)
         {
             float fallingDirection = (float)obj.Transform.Value.OffsetZ;
             time_elapsed += (float)timer.Interval.TotalSeconds;
@@ -213,7 +217,7 @@ namespace FramworkFor3D._3DPhysics
 
             //transformationGroup.Children.Add(falling);
             ModelVisual3D objectModel = InteractiveHelper.ConvertToModel(obj);
-        
+
             TranslateTransform3D falling = new TranslateTransform3D();
             if (type == ObjectType.IRREGULAR)
             {
@@ -251,7 +255,7 @@ namespace FramworkFor3D._3DPhysics
 
                 Stop();
 
-                StartJump(obj,type);
+                StartJump(obj, type);
 
             }
             if (jumpVelocity <= 1f)
@@ -263,11 +267,11 @@ namespace FramworkFor3D._3DPhysics
         #endregion
 
         #region Force Physics
-        public void StartForce(Rect3D objWithForce, Rect3D objApplyForce, UIElement3D obj, UIElement3D obj2,ObjectType type)
+        public void StartForce(Rect3D objWithForce, Rect3D objApplyForce, UIElement3D obj, UIElement3D obj2, ObjectType type, ObjectType affectByForce)
         {
             timer = new DispatcherTimer(DispatcherPriority.Normal);
             timer.Interval = TimeSpan.FromMilliseconds(1);
-            timer.Tick += (s, e) => AddForce(s, e, objWithForce, objApplyForce, obj, obj2,type);
+            timer.Tick += (s, e) => AddForce(s, e, objWithForce, objApplyForce, obj, obj2, type, affectByForce);
             timer.Start();
         }
         public void StartForceWithUserCollider(Rect3D objWithForce, Rect3D objApplyForce, UIElement3D obj, UIElement3D obj2)
@@ -310,28 +314,36 @@ namespace FramworkFor3D._3DPhysics
                 float force = (float)(mass * acceleration);
                 forcePower += force / 100;
                 Stop();
-                StartFriction(obj2, forcePower, velocity,type);
+                StartFriction(obj2,  velocity, type);
 
             }
 
         }
-        public void AddForce(object s, EventArgs e, Rect3D objWithForce, Rect3D objApplyForce, UIElement3D obj, UIElement3D obj2,ObjectType type)
+        public void AddForce(object s, EventArgs e, Rect3D objWithForce, Rect3D objApplyForce,
+            UIElement3D obj, UIElement3D obj2, ObjectType typeObjectForce, ObjectType typeObjectAffected)
         {
             float forceOrientation = (float)obj.Transform.Value.OffsetX;
             float distance = getDistance(objWithForce, objApplyForce);
-             
+
             time_elapsed += (float)timer.Interval.TotalSeconds;
             if (objWithForce.X >= objApplyForce.X)
-            { forceOrientation -= (float)(mass * time_elapsed * time_elapsed); }
+            {
+                forceOrientation -= (float)(mass * time_elapsed * time_elapsed);
+
+            }
             else
-            { forceOrientation += (float)(mass * time_elapsed * time_elapsed); }
+            {
+                forceOrientation += (float)(mass * time_elapsed * time_elapsed);
+                fromLeft = true;
+            }
             TranslateTransform3D move = new TranslateTransform3D();
             Transform3DGroup transformationGroup = new Transform3DGroup();
 
             ModelVisual3D objectModel = InteractiveHelper.ConvertToModel(obj);
-            if (type == ObjectType.IRREGULAR)
+            Irregular3DObject irregular = new Irregular3DObject(objectModel);
+            if (typeObjectForce == ObjectType.IRREGULAR)
             {
-                Irregular3DObject irregular = new Irregular3DObject(objectModel);
+
                 if (irregular != null)
                 {
                     irregular.Rotate(90, new Vector3D(1, 0, 0));
@@ -345,13 +357,13 @@ namespace FramworkFor3D._3DPhysics
             }
             else
             {
-                move.OffsetX =forceOrientation;
+                move.OffsetX = forceOrientation;
                 move.OffsetZ = obj.Transform.Value.OffsetZ;
                 move.OffsetY = obj.Transform.Value.OffsetY;
-           
+
                 obj.Transform = move;
             }
-         
+
             Bound = Collider.UpdateBounds(objectModel, move);
 
             if (Collider.IsColliding(Bound, objApplyForce))
@@ -359,29 +371,39 @@ namespace FramworkFor3D._3DPhysics
                 float forcePower = (float)obj2.Transform.Value.OffsetX;
                 float velocity = (float)(distance / time_elapsed);
                 float acceleration = (float)(velocity / time_elapsed);
-                float force = (float)(mass * acceleration);
-                forcePower += force / 100;
+                force = (float)((mass * acceleration)/200);
+              
                 Stop();
-                StartFriction(obj2, forcePower, velocity,type);
+
+                StartFriction(obj2, velocity, typeObjectAffected);
 
             }
         }
-        public void StartFriction(UIElement3D obj, float force, float velocity,ObjectType type)
+        public void StartFriction(UIElement3D obj,  float velocity, ObjectType type)
         {
             timer = new DispatcherTimer(DispatcherPriority.Normal);
             timer.Interval = TimeSpan.FromMilliseconds(1);
-            timer.Tick += (s, e) => AddFriction(s, e, obj, force, velocity,type);
+            timer.Tick += (s, e) => AddFriction(s, e, obj, velocity, type);
             timer.Start();
         }
-        public void AddFriction(object s, EventArgs e, UIElement3D obj, float force, float velocity,ObjectType type)
+        public void AddFriction(object s, EventArgs e, UIElement3D obj, float velocity, ObjectType type)
         {
 
-            float forcePower = (float)obj.Transform.Value.OffsetX;
+            float forceDirection = (float)obj.Transform.Value.OffsetX;
             time_elapsed += (float)timer.Interval.TotalSeconds;
-            forcePower += (float)(velocity * time_elapsed * time_elapsed);
-            force -= forcePower;
+            if (fromLeft)
+            {
+                forceDirection += (float)(force * time_elapsed * time_elapsed);
+                force -= forceDirection;
+            }
+            else
+            {
+                forceDirection -= (float)(force * time_elapsed * time_elapsed);
+                force -= force;
+            }
+
             TranslateTransform3D move = new TranslateTransform3D();
-            Transform3DGroup transformationGroup=new Transform3DGroup();
+            Transform3DGroup transformationGroup = new Transform3DGroup();
             ModelVisual3D objectModel = InteractiveHelper.ConvertToModel(obj);
             if (type == ObjectType.IRREGULAR)
             {
@@ -391,7 +413,8 @@ namespace FramworkFor3D._3DPhysics
                     irregular.Rotate(90, new Vector3D(1, 0, 0));
                     transformationGroup.Children.Add(irregular.Transform);
                 }
-                move.OffsetX = forcePower;
+                move.OffsetX = forceDirection;
+
                 move.OffsetY = obj.Transform.Value.OffsetY;
                 move.OffsetZ = obj.Transform.Value.OffsetZ;
                 transformationGroup.Children.Add(move);
@@ -399,13 +422,17 @@ namespace FramworkFor3D._3DPhysics
             }
             else
             {
-                move.OffsetX = forcePower;
+
+                move.OffsetX = forceDirection;
+
+
+
                 move.OffsetZ = obj.Transform.Value.OffsetZ;
                 move.OffsetY = obj.Transform.Value.OffsetY;
 
                 obj.Transform = move;
             };
-           
+
             Bound = Collider.UpdateBounds(objectModel, move);
             if (force < 0)
             { Stop(); }
@@ -416,9 +443,9 @@ namespace FramworkFor3D._3DPhysics
         #region Helpers
         private float getDistance(Rect3D obj1, Rect3D obj2)
         {
-            float distance = (float)(Math.Sqrt(Math.Pow(( obj2.X -obj1.X), 2)
-                + Math.Pow((obj2.Y -  obj1.Y), 2) +
-                Math.Pow(( obj2.Z- obj1.Z), 2)));
+            float distance = (float)(Math.Sqrt(Math.Pow((obj2.X - obj1.X), 2)
+                + Math.Pow((obj2.Y - obj1.Y), 2) +
+                Math.Pow((obj2.Z - obj1.Z), 2)));
             //MessageBox.Show("Distance: " + distance);
             return distance;
         }
