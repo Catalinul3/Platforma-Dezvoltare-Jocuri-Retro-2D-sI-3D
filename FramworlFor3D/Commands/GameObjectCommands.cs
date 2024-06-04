@@ -150,7 +150,7 @@ namespace FramworkFor3D.Commands
                 sphereInteractive = InteractiveHelper.ConvertToUI(sphere);
 
                 environment.Children.Add(sphereInteractive);
-                TranslateTransform3D center = new TranslateTransform3D(3, 2.4, 1.3);
+                TranslateTransform3D center = new TranslateTransform3D(1, 2.4, 1.3);
                 sphereBounds = Collider.UpdateBounds(sphere, center);
                 sphere.Transform = center;
                 sphereInteractive.MouseRightButtonDown += (s, e) => SpherePressed(s, e, environment);
@@ -256,7 +256,7 @@ namespace FramworkFor3D.Commands
             applyPhisycs.Items.Add(collider);
 
 
-            delete.Click += (s, ev) => Delete(s, ev, environment, clickedObject);
+            delete.Click += (s, ev) => Delete(s, ev, environment, clickedObject,type);
             rigidBody.Click += (s, ev) => Solid(s, ev, environment, clickedObject, ObjectType.IRREGULAR);
             elasticBody.Click += (s, ev) => Elastic(s, ev, environment, clickedObject, ObjectType.IRREGULAR);
             addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment, clickedObject, ObjectType.IRREGULAR);
@@ -329,7 +329,7 @@ namespace FramworkFor3D.Commands
             applyPhisycs.Items.Add(collider);
 
 
-            delete.Click += (s, ev) => Delete(s, ev, environment, clickedCube);
+            delete.Click += (s, ev) => Delete(s, ev, environment, clickedCube,type);
             rigidBody.Click += (s, ev) => Solid(s, ev, environment, clickedCube, type);
             elasticBody.Click += (s, ev) => Elastic(s, ev, environment, clickedCube, type);
             addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment, clickedCube, type);
@@ -402,7 +402,7 @@ namespace FramworkFor3D.Commands
             applyPhisycs.Items.Add(collider);
 
 
-            delete.Click += (s, ev) => Delete(s, ev, environment, clickedSphere);
+            delete.Click += (s, ev) => Delete(s, ev, environment, clickedSphere,type);
             rigidBody.Click += (s, ev) => Solid(s, ev, environment, clickedSphere, ObjectType.SPHERE);
             elasticBody.Click += (s, ev) => Elastic(s, ev, environment, clickedSphere, ObjectType.SPHERE);
             addMaterial.Click += (s, ev) => SetMaterial(s, ev, environment, clickedSphere, ObjectType.SPHERE);
@@ -493,7 +493,7 @@ namespace FramworkFor3D.Commands
             }
             if (collider)
             {
-                rigid.StartForceWithUserCollider(cubeBounds, sphereBounds, objectWithForce, objAffectByForce);
+                rigid.StartForceWithUserCollider(cubeBounds, sphereBounds, objectWithForce, objAffectByForce,type,ObjectType.IRREGULAR);
             }
 
         }
@@ -573,9 +573,21 @@ namespace FramworkFor3D.Commands
 
         }
 
-        private void Delete(object s, RoutedEventArgs ev, Viewport3D environment, UIElement3D obj)
+        private void Delete(object s, RoutedEventArgs ev, Viewport3D environment, UIElement3D obj,ObjectType objectType)
         {
             isPressed = false;
+            if(objectType==ObjectType.CUBE)
+            {
+                cubeBounds.Location=new Point3D(0,0,0);
+            }
+            if(objectType==ObjectType.SPHERE)
+            {
+                sphereBounds.Location=new Point3D(0,0,0);
+            }
+            if(objectType==ObjectType.IRREGULAR)
+            {
+                objBounds.Location=new Point3D(0,0,0);
+            }
             environment.Children.Remove(obj);
             objects.Remove(obj);
             MessageBox.Show("Object deleted ");

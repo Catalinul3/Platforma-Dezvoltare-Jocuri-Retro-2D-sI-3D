@@ -210,6 +210,18 @@ namespace FramworkFor3D._3DPhysics
 
             if (jumpVelocity <= 0.0f)
             {
+                if (type == ObjectType.IRREGULAR)
+                {
+                    gameObj.ObjBounds = Bound;
+                }
+                if (type == ObjectType.SPHERE)
+                {
+                    gameObj.SphereBounds = Bound;
+                }
+                if (type == ObjectType.CUBE)
+                {
+                    gameObj.CubeBounds = Bound;
+                }
                 Stop();
                 time_elapsed = 0;
                 StartBouncing(obj, mass, type);
@@ -268,7 +280,18 @@ namespace FramworkFor3D._3DPhysics
             {
                 jumpVelocity *= restitution;
                 jumpVelocityCopied = jumpVelocity;
-
+                if (type == ObjectType.IRREGULAR)
+                {
+                    gameObj.ObjBounds = Bound;
+                }
+                if (type == ObjectType.SPHERE)
+                {
+                    gameObj.SphereBounds = Bound;
+                }
+                if (type == ObjectType.CUBE)
+                {
+                    gameObj.CubeBounds = Bound;
+                }
                 Stop();
 
                 StartJump(obj, type);
@@ -276,6 +299,18 @@ namespace FramworkFor3D._3DPhysics
             }
             if (jumpVelocity <= 1f)
             {
+                if (type == ObjectType.IRREGULAR)
+                {
+                    gameObj.ObjBounds = Bound;
+                }
+                if (type == ObjectType.SPHERE)
+                {
+                    gameObj.SphereBounds = Bound;
+                }
+                if (type == ObjectType.CUBE)
+                {
+                    gameObj.CubeBounds = Bound;
+                }
                 Stop();
             }
 
@@ -290,19 +325,19 @@ namespace FramworkFor3D._3DPhysics
             timer.Tick += (s, e) => AddForce(s, e, objWithForce, objApplyForce, obj, obj2, type, affectByForce);
             timer.Start();
         }
-        public void StartForceWithUserCollider(Rect3D objWithForce, Rect3D objApplyForce, UIElement3D obj, UIElement3D obj2)
+        public void StartForceWithUserCollider(Rect3D objWithForce, Rect3D objApplyForce, UIElement3D obj, UIElement3D obj2 ,ObjectType type, ObjectType affectByForce)
         {
             timer = new DispatcherTimer(DispatcherPriority.Normal);
             timer.Interval = TimeSpan.FromMilliseconds(1);
-            timer.Tick += (s, e) => AddForceUser(s, e, objWithForce, objApplyForce, obj, obj2);
+            timer.Tick += (s, e) => AddForceUser(s, e, objWithForce, objApplyForce, obj, obj2,type,affectByForce);
             timer.Start();
         }
-        public void AddForceUser(object s, EventArgs e, Rect3D objWithForce, Rect3D objApplyForce, UIElement3D obj, UIElement3D obj2)
+        public void AddForceUser(object s, EventArgs e, Rect3D objWithForce, Rect3D objApplyForce, UIElement3D obj, UIElement3D obj2, ObjectType type, ObjectType affectByForce)
         {
             float forceOrientation = (float)obj.Transform.Value.OffsetX;
             float distance = getDistance(Bound, objApplyForce);
             time_elapsed += (float)timer.Interval.TotalSeconds;
-            ObjectType type = ObjectType.SPHERE;
+          
             forceOrientation += (float)(mass * time_elapsed * time_elapsed);
             Transform3DGroup transformationGroup = new Transform3DGroup();
             TranslateTransform3D move = new TranslateTransform3D();
@@ -329,6 +364,18 @@ namespace FramworkFor3D._3DPhysics
                 float acceleration = (float)(velocity / time_elapsed);
                 float force = (float)(mass * acceleration);
                 forcePower += force / 100;
+                if (type == ObjectType.IRREGULAR)
+                {
+                    gameObj.ObjBounds = Bound;
+                }
+                if (type == ObjectType.SPHERE)
+                {
+                    gameObj.SphereBounds = Bound;
+                }
+                if (type == ObjectType.CUBE)
+                {
+                    gameObj.CubeBounds = Bound;
+                }
                 Stop();
                 StartFriction(obj2,  velocity, type);
 
@@ -451,7 +498,20 @@ namespace FramworkFor3D._3DPhysics
 
             Bound = Collider.UpdateBounds(objectModel, move);
             if (force < 0)
-            { Stop(); }
+            {
+                if (type == ObjectType.IRREGULAR)
+                {
+                    gameObj.ObjBounds = Bound;
+                }
+                if (type == ObjectType.SPHERE)
+                {
+                    gameObj.SphereBounds = Bound;
+                }
+                if (type == ObjectType.CUBE)
+                {
+                    gameObj.CubeBounds = Bound;
+                }
+                Stop(); }
 
         }
         #endregion
