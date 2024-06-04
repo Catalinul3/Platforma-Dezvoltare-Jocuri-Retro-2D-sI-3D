@@ -48,6 +48,39 @@ namespace FramworkFor3D.Commands
         UIElement3D cubeInteractive, sphereInteractive, objInteractive;
         DispatcherTimer timer;
         Rect3D cubeBounds, sphereBounds, objBounds;
+        public Rect3D CubeBounds
+        {
+            get
+            {
+                return cubeBounds;
+            }
+            set
+            {
+                cubeBounds = value;
+            }
+        }
+        public Rect3D SphereBounds
+        {
+            get
+            {
+                return sphereBounds;
+            }
+            set
+            {
+                sphereBounds = value;
+            }
+        }
+        public Rect3D ObjBounds
+        {
+            get
+            {
+                return objBounds;
+            }
+            set
+            {
+                objBounds = value;
+            }
+        }
         bool collider = false;
         bool isPressed = false;
         DiffuseMaterial defaultMaterial = new DiffuseMaterial(Brushes.Gray);
@@ -415,7 +448,7 @@ namespace FramworkFor3D.Commands
 
         private void Force(object s, RoutedEventArgs ev, Viewport3D environment, UIElement3D objectWithForce, UIElement3D objAffectByForce)
         {
-            _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(10);
+            _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(10,this);
             ModelVisual3D objectModel = InteractiveHelper.ConvertToModel(objectWithForce);
             //trebuie sa ecsiste doua corpuri pentru a aplica forta ( cubul va avea fi cel care se va ciocni <deci va produce o forta>
             //, iar sfera va fi afectata de ciocnire<va fi aplicata o forta>)
@@ -484,7 +517,7 @@ namespace FramworkFor3D.Commands
 
                 }
             }
-            _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(10);
+            _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(10,this);
 
             rigid.StartBouncing(obj, rigid.Mass, type);
             if (type == ObjectType.CUBE)
@@ -525,7 +558,7 @@ namespace FramworkFor3D.Commands
 
                 }
             }
-            _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(10);
+            _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(10, this);
             if (obj.Transform.Value.OffsetZ > 0)
             {
 

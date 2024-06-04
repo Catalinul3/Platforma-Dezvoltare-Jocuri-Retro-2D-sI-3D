@@ -2,6 +2,7 @@
 using BulletSharp.Math;
 using BulletSharp.SoftBody;
 using FramworkFor3D._3DObjects;
+using FramworkFor3D.Commands;
 using FramworkFor3D.helpers;
 using HelixToolkit.Wpf;
 using SharpDX.Direct3D9;
@@ -55,12 +56,14 @@ namespace FramworkFor3D._3DPhysics
         }
 
         bool fromLeft = false;
+        GameObjectCommands gameObj;
         #endregion
 
         #region Constructor
-        public RigidBody(float mass)
+        public RigidBody(float mass,GameObjectCommands game)
         {
             this.mass = mass;
+            gameObj = game;
 
         }
         #endregion
@@ -123,9 +126,22 @@ namespace FramworkFor3D._3DPhysics
             Bound = Collider.UpdateBounds(objectModel, falling);
 
             bool collision = Collider.IsColliding(Bound, bound);
+        
 
             if (fallingDirection <= 0.1f)
             {
+                if (type == ObjectType.IRREGULAR)
+                {
+                    gameObj.ObjBounds = Bound;
+                }
+                if (type == ObjectType.SPHERE)
+                {
+                    gameObj.SphereBounds = Bound;
+                }
+                if (type == ObjectType.CUBE)
+                {
+                    gameObj.CubeBounds = Bound;
+                }
                 Stop();
 
             }
