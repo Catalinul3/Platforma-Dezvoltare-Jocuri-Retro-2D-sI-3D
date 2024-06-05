@@ -5,13 +5,16 @@ using FramworkFor3D._3DPhysics;
 using FramworkFor3D.helpers;
 using FramworlFor3D.helpers;
 using FramworlFor3D.ViewModels;
+using RetroEngine.Helpers;
 using RetroEngine.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
+using System.Windows.Media.Imaging;
 using System.Windows.Media.Media3D;
 
 using System.Windows.Threading;
@@ -172,7 +175,7 @@ namespace FramworkFor3D.Commands
         {
             if (parameter is Viewport3D environment)
             {
-                string fileName = LoadFileDialog("Select a 3d model");
+                string fileName = FileHelpers.LoadObjectDialog("Select a 3d model");
 
                 if (fileName != null)
                 {
@@ -535,11 +538,29 @@ namespace FramworkFor3D.Commands
 
         }
 
-        private void SetMaterial(object s, RoutedEventArgs ev, Viewport3D environment, UIElement3D obj, ObjectType type)
+        private void SetMaterial(object s, RoutedEventArgs ev, Viewport3D environment, UIElement3D objs, ObjectType type)
         {
-            MessageBox.Show("Under development");
-        }
+            string fileName = FileHelpers.LoadMaterialDialog("Select material of model");
 
+            if (fileName != null)
+            {
+              ModelVisual3D model= InteractiveHelper.ConvertToModel(objs);
+             
+             
+                if (model.Content is Model3DGroup model3Dgroup)
+                {
+                    foreach (var model3D in model3Dgroup.Children)
+                    {
+                        if (model3D is GeometryModel3D geometryModel)
+                        {
+
+                           
+                           
+                        }
+                    }
+                }
+            }
+        }
         private void Solid(object s, RoutedEventArgs ev, Viewport3D environment, UIElement3D obj, ObjectType type)
         {
             isPressed = false;

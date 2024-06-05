@@ -5,6 +5,12 @@ using System.Windows.Media;
 using FramworkFor3D.Based_Operations;
 using System.Windows;
 using FramworkFor3D.helpers;
+using System;
+using System.Security.Cryptography;
+using System.Windows.Documents;
+using System.Windows.Media.Imaging;
+using System.Collections.Generic;
+using RetroEngine.Helpers;
 
 namespace FramworkFor3D._3DObjects
 {
@@ -16,6 +22,7 @@ namespace FramworkFor3D._3DObjects
         private Vector3DCollection normals;
         private Int32Collection indices;
         private PointCollection texture;
+        private MaterialGroup materials;
         private const ObjectType type = ObjectType.IRREGULAR;
 
         #endregion
@@ -42,14 +49,24 @@ namespace FramworkFor3D._3DObjects
             normals = new Vector3DCollection();
             indices = new Int32Collection();
             texture = new PointCollection();
-          
+            materials= new MaterialGroup();
+            
 
             using (StreamReader reader = new StreamReader(filePath))
             {
                 string line;
+
                 while ((line = reader.ReadLine()) != null)
                 {
                     string[] parts = line.Split(' ');
+                    if (parts[0] == "mtllib")
+                    {
+                       string mat = FileHelpers.LoadMaterialDialog("Select default material image");
+                        if (mat != null)
+                        {
+                            materials = readMtlFile(mat);
+                        }
+                    }
                     if (parts[0] == "v" && parts[1] == "")
                     {
                         float x = float.Parse(parts[2]);
@@ -254,7 +271,7 @@ namespace FramworkFor3D._3DObjects
             DiffuseMaterial material = new DiffuseMaterial();
             material.Brush = Brushes.LightGray;
 
-            GeometryModel3D model = new GeometryModel3D(mesh, material);
+            GeometryModel3D model = new GeometryModel3D(mesh, materials);
             Model3DGroup lightAndGeometry = new Model3DGroup();
             lightAndGeometry.Children.Add(lightOfIrregular.Content);
             lightAndGeometry.Children.Add(model);
@@ -262,6 +279,77 @@ namespace FramworkFor3D._3DObjects
             irregular.Content = lightAndGeometry;
            Content = irregular.Content;
 
+        }
+        public MaterialGroup readMtlFile(string fileName)
+        {
+            if (!File.Exists(fileName)) return null;
+            List<MaterialGroup> materials = new List<MaterialGroup>();
+            MaterialGroup currentMaterial = new MaterialGroup();
+            string currentMaterialName = "";
+            System.Windows.Media.Color ka=Colors.White, kd=Colors.White, ks = Colors.White;
+            double ns=0.0, ni=0.0, d = 0.0, illum = 0.0;
+            string map_Kd="";
+            using (StreamReader reader = new StreamReader(fileName))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string[] parts = line.Split(' ');
+                    if (parts[0] == "newmtl")
+                    {
+                        currentMaterialName = parts[1];
+
+
+                    }
+                    if (parts[0] == "Ns")
+                    {
+                        ns = double.Parse(parts[1]);
+                    }
+                    if (parts[0] == "Ka")
+                    {
+                        byte red = (byte)((float.Parse(parts[1])) * 255);
+                        byte green = (byte)((float.Parse(parts[2])) * 255);
+                        byte blue = (byte)((float.Parse(parts[3])) * 255);
+                        ka = System.Windows.Media.Color.FromRgb(red, green, blue);
+                        currentMaterial.Children.Add(new DiffuseMaterial(new SolidColorBrush(ka)));
+
+                    }
+                    if (parts[0] == "Kd")
+                    {
+                        byte red = (byte)((float.Parse(parts[1])) * 255);
+                        byte green = (byte)((float.Parse(parts[2])) * 255);
+                        byte blue = (byte)((float.Parse(parts[3])) * 255);
+                        kd = System.Windows.Media.Color.FromRgb(red, green, blue);
+                        currentMaterial.Children.Add(new DiffuseMaterial(new SolidColorBrush(kd)));
+                    }
+                    if (parts[0] == "Ks")
+                    {
+                        byte red = (byte)((float.Parse(parts[1])) * 255);
+                        byte green = (byte)((float.Parse(parts[2])) * 255);
+                        byte blue = (byte)((float.Parse(parts[3])) * 255);
+                        ks = System.Windows.Media.Color.FromRgb(red, green, blue);
+                        currentMaterial.Children.Add(new SpecularMaterial(new SolidColorBrush(ka), ns));
+                    }
+                    if (parts[0] == "Ni")
+                    {
+                        ni = double.Parse(parts[1]);
+                    }
+                    if (parts[0] == "d")
+                    { d = double.Parse(parts[1]); }
+                    if (parts[0] == "illum")
+                    { illum = double.Parse(parts[1]); }
+                    if (parts[0] == "map_Kd")
+                    {
+                        map_Kd = parts[1];
+                    
+                        
+                     
+                        
+                    }
+                }
+            }
+            return currentMaterial;
+     
         }
         #endregion
 
@@ -317,6 +405,8 @@ namespace FramworkFor3D._3DObjects
                 this.Transform = translateTransform;
             }
         }
+
+     
     }
     #endregion
 
