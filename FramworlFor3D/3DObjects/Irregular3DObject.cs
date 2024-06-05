@@ -22,6 +22,7 @@ namespace FramworkFor3D._3DObjects
         private Vector3DCollection normals;
         private Int32Collection indices;
         private PointCollection texture;
+        private PointCollection allTexture;
         private MaterialGroup materials;
         private const ObjectType type = ObjectType.IRREGULAR;
 
@@ -40,9 +41,9 @@ namespace FramworkFor3D._3DObjects
         private void read3dObject(string filePath)
         {
 
-            DirectionalLight light = new DirectionalLight(Colors.White, new Vector3D(-1, -1, -1));
+            DirectionalLight light = new DirectionalLight(Colors.White,new Vector3D(-1,-1,-1));
             ModelVisual3D lightOfIrregular = new ModelVisual3D();
-
+            bool havemtl = false;
             lightOfIrregular.Content = light;
             if (!File.Exists(filePath)) return;
             vertices = new Point3DCollection();
@@ -50,6 +51,8 @@ namespace FramworkFor3D._3DObjects
             indices = new Int32Collection();
             texture = new PointCollection();
             materials= new MaterialGroup();
+            allTexture = new PointCollection();
+
             
 
             using (StreamReader reader = new StreamReader(filePath))
@@ -61,11 +64,12 @@ namespace FramworkFor3D._3DObjects
                     string[] parts = line.Split(' ');
                     if (parts[0] == "mtllib")
                     {
-                       string mat = FileHelpers.LoadMaterialDialog("Select default material image");
+                        string mat = FileHelpers.LoadMaterialDialog("Select default material image");
                         if (mat != null)
                         {
                             materials = readMtlFile(mat);
                         }
+                        havemtl = true;
                     }
                     if (parts[0] == "v" && parts[1] == "")
                     {
@@ -90,7 +94,7 @@ namespace FramworkFor3D._3DObjects
                         double x = double.Parse(parts[2]);
                         double y = double.Parse(parts[3]);
 
-                        Point newTextureCoordinates = new Point(x, y);
+                        Point newTextureCoordinates = new Point(x, -y);
                         texture.Add(newTextureCoordinates);
                     }
                     if (parts[0] == "vt" && parts[1] != "")
@@ -98,7 +102,7 @@ namespace FramworkFor3D._3DObjects
                         double x = double.Parse(parts[1]);
                         double y = double.Parse(parts[2]);
 
-                        Point newTextureCoordinates = new Point(x, y);
+                        Point newTextureCoordinates = new Point(x, -y);
                         texture.Add(newTextureCoordinates);
                     }
                     if (parts[0] == "vn" && parts[1] == "")
@@ -131,17 +135,31 @@ namespace FramworkFor3D._3DObjects
                             int index2INT = int.Parse(index2[0]) - 1;
                             int index3INT = int.Parse(index3[0]) - 1;
                             int index4INT = int.Parse(index4[0]) - 1;
+
+                            int indexTexture1 = int.Parse(index1[1]) - 1;
+                            int indexTexture2 = int.Parse(index2[1]) - 1;
+                            int indexTexture3 = int.Parse(index3[1]) - 1;
+                            int indexTexture4 = int.Parse(index4[1]) - 1;
+
+
                             indices.Add(index1INT);
+                            allTexture.Add(texture[indexTexture1]);
+
 
                             indices.Add(index2INT);
+                            allTexture.Add(texture[indexTexture2]);
+
 
                             indices.Add(index3INT);
+                            allTexture.Add(texture[indexTexture3]);
                             indices.Add(index1INT);
+                            allTexture.Add(texture[indexTexture1]);
                             indices.Add(index3INT);
-
+                            allTexture.Add(texture[indexTexture3]);
                             indices.Add(index4INT);
+                            allTexture.Add(texture[indexTexture4]);
 
-                            
+
                         }
                         if (parts[0] == "f" && parts[1] == "")
                         {
@@ -154,15 +172,30 @@ namespace FramworkFor3D._3DObjects
                             int index2INT = int.Parse(index2[0]) - 1;
                             int index3INT = int.Parse(index3[0]) - 1;
                             int index4INT = int.Parse(index4[0]) - 1;
-                            indices.Add(index1INT);
 
+                            int indexTexture1 = int.Parse(index1[1]) - 1;
+                            int indexTexture2 = int.Parse(index2[1]) - 1;
+                            int indexTexture3 = int.Parse(index3[1]) - 1;
+                            int indexTexture4 = int.Parse(index4[1]) - 1;
+
+                            indices.Add(index1INT);
                             indices.Add(index2INT);
-
                             indices.Add(index3INT);
+                            allTexture.Add(texture[indexTexture1]);
+                            allTexture.Add(texture[indexTexture2]);
+                            allTexture.Add(texture[indexTexture3]);
+
+                            
+                     
                             indices.Add(index1INT);
+                          
                             indices.Add(index3INT);
-
                             indices.Add(index4INT);
+                            allTexture.Add(texture[indexTexture1]);
+                            allTexture.Add(texture[indexTexture3]);
+                            allTexture.Add(texture[indexTexture4]);
+                            
+                            
                         }
                     }
                     else
@@ -178,11 +211,18 @@ namespace FramworkFor3D._3DObjects
                                 int index1INT = int.Parse(index1[0]) - 1;
                                 int index2INT = int.Parse(index2[0]) - 1;
                                 int index3INT = int.Parse(index3[0]) - 1;
+
+                                int indexTexture1 = int.Parse(index1[1]) - 1;
+                                int indexTexture2 = int.Parse(index2[1]) - 1;
+                                int indexTexture3 = int.Parse(index3[1]) - 1;
+
                                 indices.Add(index1INT);
+                                allTexture.Add(texture[indexTexture1]);
 
                                 indices.Add(index2INT);
-
+                                allTexture.Add(texture[indexTexture2]);
                                 indices.Add(index3INT);
+                                allTexture.Add(texture[indexTexture3]);
 
                             }
                             if (parts[0] == "f" && parts[1] == "")
@@ -194,11 +234,18 @@ namespace FramworkFor3D._3DObjects
                                 int index1INT = int.Parse(index1[0]) - 1;
                                 int index2INT = int.Parse(index2[0]) - 1;
                                 int index3INT = int.Parse(index3[0]) - 1;
+
+                                int indexTexture1 = int.Parse(index1[1]) - 1;
+                                int indexTexture2 = int.Parse(index2[1]) - 1;
+                                int indexTexture3 = int.Parse(index3[1]) - 1;
+
                                 indices.Add(index1INT);
+                                allTexture.Add(texture[indexTexture1]);
 
                                 indices.Add(index2INT);
-
+                                allTexture.Add(texture[indexTexture2]);
                                 indices.Add(index3INT);
+                                allTexture.Add(texture[indexTexture3]);
 
                             }
 
@@ -208,22 +255,68 @@ namespace FramworkFor3D._3DObjects
                                 string[] index2 = parts[2].Split('/');
                                 string[] index3 = parts[3].Split('/');
                                 string[] index4 = parts[4].Split('/');
+                                int indexTexture1 = 0;
+                                int indexTexture2 = 0;
+                                int indexTexture3 = 0;
+                                int indexTexture4 = 0;
+
+                                //cazul in care avem "// " in f 
+
 
                                 int index1INT = int.Parse(index1[0]) - 1;
                                 int index2INT = int.Parse(index2[0]) - 1;
                                 int index3INT = int.Parse(index3[0]) - 1;
                                 int index4INT = int.Parse(index4[0]) - 1;
+                                if (index1.Length == 1 && index2.Length == 1 && index3.Length == 1 && index4.Length == 1)
+                                {
+                                    indices.Add(index1INT);
+                                    indices.Add(index2INT);
+                                    indices.Add(index3INT);
 
-                                indices.Add(index1INT);
+                                    indices.Add(index1INT);
+                                    indices.Add(index3INT);
+                                    indices.Add(index4INT);
+                                }
+                                else
+                                {
+                                    if (index1[1] == "" || index2[1] == "" || index3[1] == "" || index4[1] == "")
+                                    {
+                                        index1[1] = "0";
+                                        index2[1] = "0";
+                                        index3[1] = "0";
+                                        index4[1] = "0";
+                                    }
+                                    else
+                                    {
+                                        indexTexture1 = int.Parse(index1[1]) - 1;
+                                        indexTexture2 = int.Parse(index2[1]) - 1;
+                                        indexTexture3 = int.Parse(index3[1]) - 1;
+                                        indexTexture4 = int.Parse(index4[1]) - 1;
 
-                                indices.Add(index2INT);
-
-                                indices.Add(index3INT);
-                                indices.Add(index1INT);
-                                indices.Add(index3INT);
-                                indices.Add(index4INT);
+                                        indices.Add(index1INT);
+                                        allTexture.Add(texture[indexTexture1]);
 
 
+                                        indices.Add(index2INT);
+                                        allTexture.Add(texture[indexTexture2]);
+
+
+                                        indices.Add(index3INT);
+                                        allTexture.Add(texture[indexTexture3]);
+                                       indices.Add(index1INT);
+                                        allTexture.Add(texture[indexTexture1]);
+                                        indices.Add(index3INT);
+                                        allTexture.Add(texture[indexTexture3]);
+                                        indices.Add(index4INT);
+                                       allTexture.Add(texture[indexTexture4]);
+
+                                       
+
+
+
+
+                                    }
+                                }
                             }
                         }
                         else
@@ -239,12 +332,19 @@ namespace FramworkFor3D._3DObjects
                                     int index1INT = int.Parse(index1[0]) - 1;
                                     int index2INT = int.Parse(index2[0]) - 1;
                                     int index3INT = int.Parse(index3[0]) - 1;
+
+
+                                    int indexTexture1 = int.Parse(index1[1]) - 1;
+                                    int indexTexture2 = int.Parse(index2[1]) - 1;
+                                    int indexTexture3 = int.Parse(index3[1]) - 1;
+
                                     indices.Add(index1INT);
+                                    allTexture.Add(texture[indexTexture1]);
 
                                     indices.Add(index2INT);
-
+                                    allTexture.Add(texture[indexTexture2]);
                                     indices.Add(index3INT);
-
+                                    allTexture.Add(texture[indexTexture3]);
                                 }
                             }
                         }
@@ -257,24 +357,31 @@ namespace FramworkFor3D._3DObjects
 
             //mesh.Normals = normals;
             mesh.TriangleIndices = indices;
-            mesh.TextureCoordinates = texture;
-            double scale = 0.05;
-            //for (int i = 0; i < vertices.Count; i++)
-            //{
-            //    Point3D originalPosition = vertices[i];
-            //    Point3D scaledPosition = new Point3D(originalPosition.X * scale, originalPosition.Y * scale, originalPosition.Z * scale);
+            mesh.TextureCoordinates = allTexture;
+            double scale = 0.5;
+            for (int i = 0; i < vertices.Count; i++)
+            {
+                Point3D originalPosition = vertices[i];
+                Point3D scaledPosition = new Point3D(originalPosition.X * scale, originalPosition.Y * scale, originalPosition.Z * scale);
 
-            //    vertices[i] = scaledPosition;
-            //}
+                vertices[i] = scaledPosition;
+            }
             mesh.Positions = vertices;
-         
+            
             DiffuseMaterial material = new DiffuseMaterial();
+            GeometryModel3D model = new GeometryModel3D();
             material.Brush = Brushes.LightGray;
+            if (havemtl)
 
-            GeometryModel3D model = new GeometryModel3D(mesh, materials);
+            {  model = new GeometryModel3D(mesh, materials); }
+            else
+            {
+                model = new GeometryModel3D(mesh, material);
+            }
             Model3DGroup lightAndGeometry = new Model3DGroup();
-            lightAndGeometry.Children.Add(lightOfIrregular.Content);
+          
             lightAndGeometry.Children.Add(model);
+            lightAndGeometry.Children.Add(lightOfIrregular.Content);
             ModelVisual3D irregular = new ModelVisual3D();
             irregular.Content = lightAndGeometry;
            Content = irregular.Content;
@@ -288,13 +395,15 @@ namespace FramworkFor3D._3DObjects
             string currentMaterialName = "";
             System.Windows.Media.Color ka=Colors.White, kd=Colors.White, ks = Colors.White;
             double ns=0.0, ni=0.0, d = 0.0, illum = 0.0;
-            string map_Kd="";
+            string map_Kd="",map_Ka="";
+            string directory=Path.GetDirectoryName(fileName);
             using (StreamReader reader = new StreamReader(fileName))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
                     string[] parts = line.Split(' ');
+                    DiffuseMaterial mat = new DiffuseMaterial();
                     if (parts[0] == "newmtl")
                     {
                         currentMaterialName = parts[1];
@@ -341,20 +450,43 @@ namespace FramworkFor3D._3DObjects
                     if (parts[0] == "map_Kd")
                     {
                         map_Kd = parts[1];
+                       
                     
                         
                      
                         
+                    }
+                    if (parts[0] == "map_Ka")
+                    {
+                        map_Ka = parts[1];
+                 
+
+
+
+
                     }
                 }
             }
             return currentMaterial;
      
         }
-        #endregion
+        private  ImageBrush LoadTexture(string textureFilePath)
+        {
+            if (!File.Exists(textureFilePath))
+            {
+                // Tratarea erorii dacă fișierul texturii nu există
+                return null;
+            }
 
-        #region BasicTransformations
-        public void Rotate(double angle, Vector3D axis)
+            BitmapImage bitmapImage = new BitmapImage(new Uri(textureFilePath));
+            ImageBrush imageBrush = new ImageBrush(bitmapImage);
+            return imageBrush;
+        }
+    
+    #endregion
+
+    #region BasicTransformations
+    public void Rotate(double angle, Vector3D axis)
         {//rotatie indiferent de axa 
             AxisAngleRotation3D axisS = new AxisAngleRotation3D(axis, angle);
             RotateTransform3D rotate = new RotateTransform3D(axisS);

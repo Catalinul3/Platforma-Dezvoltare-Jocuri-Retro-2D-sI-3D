@@ -187,7 +187,7 @@ namespace FramworkFor3D.Commands
 
                     obj.Rotate(90, new Vector3D(1, 0, 0));
                     transformGroup.Children.Add(obj.Transform);
-                    TranslateTransform3D center = new TranslateTransform3D(1, 2.4, 1.3);
+                    TranslateTransform3D center = new TranslateTransform3D(2, 2.4, 0);
 
                     transformGroup.Children.Add(center);
 
@@ -540,7 +540,7 @@ namespace FramworkFor3D.Commands
 
         private void SetMaterial(object s, RoutedEventArgs ev, Viewport3D environment, UIElement3D objs, ObjectType type)
         {
-            string fileName = FileHelpers.LoadMaterialDialog("Select material of model");
+            string fileName = FileHelpers.LoadImageDialog("Select material of model");
 
             if (fileName != null)
             {
@@ -554,7 +554,10 @@ namespace FramworkFor3D.Commands
                         if (model3D is GeometryModel3D geometryModel)
                         {
 
-                           
+                            ImageBrush image = new ImageBrush();
+                            image.ImageSource = new BitmapImage(new Uri(fileName));
+                            DiffuseMaterial newMaterial = new DiffuseMaterial(image);
+                            geometryModel.Material = newMaterial;
                            
                         }
                     }
