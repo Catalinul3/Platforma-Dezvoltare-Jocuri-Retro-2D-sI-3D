@@ -41,7 +41,7 @@ namespace FramworkFor3D._3DObjects
         private void read3dObject(string filePath)
         {
 
-            DirectionalLight light = new DirectionalLight(Colors.White,new Vector3D(-1,-1,-1));
+            DirectionalLight light = new DirectionalLight(Colors.White,new Vector3D(-1,-1,-2));
             ModelVisual3D lightOfIrregular = new ModelVisual3D();
             bool havemtl = false;
             lightOfIrregular.Content = light;
@@ -143,21 +143,23 @@ namespace FramworkFor3D._3DObjects
 
 
                             indices.Add(index1INT);
-                            allTexture.Add(texture[indexTexture1]);
+                            
 
 
                             indices.Add(index2INT);
-                            allTexture.Add(texture[indexTexture2]);
+                            
 
 
                             indices.Add(index3INT);
-                            allTexture.Add(texture[indexTexture3]);
+                          
                             indices.Add(index1INT);
-                            allTexture.Add(texture[indexTexture1]);
+                           
                             indices.Add(index3INT);
-                            allTexture.Add(texture[indexTexture3]);
+                           
                             indices.Add(index4INT);
-                            allTexture.Add(texture[indexTexture4]);
+
+                          
+                            
 
 
                         }
@@ -181,9 +183,7 @@ namespace FramworkFor3D._3DObjects
                             indices.Add(index1INT);
                             indices.Add(index2INT);
                             indices.Add(index3INT);
-                            allTexture.Add(texture[indexTexture1]);
-                            allTexture.Add(texture[indexTexture2]);
-                            allTexture.Add(texture[indexTexture3]);
+                           
 
                             
                      
@@ -191,11 +191,12 @@ namespace FramworkFor3D._3DObjects
                           
                             indices.Add(index3INT);
                             indices.Add(index4INT);
-                            allTexture.Add(texture[indexTexture1]);
-                            allTexture.Add(texture[indexTexture3]);
-                            allTexture.Add(texture[indexTexture4]);
-                            
-                            
+                       
+
+
+
+
+
                         }
                     }
                     else
@@ -217,12 +218,15 @@ namespace FramworkFor3D._3DObjects
                                 int indexTexture3 = int.Parse(index3[1]) - 1;
 
                                 indices.Add(index1INT);
-                                allTexture.Add(texture[indexTexture1]);
+                               
 
                                 indices.Add(index2INT);
-                                allTexture.Add(texture[indexTexture2]);
+                                
                                 indices.Add(index3INT);
-                                allTexture.Add(texture[indexTexture3]);
+                            
+                                
+
+
 
                             }
                             if (parts[0] == "f" && parts[1] == "")
@@ -240,12 +244,13 @@ namespace FramworkFor3D._3DObjects
                                 int indexTexture3 = int.Parse(index3[1]) - 1;
 
                                 indices.Add(index1INT);
-                                allTexture.Add(texture[indexTexture1]);
+                               
 
                                 indices.Add(index2INT);
-                                allTexture.Add(texture[indexTexture2]);
+                               
                                 indices.Add(index3INT);
-                                allTexture.Add(texture[indexTexture3]);
+                        
+                              
 
                             }
 
@@ -276,6 +281,8 @@ namespace FramworkFor3D._3DObjects
                                     indices.Add(index1INT);
                                     indices.Add(index3INT);
                                     indices.Add(index4INT);
+                           
+
                                 }
                                 else
                                 {
@@ -294,23 +301,25 @@ namespace FramworkFor3D._3DObjects
                                         indexTexture4 = int.Parse(index4[1]) - 1;
 
                                         indices.Add(index1INT);
-                                        allTexture.Add(texture[indexTexture1]);
+                                       
 
 
                                         indices.Add(index2INT);
-                                        allTexture.Add(texture[indexTexture2]);
+                                        
 
 
                                         indices.Add(index3INT);
-                                        allTexture.Add(texture[indexTexture3]);
+                                     
                                        indices.Add(index1INT);
-                                        allTexture.Add(texture[indexTexture1]);
+                                      
                                         indices.Add(index3INT);
-                                        allTexture.Add(texture[indexTexture3]);
-                                        indices.Add(index4INT);
-                                       allTexture.Add(texture[indexTexture4]);
-
                                        
+                                        indices.Add(index4INT);
+                                  
+
+
+
+
 
 
 
@@ -339,12 +348,14 @@ namespace FramworkFor3D._3DObjects
                                     int indexTexture3 = int.Parse(index3[1]) - 1;
 
                                     indices.Add(index1INT);
-                                    allTexture.Add(texture[indexTexture1]);
+                                   
 
                                     indices.Add(index2INT);
-                                    allTexture.Add(texture[indexTexture2]);
+                                   
                                     indices.Add(index3INT);
-                                    allTexture.Add(texture[indexTexture3]);
+                             
+                                  
+
                                 }
                             }
                         }
@@ -357,6 +368,11 @@ namespace FramworkFor3D._3DObjects
 
             //mesh.Normals = normals;
             mesh.TriangleIndices = indices;
+            allTexture = texture;
+            for (int i = texture.Count - 1; i >= 0; i--)
+            {
+                allTexture.Add(texture[i]);
+            }
             mesh.TextureCoordinates = allTexture;
             double scale = 0.5;
             for (int i = 0; i < vertices.Count; i++)
