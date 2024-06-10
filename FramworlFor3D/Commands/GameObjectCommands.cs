@@ -187,7 +187,7 @@ namespace FramworkFor3D.Commands
 
                     obj.Rotate(90, new Vector3D(1, 0, 0));
                     transformGroup.Children.Add(obj.Transform);
-                    TranslateTransform3D center = new TranslateTransform3D(2, 2.4, 0);
+                    TranslateTransform3D center = new TranslateTransform3D(2, 2.4, 1);
 
                     transformGroup.Children.Add(center);
 

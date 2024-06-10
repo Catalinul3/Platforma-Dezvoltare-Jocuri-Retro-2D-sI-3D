@@ -53,8 +53,6 @@ namespace FramworkFor3D._3DObjects
             materials= new MaterialGroup();
             allTexture = new PointCollection();
 
-            
-
             using (StreamReader reader = new StreamReader(filePath))
             {
                 string line;
@@ -94,7 +92,7 @@ namespace FramworkFor3D._3DObjects
                         double x = double.Parse(parts[2]);
                         double y = double.Parse(parts[3]);
 
-                        Point newTextureCoordinates = new Point(x, -y);
+                        Point newTextureCoordinates = new Point(x, 1-y);
                         texture.Add(newTextureCoordinates);
                     }
                     if (parts[0] == "vt" && parts[1] != "")
@@ -102,7 +100,7 @@ namespace FramworkFor3D._3DObjects
                         double x = double.Parse(parts[1]);
                         double y = double.Parse(parts[2]);
 
-                        Point newTextureCoordinates = new Point(x, -y);
+                        Point newTextureCoordinates = new Point(x, 1-y);
                         texture.Add(newTextureCoordinates);
                     }
                     if (parts[0] == "vn" && parts[1] == "")
@@ -191,11 +189,6 @@ namespace FramworkFor3D._3DObjects
                           
                             indices.Add(index3INT);
                             indices.Add(index4INT);
-                       
-
-
-
-
 
                         }
                     }
@@ -315,13 +308,6 @@ namespace FramworkFor3D._3DObjects
                                         indices.Add(index3INT);
                                        
                                         indices.Add(index4INT);
-                                  
-
-
-
-
-
-
 
 
                                     }

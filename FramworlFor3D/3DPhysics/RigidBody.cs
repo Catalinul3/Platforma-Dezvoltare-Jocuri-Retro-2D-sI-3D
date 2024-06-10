@@ -35,7 +35,7 @@ namespace FramworkFor3D._3DPhysics
         bool colliding = false;
        float force = 0.0f;
         double jumpVelocity = 10.0f;
-        double restitution = 1f;
+        double restitution = 0.5f;
         double jumpVelocityCopied = 10.0f;
         float acceleration = 0.0f;
         public float Mass
