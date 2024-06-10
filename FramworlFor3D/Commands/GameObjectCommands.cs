@@ -258,6 +258,8 @@ namespace FramworkFor3D.Commands
             collider.Header = "Collider";
             MenuItem colliderModify = new MenuItem();
             colliderModify.Header = "Modify Collider";
+            MenuItem sound = new MenuItem();
+            sound.Header = "Add Sound";
             collider.Items.Add(colliderModify);
             rigidBody.Items.Add(solidBody);
             rigidBody.Items.Add(elasticBody);
@@ -279,6 +281,7 @@ namespace FramworkFor3D.Commands
                 addForce.Click += (s, ev) => Force(s, ev, environment, clickedObject, cubeInteractive);
             }
             colliderModify.Click += (s, ev) => ModifyCollider(s, ev, environment, clickedObject);
+            sound.Click += (s, ev) => Sound(s, ev, clickedObject);
             context.Items.Add(delete);
             context.Items.Add(addMaterial);
             context.Items.Add(applyPhisycs);
@@ -427,6 +430,8 @@ namespace FramworkFor3D.Commands
             collider.Header = "Collider";
             MenuItem colliderModify = new MenuItem();
             colliderModify.Header = "Modify Collider";
+            MenuItem sound = new MenuItem();
+            sound.Header = "Add Sound";
             collider.Items.Add(colliderModify);
             rigidBody.Items.Add(solidBody);
             rigidBody.Items.Add(elasticBody);
@@ -443,6 +448,7 @@ namespace FramworkFor3D.Commands
             { addForce.Click += (s, ev) => Force(s, ev, environment, clickedSphere, cubeInteractive); }
             if (objInteractive != null) { addForce.Click += (s, ev) => Force(s, ev, environment, clickedSphere, objInteractive); }
             colliderModify.Click += (s, ev) => ModifyCollider(s, ev, environment, clickedSphere);
+            sound.Click += (s, ev) => Sound(s, ev, clickedSphere);
             context.Items.Add(delete);
             context.Items.Add(addMaterial);
             context.Items.Add(applyPhisycs);
@@ -655,7 +661,6 @@ namespace FramworkFor3D.Commands
             MessageBox.Show("Object deleted ");
             SoundManager.stop("sound3");
         }
-
 
         #endregion
     }
