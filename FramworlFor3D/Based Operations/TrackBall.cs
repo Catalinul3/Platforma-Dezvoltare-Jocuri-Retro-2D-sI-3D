@@ -59,7 +59,7 @@ namespace FramworkFor3D.Based_Operations
         public Matrix3D ZoomCamera(double deltaZoom)
         {
             Matrix3D zoom=new Matrix3D();
-            zoom.Translate(new Vector3D(0, 0, deltaZoom));
+            zoom.Translate(new Vector3D(0, deltaZoom, deltaZoom));
             return zoom;
 
         }

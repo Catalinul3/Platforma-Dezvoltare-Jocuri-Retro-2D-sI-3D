@@ -603,11 +603,13 @@ namespace FramworkFor3D.Commands
                 Audio player = new Audio();
                 player.LoadSound("fall", audio);
                 player.Play("fall");
+                addSound= false;
             }
             _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(10, this);
             if (obj.Transform.Value.OffsetZ > 0)
             {
                 rigid.Start(obj, type);
+
             }
          
 
