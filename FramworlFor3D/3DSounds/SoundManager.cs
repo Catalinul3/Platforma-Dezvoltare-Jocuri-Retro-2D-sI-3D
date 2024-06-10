@@ -1,37 +1,70 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace FramworkFor3D._3DSounds
 {
-   public class SoundManager
+    public class SoundManager
     {
         List<Audio> audioClips;
-                public SoundManager()
+        List<BackgroundMusic> backClip;
+        public SoundManager()
         {
             audioClips = new List<Audio>();
+            backClip = new List<BackgroundMusic>();
         }
-        public void LoadSound(string key, string fileName)
+        public void AddMusic(BackgroundMusic music)
         {
-            Audio audio = new Audio();
-            audio.LoadSound(key, fileName);
-            audioClips.Add(audio);
+            backClip.Add(music);
         }
-        public void Play(string key)
+        public void AddSound(Audio clip)
         {
-            foreach (Audio audio in audioClips)
+            audioClips.Add(clip);
+        }
+        public void RemoveSound(Audio clip)
+        {
+            audioClips.Remove(clip);
+        }
+        public void RemoveSound(BackgroundMusic music)
+        {
+            backClip.Remove(music);
+        }
+        public void PlaySound(string tag)
+        {
+
+            foreach (var clip in audioClips)
             {
-                audio.Play(key);
+                if (clip.getKey(tag))
+                {
+                    clip.Play(tag); break;
+                }
+            }
+            ;
+        }
+        public void stop(string tag)
+        {
+
+            foreach (var clip in audioClips)
+            {
+                if (clip.getKey(tag))
+                {
+                    clip.Stop(tag);
+                }
             }
         }
-        public void AdjustVolume(int volume, string key)
+        public void looping(string tag)
         {
-            foreach (Audio audio in audioClips)
+            foreach (var clip in audioClips)
             {
-                audio.AdjustVolume(volume, key);
+                if (clip.getKey(tag))
+                {
+                    clip.Looping(tag);
+                }
             }
         }
+
     }
 }

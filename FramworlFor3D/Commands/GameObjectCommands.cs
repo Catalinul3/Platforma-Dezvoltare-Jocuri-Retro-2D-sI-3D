@@ -10,6 +10,7 @@ using RetroEngine.Helpers;
 using RetroEngine.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -52,6 +53,7 @@ namespace FramworkFor3D.Commands
         UIElement3D cubeInteractive, sphereInteractive, objInteractive;
         DispatcherTimer timer;
         Rect3D cubeBounds, sphereBounds, objBounds;
+        SoundManager SoundManager;
 
         bool addSound = false;
         public Rect3D CubeBounds
@@ -97,6 +99,7 @@ namespace FramworkFor3D.Commands
         {
             _mainVM = mainVM;
             _objects = new List<UIElement3D>();
+            SoundManager = new SoundManager();
 
 
         }
@@ -233,6 +236,7 @@ namespace FramworkFor3D.Commands
 
                 }
             }
+
             type = ObjectType.IRREGULAR;
             #region Context Menu
             ContextMenu context = new ContextMenu();
@@ -290,6 +294,7 @@ namespace FramworkFor3D.Commands
             Point mouse = e.GetPosition(environment);
             var hitTestResult = VisualTreeHelper.HitTest(environment, mouse);
             var clickedCube = hitTestResult.VisualHit as UIElement3D;
+            
 
             if (hitTestResult != null && hitTestResult.VisualHit is UIElement3D hit)
             {
@@ -308,6 +313,7 @@ namespace FramworkFor3D.Commands
             }
             #region Context Menu
             type = ObjectType.CUBE;
+     
             ContextMenu context = new ContextMenu();
             MenuItem delete = new MenuItem();
             delete.Header = "Delete";
@@ -366,7 +372,17 @@ namespace FramworkFor3D.Commands
         private void Sound(object s, RoutedEventArgs ev, UIElement3D clickedCube)
         {
             addSound = true;
-    
+            string[] audio = FileHelpers.LoadSoundDialog("Add audio on object");
+            Audio clip = new Audio();
+            clip.LoadSound("sound1", audio[0]);
+            SoundManager.AddSound(clip);
+            clip.LoadSound("sound2", audio[1]);
+            SoundManager.AddSound(clip);
+            clip.LoadSound("sound3", audio[2]);
+            SoundManager.AddSound(clip);
+
+
+
         }
 
         private void SpherePressed(object sender, MouseEventArgs e, Viewport3D environment)
@@ -599,17 +615,21 @@ namespace FramworkFor3D.Commands
             }
             if (addSound)
             {
-                string audio = FileHelpers.LoadSoundDialog("Add audio on object");
-                Audio player = new Audio();
-                player.LoadSound("fall", audio);
-                player.Play("fall");
-                addSound= false;
+              
+              //  collision.LoadSound("collision", audio[1]);
+                SoundManager.looping("sound3");
+              
+                //SoundManager.AddSound(collision);
+               
+                
+                
+               
             }
             _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(10, this);
             if (obj.Transform.Value.OffsetZ > 0)
             {
                 rigid.Start(obj, type);
-
+                
             }
          
 
@@ -633,6 +653,7 @@ namespace FramworkFor3D.Commands
             environment.Children.Remove(obj);
             objects.Remove(obj);
             MessageBox.Show("Object deleted ");
+            SoundManager.stop("sound3");
         }
 
 

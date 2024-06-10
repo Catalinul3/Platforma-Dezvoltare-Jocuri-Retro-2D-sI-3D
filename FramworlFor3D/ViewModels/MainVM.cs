@@ -1,10 +1,12 @@
 ﻿using BulletSharp;
+using FramworkFor3D._3DSounds;
 using FramworkFor3D.Commands;
 using FramworkFor3D.helpers;
 using FramworkFor3D.Models;
 using FramworkFor3D.ViewModels.TreeViewVM;
 using FramworlFor3D.helpers;
 using MDriven.WPF.Media3D;
+using RetroEngine.Helpers;
 using RetroEngine.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -77,7 +79,10 @@ namespace FramworlFor3D.ViewModels
        
             //components.Add(camera);
             //components.Add(scene);
-            
+            BackgroundMusic background=new BackgroundMusic();
+            string[] music = Music();
+            background.LoadMusic("background1", music[1]);
+            background.play("background1");
             
         }
         #endregion
@@ -103,7 +108,11 @@ namespace FramworlFor3D.ViewModels
             Camera.Transform = updateConfig;
         }
 
-
+        public string[] Music()
+        {
+            string[] name = FileHelpers.LoadMusicDialog("Load background music");
+            return name;
+        }
 
         #endregion
 

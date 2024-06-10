@@ -48,16 +48,30 @@ namespace RetroEngine.Helpers
 
             return fileDialog.FileName;
         }
-        public static string LoadSoundDialog(string title)
+        public static string[] LoadSoundDialog(string title)
         {
             OpenFileDialog fileDialog = new OpenFileDialog
             {
                 Title = title,
-                Filter = "Sounds (*mp3, *wav)| *mp3; *wav"
+                Filter = "Sounds ( *wav)| ; *wav"
+                ,
+                Multiselect= true
         };
             if (fileDialog.ShowDialog() == false || fileDialog.FileName.CompareTo("") == 0)
                 return null;
-            return fileDialog.FileName;
+            return fileDialog.FileNames;
+        }
+        public static string[] LoadMusicDialog(string title)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog
+            {
+                Title = title,
+                Filter = "Music (*wav, *mp3, *mp4)| *wav;*mp3;*mp4",
+                Multiselect = true
+            };
+            if (fileDialog.ShowDialog() == false || fileDialog.FileName.CompareTo("") == 0)
+                return null;
+            return fileDialog.FileNames;
         }
     }
 }

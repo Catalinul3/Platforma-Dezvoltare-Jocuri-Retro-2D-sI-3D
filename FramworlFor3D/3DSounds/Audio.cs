@@ -13,19 +13,31 @@ namespace FramworkFor3D._3DSounds
     public class Audio
     {
 
-        private Dictionary<string, MediaPlayer> _useSounds;
+        private Dictionary<string, SoundPlayer> _useSounds;
+        public Dictionary<string, SoundPlayer> useSounds
+        {
+            get
+            {
+                return _useSounds;
+            }
+            set
+            {
+                this._useSounds = value;
+            }
+        }
        
         public Audio()
-        {    _useSounds=new Dictionary<string, MediaPlayer>();
+        {    _useSounds=new Dictionary<string, SoundPlayer>();
             
         }
+    
         public void LoadSound(string key,string fileName)
 
         {
             if(!_useSounds.ContainsKey(key))
             {
-                MediaPlayer player = new MediaPlayer();
-                player.Open(new Uri(fileName));
+               SoundPlayer player = new SoundPlayer(fileName);
+                player.Load();
                 _useSounds[key] = player;
             }
         }
@@ -33,17 +45,40 @@ namespace FramworkFor3D._3DSounds
         {
             if (_useSounds.ContainsKey(key))
             {
-                MediaPlayer player = _useSounds[key];
+                SoundPlayer player = _useSounds[key];
                 player.Play();
             }
         }
-        public void AdjustVolume(int volume,string key)
+        
+        public void Stop(string key)
         {
-            if(_useSounds.ContainsKey(key))
+            if (_useSounds.ContainsKey(key))
             {
-                MediaPlayer player = _useSounds[key];
-                player.Volume = volume;
+                SoundPlayer player = _useSounds[key];
+                player.Stop();
             }
+        }   
+        
+    
+        public void Looping(string key)
+        {
+            if (_useSounds.ContainsKey(key))
+            {
+                SoundPlayer player = _useSounds[key];
+                player.PlayLooping();
+            }
+        }
+  
+        public bool getKey(string tags)
+        {
+           foreach(string data in _useSounds.Keys)
+            {
+if (data == tags)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
