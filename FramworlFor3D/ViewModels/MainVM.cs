@@ -44,12 +44,14 @@ namespace FramworlFor3D.ViewModels
                 NotifyPropertyChanged(nameof(Margins));
             }
         }
+        private SoundManager sounds { get; set; }
         #endregion
 
         #region Constructors
         public MainVM()
         {
             Scenes scenes = new Scenes();
+            sounds = new SoundManager();
            
             List<ModelVisual3D> root = scenes.getGrid();
             SetCamera();
@@ -81,8 +83,14 @@ namespace FramworlFor3D.ViewModels
             //components.Add(scene);
             BackgroundMusic background=new BackgroundMusic();
             string[] music = Music();
-            background.LoadMusic("background1", music[1]);
-            background.play("background1");
+           
+            background.LoadMusic("background1", music[0]);
+            sounds.AddMusic(background);
+            background.LoadMusic("background2", music[1]);
+            sounds.AddMusic(background);
+       
+            sounds.playBackground("background1");
+            
             
         }
         #endregion

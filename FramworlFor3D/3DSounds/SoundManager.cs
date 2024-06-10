@@ -32,6 +32,16 @@ namespace FramworkFor3D._3DSounds
         {
             backClip.Remove(music);
         }
+        public void playBackground(string tag)
+        {
+            foreach (var clip in backClip)
+            {
+                if (clip.getKey(tag))
+                {
+                    clip.play(tag); break;
+                }
+            }
+        }
         public void PlaySound(string tag)
         {
 

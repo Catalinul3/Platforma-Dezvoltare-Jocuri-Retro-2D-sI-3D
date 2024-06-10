@@ -33,17 +33,17 @@ namespace FramworkFor3D._3DSounds
             value.MediaOpened += (s, e) =>
             {
                 Console.WriteLine("Music completely succes");
+               
             };
             music.Add(tag, value);
          
         }
         public void play(string name)
         {
-            if (music.ContainsKey(name))
-            {
-                MediaPlayer player = music[name];
+            
+                MediaPlayer player = Music[name];
                 player.Play();
-            }
+            
         }
         public void stop()
         {
@@ -74,6 +74,18 @@ namespace FramworkFor3D._3DSounds
             MediaPlayer player = music[name];
             player.Volume += volume;
         }
+        public MediaPlayer getMusicByTag(string tag)
+        {
+            return music[tag];
+        }
 
+        public bool getKey(string tag)
+        {
+           foreach(var key in music.Keys)
+            {
+                if(key==tag) return true;
+            }
+            return false;
+        }
     }
 }
