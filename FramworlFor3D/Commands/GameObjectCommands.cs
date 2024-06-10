@@ -2,6 +2,7 @@
 using BulletSharp;
 using FramworkFor3D._3DObjects;
 using FramworkFor3D._3DPhysics;
+using FramworkFor3D._3DSounds;
 using FramworkFor3D.helpers;
 using FramworlFor3D.helpers;
 using FramworlFor3D.ViewModels;
@@ -51,6 +52,8 @@ namespace FramworkFor3D.Commands
         UIElement3D cubeInteractive, sphereInteractive, objInteractive;
         DispatcherTimer timer;
         Rect3D cubeBounds, sphereBounds, objBounds;
+
+        bool addSound = false;
         public Rect3D CubeBounds
         {
             get
@@ -324,6 +327,8 @@ namespace FramworkFor3D.Commands
             collider.Header = "Collider";
             MenuItem colliderModify = new MenuItem();
             colliderModify.Header = "Modify Collider";
+            MenuItem sound = new MenuItem();
+            sound.Header = "Add Sound";
             collider.Items.Add(colliderModify);
             rigidBody.Items.Add(solidBody);
             rigidBody.Items.Add(elasticBody);
@@ -345,9 +350,11 @@ namespace FramworkFor3D.Commands
                 addForce.Click += (s, ev) => Force(s, ev, environment, clickedCube, objInteractive);
             }
             colliderModify.Click += (s, ev) => ModifyCollider(s, ev, environment, clickedCube);
+            sound.Click +=(s,ev)=>Sound(s,ev,clickedCube);
             context.Items.Add(delete);
             context.Items.Add(addMaterial);
             context.Items.Add(applyPhisycs);
+            context.Items.Add(sound);
 
 
             context.IsOpen = true;
@@ -355,6 +362,13 @@ namespace FramworkFor3D.Commands
             #endregion
 
         }
+
+        private void Sound(object s, RoutedEventArgs ev, UIElement3D clickedCube)
+        {
+            addSound = true;
+    
+        }
+
         private void SpherePressed(object sender, MouseEventArgs e, Viewport3D environment)
         {
             Point mouse = e.GetPosition(environment);
@@ -416,6 +430,7 @@ namespace FramworkFor3D.Commands
             context.Items.Add(delete);
             context.Items.Add(addMaterial);
             context.Items.Add(applyPhisycs);
+          
 
 
             context.IsOpen = true;
@@ -582,18 +597,19 @@ namespace FramworkFor3D.Commands
 
                 }
             }
+            if (addSound)
+            {
+                string audio = FileHelpers.LoadSoundDialog("Add audio on object");
+                Audio player = new Audio();
+                player.LoadSound("fall", audio);
+                player.Play("fall");
+            }
             _3DPhysics.RigidBody rigid = new _3DPhysics.RigidBody(10, this);
             if (obj.Transform.Value.OffsetZ > 0)
             {
-
-
-
                 rigid.Start(obj, type);
-
-
-
             }
-
+         
 
         }
 
