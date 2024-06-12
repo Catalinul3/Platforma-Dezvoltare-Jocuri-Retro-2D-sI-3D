@@ -1,4 +1,5 @@
 ﻿
+
 using BulletSharp;
 using FramworkFor3D._3DObjects;
 using FramworkFor3D._3DPhysics;
@@ -261,6 +262,8 @@ namespace FramworkFor3D.Commands
             colliderModify.Header = "Modify Collider";
             MenuItem sound = new MenuItem();
             sound.Header = "Add Sound";
+            MenuItem animation = new MenuItem();
+            animation.Header = "Add Animation";
             collider.Items.Add(colliderModify);
             rigidBody.Items.Add(solidBody);
             rigidBody.Items.Add(elasticBody);
@@ -283,10 +286,12 @@ namespace FramworkFor3D.Commands
             }
             colliderModify.Click += (s, ev) => ModifyCollider(s, ev, environment, clickedObject);
             sound.Click += (s, ev) => Sound(s, ev, clickedObject);
+            animation.Click += (s, ev) => Animate(s, ev, clickedObject);
             context.Items.Add(delete);
             context.Items.Add(addMaterial);
             context.Items.Add(applyPhisycs);
             context.Items.Add(sound);
+            context.Items.Add(animation);
 
 
             context.IsOpen = true;
@@ -340,6 +345,9 @@ namespace FramworkFor3D.Commands
             colliderModify.Header = "Modify Collider";
             MenuItem sound = new MenuItem();
             sound.Header = "Add Sound";
+            MenuItem animation = new MenuItem();
+            animation.Header = "Add Animation";
+
             collider.Items.Add(colliderModify);
             rigidBody.Items.Add(solidBody);
             rigidBody.Items.Add(elasticBody);
@@ -362,10 +370,12 @@ namespace FramworkFor3D.Commands
             }
             colliderModify.Click += (s, ev) => ModifyCollider(s, ev, environment, clickedCube);
             sound.Click +=(s,ev)=>Sound(s,ev,clickedCube);
+            animation.Click += (s, ev) => Animate(s, ev, clickedCube);
             context.Items.Add(delete);
             context.Items.Add(addMaterial);
             context.Items.Add(applyPhisycs);
             context.Items.Add(sound);
+            context.Items.Add(animation);
 
 
             context.IsOpen = true;
@@ -374,20 +384,27 @@ namespace FramworkFor3D.Commands
 
         }
 
+        private void Animate(object s, RoutedEventArgs ev, UIElement3D clickedCube)
+        {
+            ModelVisual3D model = InteractiveHelper.ConvertToModel(clickedCube);
+            Animations.Animation animate = new Animation();
+            animate.StartAnimation(model);
+        }
+
         private void Sound(object s, RoutedEventArgs ev, UIElement3D clickedCube)
         {
-            //addSound = true;
-            //string[] audio = FileHelpers.LoadSoundDialog("Add audio on object");
-            //Audio clip = new Audio();
-            //clip.LoadSound("sound1", audio[0]);
-            //SoundManager.AddSound(clip);
-            //clip.LoadSound("sound2", audio[1]);
-            //SoundManager.AddSound(clip);
-            //clip.LoadSound("sound3", audio[2]);
-            //SoundManager.AddSound(clip);
-           
-            Animation animate = new Animation();
-            
+            addSound = true;
+            string[] audio = FileHelpers.LoadSoundDialog("Add audio on object");
+            Audio clip = new Audio();
+            clip.LoadSound("sound1", audio[0]);
+            SoundManager.AddSound(clip);
+            clip.LoadSound("sound2", audio[1]);
+            SoundManager.AddSound(clip);
+            clip.LoadSound("sound3", audio[2]);
+            SoundManager.AddSound(clip);
+
+
+
 
 
         }
@@ -456,7 +473,8 @@ namespace FramworkFor3D.Commands
             context.Items.Add(delete);
             context.Items.Add(addMaterial);
             context.Items.Add(applyPhisycs);
-          
+            context.Items.Add(sound);
+
 
 
             context.IsOpen = true;

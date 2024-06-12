@@ -10,15 +10,10 @@ namespace FramworkFor3D.Animations
     {
         private string _name;
         public string Name { get { return _name; } set { _name = value; } }
-        private double _duration;
-        private List<KeyFrame> _keyFrames;
-        public List<KeyFrame> KeyFrames { get { return _keyFrames; } set { _keyFrames = value; } }
-        public double duration { get { return _duration; } set { _duration = value; } }
+        public List<AnimationFrame> Frames { get; set; }
         public AnimationClip()
         {
-            _name = "Default";
-            _duration = 0;
-            _keyFrames= new List<KeyFrame>();
+            Frames = new List<AnimationFrame>();
         }
     }
 }
