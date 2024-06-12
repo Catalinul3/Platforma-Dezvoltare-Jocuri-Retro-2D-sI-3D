@@ -81,15 +81,15 @@ namespace FramworlFor3D.ViewModels
        
             //components.Add(camera);
             //components.Add(scene);
-            BackgroundMusic background=new BackgroundMusic();
-            string[] music = Music();
+            //BackgroundMusic background=new BackgroundMusic();
+            //string[] music = Music();
            
-            background.LoadMusic("background1", music[0]);
-            sounds.AddMusic(background);
-            background.LoadMusic("background2", music[1]);
-            sounds.AddMusic(background);
+            //background.LoadMusic("background1", music[0]);
+            //sounds.AddMusic(background);
+            //background.LoadMusic("background2", music[1]);
+            //sounds.AddMusic(background);
        
-            sounds.playBackground("background1");
+            //sounds.playBackground("background1");
             
             
         }

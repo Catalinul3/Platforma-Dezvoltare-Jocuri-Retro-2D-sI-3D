@@ -53,6 +53,14 @@
               "target": "Package",
               "version": "[1.0.0, )"
             },
+            "Assimp": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
+            "AssimpNet": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
             "BulletSharp": {
               "target": "Package",
               "version": "[0.11.1, )"

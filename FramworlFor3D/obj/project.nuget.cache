@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "vPR2wa4g8LACrwdJfxDAEvq+gUChx/Q/hD+rlPSLehtuQjl69YvueFG2EYYkVJdvLXyXqX2kPnrNAaKOSgzcBg==",
+  "dgSpecHash": "KVtOwjbyCU2NlMjQ++FDh2UoAfud46rX6iVb/NwkAjQLbkD7lAbTtsiD6mJvpyzKSaENBuzSz58jR1AfD4ogIg==",
   "success": true,
   "projectFilePath": "D:\\GitHub\\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\\FramworlFor3D\\FramworkFor3D.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\zcata\\.nuget\\packages\\3dtools\\1.0.0\\3dtools.1.0.0.nupkg.sha512",
+    "C:\\Users\\zcata\\.nuget\\packages\\assimp\\3.0.0\\assimp.3.0.0.nupkg.sha512",
+    "C:\\Users\\zcata\\.nuget\\packages\\assimp.redist\\3.0.0\\assimp.redist.3.0.0.nupkg.sha512",
+    "C:\\Users\\zcata\\.nuget\\packages\\assimpnet\\4.1.0\\assimpnet.4.1.0.nupkg.sha512",
     "C:\\Users\\zcata\\.nuget\\packages\\bulletsharp\\0.11.1\\bulletsharp.0.11.1.nupkg.sha512",
     "C:\\Users\\zcata\\.nuget\\packages\\ecocore\\7.0.0.15507\\ecocore.7.0.0.15507.nupkg.sha512",
     "C:\\Users\\zcata\\.nuget\\packages\\ecowpf\\7.0.0.15507\\ecowpf.7.0.0.15507.nupkg.sha512",

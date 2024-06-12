@@ -53,7 +53,7 @@ namespace RetroEngine.Helpers
             OpenFileDialog fileDialog = new OpenFileDialog
             {
                 Title = title,
-                Filter = "Sounds ( *wav)| ; *wav"
+                Filter = "Sounds Files ( *wav)| ; *wav"
                 ,
                 Multiselect= true
         };
@@ -66,12 +66,24 @@ namespace RetroEngine.Helpers
             OpenFileDialog fileDialog = new OpenFileDialog
             {
                 Title = title,
-                Filter = "Music (*wav, *mp3, *mp4)| *wav;*mp3;*mp4",
+                Filter = "Music Files (*wav, *mp3, *mp4)| *wav;*mp3;*mp4",
                 Multiselect = true
             };
             if (fileDialog.ShowDialog() == false || fileDialog.FileName.CompareTo("") == 0)
                 return null;
             return fileDialog.FileNames;
+        }
+        public static string loadFBXDialog(string title)
+        {
+            OpenFileDialog fileDialog=new OpenFileDialog
+            {
+                Title = title,
+                Filter = "FBX files (*.fbx)| *fbx"
+               
+            };
+            if (fileDialog.ShowDialog() == false || fileDialog.FileName.CompareTo("") == 0)
+                return null;
+            return fileDialog.FileName;
         }
     }
 }

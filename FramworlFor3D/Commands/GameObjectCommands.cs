@@ -3,6 +3,7 @@ using BulletSharp;
 using FramworkFor3D._3DObjects;
 using FramworkFor3D._3DPhysics;
 using FramworkFor3D._3DSounds;
+using FramworkFor3D.Animations;
 using FramworkFor3D.helpers;
 using FramworlFor3D.helpers;
 using FramworlFor3D.ViewModels;
@@ -285,6 +286,7 @@ namespace FramworkFor3D.Commands
             context.Items.Add(delete);
             context.Items.Add(addMaterial);
             context.Items.Add(applyPhisycs);
+            context.Items.Add(sound);
 
 
             context.IsOpen = true;
@@ -374,16 +376,18 @@ namespace FramworkFor3D.Commands
 
         private void Sound(object s, RoutedEventArgs ev, UIElement3D clickedCube)
         {
-            addSound = true;
-            string[] audio = FileHelpers.LoadSoundDialog("Add audio on object");
-            Audio clip = new Audio();
-            clip.LoadSound("sound1", audio[0]);
-            SoundManager.AddSound(clip);
-            clip.LoadSound("sound2", audio[1]);
-            SoundManager.AddSound(clip);
-            clip.LoadSound("sound3", audio[2]);
-            SoundManager.AddSound(clip);
-
+            //addSound = true;
+            //string[] audio = FileHelpers.LoadSoundDialog("Add audio on object");
+            //Audio clip = new Audio();
+            //clip.LoadSound("sound1", audio[0]);
+            //SoundManager.AddSound(clip);
+            //clip.LoadSound("sound2", audio[1]);
+            //SoundManager.AddSound(clip);
+            //clip.LoadSound("sound3", audio[2]);
+            //SoundManager.AddSound(clip);
+           
+            Animation animate = new Animation();
+            
 
 
         }

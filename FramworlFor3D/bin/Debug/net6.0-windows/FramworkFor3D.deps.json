@@ -9,6 +9,8 @@
       "FramworkFor3D/1.0.0": {
         "dependencies": {
           "3DTools": "1.0.0",
+          "Assimp": "3.0.0",
+          "AssimpNet": "4.1.0",
           "BulletSharp": "0.11.1",
           "EcoWpf": "7.0.0.15507",
           "HelixToolkit": "2.24.0",
@@ -30,6 +32,45 @@
           "lib/net6.0-windows7.0/3DTools.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Assimp/3.0.0": {
+        "dependencies": {
+          "Assimp.redist": "3.0.0"
+        }
+      },
+      "Assimp.redist/3.0.0": {},
+      "AssimpNet/4.1.0": {
+        "dependencies": {
+          "NETStandard.Library": "1.6.1"
+        },
+        "runtime": {
+          "lib/netstandard1.3/AssimpNet.dll": {
+            "assemblyVersion": "4.1.0.0",
+            "fileVersion": "4.1.0.0"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/linux-x64/native/libassimp.so": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libassimp.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/assimp.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/assimp.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
           }
         }
       },
@@ -978,6 +1019,27 @@
       "sha512": "sha512-XzzijLAgIGXRK4q9SD9zyM4HV2Hf/P1xmLEA+40Hh9LhjAZZSUu4rlKPkA+V2OV3P34BvicmUd2W2YdjgpwxBA==",
       "path": "3dtools/1.0.0",
       "hashPath": "3dtools.1.0.0.nupkg.sha512"
+    },
+    "Assimp/3.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-tXbNKtiUy4KEkFAfiHYEpokvW8wD3wfcIwVtwjK0lZHYHkZtBEQ81OprseYS9WFrlui+fJg6ma+DG8AtamcWGA==",
+      "path": "assimp/3.0.0",
+      "hashPath": "assimp.3.0.0.nupkg.sha512"
+    },
+    "Assimp.redist/3.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-H01/5QCoghNeziFSPBS19XjNkSjsK2Nz1mt2wyD+4w2yF1A9vT8BjARvYF6VJ36Kxa4uEgr86/laQUMi+heyCQ==",
+      "path": "assimp.redist/3.0.0",
+      "hashPath": "assimp.redist.3.0.0.nupkg.sha512"
+    },
+    "AssimpNet/4.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-z/4Tmf3Q2r1+vN6o/szArEZvPsdYNRYiS0L/yArybQd7n7KCiS9L4lRZhwwlHJb/edECM+Jky0XisVspr5aQWQ==",
+      "path": "assimpnet/4.1.0",
+      "hashPath": "assimpnet.4.1.0.nupkg.sha512"
     },
     "BulletSharp/0.11.1": {
       "type": "package",
