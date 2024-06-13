@@ -11,6 +11,7 @@ using System.Windows.Documents;
 using System.Windows.Media.Imaging;
 using System.Collections.Generic;
 using RetroEngine.Helpers;
+using Microsoft.CodeAnalysis;
 
 namespace FramworkFor3D._3DObjects
 {
@@ -25,6 +26,7 @@ namespace FramworkFor3D._3DObjects
         private PointCollection allTexture;
         private MaterialGroup defaultMaterial;
         private const ObjectType type = ObjectType.IRREGULAR;
+        private List<ModelVisual3D> models;
 
         #endregion
         public Irregular3DObject()
@@ -54,10 +56,11 @@ namespace FramworkFor3D._3DObjects
             normals = new Vector3DCollection();
             indices = new Int32Collection();
             texture = new PointCollection();
-            defaultMaterial = new MaterialGroup();
-            allTexture = new PointCollection();
+
             Dictionary<string, ModelVisual3D> partsOfModel = new Dictionary<string, ModelVisual3D>();
             ModelVisual3D part = new ModelVisual3D();
+            models= new List<ModelVisual3D>();
+            string nameOfPart = "";
 
             using (StreamReader reader = new StreamReader(filePath))
             {
@@ -81,16 +84,18 @@ namespace FramworkFor3D._3DObjects
                     }
                     if (parts[0] == "o")
                     {
-                        string nameOfPart = parts[1];
-                        if (partsOfModel.ContainsKey(nameOfPart))
-                        {
-                            part = partsOfModel[nameOfPart];
-                        }
-                        else
-                        {
-                            part = new ModelVisual3D();
-                            partsOfModel.Add(nameOfPart, part);
-                        }
+                        nameOfPart = parts[1];
+                        vertices = new Point3DCollection();
+                        normals = new Vector3DCollection();
+                        indices = new Int32Collection();
+                        texture = new PointCollection();
+                        defaultMaterial = new MaterialGroup();
+                        allTexture = new PointCollection();
+
+                        part = new ModelVisual3D();
+                            
+                            
+                        
                     }
                     if (parts[0] == "v" && parts[1] == "")
                     {
@@ -142,7 +147,7 @@ namespace FramworkFor3D._3DObjects
                         Vector3D newNormalsVector = new Vector3D(x, y, z);
                         normals.Add(newNormalsVector);
                     }
-                    if (parts[0] == "g")
+                    if (parts[0] == "usemtl")
                     {
                         MeshGeometry3D meshPart = new MeshGeometry3D();
 
@@ -162,18 +167,27 @@ namespace FramworkFor3D._3DObjects
                         //    vertices[i] = scaledPosition;
                         //}
                         meshPart.Positions = vertices;
+                        meshPart.TriangleIndices = indices;
 
                         DiffuseMaterial materialPart = new DiffuseMaterial();
                         GeometryModel3D modelPart = new GeometryModel3D();
                         materialPart.Brush = Brushes.LightGray;
+                        modelPart = new GeometryModel3D(meshPart,materialPart);
+                        Model3DGroup lightAndGeometry = new Model3DGroup();
 
+                        lightAndGeometry.Children.Add(modelPart);
+                        lightAndGeometry.Children.Add(lightOfIrregular.Content);
+                        part.Content = lightAndGeometry;
+                        if (partsOfModel.ContainsKey(nameOfPart))
+                        {
+                            part = partsOfModel[nameOfPart];
+                            partsOfModel.TryAdd(nameOfPart, part);
+                        }
+                        else
+                        {
+                            partsOfModel.Add(nameOfPart, part);
 
-                        modelPart = new GeometryModel3D(meshPart, materialPart);
-                        part.Content = modelPart;
-
-
-
-
+                        }
                     }
                     if (parts.Length == 6)
 
@@ -226,10 +240,7 @@ namespace FramworkFor3D._3DObjects
                             int index3INT = int.Parse(index3[0]) - 1;
                             int index4INT = int.Parse(index4[0]) - 1;
 
-                            int indexTexture1 = int.Parse(index1[1]) - 1;
-                            int indexTexture2 = int.Parse(index2[1]) - 1;
-                            int indexTexture3 = int.Parse(index3[1]) - 1;
-                            int indexTexture4 = int.Parse(index4[1]) - 1;
+                          
 
                             indices.Add(index1INT);
                             indices.Add(index2INT);
@@ -259,9 +270,7 @@ namespace FramworkFor3D._3DObjects
                                 int index2INT = int.Parse(index2[0]) - 1;
                                 int index3INT = int.Parse(index3[0]) - 1;
 
-                                int indexTexture1 = int.Parse(index1[1]) - 1;
-                                int indexTexture2 = int.Parse(index2[1]) - 1;
-                                int indexTexture3 = int.Parse(index3[1]) - 1;
+                            
 
                                 indices.Add(index1INT);
 
@@ -304,10 +313,7 @@ namespace FramworkFor3D._3DObjects
                                 string[] index2 = parts[2].Split('/');
                                 string[] index3 = parts[3].Split('/');
                                 string[] index4 = parts[4].Split('/');
-                                int indexTexture1 = 0;
-                                int indexTexture2 = 0;
-                                int indexTexture3 = 0;
-                                int indexTexture4 = 0;
+                         
 
                                 //cazul in care avem "// " in f 
 
@@ -395,44 +401,59 @@ namespace FramworkFor3D._3DObjects
                 }
 
             }
-
-            MeshGeometry3D mesh = new MeshGeometry3D();
-
-            // mesh.Normals = normals;
-            mesh.TriangleIndices = indices;
-            allTexture = texture;
-            for (int i = texture.Count - 1; i >= 0; i--)
+            Model3DGroup allObject = new Model3DGroup();
+            foreach (var objects in partsOfModel.Values)
             {
-                allTexture.Add(texture[i]);
+                models.Add(objects);
+               
             }
-            mesh.TextureCoordinates = allTexture;
-            double scale = 0.05;
-            for (int i = 0; i < vertices.Count; i++)
+            foreach(var model in models)
             {
-                Point3D originalPosition = vertices[i];
-                Point3D scaledPosition = new Point3D(originalPosition.X * scale, originalPosition.Y * scale, originalPosition.Z * scale);
-
-                vertices[i] = scaledPosition;
+                allObject.Children.Add(model.Content);
             }
-            mesh.Positions = vertices;
+            ModelVisual3D modelVisual = new ModelVisual3D();
+            modelVisual.Content = allObject;
+            Content = models[2].Content;
 
-            DiffuseMaterial material = new DiffuseMaterial();
-            GeometryModel3D model = new GeometryModel3D();
-            material.Brush = Brushes.LightGray;
-            if (havemtl)
 
-            { model = new GeometryModel3D(mesh, defaultMaterial); }
-            else
-            {
-                model = new GeometryModel3D(mesh, material);
-            }
-            Model3DGroup lightAndGeometry = new Model3DGroup();
+            //MeshGeometry3D mesh = new MeshGeometry3D();
 
-            lightAndGeometry.Children.Add(model);
-            lightAndGeometry.Children.Add(lightOfIrregular.Content);
-            ModelVisual3D irregular= new ModelVisual3D();
-            irregular.Content =lightAndGeometry ;
-            Content = irregular.Content;
+            //// mesh.Normals = normals;
+            //mesh.TriangleIndices = indices;
+            //allTexture = texture;
+            //for (int i = texture.Count - 1; i >= 0; i--)
+            //{
+            //    allTexture.Add(texture[i]);
+            //}
+            //mesh.TextureCoordinates = allTexture;
+            //double scale = 0.05;
+            //for (int i = 0; i < vertices.Count; i++)
+            //{
+            //    Point3D originalPosition = vertices[i];
+            //    Point3D scaledPosition = new Point3D(originalPosition.X * scale, originalPosition.Y * scale, originalPosition.Z * scale);
+
+            //    vertices[i] = scaledPosition;
+            //}
+            //mesh.Positions = vertices;
+
+            //DiffuseMaterial material = new DiffuseMaterial();
+            //GeometryModel3D model = new GeometryModel3D();
+            //material.Brush = Brushes.LightGray;
+            //if (havemtl)
+
+            //{ model = new GeometryModel3D(mesh, defaultMaterial); }
+            //else
+            //{
+            //    model = new GeometryModel3D(mesh, material);
+            //}
+            //Model3DGroup lightAndGeometry = new Model3DGroup();
+
+            //lightAndGeometry.Children.Add(model);
+            //lightAndGeometry.Children.Add(lightOfIrregular.Content);
+            //ModelVisual3D irregular= new ModelVisual3D();
+            //irregular.Content =lightAndGeometry ;
+            //Content = irregular.Content;
+
             MessageBox.Show("Object have " + partsOfModel.Count + " components");
 
         }
