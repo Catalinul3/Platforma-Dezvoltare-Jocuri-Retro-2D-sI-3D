@@ -23,7 +23,7 @@ namespace FramworkFor3D._3DObjects
         private Int32Collection indices;
         private PointCollection texture;
         private PointCollection allTexture;
-        private MaterialGroup materials;
+        private MaterialGroup defaultMaterial;
         private const ObjectType type = ObjectType.IRREGULAR;
 
         #endregion
@@ -37,15 +37,15 @@ namespace FramworkFor3D._3DObjects
         }
         public Irregular3DObject(ModelVisual3D obj)
         {
-            this.Content= obj.Content;
+            this.Content = obj.Content;
         }
-      
+
 
         #region Parse Data
         private void read3dObject(string filePath)
         {
 
-            DirectionalLight light = new DirectionalLight(Colors.White,new Vector3D(-1,-1,-2));
+            DirectionalLight light = new DirectionalLight(Colors.White, new Vector3D(-1, -1, -2));
             ModelVisual3D lightOfIrregular = new ModelVisual3D();
             bool havemtl = false;
             lightOfIrregular.Content = light;
@@ -54,8 +54,10 @@ namespace FramworkFor3D._3DObjects
             normals = new Vector3DCollection();
             indices = new Int32Collection();
             texture = new PointCollection();
-            materials= new MaterialGroup();
+            defaultMaterial = new MaterialGroup();
             allTexture = new PointCollection();
+            Dictionary<string, ModelVisual3D> partsOfModel = new Dictionary<string, ModelVisual3D>();
+            ModelVisual3D part = new ModelVisual3D();
 
             using (StreamReader reader = new StreamReader(filePath))
             {
@@ -63,16 +65,33 @@ namespace FramworkFor3D._3DObjects
 
                 while ((line = reader.ReadLine()) != null)
                 {
+
+
                     string[] parts = line.Split(' ');
-                    //if (parts[0] == "mtllib")
-                    //{
-                    //    string mat = FileHelpers.LoadMaterialDialog("Select default material image");
-                    //    if (mat != null)
-                    //    {
-                    //        materials = readMtlFile(mat);
-                    //    }
-                    //    havemtl = true;
-                    //}
+                    if (parts[0] == "mtllib")
+                    {
+                        string matPath = Path.GetFullPath(filePath);
+                        matPath = matPath.Replace(Path.GetFileName(filePath), parts[1]);
+
+                        if (matPath != null)
+                        {
+                            defaultMaterial = readMtlFile(matPath);
+                        }
+                        havemtl = true;
+                    }
+                    if (parts[0] == "o")
+                    {
+                        string nameOfPart = parts[1];
+                        if (partsOfModel.ContainsKey(nameOfPart))
+                        {
+                            part = partsOfModel[nameOfPart];
+                        }
+                        else
+                        {
+                            part = new ModelVisual3D();
+                            partsOfModel.Add(nameOfPart, part);
+                        }
+                    }
                     if (parts[0] == "v" && parts[1] == "")
                     {
                         float x = float.Parse(parts[2]);
@@ -96,7 +115,7 @@ namespace FramworkFor3D._3DObjects
                         double x = double.Parse(parts[2]);
                         double y = double.Parse(parts[3]);
 
-                        Point newTextureCoordinates = new Point(x, 1-y);
+                        Point newTextureCoordinates = new Point(x, 1 - y);
                         texture.Add(newTextureCoordinates);
                     }
                     if (parts[0] == "vt" && parts[1] != "")
@@ -104,7 +123,7 @@ namespace FramworkFor3D._3DObjects
                         double x = double.Parse(parts[1]);
                         double y = double.Parse(parts[2]);
 
-                        Point newTextureCoordinates = new Point(x, 1-y);
+                        Point newTextureCoordinates = new Point(x, 1 - y);
                         texture.Add(newTextureCoordinates);
                     }
                     if (parts[0] == "vn" && parts[1] == "")
@@ -123,6 +142,39 @@ namespace FramworkFor3D._3DObjects
                         Vector3D newNormalsVector = new Vector3D(x, y, z);
                         normals.Add(newNormalsVector);
                     }
+                    if (parts[0] == "g")
+                    {
+                        MeshGeometry3D meshPart = new MeshGeometry3D();
+
+
+                        allTexture = texture;
+                        for (int i = texture.Count - 1; i >= 0; i--)
+                        {
+                            allTexture.Add(texture[i]);
+                        }
+                        meshPart.TextureCoordinates = allTexture;
+                        //double scale = 0.05;
+                        //for (int i = 0; i < vertices.Count; i++)
+                        //{
+                        //    Point3D originalPosition = vertices[i];
+                        //    Point3D scaledPosition = new Point3D(originalPosition.X * scale, originalPosition.Y * scale, originalPosition.Z * scale);
+
+                        //    vertices[i] = scaledPosition;
+                        //}
+                        meshPart.Positions = vertices;
+
+                        DiffuseMaterial materialPart = new DiffuseMaterial();
+                        GeometryModel3D modelPart = new GeometryModel3D();
+                        materialPart.Brush = Brushes.LightGray;
+
+
+                        modelPart = new GeometryModel3D(meshPart, materialPart);
+                        part.Content = modelPart;
+
+
+
+
+                    }
                     if (parts.Length == 6)
 
                     {
@@ -138,30 +190,27 @@ namespace FramworkFor3D._3DObjects
                             int index3INT = int.Parse(index3[0]) - 1;
                             int index4INT = int.Parse(index4[0]) - 1;
 
-                            int indexTexture1 = int.Parse(index1[1]) - 1;
-                            int indexTexture2 = int.Parse(index2[1]) - 1;
-                            int indexTexture3 = int.Parse(index3[1]) - 1;
-                            int indexTexture4 = int.Parse(index4[1]) - 1;
+
 
 
                             indices.Add(index1INT);
-                            
+
 
 
                             indices.Add(index2INT);
-                            
+
 
 
                             indices.Add(index3INT);
-                          
+
                             indices.Add(index1INT);
-                           
+
                             indices.Add(index3INT);
-                           
+
                             indices.Add(index4INT);
 
-                          
-                            
+
+
 
 
                         }
@@ -185,12 +234,12 @@ namespace FramworkFor3D._3DObjects
                             indices.Add(index1INT);
                             indices.Add(index2INT);
                             indices.Add(index3INT);
-                           
 
-                            
-                     
+
+
+
                             indices.Add(index1INT);
-                          
+
                             indices.Add(index3INT);
                             indices.Add(index4INT);
 
@@ -215,13 +264,13 @@ namespace FramworkFor3D._3DObjects
                                 int indexTexture3 = int.Parse(index3[1]) - 1;
 
                                 indices.Add(index1INT);
-                               
+
 
                                 indices.Add(index2INT);
-                                
+
                                 indices.Add(index3INT);
-                            
-                                
+
+
 
 
 
@@ -236,18 +285,16 @@ namespace FramworkFor3D._3DObjects
                                 int index2INT = int.Parse(index2[0]) - 1;
                                 int index3INT = int.Parse(index3[0]) - 1;
 
-                                int indexTexture1 = int.Parse(index1[1]) - 1;
-                                int indexTexture2 = int.Parse(index2[1]) - 1;
-                                int indexTexture3 = int.Parse(index3[1]) - 1;
+
 
                                 indices.Add(index1INT);
-                               
+
 
                                 indices.Add(index2INT);
-                               
+
                                 indices.Add(index3INT);
-                        
-                              
+
+
 
                             }
 
@@ -278,7 +325,7 @@ namespace FramworkFor3D._3DObjects
                                     indices.Add(index1INT);
                                     indices.Add(index3INT);
                                     indices.Add(index4INT);
-                           
+
 
                                 }
                                 else
@@ -292,25 +339,22 @@ namespace FramworkFor3D._3DObjects
                                     }
                                     else
                                     {
-                                        indexTexture1 = int.Parse(index1[1]) - 1;
-                                        indexTexture2 = int.Parse(index2[1]) - 1;
-                                        indexTexture3 = int.Parse(index3[1]) - 1;
-                                        indexTexture4 = int.Parse(index4[1]) - 1;
+
 
                                         indices.Add(index1INT);
-                                       
+
 
 
                                         indices.Add(index2INT);
-                                        
+
 
 
                                         indices.Add(index3INT);
-                                     
-                                       indices.Add(index1INT);
-                                      
+
+                                        indices.Add(index1INT);
+
                                         indices.Add(index3INT);
-                                       
+
                                         indices.Add(index4INT);
 
 
@@ -333,18 +377,16 @@ namespace FramworkFor3D._3DObjects
                                     int index3INT = int.Parse(index3[0]) - 1;
 
 
-                                    int indexTexture1 = int.Parse(index1[1]) - 1;
-                                    int indexTexture2 = int.Parse(index2[1]) - 1;
-                                    int indexTexture3 = int.Parse(index3[1]) - 1;
+
 
                                     indices.Add(index1INT);
-                                   
+
 
                                     indices.Add(index2INT);
-                                   
+
                                     indices.Add(index3INT);
-                             
-                                  
+
+
 
                                 }
                             }
@@ -356,7 +398,7 @@ namespace FramworkFor3D._3DObjects
 
             MeshGeometry3D mesh = new MeshGeometry3D();
 
-            //mesh.Normals = normals;
+            // mesh.Normals = normals;
             mesh.TriangleIndices = indices;
             allTexture = texture;
             for (int i = texture.Count - 1; i >= 0; i--)
@@ -364,119 +406,120 @@ namespace FramworkFor3D._3DObjects
                 allTexture.Add(texture[i]);
             }
             mesh.TextureCoordinates = allTexture;
-            //double scale = 0.05;
-            //for (int i = 0; i < vertices.Count; i++)
-            //{
-            //    Point3D originalPosition = vertices[i];
-            //    Point3D scaledPosition = new Point3D(originalPosition.X * scale, originalPosition.Y * scale, originalPosition.Z * scale);
+            double scale = 0.05;
+            for (int i = 0; i < vertices.Count; i++)
+            {
+                Point3D originalPosition = vertices[i];
+                Point3D scaledPosition = new Point3D(originalPosition.X * scale, originalPosition.Y * scale, originalPosition.Z * scale);
 
-            //    vertices[i] = scaledPosition;
-            //}
+                vertices[i] = scaledPosition;
+            }
             mesh.Positions = vertices;
-            
+
             DiffuseMaterial material = new DiffuseMaterial();
             GeometryModel3D model = new GeometryModel3D();
             material.Brush = Brushes.LightGray;
             if (havemtl)
 
-            {  model = new GeometryModel3D(mesh, materials); }
+            { model = new GeometryModel3D(mesh, defaultMaterial); }
             else
             {
                 model = new GeometryModel3D(mesh, material);
             }
             Model3DGroup lightAndGeometry = new Model3DGroup();
-          
+
             lightAndGeometry.Children.Add(model);
             lightAndGeometry.Children.Add(lightOfIrregular.Content);
-            ModelVisual3D irregular = new ModelVisual3D();
-            irregular.Content = lightAndGeometry;
-           Content = irregular.Content;
+            ModelVisual3D irregular= new ModelVisual3D();
+            irregular.Content =lightAndGeometry ;
+            Content = irregular.Content;
+            MessageBox.Show("Object have " + partsOfModel.Count + " components");
 
         }
-        //public MaterialGroup readMtlFile(string fileName)
-        //{
-        //    if (!File.Exists(fileName)) return null;
-        //    List<MaterialGroup> materials = new List<MaterialGroup>();
-        //    MaterialGroup currentMaterial = new MaterialGroup();
-        //    string currentMaterialName = "";
-        //    System.Windows.Media.Color ka=Colors.White, kd=Colors.White, ks = Colors.White;
-        //    double ns=0.0, ni=0.0, d = 0.0, illum = 0.0;
-        //    string map_Kd="",map_Ka="";
-        //    string directory=Path.GetDirectoryName(fileName);
-        //    using (StreamReader reader = new StreamReader(fileName))
-        //    {
-        //        string line;
-        //        while ((line = reader.ReadLine()) != null)
-        //        {
-        //            string[] parts = line.Split(' ');
-        //            DiffuseMaterial mat = new DiffuseMaterial();
-        //            if (parts[0] == "newmtl")
-        //            {
-        //                currentMaterialName = parts[1];
+        public MaterialGroup readMtlFile(string fileName)
+        {
+            if (!File.Exists(fileName)) return null;
+            List<MaterialGroup> materials = new List<MaterialGroup>();
+            MaterialGroup currentMaterial = new MaterialGroup();
+            string currentMaterialName = "";
+            System.Windows.Media.Color ka = Colors.White, kd = Colors.White, ks = Colors.White;
+            double ns = 0.0, ni = 0.0, d = 0.0, illum = 0.0;
+            string map_Kd = "", map_Ka = "";
+            string directory = Path.GetDirectoryName(fileName);
+            using (StreamReader reader = new StreamReader(fileName))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string[] parts = line.Split(' ');
+                    DiffuseMaterial mat = new DiffuseMaterial();
+                    if (parts[0] == "newmtl")
+                    {
+                        currentMaterialName = parts[1];
 
 
-        //            }
-        //            if (parts[0] == "Ns")
-        //            {
-        //                ns = double.Parse(parts[1]);
-        //            }
-        //            if (parts[0] == "Ka")
-        //            {
-        //                byte red = (byte)((float.Parse(parts[1])) * 255);
-        //                byte green = (byte)((float.Parse(parts[2])) * 255);
-        //                byte blue = (byte)((float.Parse(parts[3])) * 255);
-        //                ka = System.Windows.Media.Color.FromRgb(red, green, blue);
-        //                currentMaterial.Children.Add(new DiffuseMaterial(new SolidColorBrush(ka)));
+                    }
+                    if (parts[0] == "Ns")
+                    {
+                        ns = double.Parse(parts[1]);
+                    }
+                    if (parts[0] == "Ka")
+                    {
+                        byte red = (byte)((float.Parse(parts[1])) * 255);
+                        byte green = (byte)((float.Parse(parts[2])) * 255);
+                        byte blue = (byte)((float.Parse(parts[3])) * 255);
+                        ka = System.Windows.Media.Color.FromRgb(red, green, blue);
+                        currentMaterial.Children.Add(new DiffuseMaterial(new SolidColorBrush(ka)));
 
-        //            }
-        //            if (parts[0] == "Kd")
-        //            {
-        //                byte red = (byte)((float.Parse(parts[1])) * 255);
-        //                byte green = (byte)((float.Parse(parts[2])) * 255);
-        //                byte blue = (byte)((float.Parse(parts[3])) * 255);
-        //                kd = System.Windows.Media.Color.FromRgb(red, green, blue);
-        //                currentMaterial.Children.Add(new DiffuseMaterial(new SolidColorBrush(kd)));
-        //            }
-        //            if (parts[0] == "Ks")
-        //            {
-        //                byte red = (byte)((float.Parse(parts[1])) * 255);
-        //                byte green = (byte)((float.Parse(parts[2])) * 255);
-        //                byte blue = (byte)((float.Parse(parts[3])) * 255);
-        //                ks = System.Windows.Media.Color.FromRgb(red, green, blue);
-        //                currentMaterial.Children.Add(new SpecularMaterial(new SolidColorBrush(ka), ns));
-        //            }
-        //            if (parts[0] == "Ni")
-        //            {
-        //                ni = double.Parse(parts[1]);
-        //            }
-        //            if (parts[0] == "d")
-        //            { d = double.Parse(parts[1]); }
-        //            if (parts[0] == "illum")
-        //            { illum = double.Parse(parts[1]); }
-        //            if (parts[0] == "map_Kd")
-        //            {
-        //                map_Kd = parts[1];
-                       
-                    
-                        
-                     
-                        
-        //            }
-        //            if (parts[0] == "map_Ka")
-        //            {
-        //                map_Ka = parts[1];
-                 
+                    }
+                    if (parts[0] == "Kd")
+                    {
+                        byte red = (byte)((float.Parse(parts[1])) * 255);
+                        byte green = (byte)((float.Parse(parts[2])) * 255);
+                        byte blue = (byte)((float.Parse(parts[3])) * 255);
+                        kd = System.Windows.Media.Color.FromRgb(red, green, blue);
+                        currentMaterial.Children.Add(new DiffuseMaterial(new SolidColorBrush(kd)));
+                    }
+                    if (parts[0] == "Ks")
+                    {
+                        byte red = (byte)((float.Parse(parts[1])) * 255);
+                        byte green = (byte)((float.Parse(parts[2])) * 255);
+                        byte blue = (byte)((float.Parse(parts[3])) * 255);
+                        ks = System.Windows.Media.Color.FromRgb(red, green, blue);
+                        currentMaterial.Children.Add(new SpecularMaterial(new SolidColorBrush(ka), ns));
+                    }
+                    if (parts[0] == "Ni")
+                    {
+                        ni = double.Parse(parts[1]);
+                    }
+                    if (parts[0] == "d")
+                    { d = double.Parse(parts[1]); }
+                    if (parts[0] == "illum")
+                    { illum = double.Parse(parts[1]); }
+                    if (parts[0] == "map_Kd")
+                    {
+                        map_Kd = parts[1];
 
 
 
 
-        //            }
-        //        }
-        //    }
-        //    return currentMaterial;
-     
-        //}
-        private  ImageBrush LoadTexture(string textureFilePath)
+
+                    }
+                    if (parts[0] == "map_Ka")
+                    {
+                        map_Ka = parts[1];
+
+
+
+
+
+                    }
+                }
+            }
+            return currentMaterial;
+
+        }
+        private ImageBrush LoadTexture(string textureFilePath)
         {
             if (!File.Exists(textureFilePath))
             {
@@ -488,11 +531,11 @@ namespace FramworkFor3D._3DObjects
             ImageBrush imageBrush = new ImageBrush(bitmapImage);
             return imageBrush;
         }
-    
-    #endregion
 
-    #region BasicTransformations
-    public void Rotate(double angle, Vector3D axis)
+        #endregion
+
+        #region BasicTransformations
+        public void Rotate(double angle, Vector3D axis)
         {//rotatie indiferent de axa 
             AxisAngleRotation3D axisS = new AxisAngleRotation3D(axis, angle);
             RotateTransform3D rotate = new RotateTransform3D(axisS);
@@ -544,7 +587,7 @@ namespace FramworkFor3D._3DObjects
             }
         }
 
-     
+
     }
     #endregion
 

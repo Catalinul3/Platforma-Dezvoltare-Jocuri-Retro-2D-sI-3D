@@ -191,17 +191,17 @@ namespace FramworkFor3D.Commands
 
 
                     Transform3DGroup transformGroup = new Transform3DGroup();
-                    objInteractive = InteractiveHelper.ConvertToUI(obj);
+                   objInteractive = InteractiveHelper.ConvertToUI(obj);
 
                     obj.Rotate(90, new Vector3D(1, 0, 0));
                     transformGroup.Children.Add(obj.Transform);
-                    TranslateTransform3D center = new TranslateTransform3D(2, 2.4, 1);
+                    TranslateTransform3D center = new TranslateTransform3D(1, 2.4, 1);
 
                     transformGroup.Children.Add(center);
+                    objInteractive.Transform= transformGroup;
 
 
-
-                    objInteractive.Transform = transformGroup;
+                    
                     objBounds = Collider.UpdateBounds(obj, center);
 
                     objInteractive.MouseRightButtonDown += (s, e) => ObjectPressed(s, e, environment);
