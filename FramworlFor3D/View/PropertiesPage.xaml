@@ -30,16 +30,15 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Viewport3D Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" Grid.RowSpan="8">
-            <Viewport3D.Camera>
-                <PerspectiveCamera LookDirection="0,0,-1" UpDirection="1,1,0" Position="0,0,5" FieldOfView="45"/>
-            </Viewport3D.Camera>
-            <ModelVisual3D Content="{Binding Model.Content}"></ModelVisual3D>
-        </Viewport3D>
 
-        <Grid Grid.Row="0" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="3">
-            <TextBlock Text="Cube" FontSize="10" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
-        </Grid>
-        <Grid ShowGridLines="True" Grid.Row="1" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="3">
+            <Viewport3D.Camera>
+                <PerspectiveCamera Position="-1,1,1" LookDirection="1,-1,-1 " 
+                     UpDirection="0,0,1" />
+            </Viewport3D.Camera>
+            <ModelVisual3D Content="{Binding Model.Content}">
+            </ModelVisual3D>
+        </Viewport3D>
+        <Grid ShowGridLines="True" Grid.Row="0" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" ></ColumnDefinition>
                 <ColumnDefinition ></ColumnDefinition>

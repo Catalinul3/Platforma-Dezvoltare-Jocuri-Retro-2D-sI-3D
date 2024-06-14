@@ -1,26 +1,11 @@
-﻿using BulletSharp;
-using BulletSharp.Math;
-using Eco.Persistence;
-using FramworkFor3D._3DPhysics;
+﻿
 using FramworkFor3D.Based_Operations;
 using FramworkFor3D.helpers;
-using HelixToolkit.Wpf;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.Xml;
-using System.Security.Policy;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
+
 using System.Windows.Media;
-using System.Windows.Media.Effects;
+
 using System.Windows.Media.Media3D;
-using System.Windows.Shapes;
-using System.Windows.Threading;
+
 
 namespace FramworkFor3D._3DObjects
 {
@@ -61,6 +46,10 @@ namespace FramworkFor3D._3DObjects
         #endregion
 
         #region Create Cube
+        public Cube3D(ModelVisual3D model)
+        {
+            this.Content = model.Content;
+        }
         public Cube3D()
         { //Adding Light for cube
 

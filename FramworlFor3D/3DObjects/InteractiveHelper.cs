@@ -25,6 +25,22 @@ namespace FramworkFor3D._3DObjects
             modelVisual3DmodelUIElement.Content = modelUi.Model ;
             return modelVisual3DmodelUIElement;
         }
+        public static Cube3D convertToCube(ModelVisual3D model)
+        {
+            Cube3D cube = new Cube3D(model);
+           
+            return cube;
+        }
+        public static Sphere3D convertToSphere(ModelVisual3D model)
+        {
+                       Sphere3D sphere = new Sphere3D(model);
+            return sphere;
+        }
+        public static Irregular3DObject convertToObject(ModelVisual3D model)
+        {
+            Irregular3DObject obj = new Irregular3DObject(model);
+            return obj;
+        }
        
 
      

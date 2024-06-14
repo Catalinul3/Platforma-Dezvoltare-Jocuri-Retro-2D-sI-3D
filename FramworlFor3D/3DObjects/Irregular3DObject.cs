@@ -6,12 +6,10 @@ using FramworkFor3D.Based_Operations;
 using System.Windows;
 using FramworkFor3D.helpers;
 using System;
-using System.Security.Cryptography;
-using System.Windows.Documents;
+
 using System.Windows.Media.Imaging;
 using System.Collections.Generic;
-using RetroEngine.Helpers;
-using Microsoft.CodeAnalysis;
+
 
 namespace FramworkFor3D._3DObjects
 {

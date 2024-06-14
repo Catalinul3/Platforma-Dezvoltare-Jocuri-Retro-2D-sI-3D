@@ -1,25 +1,16 @@
-﻿using BulletSharp;
-using BulletSharp.Math;
-using BulletSharp.SoftBody;
+﻿
 using FramworkFor3D._3DObjects;
 using FramworkFor3D.Commands;
 using FramworkFor3D.helpers;
-using HelixToolkit.Wpf;
-using SharpDX.Direct3D9;
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
+
 using System.Windows.Media.Media3D;
-using System.Windows.Shell;
+
 using System.Windows.Threading;
-using System.Xaml;
-using Matrix = BulletSharp.Math.Matrix;
+
 
 namespace FramworkFor3D._3DPhysics
 {

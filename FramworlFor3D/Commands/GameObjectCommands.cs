@@ -1,6 +1,6 @@
 ﻿
 
-using BulletSharp;
+
 using FramworkFor3D._3DObjects;
 using FramworkFor3D._3DPhysics;
 using FramworkFor3D._3DSounds;
@@ -13,12 +13,12 @@ using RetroEngine.Helpers;
 using RetroEngine.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Threading;
+
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Effects;
+
 using System.Windows.Media.Imaging;
 using System.Windows.Media.Media3D;
 
@@ -497,8 +497,9 @@ namespace FramworkFor3D.Commands
 
         private void Properties(object s, RoutedEventArgs ev, UIElement3D obj)
         {ModelVisual3D model=InteractiveHelper.ConvertToModel(obj);
-
+          
             PropertiesPage page = new PropertiesPage();
+            
             page.SetModel(model);
             var propertiesWindow = new Window
 

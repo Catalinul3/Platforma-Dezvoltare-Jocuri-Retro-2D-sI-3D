@@ -29,6 +29,10 @@ namespace FramworkFor3D._3DObjects
             readSphere("D:/GitHub/Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D/" +
                 "FramworlFor3D/3D Models/sphere.obj");
         }
+        public Sphere3D(ModelVisual3D model)
+        {
+            this.Content = model.Content;
+        }
         #region Parse Data
         private void readSphere(string filePath)
         {
