@@ -77,7 +77,7 @@
                 <MenuItem Header="Stop"></MenuItem>
             </Menu>
         </StackPanel>
-        <TreeView x:Name="componentsTree" ItemsSource="{Binding treeViewComponentsVM, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="4" VerticalAlignment="Stretch">
+        <!--<TreeView x:Name="componentsTree" ItemsSource="{Binding treeViewComponentsVM, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="4" VerticalAlignment="Stretch">
             <i:Interaction.Behaviors>
                 <behaviours:BindableSelectedTreeViewItem SelectedItem="{Binding SelectedItem, Mode=TwoWay}"/>
             </i:Interaction.Behaviors>
@@ -91,8 +91,8 @@
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
 
-        </TreeView>
-        <Grid Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="6" Grid.RowSpan="2">
+        </TreeView>-->
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="9" Grid.RowSpan="2">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0.5 ,0.4" EndPoint="0.5,1" >
                     <GradientStop Color="#FF7DB6EA" Offset="0"/>
@@ -100,7 +100,7 @@
                 </LinearGradientBrush>
             </Grid.Background>
         </Grid>
-        <Grid Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="6" Grid.RowSpan="2">
+        <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="9" Grid.RowSpan="2">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0.5 ,0.4" EndPoint="0.5,1" >
                     <GradientStop Color="White" Offset="0"/>
@@ -108,14 +108,14 @@
                 </LinearGradientBrush>
             </Grid.Background>
         </Grid>
-        <Grid Grid.Row="1" x:Name="Viewport" Grid.RowSpan="4" Grid.Column="3" Grid.ColumnSpan="6" 
+        <Grid Grid.Row="1" x:Name="Viewport" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="9" 
               MouseWheel="MouseWheel" Background="#0000"  Loaded="OnLoaded" KeyDown="KeyDown"
                           Focusable="True" 
           >
             <Viewport3D   x:Name="environment"
-                      Grid.ColumnSpan="6" 
+                      Grid.ColumnSpan="9" 
                       Grid.RowSpan="4"
-                      Grid.Column="3" Grid.Row="1" 
+                      Grid.Column="0" Grid.Row="1" 
                       Camera="{Binding Camera}"
                           MouseLeftButtonDown="MouseDown"
                           MouseLeftButtonUp="MouseUp"
