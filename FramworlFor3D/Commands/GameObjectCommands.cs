@@ -498,10 +498,13 @@ namespace FramworkFor3D.Commands
         private void Properties(object s, RoutedEventArgs ev, UIElement3D obj)
         {ModelVisual3D model=InteractiveHelper.ConvertToModel(obj);
 
-
+            PropertiesPage page = new PropertiesPage();
+            page.SetModel(model);
             var propertiesWindow = new Window
+
+
             { Title = type.ToString(),
-                Content = new PropertiesPage()
+                Content = page,
               
         };
             propertiesWindow.Show();

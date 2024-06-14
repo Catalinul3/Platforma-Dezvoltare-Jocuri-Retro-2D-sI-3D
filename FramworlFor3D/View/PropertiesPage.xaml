@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FramworkFor3D.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+           >
     <Grid  Background="Gray">
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -30,8 +31,9 @@
         </Grid.RowDefinitions>
         <Viewport3D Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" Grid.RowSpan="8">
             <Viewport3D.Camera>
-                <PerspectiveCamera LookDirection="0,0,0" UpDirection="0,0,0" Position="0,0,0" FieldOfView="45"/>
+                <PerspectiveCamera LookDirection="0,0,-1" UpDirection="1,1,0" Position="0,0,5" FieldOfView="45"/>
             </Viewport3D.Camera>
+            <ModelVisual3D Content="{Binding Model.Content}"></ModelVisual3D>
         </Viewport3D>
 
         <Grid Grid.Row="0" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="3">
