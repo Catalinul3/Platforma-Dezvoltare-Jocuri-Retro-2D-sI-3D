@@ -24,7 +24,8 @@ namespace FramworkFor3D._3DObjects
         #endregion
 
         public Sphere3D()
-        {  
+        {
+            
             readSphere("D:/GitHub/Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D/" +
                 "FramworlFor3D/3D Models/sphere.obj");
         }
@@ -48,9 +49,9 @@ namespace FramworkFor3D._3DObjects
                     string[] parts = line.Split(' ');
                     if (parts[0] == "v")
                     {
-                        float x = float.Parse(parts[1]);
-                        float y= float.Parse(parts[2]);
-                        float z = float.Parse(parts[3]);
+                        float x = float.Parse(parts[2]);
+                        float y= float.Parse(parts[3]);
+                        float z = float.Parse(parts[4]);
                         Point3D newPoint= new Point3D(x, y, z);
                         vertices.Add(newPoint);
                     }
@@ -67,21 +68,29 @@ namespace FramworkFor3D._3DObjects
                         string[] index1 = parts[1].Split('/');
                         string[] index2 = parts[2].Split('/');
                         string[] index3 = parts[3].Split('/');
+                        string[] index4 = parts[4].Split('/');
+                      
                     
                         int index1INT = int.Parse(index1[0])-1;
                         int index2INT = int.Parse(index2[0])-1;
                         int index3INT = int.Parse(index3[0])-1;
+                        int index4INT = int.Parse(index4[0])-1;
                         indices.Add(index1INT);
 
                         indices.Add(index2INT);
 
                         indices.Add(index3INT);
+
+                        indices.Add(index1INT);
+                        indices.Add(index3INT);
+
+                        indices.Add(index4INT);
                     }
                 }
             }
             MeshGeometry3D mesh = new MeshGeometry3D();
             mesh.Positions= vertices;
-            mesh.Normals= normals;
+           // mesh.Normals= normals;
             mesh.TriangleIndices= indices;
             double scale = 0.03;
             for (int i = 0; i < mesh.Positions.Count; i++)

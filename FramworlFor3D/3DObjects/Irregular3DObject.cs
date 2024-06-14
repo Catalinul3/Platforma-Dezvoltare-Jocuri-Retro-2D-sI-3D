@@ -59,7 +59,7 @@ namespace FramworkFor3D._3DObjects
 
             Dictionary<string, ModelVisual3D> partsOfModel = new Dictionary<string, ModelVisual3D>();
             ModelVisual3D part = new ModelVisual3D();
-            models= new List<ModelVisual3D>();
+            models = new List<ModelVisual3D>();
             string nameOfPart = "";
 
             using (StreamReader reader = new StreamReader(filePath))
@@ -93,9 +93,9 @@ namespace FramworkFor3D._3DObjects
                         allTexture = new PointCollection();
 
                         part = new ModelVisual3D();
-                            
-                            
-                        
+
+
+
                     }
                     if (parts[0] == "v" && parts[1] == "")
                     {
@@ -172,7 +172,7 @@ namespace FramworkFor3D._3DObjects
                         DiffuseMaterial materialPart = new DiffuseMaterial();
                         GeometryModel3D modelPart = new GeometryModel3D();
                         materialPart.Brush = Brushes.LightGray;
-                        modelPart = new GeometryModel3D(meshPart,materialPart);
+                        modelPart = new GeometryModel3D(meshPart, materialPart);
                         Model3DGroup lightAndGeometry = new Model3DGroup();
 
                         lightAndGeometry.Children.Add(modelPart);
@@ -181,7 +181,7 @@ namespace FramworkFor3D._3DObjects
                         if (partsOfModel.ContainsKey(nameOfPart))
                         {
                             part = partsOfModel[nameOfPart];
-                            partsOfModel.TryAdd(nameOfPart, part);
+                            
                         }
                         else
                         {
@@ -240,7 +240,7 @@ namespace FramworkFor3D._3DObjects
                             int index3INT = int.Parse(index3[0]) - 1;
                             int index4INT = int.Parse(index4[0]) - 1;
 
-                          
+
 
                             indices.Add(index1INT);
                             indices.Add(index2INT);
@@ -270,7 +270,7 @@ namespace FramworkFor3D._3DObjects
                                 int index2INT = int.Parse(index2[0]) - 1;
                                 int index3INT = int.Parse(index3[0]) - 1;
 
-                            
+
 
                                 indices.Add(index1INT);
 
@@ -313,7 +313,7 @@ namespace FramworkFor3D._3DObjects
                                 string[] index2 = parts[2].Split('/');
                                 string[] index3 = parts[3].Split('/');
                                 string[] index4 = parts[4].Split('/');
-                         
+
 
                                 //cazul in care avem "// " in f 
 
@@ -405,15 +405,15 @@ namespace FramworkFor3D._3DObjects
             foreach (var objects in partsOfModel.Values)
             {
                 models.Add(objects);
-               
+
             }
-            foreach(var model in models)
+            foreach (var model in models)
             {
                 allObject.Children.Add(model.Content);
             }
             ModelVisual3D modelVisual = new ModelVisual3D();
-            modelVisual.Content = allObject;
-            Content = models[2].Content;
+            modelVisual = part;
+            Content = modelVisual.Content;
 
 
             //MeshGeometry3D mesh = new MeshGeometry3D();
