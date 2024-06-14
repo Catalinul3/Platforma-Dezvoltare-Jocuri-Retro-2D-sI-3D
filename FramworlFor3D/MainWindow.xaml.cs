@@ -55,7 +55,7 @@ namespace FramworlFor3D
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 this.Cursor = Cursors.ScrollAll;
-            
+
 
                 environment.MouseMove += MouseMove;
 
@@ -77,19 +77,25 @@ namespace FramworlFor3D
         {
             if (isMouseCaptured)
             { //convertirea punctelor 2D la spațiul de coordonate sferic 3D 
-                Matrix3D camera=((MatrixTransform3D)environment.Camera.Transform).Matrix;
-                Matrix3D rotate=track.RotateCamera(lastClick, e.GetPosition(environment), camera,environment,centerOfGrid);
-              
+                Matrix3D camera = ((MatrixTransform3D)environment.Camera.Transform).Matrix;
+                Vector3D last = track.ConvertToSphereCoordinates(lastClick, environment.RenderSize.Width, environment.RenderSize.Height);
+                Vector3D current = track.ConvertToSphereCoordinates(e.GetPosition(environment), environment.RenderSize.Width, environment.RenderSize.Height);
+               
+               Matrix3D rotate= track.RotateCamera(lastClick, e.GetPosition(environment), camera,environment,centerOfGrid);
+                
+                
+               
+                //Matrix3D finalConfig = Matrix3D.Multiply(cameraConfig, camera);
                 environment.Camera.Transform = new MatrixTransform3D(rotate);
                 lastClick = e.GetPosition(environment);
-          
+
 
 
 
             }
 
         }
-       
+
         #endregion
 
         #region Move
@@ -118,10 +124,10 @@ namespace FramworlFor3D
 
 
             Matrix3D camera = ((MatrixTransform3D)environment.Camera.Transform).Matrix;
-            Matrix3D translateMatrix = track.MoveCameraOnXaxis(-deltaX,camera);
-            
-           
-            
+            Matrix3D translateMatrix = track.MoveCameraOnXaxis(-deltaX, camera);
+
+
+
             environment.Camera.Transform = new MatrixTransform3D(translateMatrix);
 
 
@@ -164,10 +170,10 @@ namespace FramworlFor3D
         #endregion
 
         #region Zoom
-        private void MouseWheel(object sender,MouseWheelEventArgs e)
+        private void MouseWheel(object sender, MouseWheelEventArgs e)
         {
             double zoom = 0;
-            if(e.Delta<0)
+            if (e.Delta < 0)
             {
                 zoom = 0.1;
             }
@@ -180,7 +186,8 @@ namespace FramworlFor3D
         }
 
         private void Zoom(double zoom)
-        { Matrix3D zoomTranslate = track.ZoomCamera(zoom);
+        {
+            Matrix3D zoomTranslate = track.ZoomCamera(zoom);
             Matrix3D camera = ((MatrixTransform3D)environment.Camera.Transform).Matrix;
             Matrix3D cameraZoom = Matrix3D.Multiply(camera, zoomTranslate);
             environment.Camera.Transform = new MatrixTransform3D(cameraZoom);
@@ -192,7 +199,7 @@ namespace FramworlFor3D
         private void CreateGrid()
         {
             Scenes sc = new Scenes();
-            List < ModelVisual3D> root = sc.getGrid();
+            List<ModelVisual3D> root = sc.getGrid();
             Model3DGroup gridGroup = new Model3DGroup();
             centerOfGrid = new ModelVisual3D();
             ObservableCollection<ModelVisual3D> grid = new ObservableCollection<ModelVisual3D>(root);

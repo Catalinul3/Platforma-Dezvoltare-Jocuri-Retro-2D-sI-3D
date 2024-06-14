@@ -53,13 +53,15 @@ namespace FramworkFor3D.Based_Operations
 
             //determinarea unghiului dintre cele doua puncte;
             double theta = Vector3D.AngleBetween(rotateClickSphereCoordinates, currentClickSphereCoordinates);
-
+        
             Quaternion delta = new Quaternion(axis, -theta);
-
+            
             //rotatia 
-
+            
             Matrix3D matrix = new Matrix3D();
             matrix.Rotate(delta);
+
+            // finalRotate = rotateFirstTwo * matrixz;
             return matrix;
         }
         #endregion

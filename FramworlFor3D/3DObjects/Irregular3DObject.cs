@@ -47,7 +47,7 @@ namespace FramworkFor3D._3DObjects
         private void read3dObject(string filePath)
         {
 
-            DirectionalLight light = new DirectionalLight(Colors.White, new Vector3D(-1, -1, -2));
+            DirectionalLight light = new DirectionalLight(Colors.White, new Vector3D(-1, -1, -1));
             ModelVisual3D lightOfIrregular = new ModelVisual3D();
             bool havemtl = false;
             lightOfIrregular.Content = light;
@@ -82,21 +82,21 @@ namespace FramworkFor3D._3DObjects
                         }
                         havemtl = true;
                     }
-                    if (parts[0] == "o")
-                    {
-                        nameOfPart = parts[1];
-                        vertices = new Point3DCollection();
-                        normals = new Vector3DCollection();
-                        indices = new Int32Collection();
-                        texture = new PointCollection();
-                        defaultMaterial = new MaterialGroup();
-                        allTexture = new PointCollection();
+                    //if (parts[0] == "o")
+                    //{
+                    //    nameOfPart = parts[1];
+                    //    vertices = new Point3DCollection();
+                    //    normals = new Vector3DCollection();
+                    //    indices = new Int32Collection();
+                    //    texture = new PointCollection();
+                    //    defaultMaterial = new MaterialGroup();
+                    //    allTexture = new PointCollection();
 
-                        part = new ModelVisual3D();
+                    //    part = new ModelVisual3D();
 
 
 
-                    }
+                    //}
                     if (parts[0] == "v" && parts[1] == "")
                     {
                         float x = float.Parse(parts[2]);
@@ -147,48 +147,48 @@ namespace FramworkFor3D._3DObjects
                         Vector3D newNormalsVector = new Vector3D(x, y, z);
                         normals.Add(newNormalsVector);
                     }
-                    if (parts[0] == "usemtl")
-                    {
-                        MeshGeometry3D meshPart = new MeshGeometry3D();
+                  //  if (parts[0] == "usemtl")
+                   // {
+                        //MeshGeometry3D meshPart = new MeshGeometry3D();
 
 
-                        allTexture = texture;
-                        for (int i = texture.Count - 1; i >= 0; i--)
-                        {
-                            allTexture.Add(texture[i]);
-                        }
-                        meshPart.TextureCoordinates = allTexture;
-                        //double scale = 0.05;
-                        //for (int i = 0; i < vertices.Count; i++)
+                        //allTexture = texture;
+                        //for (int i = texture.Count - 1; i >= 0; i--)
                         //{
-                        //    Point3D originalPosition = vertices[i];
-                        //    Point3D scaledPosition = new Point3D(originalPosition.X * scale, originalPosition.Y * scale, originalPosition.Z * scale);
-
-                        //    vertices[i] = scaledPosition;
+                        //    allTexture.Add(texture[i]);
                         //}
-                        meshPart.Positions = vertices;
-                        meshPart.TriangleIndices = indices;
+                        //meshPart.TextureCoordinates = allTexture;
+                        ////double scale = 0.05;
+                        ////for (int i = 0; i < vertices.Count; i++)
+                        ////{
+                        ////    Point3D originalPosition = vertices[i];
+                        ////    Point3D scaledPosition = new Point3D(originalPosition.X * scale, originalPosition.Y * scale, originalPosition.Z * scale);
 
-                        DiffuseMaterial materialPart = new DiffuseMaterial();
-                        GeometryModel3D modelPart = new GeometryModel3D();
-                        materialPart.Brush = Brushes.LightGray;
-                        modelPart = new GeometryModel3D(meshPart, materialPart);
-                        Model3DGroup lightAndGeometry = new Model3DGroup();
+                        ////    vertices[i] = scaledPosition;
+                        ////}
+                        //meshPart.Positions = vertices;
+                        //meshPart.TriangleIndices = indices;
 
-                        lightAndGeometry.Children.Add(modelPart);
-                        lightAndGeometry.Children.Add(lightOfIrregular.Content);
-                        part.Content = lightAndGeometry;
-                        if (partsOfModel.ContainsKey(nameOfPart))
-                        {
-                            part = partsOfModel[nameOfPart];
+                        //DiffuseMaterial materialPart = new DiffuseMaterial();
+                        //GeometryModel3D modelPart = new GeometryModel3D();
+                        //materialPart.Brush = Brushes.LightGray;
+                        //modelPart = new GeometryModel3D(meshPart, materialPart);
+                        //Model3DGroup lightAndGeometry = new Model3DGroup();
+
+                        //lightAndGeometry.Children.Add(modelPart);
+                        //lightAndGeometry.Children.Add(lightOfIrregular.Content);
+                        //part.Content = lightAndGeometry;
+                        //if (partsOfModel.ContainsKey(nameOfPart))
+                        //{
+                        //    part = partsOfModel[nameOfPart];
                             
-                        }
-                        else
-                        {
-                            partsOfModel.Add(nameOfPart, part);
+                        //}
+                        //else
+                        //{
+                        //    partsOfModel.Add(nameOfPart, part);
 
-                        }
-                    }
+                        //}
+                   // }
                     if (parts.Length == 6)
 
                     {
@@ -401,19 +401,49 @@ namespace FramworkFor3D._3DObjects
                 }
 
             }
-            Model3DGroup allObject = new Model3DGroup();
-            foreach (var objects in partsOfModel.Values)
-            {
-                models.Add(objects);
+            MeshGeometry3D meshPart = new MeshGeometry3D();
 
-            }
-            foreach (var model in models)
+
+            allTexture = texture;
+            for (int i = texture.Count - 1; i >= 0; i--)
             {
-                allObject.Children.Add(model.Content);
+                allTexture.Add(texture[i]);
             }
-            ModelVisual3D modelVisual = new ModelVisual3D();
-            modelVisual = part;
-            Content = modelVisual.Content;
+            meshPart.TextureCoordinates = allTexture;
+            double scale = 0.05;
+            for (int i = 0; i < vertices.Count; i++)
+            {
+                Point3D originalPosition = vertices[i];
+                Point3D scaledPosition = new Point3D(originalPosition.X * scale, originalPosition.Y * scale, originalPosition.Z * scale);
+
+                vertices[i] = scaledPosition;
+            }
+            meshPart.Positions = vertices;
+            meshPart.TriangleIndices = indices;
+
+            DiffuseMaterial materialPart = new DiffuseMaterial();
+            GeometryModel3D modelPart = new GeometryModel3D();
+            materialPart.Brush = Brushes.LightGray;
+            modelPart = new GeometryModel3D(meshPart, materialPart);
+            Model3DGroup lightAndGeometry = new Model3DGroup();
+
+            lightAndGeometry.Children.Add(modelPart);
+            lightAndGeometry.Children.Add(lightOfIrregular.Content);
+            part.Content = lightAndGeometry;
+            Content= part.Content;
+            //Model3DGroup allObject = new Model3DGroup();
+            //foreach (var objects in partsOfModel.Values)
+            //{
+            //    models.Add(objects);
+
+            //}
+            //foreach (var model in models)
+            //{
+            //    allObject.Children.Add(model.Content);
+            //}
+            //ModelVisual3D modelVisual = new ModelVisual3D();
+            //modelVisual = part;
+            //Content = modelVisual.Content;
 
 
             //MeshGeometry3D mesh = new MeshGeometry3D();
