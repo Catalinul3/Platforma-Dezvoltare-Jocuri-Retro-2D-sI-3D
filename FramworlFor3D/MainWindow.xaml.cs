@@ -55,8 +55,7 @@ namespace FramworlFor3D
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 this.Cursor = Cursors.ScrollAll;
-                lastClick = e.GetPosition((IInputElement)sender);
-                Vector3D sphere = track.ConvertToSphereCoordinates(lastClick, width, height);
+            
 
                 environment.MouseMove += MouseMove;
 
@@ -78,29 +77,11 @@ namespace FramworlFor3D
         {
             if (isMouseCaptured)
             { //convertirea punctelor 2D la spațiul de coordonate sferic 3D 
-                double width = environment.RenderSize.Width;
-                double height = environment.RenderSize.Height;
-                Point currentClick = e.GetPosition(this);
-                
-                Point rotateClick =new Point(width/2,height/2);
-                Vector3D rotateClickSphereCoordinates = track.ConvertToSphereCoordinates(rotateClick, width, height);
-                Vector3D currentClickSphereCoordinates = track.ConvertToSphereCoordinates(currentClick, width, height);
-
-                //determinarea axei pe care o formeaza punctul din mijlocul si punctul curent al mouse-ului
-                Vector3D axis = Vector3D.CrossProduct(rotateClickSphereCoordinates, currentClickSphereCoordinates);
-
-                //determinarea unghiului dintre cele doua puncte;
-                double theta = Vector3D.AngleBetween(rotateClickSphereCoordinates, currentClickSphereCoordinates);
-
-                Quaternion delta = new Quaternion(axis, -theta);
-
-                //rotatia 
+                Matrix3D camera=((MatrixTransform3D)environment.Camera.Transform).Matrix;
+                Matrix3D rotate=track.RotateCamera(lastClick, e.GetPosition(environment), camera,environment,centerOfGrid);
               
-               Matrix3D matrix=new Matrix3D();
-                matrix.Rotate(delta);
-              
-                environment.Camera.Transform = new MatrixTransform3D(matrix);
-                lastClick = currentClick;
+                environment.Camera.Transform = new MatrixTransform3D(rotate);
+                lastClick = e.GetPosition(environment);
           
 
 
@@ -212,20 +193,23 @@ namespace FramworlFor3D
         {
             Scenes sc = new Scenes();
             List < ModelVisual3D> root = sc.getGrid();
+            Model3DGroup gridGroup = new Model3DGroup();
+            centerOfGrid = new ModelVisual3D();
             ObservableCollection<ModelVisual3D> grid = new ObservableCollection<ModelVisual3D>(root);
             foreach (var item in grid)
             {
 
                 environment.Children.Add(item);
+                gridGroup.Children.Add(item.Content);
             }
-
+            centerOfGrid.Content = gridGroup;
             // centerOfGrid = sc.getCenterOfGrid(root);
 
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            environment.Focus();
+            Viewport.Focus();
         }
         #endregion
 

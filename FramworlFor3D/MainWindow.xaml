@@ -108,16 +108,17 @@
                 </LinearGradientBrush>
             </Grid.Background>
         </Grid>
-        <Grid Grid.Row="1" Grid.RowSpan="4" Grid.Column="3" Grid.ColumnSpan="6" 
-              MouseWheel="MouseWheel" Background="#0000"  MouseLeftButtonDown="MouseDown"
-                  MouseLeftButtonUp="MouseUp">
+        <Grid Grid.Row="1" x:Name="Viewport" Grid.RowSpan="4" Grid.Column="3" Grid.ColumnSpan="6" 
+              MouseWheel="MouseWheel" Background="#0000"  Loaded="OnLoaded" KeyDown="KeyDown"
+                          Focusable="True" 
+          >
             <Viewport3D   x:Name="environment"
                       Grid.ColumnSpan="6" 
                       Grid.RowSpan="4"
                       Grid.Column="3" Grid.Row="1" 
                       Camera="{Binding Camera}"
-                          Loaded="OnLoaded" KeyDown="KeyDown"
-                          Focusable="True" 
+                          MouseLeftButtonDown="MouseDown"
+                          MouseLeftButtonUp="MouseUp"
                                          >
 
             </Viewport3D>
