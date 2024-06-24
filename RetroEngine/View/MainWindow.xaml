@@ -39,11 +39,12 @@
         <TextBlock Text="Retro Engine 2024" Grid.Column="0" Grid.ColumnSpan="3" FontSize="30" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
         <Image Source="../images/retro_engine_poster.jpg" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="2" Width="1020"  HorizontalAlignment="Stretch" Stretch="Fill"></Image>
         <Button Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Content="Create a new game" Background="#242424" Foreground="White"
-                BorderBrush="White" BorderThickness="3">  </Button>
+                BorderBrush="White" BorderThickness="3" 
+                Command="{Binding create}">  </Button>
         <Button  Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Content="Open game" Background="#242424" Foreground="White"
                 BorderBrush="White" BorderThickness="3"></Button>
         <Button  Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" Content="Exit engine" Background="#242424" Foreground="White"
-                BorderBrush="White" BorderThickness="3"></Button>
+                BorderBrush="White" BorderThickness="3" Command="{Binding exit}"></Button>
         <Image Grid.Column="5" Grid.Row="4" Grid.RowSpan="6" Source="../images/create_image.png" HorizontalAlignment="Stretch" Grid.ColumnSpan="4"></Image>
 
 
