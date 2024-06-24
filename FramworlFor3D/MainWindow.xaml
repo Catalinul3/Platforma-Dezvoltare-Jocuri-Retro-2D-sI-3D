@@ -4,9 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FramworlFor3D.ViewModels"
-        xmlns:behaviours="clr-namespace:FramworlFor3D.helpers"
-         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-        xmlns:h="http://helix-toolkit.org/wpf"
+        Icon="../helpers/images/retro_3d_icon.png"
         mc:Ignorable="d"
         Title="3dFramework" Height="450" Width="800">
     <Window.DataContext>
@@ -68,31 +66,9 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="12" Height="20px" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Menu>
-                <MenuItem Header="Build">
-
-                </MenuItem>
-                <MenuItem Header="Run"></MenuItem>
-                <MenuItem Header="Stop"></MenuItem>
-            </Menu>
-        </StackPanel>
-        <!--<TreeView x:Name="componentsTree" ItemsSource="{Binding treeViewComponentsVM, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="4" VerticalAlignment="Stretch">
-            <i:Interaction.Behaviors>
-                <behaviours:BindableSelectedTreeViewItem SelectedItem="{Binding SelectedItem, Mode=TwoWay}"/>
-            </i:Interaction.Behaviors>
-            <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding Components}">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="{Binding ComponentImage}" Width="17" Height="17"/>
-                        <TextBlock Text="{Binding ComponentName}" FontSize="16"/>
-
-                    </StackPanel>
-                </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>
-
-        </TreeView>-->
-        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="9" Grid.RowSpan="2">
+     
+       
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="12" Grid.RowSpan="4">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0.5 ,0.4" EndPoint="0.5,1" >
                     <GradientStop Color="#FF7DB6EA" Offset="0"/>
@@ -100,7 +76,7 @@
                 </LinearGradientBrush>
             </Grid.Background>
         </Grid>
-        <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="9" Grid.RowSpan="2">
+        <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="12" Grid.RowSpan="4">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0.5 ,0.4" EndPoint="0.5,1" >
                     <GradientStop Color="White" Offset="0"/>
@@ -108,13 +84,13 @@
                 </LinearGradientBrush>
             </Grid.Background>
         </Grid>
-        <Grid Grid.Row="1" x:Name="Viewport" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="9" 
+        <Grid Grid.Row="1" x:Name="Viewport" Grid.RowSpan="8" Grid.Column="0" Grid.ColumnSpan="12" 
               MouseWheel="MouseWheel" Background="#0000"  Loaded="OnLoaded" KeyDown="KeyDown"
                           Focusable="True" 
           >
             <Viewport3D   x:Name="environment"
-                      Grid.ColumnSpan="9" 
-                      Grid.RowSpan="4"
+                      Grid.ColumnSpan="12" 
+                      Grid.RowSpan="8"
                       Grid.Column="0" Grid.Row="1" 
                       Camera="{Binding Camera}"
                           MouseLeftButtonDown="MouseDown"
@@ -131,46 +107,7 @@
 
         </h:HelixViewport3D>-->
 
-        <DockPanel  Grid.Row="5" Grid.ColumnSpan="8" VerticalAlignment="Top">
-            <Menu>
-                <MenuItem Header="Project"></MenuItem>
-                <MenuItem Header="Console"></MenuItem>
-            </Menu>
-        </DockPanel>
-        <DockPanel  Grid.Row="5" Grid.ColumnSpan="9" VerticalAlignment="Center">
-            <Menu>
-                <MenuItem Header="Add"></MenuItem>
-                <MenuItem Header="Search"></MenuItem>
-            </Menu>
-        </DockPanel>
-        <TreeView Grid.Row="6" Grid.RowSpan="3" Grid.ColumnSpan="2">
-            <TreeViewItem Header="Level 1" IsExpanded="True">
-                <TreeViewItem Header="Level 2.1" />
-                <TreeViewItem Header="Level 2.2" IsExpanded="True">
-                    <TreeViewItem Header="Level 3.1" />
-                    <TreeViewItem Header="Level 3.2" />
-                </TreeViewItem>
-                <TreeViewItem Header="Level 2.3" />
-            </TreeViewItem>
-        </TreeView>
-        <ListView Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="7" Grid.RowSpan="3" >
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-
-                    <WrapPanel Orientation="Horizontal"></WrapPanel>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-            <ListViewItem Content="Some Item"></ListViewItem>
-            <ListViewItem Content="Some Item"></ListViewItem>
-            <ListViewItem Content="Some Item"></ListViewItem>
-            <ListViewItem Content="Some Item"></ListViewItem>
-            <ListViewItem Content="Some Item"></ListViewItem>
-            <ListViewItem Content="Some Item"></ListViewItem>
-        </ListView>
-        <ListView Grid.Row="1" Grid.Column="9" Grid.ColumnSpan="3" Grid.RowSpan="8">
-            <ListViewItem Content="Inspector for something"/>
-            <ListViewItem Content="Inspector for something 2"/>
-        </ListView>
+      
         <!--
         <Viewport3D >
            

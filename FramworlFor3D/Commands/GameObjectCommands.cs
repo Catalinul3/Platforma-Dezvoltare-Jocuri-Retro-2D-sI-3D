@@ -131,9 +131,12 @@ namespace FramworkFor3D.Commands
                 cubeInteractive = InteractiveHelper.ConvertToUI(cube);
                 UIElement3D newCubeInteractive = cubeInteractive;
                 environment.Children.Add(newCubeInteractive);
-
-                TranslateTransform3D center = new TranslateTransform3D(3, 2.3, 1.1);
-                cube.Transform = center;
+                Transform3DGroup transfGroup = new Transform3DGroup();
+                cube.Rotate(15, new Vector3D(1, 0, 0));
+                transfGroup.Children.Add(cube.Transform);
+                TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 0.0);
+                transfGroup.Children.Add(center);
+                cube.Transform = transfGroup;
                 cubeBounds = Collider.UpdateBounds(cube, center);
 
 
@@ -194,7 +197,7 @@ namespace FramworkFor3D.Commands
                     Transform3DGroup transformGroup = new Transform3DGroup();
                    objInteractive = InteractiveHelper.ConvertToUI(obj);
 
-                    obj.Rotate(90, new Vector3D(1, 0, 0));
+                    obj.Rotate(95, new Vector3D(1, 0, 0));
                     transformGroup.Children.Add(obj.Transform);
               
                     TranslateTransform3D center = new TranslateTransform3D(2, 2.4, 1);
@@ -264,15 +267,10 @@ namespace FramworkFor3D.Commands
             colliderModify.Header = "Modify Collider";
             MenuItem sound = new MenuItem();
             sound.Header = "Add Sound";
-            MenuItem animation = new MenuItem();
-            animation.Header = "Add Animation";
+        
             MenuItem properties = new MenuItem();
-            properties.Header = "Properties";
-            MenuItem script = new MenuItem();
-            script.Header = "Add Script";
-            MenuItem movement= new MenuItem();
-            movement.Header = "Add Movement";
-            script.Items.Add(movement);
+        
+         
             collider.Items.Add(colliderModify);
             rigidBody.Items.Add(solidBody);
             rigidBody.Items.Add(elasticBody);
@@ -295,15 +293,15 @@ namespace FramworkFor3D.Commands
             }
             colliderModify.Click += (s, ev) => ModifyCollider(s, ev, environment, clickedObject);
             sound.Click += (s, ev) => Sound(s, ev, clickedObject);
-            animation.Click += (s, ev) => Animate(s, ev, clickedObject);
+          
             properties.Click += (s, ev) => Properties(s, ev, clickedObject);
-            script.Click += (s, ev) => Script(s, ev, clickedObject);
+         
             context.Items.Add(delete);
             context.Items.Add(addMaterial);
             context.Items.Add(applyPhisycs);
             context.Items.Add(sound);
-            context.Items.Add(animation);
-            context.Items.Add(script);
+           
+            
             context.Items.Add(properties);
 
 
@@ -358,12 +356,10 @@ namespace FramworkFor3D.Commands
             colliderModify.Header = "Modify Collider";
             MenuItem sound = new MenuItem();
             sound.Header = "Add Sound";
-            MenuItem animation = new MenuItem();
-            animation.Header = "Add Animation";
+          
             MenuItem properties = new MenuItem();
             properties.Header = "Properties";
-            MenuItem script = new MenuItem();
-            script.Header = "Add Script";
+          
 
             collider.Items.Add(colliderModify);
             rigidBody.Items.Add(solidBody);
@@ -387,16 +383,16 @@ namespace FramworkFor3D.Commands
             }
             colliderModify.Click += (s, ev) => ModifyCollider(s, ev, environment, clickedCube);
             sound.Click +=(s,ev)=>Sound(s,ev,clickedCube);
-            animation.Click += (s, ev) => Animate(s, ev, clickedCube);
+            
             properties.Click += (s, ev) => Properties(s, ev, clickedCube);
-            script.Click += (s, ev) => Script(s, ev, clickedCube);
+        
             context.Items.Add(delete);
             context.Items.Add(addMaterial);
             context.Items.Add(applyPhisycs);
             context.Items.Add(sound);
-            context.Items.Add(animation);
+          
             context.Items.Add(properties);
-            context.Items.Add(script);
+           
 
 
             context.IsOpen = true;
@@ -448,12 +444,10 @@ namespace FramworkFor3D.Commands
             colliderModify.Header = "Modify Collider";
             MenuItem sound = new MenuItem();
             sound.Header = "Add Sound";
-            MenuItem animation = new MenuItem();
-            animation.Header = "Add Animation";
+        
             MenuItem properties = new MenuItem();
             properties.Header = "Properties";
-            MenuItem script = new MenuItem();
-            script.Header = "Add Script";
+          
 
             collider.Items.Add(colliderModify);
             rigidBody.Items.Add(solidBody);
@@ -472,27 +466,22 @@ namespace FramworkFor3D.Commands
             if (objInteractive != null) { addForce.Click += (s, ev) => Force(s, ev, environment, clickedSphere, objInteractive); }
             colliderModify.Click += (s, ev) => ModifyCollider(s, ev, environment, clickedSphere);
             sound.Click += (s, ev) => Sound(s, ev, clickedSphere);
-            animation.Click += (s, ev) => Animate(s, ev, clickedSphere);
+          
             properties.Click += (s, ev) => Properties(s, ev, clickedSphere);
-            script.Click += (s, ev) => Script(s, ev, clickedSphere);
+           
             context.Items.Add(delete);
             context.Items.Add(addMaterial);
             context.Items.Add(applyPhisycs);
             context.Items.Add(sound);
-            context.Items.Add(animation);
+        
             context.Items.Add(properties);
-             context.Items.Add(script);
+             
 
 
 
             context.IsOpen = true;
             #endregion
 
-        }
-
-        private void Script(object s, RoutedEventArgs ev, UIElement3D obj)
-        {
-            MessageBox.Show("Under development");
         }
 
         private void Properties(object s, RoutedEventArgs ev, UIElement3D obj)

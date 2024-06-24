@@ -69,17 +69,14 @@ namespace FramworkFor3D.Based_Operations
         #region MoveCamera
         public Matrix3D MoveCameraOnXaxis(double deltaX,Matrix3D camera)
         {
-            
+
             Vector3D translate = new Vector3D(deltaX, 0, 0);
-            //Matrix3D translateMatrix = new Matrix3D();
             camera.Translate(translate);
             return camera;
         }
         public Matrix3D MoveCameraOnYaxis(double deltaY,Matrix3D camera)
         {
-
-            Vector3D translate = new Vector3D(0, deltaY, 0);
-           
+            Vector3D translate = new Vector3D(0, deltaY, 0);    
             camera.Translate(translate);
             return camera;
         }
@@ -91,7 +88,6 @@ namespace FramworkFor3D.Based_Operations
             Matrix3D zoom=new Matrix3D();
             zoom.Translate(new Vector3D(0, deltaZoom, deltaZoom));
             return zoom;
-
         }
         #endregion
     }

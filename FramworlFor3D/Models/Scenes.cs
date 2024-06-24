@@ -40,13 +40,9 @@ namespace FramworkFor3D.Models
             ModelVisual3D floor=new ModelVisual3D();
             ModelVisual3D lightVisual = new ModelVisual3D();
             Model3DGroup floorGroup = new Model3DGroup();
-          //  lightVisual.Content = light;
+         ;
             double cellSize = 0.3;
             double delim = 0.09;
- 
-
-
-
 
             for (int x = 0; x < 20; x++)
             {

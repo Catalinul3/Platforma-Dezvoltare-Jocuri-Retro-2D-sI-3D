@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RetroEngine.ViewModels"
         mc:Ignorable="d"
+        Icon="../images/retro_engine_icon.png"
         Title="MainWindow" Height="800" Width="1020" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.DataContext>
         <local:MainWindowVM/>
@@ -35,13 +36,17 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="Retro Engine 2024" Grid.Column="0" Grid.ColumnSpan="3" FontSize="30" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" ></TextBlock>
-        <TextBlock Text="Open recent" Grid.Row="1" Grid.Column="0" FontSize="25" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Center"  Foreground="White"></TextBlock>
-        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Background="#383838" Height="30px" Grid.ColumnSpan="4" Margin="30,0,0,0">
-            <TextBlock Text="Open recent" Background="#383838" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Left"  Foreground="Black"></TextBlock>
-            
-            <Image Source="{Binding SearchBar}" Width="30px" Margin="200,0,0,0"  HorizontalAlignment="Right"></Image>
-        </StackPanel>
-        <TextBlock Text="Get started" Grid.Row="1" Grid.Column="7" Foreground="White" FontSize="25" VerticalAlignment="Bottom" Grid.ColumnSpan="2" ></TextBlock>
+        <TextBlock Text="Retro Engine 2024" Grid.Column="0" Grid.ColumnSpan="3" FontSize="30" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <Image Source="../images/retro_engine_poster.jpg" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="2" Width="1020"  HorizontalAlignment="Stretch" Stretch="Fill"></Image>
+        <Button Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Content="Create a new game" Background="#242424" Foreground="White"
+                BorderBrush="White" BorderThickness="3">  </Button>
+        <Button  Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Content="Open game" Background="#242424" Foreground="White"
+                BorderBrush="White" BorderThickness="3"></Button>
+        <Button  Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" Content="Exit engine" Background="#242424" Foreground="White"
+                BorderBrush="White" BorderThickness="3"></Button>
+        <Image Grid.Column="5" Grid.Row="4" Grid.RowSpan="6" Grid.ColumnSpan="4"></Image>
+
+
+
     </Grid>
 </Window>

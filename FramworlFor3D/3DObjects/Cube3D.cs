@@ -95,7 +95,6 @@ namespace FramworkFor3D._3DObjects
             }
 
             cubeShape.TriangleIndices.Add(0);
-          
             cubeShape.TriangleIndices.Add(2);
             cubeShape.TriangleIndices.Add(1);
          

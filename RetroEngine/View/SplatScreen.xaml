@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:RetroEngine.ViewModels"
         mc:Ignorable="d"
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        Icon="../images/retro_engine_icon.png"
         Title="SplashScreen" Height="450" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Window.DataContext>
         <local:SplashScreenViewModel/>

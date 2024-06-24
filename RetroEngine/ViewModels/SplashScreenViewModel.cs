@@ -48,9 +48,6 @@ namespace RetroEngine.ViewModels
 
         public SplashScreenViewModel()
         {
-
-            
-
             
             _titlePath = "../images/title.png";
             _background ="../images/load.gif";

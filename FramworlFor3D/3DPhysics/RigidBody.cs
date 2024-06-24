@@ -20,15 +20,14 @@ namespace FramworkFor3D._3DPhysics
         float mass;
         const float gravity_acceleration = 9.81f;
         DispatcherTimer timer;
-        UIElement3D obj;
+     
         Rect3D bound;
         float time_elapsed = 0;
-        bool colliding = false;
+        
        float force = 0.0f;
         double jumpVelocity = 10.0f;
         double restitution = 0.5f;
         double jumpVelocityCopied = 10.0f;
-        float acceleration = 0.0f;
         public float Mass
         {
             get { return mass; }
@@ -71,11 +70,7 @@ namespace FramworkFor3D._3DPhysics
 
         public void Fall(object sender, EventArgs e, UIElement3D obj, ObjectType type)
         {
-
-
             float fallingDirection = (float)obj.Transform.Value.OffsetZ;
-
-
             time_elapsed += (float)timer.Interval.TotalSeconds;
 
             //formula pentru cadere libera a lui Newton dar fara viteza intiala si altitudine initiala obiectului
@@ -110,9 +105,6 @@ namespace FramworkFor3D._3DPhysics
 
                 obj.Transform = falling;
             }
-
-
-
 
             Bound = Collider.UpdateBounds(objectModel, falling);
 

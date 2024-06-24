@@ -78,22 +78,14 @@ namespace FramworlFor3D
             if (isMouseCaptured)
             { //convertirea punctelor 2D la spațiul de coordonate sferic 3D 
                 Matrix3D camera = ((MatrixTransform3D)environment.Camera.Transform).Matrix;
-                Vector3D last = track.ConvertToSphereCoordinates(lastClick, environment.RenderSize.Width, environment.RenderSize.Height);
-                Vector3D current = track.ConvertToSphereCoordinates(e.GetPosition(environment), environment.RenderSize.Width, environment.RenderSize.Height);
-               
-               Matrix3D rotate= track.RotateCamera(lastClick, e.GetPosition(environment), camera,environment,centerOfGrid);
-                
-                
-               
+              
+               Matrix3D rotate= track.RotateCamera(lastClick, e.GetPosition(environment), camera,environment,centerOfGrid);    
                 //Matrix3D finalConfig = Matrix3D.Multiply(cameraConfig, camera);
                 environment.Camera.Transform = new MatrixTransform3D(rotate);
+                //pastrarea configurației camerei
                 lastClick = e.GetPosition(environment);
 
-
-
-
             }
-
         }
 
         #endregion
@@ -121,25 +113,15 @@ namespace FramworlFor3D
         }
         private void KeyA()
         {
-
-
             Matrix3D camera = ((MatrixTransform3D)environment.Camera.Transform).Matrix;
             Matrix3D translateMatrix = track.MoveCameraOnXaxis(-deltaX, camera);
-
-
-
-            environment.Camera.Transform = new MatrixTransform3D(translateMatrix);
-
-
+          environment.Camera.Transform = new MatrixTransform3D(translateMatrix);
         }
         private void KeyD()
         {
 
             Matrix3D camera = ((MatrixTransform3D)environment.Camera.Transform).Matrix;
             Matrix3D translateMatrix = track.MoveCameraOnXaxis(deltaX, camera);
-
-
-
             environment.Camera.Transform = new MatrixTransform3D(translateMatrix);
 
         }
@@ -148,11 +130,8 @@ namespace FramworlFor3D
 
             Matrix3D camera = ((MatrixTransform3D)environment.Camera.Transform).Matrix;
             Matrix3D translateMatrix = track.MoveCameraOnYaxis(deltaY, camera);
-
-
-
             environment.Camera.Transform = new MatrixTransform3D(translateMatrix);
-
+           
         }
         private void KeyS()
         {
@@ -160,9 +139,6 @@ namespace FramworlFor3D
 
             Matrix3D camera = ((MatrixTransform3D)environment.Camera.Transform).Matrix;
             Matrix3D translateMatrix = track.MoveCameraOnYaxis(-deltaY, camera);
-
-
-
             environment.Camera.Transform = new MatrixTransform3D(translateMatrix);
 
 

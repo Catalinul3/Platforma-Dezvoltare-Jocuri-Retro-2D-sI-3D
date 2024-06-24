@@ -12,6 +12,7 @@
     <None Remove="3D Models\FinalBaseMesh.obj" />
     <None Remove="3D Models\sphere.obj" />
     <None Remove="helpers\grid_lines.jpg" />
+    <None Remove="helpers\images\retro_3d_icon.png" />
     <None Remove="Resources\camera.png" />
     <None Remove="Resources\cell.png" />
     <None Remove="Resources\object.png" />
@@ -30,6 +31,9 @@
     </Content>
     <Content Include="helpers\grid_lines.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="helpers\images\retro_3d_icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\camera.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

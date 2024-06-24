@@ -10,6 +10,8 @@
 
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/find.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/load.gif")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/retro_engine_icon.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/retro_engine_poster.jpg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/title.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/retro.jpg")]
 

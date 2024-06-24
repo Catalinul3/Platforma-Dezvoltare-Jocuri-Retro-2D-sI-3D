@@ -62,3 +62,5 @@ D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\obj\Debug\net6.0-windows\ref\RetroEngine.dll
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\bin\Debug\net6.0-windows\Microsoft.Expression.Interactions.dll
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\bin\Debug\net6.0-windows\System.Windows.Interactivity.dll
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\bin\Debug\net6.0-windows\images\retro_engine_icon.png
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\bin\Debug\net6.0-windows\images\retro_engine_poster.jpg

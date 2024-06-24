@@ -94,8 +94,9 @@ namespace FramworkFor3D._3DObjects
             }
             MeshGeometry3D mesh = new MeshGeometry3D();
             mesh.Positions= vertices;
-           // mesh.Normals= normals;
+           
             mesh.TriangleIndices= indices;
+            
             double scale = 0.03;
             for (int i = 0; i < mesh.Positions.Count; i++)
             {
@@ -103,7 +104,7 @@ namespace FramworkFor3D._3DObjects
                 Point3D scaledPosition = new Point3D(originalPosition.X * scale, originalPosition.Y * scale, originalPosition.Z * scale);
                 mesh.Positions[i] = scaledPosition;
             }
-            DiffuseMaterial material= new DiffuseMaterial();
+            DiffuseMaterial material = new DiffuseMaterial();
             material.Brush = Brushes.LightGray;
             GeometryModel3D model = new GeometryModel3D(mesh, material);
             Model3DGroup lightAndGeometry = new Model3DGroup();

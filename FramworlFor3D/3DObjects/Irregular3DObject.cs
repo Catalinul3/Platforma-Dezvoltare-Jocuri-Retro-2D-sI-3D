@@ -202,28 +202,12 @@ namespace FramworkFor3D._3DObjects
                             int index3INT = int.Parse(index3[0]) - 1;
                             int index4INT = int.Parse(index4[0]) - 1;
 
-
-
-
                             indices.Add(index1INT);
-
-
-
                             indices.Add(index2INT);
-
-
-
                             indices.Add(index3INT);
-
                             indices.Add(index1INT);
-
                             indices.Add(index3INT);
-
                             indices.Add(index4INT);
-
-
-
-
 
                         }
                         if (parts[0] == "f" && parts[1] == "")
@@ -380,17 +364,9 @@ namespace FramworkFor3D._3DObjects
                                     int index2INT = int.Parse(index2[0]) - 1;
                                     int index3INT = int.Parse(index3[0]) - 1;
 
-
-
-
                                     indices.Add(index1INT);
-
-
                                     indices.Add(index2INT);
-
                                     indices.Add(index3INT);
-
-
 
                                 }
                             }
