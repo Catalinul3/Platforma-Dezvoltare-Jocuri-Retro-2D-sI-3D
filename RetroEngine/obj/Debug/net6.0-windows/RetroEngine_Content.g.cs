@@ -8,7 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("fonts/arcade.ttf")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/create_image.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/find.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/gameover.jpg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/load.gif")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/retro_engine_icon.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/retro_engine_poster.jpg")]

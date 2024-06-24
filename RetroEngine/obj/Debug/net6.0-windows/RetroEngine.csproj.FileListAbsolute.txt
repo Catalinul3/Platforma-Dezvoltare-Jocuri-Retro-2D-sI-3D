@@ -64,3 +64,6 @@ D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\bin\Debug\net6.
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\bin\Debug\net6.0-windows\System.Windows.Interactivity.dll
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\bin\Debug\net6.0-windows\images\retro_engine_icon.png
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\bin\Debug\net6.0-windows\images\retro_engine_poster.jpg
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\bin\Debug\net6.0-windows\images\create_image.png
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\bin\Debug\net6.0-windows\images\GameOver.jpg
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\RetroEngine\bin\Debug\net6.0-windows\Fonts\arcade.TTF

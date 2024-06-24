@@ -5,6 +5,8 @@
             
              >
     <Application.Resources>
-         
+        <Style x:Key="buttonDesign" TargetType="Button">
+            <Setter Property="FontFamily" Value="Fonts/arcade.TTF #retro"/>
+        </Style>
     </Application.Resources>
 </Application>

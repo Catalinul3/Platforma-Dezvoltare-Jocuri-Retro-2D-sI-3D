@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RetroEngine.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,18 @@ namespace RetroEngine
         public MainWindow()
         {
             InitializeComponent();
+        }
+        private void Button_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            imageState.Source = new BitmapImage(new Uri("../images/create_image.png", UriKind.Relative));
+        }
+        private void Button_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            imageState.Source = null;
+        }
+        private void Button_MouseEnterLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            imageState.Source = new BitmapImage(new Uri("../images/GameOver.jpg", UriKind.Relative));
         }
     }
 }

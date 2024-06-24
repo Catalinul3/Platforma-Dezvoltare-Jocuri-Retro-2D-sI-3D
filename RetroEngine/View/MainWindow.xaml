@@ -7,6 +7,11 @@
         mc:Ignorable="d"
         Icon="../images/retro_engine_icon.png"
         Title="MainWindow" Height="800" Width="1020" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style x:Key="buttonDesign" TargetType="Button">
+            <Setter Property="FontFamily" Value="Fonts/arcade.TTF "/>
+        </Style>
+    </Window.Resources>
     <Window.DataContext>
         <local:MainWindowVM/>
     </Window.DataContext>
@@ -40,12 +45,18 @@
         <Image Source="../images/retro_engine_poster.jpg" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="2" Width="1020"  HorizontalAlignment="Stretch" Stretch="Fill"></Image>
         <Button Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Content="Create a new game" Background="#242424" Foreground="White"
                 BorderBrush="White" BorderThickness="3" 
-                Command="{Binding create}">  </Button>
-        <Button  Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Content="Open game" Background="#242424" Foreground="White"
-                BorderBrush="White" BorderThickness="3"></Button>
-        <Button  Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" Content="Exit engine" Background="#242424" Foreground="White"
-                BorderBrush="White" BorderThickness="3" Command="{Binding exit}"></Button>
-        <Image Grid.Column="5" Grid.Row="4" Grid.RowSpan="6" Source="../images/create_image.png" HorizontalAlignment="Stretch" Grid.ColumnSpan="4"></Image>
+                Command="{Binding create}"
+                Style="{StaticResource buttonDesign}"
+                CommandParameter="{Binding ElementName=imageState}"
+                MouseEnter="Button_MouseEnter"
+                MouseLeave="Button_MouseLeave">  </Button>
+       
+        <Button  Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Content="Exit engine" Background="#242424" Foreground="White"
+                BorderBrush="White" BorderThickness="3" Command="{Binding exit}" 
+                 CommandParameter="{Binding ElementName=imageState}"
+                 MouseEnter="Button_MouseEnterLeave"
+                 MouseLeave="Button_MouseLeave"></Button>
+        <Image x:Name="imageState" Grid.Column="5" Grid.Row="4" Grid.RowSpan="6"  HorizontalAlignment="Stretch" Grid.ColumnSpan="4"></Image>
 
 
 
