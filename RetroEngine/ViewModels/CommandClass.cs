@@ -1,4 +1,5 @@
 ﻿using RetroEngine.Helpers;
+using RetroEngine.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,18 +39,17 @@ namespace RetroEngine.ViewModels
 
         private void Exit(object parameter)
         {
-            MessageBox.Show("You gave up");
+            System.Windows.Application.Current.Shutdown();
         }
 
         private void Create(object parameter)
         {
-           if(parameter is Image image)
-            { string path = "../images/create_image.png";
-                BitmapImage source = new BitmapImage(new Uri(path,UriKind.Relative));
-                image.Source = source;
-                
+
+            CreateDialog dialog = new CreateDialog();
+            dialog.ShowDialog();
+
                 
             }
         }
     }
-}
+

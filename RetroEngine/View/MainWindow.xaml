@@ -49,7 +49,7 @@
                 Style="{StaticResource buttonDesign}"
                 CommandParameter="{Binding ElementName=imageState}"
                 MouseEnter="Button_MouseEnter"
-                MouseLeave="Button_MouseLeave">  </Button>
+                MouseLeave="Button_MouseLeave" >  </Button>
        
         <Button  Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Content="Exit engine" Background="#242424" Foreground="White"
                 BorderBrush="White" BorderThickness="3" Command="{Binding exit}" 
