@@ -44,7 +44,7 @@
                 BorderBrush="White" BorderThickness="3"></Button>
         <Button  Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" Content="Exit engine" Background="#242424" Foreground="White"
                 BorderBrush="White" BorderThickness="3"></Button>
-        <Image Grid.Column="5" Grid.Row="4" Grid.RowSpan="6" Grid.ColumnSpan="4"></Image>
+        <Image Grid.Column="5" Grid.Row="4" Grid.RowSpan="6" Source="../images/create_image.png" HorizontalAlignment="Stretch" Grid.ColumnSpan="4"></Image>
 
 
 
