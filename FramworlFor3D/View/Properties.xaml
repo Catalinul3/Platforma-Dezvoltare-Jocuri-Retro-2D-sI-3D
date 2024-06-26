@@ -1,0 +1,16 @@
+﻿<Window x:Class="FramworkFor3D.View.Properties"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FramworkFor3D.View"
+        xmlns:bind="clr-namespace:FramworkFor3D.ViewModels"
+        mc:Ignorable="d"
+        Title="Properties" Height="450" Width="800">
+    <Window.DataContext>
+        <bind:PropertiesVM/>
+    </Window.DataContext>
+    <Grid>
+        <local:PropertiesPage></local:PropertiesPage>
+    </Grid>
+</Window>

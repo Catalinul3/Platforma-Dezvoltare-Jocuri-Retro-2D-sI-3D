@@ -7,6 +7,7 @@ using FramworkFor3D._3DSounds;
 using FramworkFor3D.Animations;
 using FramworkFor3D.helpers;
 using FramworkFor3D.View;
+using FramworkFor3D.ViewModels;
 using FramworlFor3D.helpers;
 using FramworlFor3D.ViewModels;
 
@@ -56,6 +57,8 @@ namespace FramworkFor3D.Commands
         DispatcherTimer timer;
         Rect3D cubeBounds, sphereBounds, objBounds;
         SoundManager SoundManager;
+
+        private Transform3DGroup _cubeTransform, _sphereTransform, _objTransform;
 
         bool addSound = false;
         public Rect3D CubeBounds
@@ -131,10 +134,17 @@ namespace FramworkFor3D.Commands
                 UIElement3D newCubeInteractive = cubeInteractive;
                 environment.Children.Add(newCubeInteractive);
                 Transform3DGroup transfGroup = new Transform3DGroup();
-                cube.Rotate(15, new Vector3D(1, 0, 0));
-                transfGroup.Children.Add(cube.Transform);
+                ScaleTransform3D scale = new ScaleTransform3D(0.4, 1, 1);
+                transfGroup.Children.Add(scale);
+                RotateTransform3D rotate=new RotateTransform3D(new AxisAngleRotation3D(new Vector3D(0, 1, 0), 50));
+               // cube.Rotate(15, new Vector3D(1, 0, 0));
+                transfGroup.Children.Add(rotate);
                 TranslateTransform3D center = new TranslateTransform3D(2, 1.5, 0.0);
+
+              
                 transfGroup.Children.Add(center);
+              
+                _cubeTransform = transfGroup;
                 cube.Transform = transfGroup;
                 cubeBounds = Collider.UpdateBounds(cube, center);
 
@@ -162,11 +172,17 @@ namespace FramworkFor3D.Commands
 
                 sphere = new Sphere3D();
                 sphereInteractive = InteractiveHelper.ConvertToUI(sphere);
-
+                Transform3DGroup transformGroup=new Transform3DGroup();
                 environment.Children.Add(sphereInteractive);
+                ScaleTransform3D scale = new ScaleTransform3D(1, 0.4, 0.4);
+                transformGroup.Children.Add(scale);
+                sphere.Rotate(90, new Vector3D(1, 0, 0));
+                transformGroup.Children.Add(sphere.Transform);
                 TranslateTransform3D center = new TranslateTransform3D(1, 2.4, 1.3);
+                transformGroup.Children.Add(center);
                 sphereBounds = Collider.UpdateBounds(sphere, center);
                 sphere.Transform = center;
+                _sphereTransform=transformGroup;
                 sphereInteractive.MouseRightButtonDown += (s, e) => SpherePressed(s, e, environment);
                 sphereInteractive.Transform = center;
                 objects.Add(sphereInteractive);
@@ -195,16 +211,18 @@ namespace FramworkFor3D.Commands
 
                     Transform3DGroup transformGroup = new Transform3DGroup();
                    objInteractive = InteractiveHelper.ConvertToUI(obj);
-
-                    obj.Rotate(95, new Vector3D(1, 0, 0));
-                    transformGroup.Children.Add(obj.Transform);
+                    ScaleTransform3D scale = new ScaleTransform3D(0, 0.5, 0);
+                    transformGroup.Children.Add(scale);
+                    obj.Rotate(90, new Vector3D(1, 0, 0));
               
+                    transformGroup.Children.Add(obj.Transform);
+                   
                     TranslateTransform3D center = new TranslateTransform3D(2, 2.4, 1);
 
                     transformGroup.Children.Add(center);
                     objInteractive.Transform= transformGroup;
 
-
+                    _objTransform= transformGroup;
                     
                     objBounds = Collider.UpdateBounds(obj, center);
 
@@ -485,18 +503,34 @@ namespace FramworkFor3D.Commands
 
         private void Properties(object s, RoutedEventArgs ev, UIElement3D obj)
         {ModelVisual3D model=InteractiveHelper.ConvertToModel(obj);
-          
-            PropertiesPage page = new PropertiesPage();
             
-            page.SetModel(model);
-            var propertiesWindow = new Window
+          if(type==ObjectType.CUBE)
+            {
+                model.Transform = _cubeTransform;
+            }
+          if(type== ObjectType.SPHERE)
+            {
+                model.Transform = _sphereTransform;
+            }
+          if(type==ObjectType.IRREGULAR)
+            {
+                model.Transform = _objTransform;
+            }
+            
+         
+          
+
+            PropertiesVM pageVM = new PropertiesVM(model);
+            var propertiesWindow = new Properties
 
 
             { Title = type.ToString(),
-                Content = page,
+                
               
         };
+            propertiesWindow.DataContext = pageVM;
             propertiesWindow.Show();
+         
 
         }
 
@@ -690,7 +724,7 @@ namespace FramworkFor3D.Commands
             {
               
               //  collision.LoadSound("collision", audio[1]);
-                SoundManager.looping("sound3");
+                SoundManager.PlaySound("sound3");
               
                 //SoundManager.AddSound(collision);
                

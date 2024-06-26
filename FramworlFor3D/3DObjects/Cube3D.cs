@@ -196,16 +196,18 @@ namespace FramworkFor3D._3DObjects
         }
         public void Scale(Vector3D axis, double scaleFactor)
         {
+          
+           
             if (axis.X != null)
             {
                 ScaleTransform3D scale = new ScaleTransform3D(scaleFactor, 1, 1);
-                this.Transform = scale;
+                this.Transform= scale;
             }
             //scalare pe axa y cu factorul scaleFactor
             if (axis.Y != null)
             {
                 ScaleTransform3D scale = new ScaleTransform3D(1, scaleFactor, 1);
-                this.Transform = scale;
+                this.Transform= scale;
             }
             //scalare pe axa z cu factorul scaleFactor
             if (axis.Z != null)
@@ -213,6 +215,7 @@ namespace FramworkFor3D._3DObjects
                 ScaleTransform3D scale = new ScaleTransform3D(1, 1, scaleFactor);
                 this.Transform = scale;
             }
+            
         }
 
         #endregion

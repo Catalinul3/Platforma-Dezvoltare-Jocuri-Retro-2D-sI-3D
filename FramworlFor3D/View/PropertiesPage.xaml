@@ -7,6 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
            >
+    
     <Grid  Background="Gray">
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -38,7 +39,7 @@
             <ModelVisual3D Content="{Binding Model.Content}">
             </ModelVisual3D>
         </Viewport3D>
-        <Grid ShowGridLines="True" Grid.Row="0" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="3">
+        <Grid  Grid.Row="0" Grid.Column="6" Grid.RowSpan="2" Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" ></ColumnDefinition>
                 <ColumnDefinition ></ColumnDefinition>
@@ -62,21 +63,21 @@
             <TextBlock  Grid.Column="1" Grid.Row="1" Text="X:" FontSize="10" FontWeight="Bold" Height="15" Width="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBlock  Grid.Column="1" Grid.Row="2" Text="X:" FontSize="10" FontWeight="Bold" Height="15" Width="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBlock  Grid.Column="1" Grid.Row="3" Text="X:" FontSize="10" FontWeight="Bold" Height="15" Width="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBox  Grid.Column="2" Grid.Row="1" Text="0.0" FontSize="10" TextAlignment="Center" FontWeight="Bold"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="15" />
-            <TextBox  Grid.Column="2" Grid.Row="2" Text="0.0" FontSize="10" TextAlignment="Center" FontWeight="Bold"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="15" />
-            <TextBox  Grid.Column="2" Grid.Row="3" Text="0.0" FontSize="10" TextAlignment="Center" FontWeight="Bold"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="15" />
+            <TextBox Text="{Binding TranslateX}" Grid.Column="2" Grid.Row="1"  FontSize="10" TextAlignment="Center" FontWeight="Bold"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="15" />
+            <TextBox Text="{Binding  RotateX}"  Grid.Column="2" Grid.Row="2"  FontSize="10" TextAlignment="Center" FontWeight="Bold"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="15" />
+            <TextBox  Text="{Binding ScaleX}" Grid.Column="2" Grid.Row="3"  FontSize="10" TextAlignment="Center" FontWeight="Bold"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="15" />
             <TextBlock  Grid.Column="3" Grid.Row="1" Text="Y:" FontSize="10" FontWeight="Bold" Height="15" Width="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBlock  Grid.Column="3" Grid.Row="2" Text="Y:" FontSize="10" FontWeight="Bold" Height="15" Width="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBlock  Grid.Column="3" Grid.Row="3" Text="Y:" FontSize="10" FontWeight="Bold" Height="15" Width="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBox  Grid.Column="4" Grid.Row="1" Text="0.0" FontSize="10" TextAlignment="Center" FontWeight="Bold"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="15" />
-            <TextBox  Grid.Column="4" Grid.Row="2" Text="0.0" FontSize="10" TextAlignment="Center" FontWeight="Bold"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="15" />
-            <TextBox  Grid.Column="4" Grid.Row="3" Text="0.0" FontSize="10" TextAlignment="Center" FontWeight="Bold"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="15"/>
+            <TextBox Text="{Binding TranslateY}"  Grid.Column="4" Grid.Row="1"  FontSize="10" TextAlignment="Center" FontWeight="Bold"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="15" />
+            <TextBox Text="{Binding RotateY}"  Grid.Column="4" Grid.Row="2"  FontSize="10" TextAlignment="Center" FontWeight="Bold"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="15" />
+            <TextBox Text="{Binding ScaleY}"  Grid.Column="4" Grid.Row="3"  FontSize="10" TextAlignment="Center" FontWeight="Bold"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="15"/>
             <TextBlock  Grid.Column="5" Grid.Row="1" Text="Z:" FontSize="10" FontWeight="Bold" Height="15" Width="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBlock  Grid.Column="5" Grid.Row="2" Text="Z:" FontSize="10" FontWeight="Bold" Height="15" Width="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBlock  Grid.Column="5" Grid.Row="3" Text="Z:" FontSize="10" FontWeight="Bold" Height="15" Width="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBox  Grid.Column="6" Grid.Row="1" Text="0.0" FontSize="10" TextAlignment="Center" FontWeight="Bold"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="15" />
-            <TextBox  Grid.Column="6" Grid.Row="2" Text="0.0" FontSize="10" TextAlignment="Center" FontWeight="Bold"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="15" />
-            <TextBox  Grid.Column="6" Grid.Row="3" Text="0.0" FontSize="10" TextAlignment="Center" FontWeight="Bold"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="15" />
+            <TextBox Text="{Binding TranslateZ}"  Grid.Column="6" Grid.Row="1"  FontSize="10" TextAlignment="Center" FontWeight="Bold"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="15" />
+            <TextBox Text="{Binding RotateZ }"  Grid.Column="6" Grid.Row="2"  FontSize="10" TextAlignment="Center" FontWeight="Bold"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="15" />
+            <TextBox Text="{Binding ScaleZ}"  Grid.Column="6" Grid.Row="3"  FontSize="10" TextAlignment="Center" FontWeight="Bold"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="15" />
         </Grid>
         <StackPanel Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="2"></StackPanel>
         <StackPanel Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="2"></StackPanel>

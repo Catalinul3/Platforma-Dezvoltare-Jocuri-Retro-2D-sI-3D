@@ -41,7 +41,14 @@ namespace RetroEngine.ViewModels
             {
                 Title = _title
             };
-            frameWorkWindow.Show();
+            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
+            if (currentWindow != null)
+            {
+               currentWindow.Close();
+                frameWorkWindow.Show();
+            }
+            
+            
         }
       
 

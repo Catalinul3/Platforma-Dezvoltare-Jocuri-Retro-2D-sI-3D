@@ -44,9 +44,16 @@ namespace RetroEngine.ViewModels
 
         private void Create(object parameter)
         {
-
+            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
             CreateDialog dialog = new CreateDialog();
-            dialog.ShowDialog();
+            if (currentWindow != null)
+            {
+                currentWindow.Close();
+                dialog.ShowDialog();
+               
+            }
+          
+            
 
                 
             }

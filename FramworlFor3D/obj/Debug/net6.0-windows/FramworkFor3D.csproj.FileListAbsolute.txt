@@ -84,3 +84,5 @@ D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\FramworlFor3D\bin\Debug\net
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\FramworlFor3D\obj\Debug\net6.0-windows\View\PropertiesPage.g.cs
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\FramworlFor3D\obj\Debug\net6.0-windows\View\PropertiesPage.baml
 D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\FramworlFor3D\bin\Debug\net6.0-windows\helpers\images\retro_3d_icon.png
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\FramworlFor3D\obj\Debug\net6.0-windows\View\Properties.g.cs
+D:\GitHub\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\FramworlFor3D\obj\Debug\net6.0-windows\View\Properties.baml

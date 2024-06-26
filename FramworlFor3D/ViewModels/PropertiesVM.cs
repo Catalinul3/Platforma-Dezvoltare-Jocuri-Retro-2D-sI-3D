@@ -22,10 +22,10 @@ namespace FramworkFor3D.ViewModels
                 NotifyPropertyChanged("Model");
             }
         }
-        private double translateX, translateY, translateZ;
-        private double scaleX, scaleY, scaleZ;
-        private double rotateX, rotateY, rotateZ;
-        public double TranslateX
+        private string translateX, translateY, translateZ;
+        private string scaleX, scaleY, scaleZ;
+        private string rotateX, rotateY, rotateZ;
+        public string TranslateX
         {
             get
             {
@@ -34,9 +34,10 @@ namespace FramworkFor3D.ViewModels
             set
             {
                 translateX = value;
+                NotifyPropertyChanged(nameof(TranslateX));
             }
         }
-        public double TranslateY
+        public string TranslateY
         {
             get
             
@@ -46,11 +47,12 @@ namespace FramworkFor3D.ViewModels
                 set
             {
                     translateY = value;
-                }
+                NotifyPropertyChanged(nameof(TranslateY));
+            }
 
 
         }
-        public double TranslateZ
+        public string TranslateZ
         {
             get
 
@@ -60,11 +62,12 @@ namespace FramworkFor3D.ViewModels
             set
             {
                 translateZ = value;
+                NotifyPropertyChanged(nameof(TranslateZ));
             }
 
 
         }
-        public double ScaleX
+        public string ScaleX
         {
             get
             {
@@ -73,9 +76,10 @@ namespace FramworkFor3D.ViewModels
             set
             {
                 scaleX = value;
+                NotifyPropertyChanged(nameof(ScaleX));
             }
         }
-        public double ScaleY
+        public string ScaleY
         {
             get
 
@@ -85,11 +89,12 @@ namespace FramworkFor3D.ViewModels
             set
             {
                 scaleY = value;
+                NotifyPropertyChanged(nameof(ScaleY));
             }
 
 
         }
-        public double ScaleZ
+        public string ScaleZ
         {
             get
 
@@ -99,11 +104,12 @@ namespace FramworkFor3D.ViewModels
             set
             {
                 scaleZ = value;
+                NotifyPropertyChanged(nameof(ScaleZ));
             }
 
 
         }
-        public double RotateX
+        public string RotateX
         {
             get
             {
@@ -112,9 +118,10 @@ namespace FramworkFor3D.ViewModels
             set
             {
                 rotateX = value;
+                NotifyPropertyChanged(nameof(RotateX));
             }
         }
-        public double RotateY
+        public string RotateY
         {
             get
 
@@ -124,11 +131,12 @@ namespace FramworkFor3D.ViewModels
             set
             {
                 rotateY = value;
+                NotifyPropertyChanged(nameof(RotateY));
             }
 
 
         }
-        public double RotateZ
+        public string RotateZ
         {
             get
 
@@ -138,13 +146,47 @@ namespace FramworkFor3D.ViewModels
             set
             {
                 rotateZ = value;
+                NotifyPropertyChanged(nameof(RotateZ));
             }
 
+
+        }
+        public PropertiesVM()
+        {
 
         }
         public PropertiesVM(ModelVisual3D model)
         {
             _model = model;
+            if(model.Transform is Transform3DGroup)
+            {
+                Transform3DGroup group = (Transform3DGroup)model.Transform;
+                if(group.Children.Count>0)
+                {
+                    if (group.Children[2] is TranslateTransform3D)
+                    {
+                        TranslateTransform3D translate = (TranslateTransform3D)group.Children[2];
+                        translateX = translate.OffsetX.ToString();
+                        translateY = translate.OffsetY.ToString();
+                        translateZ = translate.OffsetZ.ToString();
+                    }
+                    if (group.Children[0] is ScaleTransform3D)
+                    {
+                        ScaleTransform3D scale = (ScaleTransform3D)group.Children[0];
+                        scaleX = scale.ScaleX.ToString();
+                        scaleY = scale.ScaleY.ToString();
+                        scaleZ = scale.ScaleZ.ToString();
+                    }
+                    if (group.Children[1] is RotateTransform3D)
+                    {
+                        RotateTransform3D rotate = (RotateTransform3D)group.Children[1];
+                        rotateX = rotate.CenterX.ToString();
+                        rotateY = rotate.CenterY.ToString();
+                        rotateZ = rotate.CenterZ.ToString();
+                    }
+                }
+               
+            }
 
         }
         
