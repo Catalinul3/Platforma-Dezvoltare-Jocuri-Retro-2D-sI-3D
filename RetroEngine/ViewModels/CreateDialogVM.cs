@@ -37,7 +37,11 @@ namespace RetroEngine.ViewModels
         }
         private void Create(object parameter)
         {
-            MessageBox.Show(_title);
+            var frameWorkWindow = new FramworlFor3D.MainWindow
+            {
+                Title = _title
+            };
+            frameWorkWindow.Show();
         }
       
 

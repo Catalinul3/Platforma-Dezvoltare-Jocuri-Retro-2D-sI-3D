@@ -9,8 +9,7 @@ using FramworkFor3D.helpers;
 using FramworkFor3D.View;
 using FramworlFor3D.helpers;
 using FramworlFor3D.ViewModels;
-using RetroEngine.Helpers;
-using RetroEngine.ViewModels;
+
 using System;
 using System.Collections.Generic;
 
@@ -44,9 +43,9 @@ namespace FramworkFor3D.Commands
 
             }
         }
-        private RelayCommand _add3DCube;
-        private RelayCommand _add3DSphere;
-        private RelayCommand _add3DOther;
+        private RelayCommands3D _add3DCube;
+        private RelayCommands3D _add3DSphere;
+        private RelayCommands3D _add3DOther;
         private Irregular3DObject obj;
 
 
@@ -109,12 +108,12 @@ namespace FramworkFor3D.Commands
 
 
         #region Create Models 
-        public RelayCommand add3DCube
+        public RelayCommands3D add3DCube
         {
             get
             {
                 if (_add3DCube == null)
-                    _add3DCube = new RelayCommand(addCube);
+                    _add3DCube = new RelayCommands3D(addCube);
                 return _add3DCube;
             }
         }
@@ -147,12 +146,12 @@ namespace FramworkFor3D.Commands
             }
             MessageBox.Show("Scene has " + objects.Count + " objects");
         }
-        public RelayCommand add3DSphere
+        public RelayCommands3D add3DSphere
         {
             get
             {
                 if (_add3DSphere == null)
-                    _add3DSphere = new RelayCommand(addSphere);
+                    _add3DSphere = new RelayCommands3D(addSphere);
                 return _add3DSphere;
             }
         }
@@ -174,12 +173,12 @@ namespace FramworkFor3D.Commands
             }
             MessageBox.Show("Scene has " + objects.Count + " objects");
         }
-        public RelayCommand add3DOther
+        public RelayCommands3D add3DOther
         {
             get
             {
                 if (_add3DOther == null)
-                    _add3DOther = new RelayCommand(addOther);
+                    _add3DOther = new RelayCommands3D(addOther);
                 return _add3DOther;
             }
         }

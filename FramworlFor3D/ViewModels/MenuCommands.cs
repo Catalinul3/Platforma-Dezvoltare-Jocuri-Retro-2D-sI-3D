@@ -1,6 +1,6 @@
-﻿using FramworlFor3D.helpers;
-using RetroEngine.Helpers;
-using RetroEngine.ViewModels;
+﻿using FramworkFor3D.helpers;
+using FramworlFor3D.helpers;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,13 +17,13 @@ namespace FramworlFor3D.ViewModels
         {
             _mainVM = mainVM;
         }
-        private RelayCommand _loadObjectCommand;
-        public RelayCommand LoadObjectCommand
+        private RelayCommands3D _loadObjectCommand;
+        public RelayCommands3D LoadObjectCommand
         {
             get
             {
                 if (_loadObjectCommand == null)
-                    _loadObjectCommand = new RelayCommand(Load);
+                    _loadObjectCommand = new RelayCommands3D(Load);
                 return _loadObjectCommand;
             }
         }

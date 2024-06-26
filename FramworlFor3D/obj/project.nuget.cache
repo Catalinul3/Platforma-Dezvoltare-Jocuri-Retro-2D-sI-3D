@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "KVtOwjbyCU2NlMjQ++FDh2UoAfud46rX6iVb/NwkAjQLbkD7lAbTtsiD6mJvpyzKSaENBuzSz58jR1AfD4ogIg==",
+  "dgSpecHash": "CeI8Q6f0v44xc0kkvZukOt9ozrYp5iKH2P9Wcsh7Iy3nyETUtUEjhN+/RyCOSfgcvyFiD1Qa+BkGI0mBYzr8FQ==",
   "success": true,
   "projectFilePath": "D:\\GitHub\\Platforma-Dezvoltare-Jocuri-Retro-2D-sI-3D\\FramworlFor3D\\FramworkFor3D.csproj",
   "expectedPackageFiles": [
@@ -96,8 +96,7 @@
     "C:\\Users\\zcata\\.nuget\\packages\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512",
     "C:\\Users\\zcata\\.nuget\\packages\\system.windows.interactivity.wpf\\2.0.20525\\system.windows.interactivity.wpf.2.0.20525.nupkg.sha512",
     "C:\\Users\\zcata\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
-    "C:\\Users\\zcata\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\zcata\\.nuget\\packages\\wpfanimatedgif\\2.0.2\\wpfanimatedgif.2.0.2.nupkg.sha512"
+    "C:\\Users\\zcata\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
   ],
   "logs": [
     {

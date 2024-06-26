@@ -1,7 +1,8 @@
 ﻿using Assimp;
 using FramworkFor3D._3DObjects;
+using FramworkFor3D.helpers;
 using HelixToolkit.Wpf;
-using RetroEngine.Helpers;
+
 using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;

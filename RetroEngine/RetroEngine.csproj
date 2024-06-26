@@ -57,6 +57,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FramworlFor3D\FramworkFor3D.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Page Update="View\SplatScreen.xaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>

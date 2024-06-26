@@ -53,7 +53,7 @@ namespace FramworkFor3D.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/FramworkFor3D;V1.0.0.0;component/view/propertiespage.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/FramworkFor3D;component/view/propertiespage.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\PropertiesPage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
