@@ -211,7 +211,7 @@ namespace FramworkFor3D.Commands
 
                     Transform3DGroup transformGroup = new Transform3DGroup();
                    objInteractive = InteractiveHelper.ConvertToUI(obj);
-                    ScaleTransform3D scale = new ScaleTransform3D(0, 0.5, 0);
+                    ScaleTransform3D scale = new ScaleTransform3D(1, 1, 1);
                     transformGroup.Children.Add(scale);
                     obj.Rotate(90, new Vector3D(1, 0, 0));
               
@@ -286,7 +286,7 @@ namespace FramworkFor3D.Commands
             sound.Header = "Add Sound";
         
             MenuItem properties = new MenuItem();
-        
+            properties.Header = "Properties";
          
             collider.Items.Add(colliderModify);
             rigidBody.Items.Add(solidBody);
@@ -503,8 +503,22 @@ namespace FramworkFor3D.Commands
 
         private void Properties(object s, RoutedEventArgs ev, UIElement3D obj)
         {ModelVisual3D model=InteractiveHelper.ConvertToModel(obj);
-            
-          if(type==ObjectType.CUBE)
+            isPressed = false;
+            if (!isPressed)
+            {
+                if (model.Content is Model3DGroup model3Dgroup)
+                {
+                    foreach (var m in model3Dgroup.Children)
+                    {
+                        if (m is GeometryModel3D geometryModel)
+                        {
+                            geometryModel.Material = defaultMaterial;
+                        }
+                    }
+
+                }
+            }
+            if (type==ObjectType.CUBE)
             {
                 model.Transform = _cubeTransform;
             }

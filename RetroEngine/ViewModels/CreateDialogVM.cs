@@ -37,18 +37,26 @@ namespace RetroEngine.ViewModels
         }
         private void Create(object parameter)
         {
-            var frameWorkWindow = new FramworlFor3D.MainWindow
+            if (_title == "")
             {
-                Title = _title
-            };
-            var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
-            if (currentWindow != null)
-            {
-               currentWindow.Close();
-                frameWorkWindow.Show();
+                MessageBox.Show("Please enter a title");
+
             }
-            
-            
+            else
+            {
+                var frameWorkWindow = new FramworlFor3D.MainWindow
+                {
+                    Title = _title
+                };
+                var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
+                if (currentWindow != null)
+                {
+                    currentWindow.Close();
+                    frameWorkWindow.Show();
+                }
+
+
+            }
         }
       
 
